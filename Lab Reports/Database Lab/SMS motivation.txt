@@ -1,0 +1,35 @@
+**Motivation:**
+The motivation behind developing a Student Management System using a DBMS lies in the need to overcome the limitations of manual record-keeping and traditional paper-based systems. By adopting a digital solution, educational institutions can benefit from:
+
+1. Improved Efficiency: Streamline administrative processes, reducing the time and effort required to manage student information.
+
+2. Accuracy and Consistency: Minimize errors and discrepancies by maintaining a centralized and standardized database.
+
+3. Accessibility: Provide authorized users with easy access to real-time information, fostering better communication and collaboration.
+
+4. Scalability: Accommodate the growing needs of the educational institution by designing a system that can scale with increasing data and user requirements.
+
+5. Data Analysis: Leverage the power of data analytics to gain insights into student performance trends, allowing for data-driven decision-making.
+
+
+**Objective:**
+The objective of creating a Student Management System (SMS) using a Database Management System (DBMS) is to efficiently and effectively manage student-related information within an educational institution. The system aims to streamline various administrative tasks, improve data accuracy, and enhance overall organization and accessibility of student data. The key goals include:
+
+1.Data Centralization
+2.Efficient Data Retrieval
+3.Automation of Administrative Tasks
+4.Enhanced Communication
+5.Data Security
+6. Reports and Analytics
+
+
+
+
+
+
+Song: Jonny Easton - Purpose
+License: Creative Commons (CC BY 3.0) https://creativecommons.org/licenses/by/3.0
+https://www.youtube.com/jonnyeaston
+Music powered by BreakingCopyright: https://breakingcopyright.com
+
+

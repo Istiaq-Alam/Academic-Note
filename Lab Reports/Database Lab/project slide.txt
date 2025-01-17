@@ -1,0 +1,15 @@
+--------------Presentation Slide Draft--------------
+1. Introduction
+2. Project Name / Objective + motivation
+3. ER Diagram
+4. Schema
+5. Front Page + admin login
+6. Dashboard ---> Mark and level
+7. All the features for students
+8. Backend + php connection
+9. Code <Script>
+10. Reference 
+
+
+
+
