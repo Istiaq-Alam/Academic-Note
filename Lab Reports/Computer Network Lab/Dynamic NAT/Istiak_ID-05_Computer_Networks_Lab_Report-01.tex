@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[a4paper,12pt]{article}
 \usepackage{geometry}
 \geometry{a4paper, margin=1in}
 \usepackage{titlesec}
@@ -10,7 +10,7 @@
 \usepackage{caption}
 \usepackage{hyperref}
 \usepackage{graphicx}
-
+\usepackage{setspace}
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
 
 \titleformat{\section}{\Large\bfseries}{\thesection}{1em}{}
@@ -23,26 +23,49 @@
 \begin{document}
 
 \begin{titlepage}
-    \centering
-    \vspace*{2cm}
-    
-    {\Huge \bfseries Dynamic NAT Configuration in Cisco Packet Tracer\par}
-    \vspace{2cm}
-    
-    {\Large \textbf{Computer Network Lab Report}\par}
-    \vspace{1.5cm}
-    
-    {\large Submitted By: Your Name\par}
+% Cover Start
+\begin{center}
+    \includegraphics[width=0.35\textwidth]{logo.png} \\
     \vspace{0.5cm}
-    {\large Roll Number: 12345678\par}
+    \textbf{\Huge \textcolor{teal}{NOTRE DAME} \textcolor{teal}{UNIVERSITY}} \\
     \vspace{0.5cm}
-    {\large Department of Computer Science and Engineering\par}
-    \vspace{0.5cm}
-    {\large Your University Name\par}
+    \textbf{\Huge \textcolor{orange}{BANGLADESH}} \\
     
+    \vspace{0.9cm}
+    \textbf{\Huge \underline{Computer Networks Lab Report-01}} \\
+    
+    \vspace{1.5em}
+    \begin{flushleft}
+    	\textbf{\Large Course Code: CSE-3204} \\
+		\vspace{0.2cm}        
+        \textbf{\Large Course Title: Computer Networks Lab} \\
+        \vspace{0.2cm}
+        \textbf{\Large Lab Task Topic: Configuration of Dynamic NAT} \\
+        
+    \end{flushleft}
+    
+    \vspace{1em}
+    \begin{flushleft}
+        \textbf{\Huge \textcolor{blue}{Submitted by:}} \\
+        \vspace{0.2cm}
+        \textbf{\Large Name: Istiak Alam} \\
+        \vspace{0.2cm}
+        \textbf{\Large ID: 0692230005101005} \\
+		\vspace{0.2cm}        
+        \textbf{\Large Batch: CSE-20} \\
+        \vspace{0.5cm}
+        \textbf{\Large Submission Date: }{\Large \today\par}
+    \end{flushleft}
     \vfill
-    
-    {\large Date: \today\par}
+    \begin{flushleft}
+        \textbf{\Huge \textcolor{blue}{Submitted to:}} \\
+        \vspace{0.2cm}
+        \textbf{\Large Dr. Fernaz Narin Nur} \\
+        \vspace{0.2cm}
+        \textbf{\Large Adjunct Professor, NDUB} \\
+    \end{flushleft}
+\end{center}
+% Cover End
 \end{titlepage}
 
 
@@ -57,6 +80,8 @@ To implement and understand the working of \textbf{Dynamic NAT (Network Address 
   \item End Devices (PC, Server)
   \item Copper Cross-Over \& Serial DCE cables
 \end{itemize}
+
+
 
 \section*{Network Design Overview}
 \begin{longtable}{|p{4cm}|p{4cm}|p{4cm}|}
@@ -77,15 +102,16 @@ Server & NIC & 10.0.0.100 (External Server) \\
 \hline
 \end{longtable}
 
-\begin{figure}[h!]
+
+\begin{figure}
+\section*{Network Topology in Packet Tracer :}
 \centering
 \includegraphics[width=1\textwidth]{topology.png}
 \caption{Network Topology for Dynamic NAT Configuration}
 \label{fig:topology}
 \end{figure}
 
-
-\section*{Step-by-Step Configuration}
+\section*{Step by Step Configuration}
 
 \subsection{PC Configuration}
 \begin{lstlisting}

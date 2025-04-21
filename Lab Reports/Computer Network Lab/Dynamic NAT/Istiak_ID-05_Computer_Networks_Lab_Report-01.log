@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.4.18)  21 APR 2025 15:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.4.18)  21 APR 2025 17:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./dynamic_nat_lab_report.tex
-(dynamic_nat_lab_report.tex
+**./Istiak_ID-05_Computer_Networks_Lab_Report-01.tex
+(Istiak_ID-05_Computer_Networks_Lab_Report-01.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
 (C:\Users\istia\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -330,6 +330,9 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip70
 )
+(C:\Users\istia\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+)
 Package hyperref Info: Option `colorlinks' set `true' on input line 14.
 
 (C:\Users\istia\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
@@ -337,8 +340,9 @@ tex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count291
 \l__pdf_internal_box=\box59
-) (dynamic_nat_lab_report.aux)
-\openout1 = `dynamic_nat_lab_report.aux'.
+)
+No file Istiak_ID-05_Computer_Networks_Lab_Report-01.aux.
+\openout1 = `Istiak_ID-05_Computer_Networks_Lab_Report-01.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
 LaTeX Font Info:    ... okay on input line 23.
@@ -358,7 +362,6 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 23.
 LaTeX Font Info:    ... okay on input line 23.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 23.
 LaTeX Font Info:    ... okay on input line 23.
-
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -380,7 +383,7 @@ LaTeX Font Info:    ... okay on input line 23.
 * \headsep=25.0pt
 * \topskip=12.0pt
 * \footskip=30.0pt
-* \marginparwidth=44.0pt
+* \marginparwidth=35.0pt
 * \marginparsep=10.0pt
 * \columnsep=10.0pt
 * \skip\footins=10.8pt plus 4.0pt minus 2.0pt
@@ -424,35 +427,43 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
 Package hyperref Info: Link coloring ON on input line 23.
- (dynamic_nat_lab_report.out) (dynamic_nat_lab_report.out)
 \@outlinefile=\write3
-\openout3 = `dynamic_nat_lab_report.out'.
+\openout3 = `Istiak_ID-05_Computer_Networks_Lab_Report-01.out'.
 
+<logo.png, id=3, 837.6093pt x 834.9594pt>
+File: logo.png Graphic file (type png)
+<use logo.png>
+Package pdftex.def Info: logo.png  used on input line 28.
+(pdftex.def)             Requested size: 158.54152pt x 158.03238pt.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <24.88> on input line 35.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <20.74> on input line 35.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <17.28> on input line 35.
  [1
 
-{C:/Users/istia/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 68--69
+{C:/Users/istia/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./logo.png>]
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--94
 []|\OT1/cmr/m/n/12 192.168.30.1 (Gate-
  []
 
 
-Underfull \hbox (badness 3623) in paragraph at lines 74--75
+Underfull \hbox (badness 3623) in paragraph at lines 99--100
 []|\OT1/cmr/m/n/12 10.0.0.1 (NAT Out-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 76--77
+Underfull \hbox (badness 10000) in paragraph at lines 101--102
 []|\OT1/cmr/m/n/12 10.0.0.100 (Ex-ter-nal
  []
 
-<topology.png, id=26, 497.60907pt x 559.33969pt>
+<topology.png, id=13, 497.60907pt x 559.33969pt>
 File: topology.png Graphic file (type png)
 <use topology.png>
-Package pdftex.def Info: topology.png  used on input line 82.
+Package pdftex.def Info: topology.png  used on input line 109.
 (pdftex.def)             Requested size: 452.9679pt x 509.17061pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 (C:\Users\istia\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
@@ -471,7 +482,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.103 ip 
+l.129 ip 
          address 192.168.30.1 255.255.255.0 [1]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -496,31 +507,44 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[4] (dynamic_nat_lab_report.aux)
+[4] (Istiak_ID-05_Computer_Networks_Lab_Report-01.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
-Package rerunfilecheck Info: File `dynamic_nat_lab_report.out' has not changed.
 
-(rerunfilecheck)             Checksum: B3B8FFD032BE60FD8DAD31154C6DDFA3;645.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `Istiak_ID-05_Computer_Networks_Lab_Report
+-01.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Istiak_ID-05_Computer_Networks_Lab_
+Report-01.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  B3B8FFD032BE60FD8DAD31154C6DDFA3;645.
  ) 
 Here is how much of TeX's memory you used:
- 13231 strings out of 474486
- 209387 string characters out of 5743755
- 1957542 words of memory out of 5000000
- 35343 multiletter control sequences out of 15000+600000
- 560997 words of font info for 46 fonts, out of 8000000 for 9000
+ 13280 strings out of 474486
+ 210474 string characters out of 5743755
+ 1961542 words of memory out of 5000000
+ 35393 multiletter control sequences out of 15000+600000
+ 563141 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,79p,432b,2006s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,79p,454b,2008s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\istia\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 1200.pk><C:/Users/istia/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
 ts/cm/cmbx12.pfb><C:/Users/istia/AppData/Local/Programs/MiKTeX/fonts/type1/publ
 ic/amsfonts/cm/cmr12.pfb><C:/Users/istia/AppData/Local/Programs/MiKTeX/fonts/ty
-pe1/public/amsfonts/cm/cmtt12.pfb>
-Output written on dynamic_nat_lab_report.pdf (5 pages, 86462 bytes).
+pe1/public/amsfonts/cm/cmr17.pfb><C:/Users/istia/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on Istiak_ID-05_Computer_Networks_Lab_Report-01.pdf (5 pages, 76
+5192 bytes).
 PDF statistics:
- 128 PDF objects out of 1000 (max. 8388607)
+ 122 PDF objects out of 1000 (max. 8388607)
  58 named destinations out of 1000 (max. 500000)
- 38 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
