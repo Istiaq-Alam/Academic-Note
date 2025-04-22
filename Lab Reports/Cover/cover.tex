@@ -1,12 +1,28 @@
 \documentclass[a4paper,12pt]{article}
-\usepackage{graphicx}
-\usepackage{xcolor}
-\usepackage[margin=1in]{geometry}
-\usepackage{setspace}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
 \usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{setspace}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+\titleformat{\section}{\Large\bfseries}{\thesection}{1em}{} 
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Computer Network Lab}
+\lhead{Dynamic NAT}
+\rfoot{\thepage}
 
 \begin{document}
 
+\begin{titlepage}
 % Cover Start
 \begin{center}
     \includegraphics[width=0.35\textwidth]{logo.png} \\
@@ -20,11 +36,11 @@
     
     \vspace{1.5em}
     \begin{flushleft}
-    	\textbf{\Large Course Code: } \Large CSE-3204 \\
+    	\textbf{\Large Course Code: CSE-3204} \\
 		\vspace{0.2cm}        
-        \textbf{\Large Course Title: } \Large Computer Networks Lab \\
+        \textbf{\Large Course Title: Computer Networks Lab} \\
         \vspace{0.2cm}
-        \textbf{\Large Lab Task Topic: } \textbf{\Large Configuration of Dynamic NAT} \\
+        \textbf{\Large Lab Task Topic: Configuration of Dynamic NAT} \\
         
     \end{flushleft}
     
@@ -32,15 +48,14 @@
     \begin{flushleft}
         \textbf{\Huge \textcolor{blue}{Submitted by:}} \\
         \vspace{0.2cm}
-        \textbf{\Large Name: }\Large Istiak Alam \\
+        \textbf{\Large Name: Istiak Alam} \\
         \vspace{0.2cm}
-        \textbf{\Large ID: }\Large 0692230005101005 \\
+        \textbf{\Large ID: 0692230005101005} \\
 		\vspace{0.2cm}        
-        \textbf{\Large Batch: }\Large CSE-20 \\
-        \vspace{0.2cm}
+        \textbf{\Large Batch: CSE-20} \\
+        \vspace{0.5cm}
         \textbf{\Large Submission Date: }{\Large \today\par}
     \end{flushleft}
-    
     \vfill
     \begin{flushleft}
         \textbf{\Huge \textcolor{blue}{Submitted to:}} \\
@@ -51,4 +66,13 @@
     \end{flushleft}
 \end{center}
 % Cover End
+\end{titlepage}
+
+
+
+
+
+
+
+
 \end{document}
