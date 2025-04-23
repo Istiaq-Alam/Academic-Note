@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.4.24)  24 APR 2025 00:12
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.4.24)  24 APR 2025 00:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -446,7 +446,7 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 
 (C:\Users\istia\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
 Package hyperref Info: Option `colorlinks' set `true' on input line 18.
-No file CoverTemplate.aux.
+(CoverTemplate.aux)
 \openout1 = `CoverTemplate.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
@@ -460,6 +460,7 @@ LaTeX Font Info:    ... okay on input line 26.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 2
 6.
+
 (C:\Users\istia\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1cmr.fd
 File: ts1cmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
@@ -543,12 +544,11 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
 Package hyperref Info: Link coloring ON on input line 26.
+
+(CoverTemplate.out) (CoverTemplate.out)
 \@outlinefile=\write3
 \openout3 = `CoverTemplate.out'.
 
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -607,21 +607,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
-
-
-Package rerunfilecheck Warning: File `CoverTemplate.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `CoverTemplate.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  76F40715D2F197B68B4ED29FF7587AD5;259.
+Package rerunfilecheck Info: File `CoverTemplate.out' has not changed.
+(rerunfilecheck)             Checksum: 76F40715D2F197B68B4ED29FF7587AD5;259.
  ) 
 Here is how much of TeX's memory you used:
- 14924 strings out of 409617
- 285689 string characters out of 5774013
- 1923191 words of memory out of 5000000
- 36868 multiletter control sequences out of 15000+600000
+ 14933 strings out of 409617
+ 285853 string characters out of 5774013
+ 1922191 words of memory out of 5000000
+ 36871 multiletter control sequences out of 15000+600000
  564410 words of font info for 77 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  79i,11n,93p,266b,341s stack positions out of 10000i,1000n,20000p,200000b,200000s
