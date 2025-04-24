@@ -1,0 +1,21 @@
+Computer Network Hardware Lab Report :
+Describe those topics With Appropriate Figure
+Topics :
+1. Cable Tracer
+2. Cable Tester
+3. T-568B : wo-o-wg-b-wb-g-wc-c
+ white orenge
+ orenge
+ white green
+ blue
+ white blue
+ green
+ white coffee
+ coffee
+4. 232 Cable
+5. fiber optical (duplex) cable
+6. SFP module
+7. Switch
+8. Router configuration
+9. Switch to Router Connection
+10. OSI Model

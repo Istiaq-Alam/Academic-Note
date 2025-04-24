@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2025/dev/Debian) (preloaded format=xelatex 2025.3.28)  24 APR 2025 16:14
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2025/dev/Debian) (preloaded format=xelatex 2025.3.28)  24 APR 2025 16:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**Istiak_ID-05_Computer_Networks_Lab_Report-01.tex
-(./Istiak_ID-05_Computer_Networks_Lab_Report-01.tex
+**Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.tex
+(./Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -417,8 +417,8 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 18.
 
-(./Istiak_ID-05_Computer_Networks_Lab_Report-01.aux)
-\openout1 = `Istiak_ID-05_Computer_Networks_Lab_Report-01.aux'.
+(./Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.aux)
+\openout1 = `Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
 LaTeX Font Info:    ... okay on input line 26.
@@ -511,10 +511,10 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
 Package hyperref Info: Link coloring ON on input line 26.
 
-(./Istiak_ID-05_Computer_Networks_Lab_Report-01.out)
-(./Istiak_ID-05_Computer_Networks_Lab_Report-01.out)
+(./Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.out)
+(./Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.out)
 \@outlinefile=\write3
-\openout3 = `Istiak_ID-05_Computer_Networks_Lab_Report-01.out'.
+\openout3 = `Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.out'.
 
 
 *geometry* driver: auto-detecting
@@ -560,27 +560,15 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <17.28> on input line 37.
 
+Overfull \hbox (5.17252pt too wide) in paragraph at lines 37--37
+ []$[]$ 
+ []
+
+
 
 [1
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 101--102
-[]|\TU/TimesNewRoman(0)/m/n/12 10.0.0.1 (NAT Out-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 103--104
-[]|\TU/TimesNewRoman(0)/m/n/12 10.0.0.100 (External
- []
-
-File: topology.png Graphic file (type bmp)
-<topology.png>
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2024/09/23 1.10c listings language file
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2024/09/23 1.10c listings language file
-)
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -589,49 +577,23 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[1]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[2]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[3]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[4] (./Istiak_ID-05_Computer_Networks_Lab_Report-01.aux)
+[1] (./Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-Package rerunfilecheck Info: File `Istiak_ID-05_Computer_Networks_Lab_Report-01
-.out' has not changed.
-(rerunfilecheck)             Checksum: B3B8FFD032BE60FD8DAD31154C6DDFA3;645.
+Package rerunfilecheck Info: File `Istiak_ID-05_Hardware_Lab_Report_Computer_Ne
+tworks.out' has not changed.
+(rerunfilecheck)             Checksum: 76F40715D2F197B68B4ED29FF7587AD5;259.
  ) 
 Here is how much of TeX's memory you used:
- 15073 strings out of 473835
- 290865 string characters out of 5731946
- 938850 words of memory out of 5000000
- 37961 multiletter control sequences out of 15000+600000
- 565194 words of font info for 79 fonts, out of 8000000 for 9000
+ 14892 strings out of 473835
+ 288399 string characters out of 5731946
+ 731127 words of memory out of 5000000
+ 37789 multiletter control sequences out of 15000+600000
+ 565178 words of font info for 77 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 79i,12n,93p,369b,1671s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 79i,11n,93p,301b,343s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Istiak_ID-05_Computer_Networks_Lab_Report-01.pdf (5 pages).
+Output written on Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.pdf (2 pag
+es).
