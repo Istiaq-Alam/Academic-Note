@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2025/dev/Debian) (preloaded format=xelatex 2025.3.28)  24 APR 2025 16:44
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2025/dev/Debian) (preloaded format=xelatex 2025.3.28)  24 APR 2025 20:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -568,7 +568,11 @@ Overfull \hbox (5.17252pt too wide) in paragraph at lines 37--37
 
 [1
 
-]
+] (./Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.toc)
+\tf@toc=\write4
+\openout4 = `Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.toc'.
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -577,23 +581,58 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[1] (./Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.aux)
+[1]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[2]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[3]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[4] (./Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-Package rerunfilecheck Info: File `Istiak_ID-05_Hardware_Lab_Report_Computer_Ne
-tworks.out' has not changed.
-(rerunfilecheck)             Checksum: 76F40715D2F197B68B4ED29FF7587AD5;259.
+
+
+Package rerunfilecheck Warning: File `Istiak_ID-05_Hardware_Lab_Report_Computer
+_Networks.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Istiak_ID-05_Hardware_Lab_Report_Co
+mputer_Networks.out':
+(rerunfilecheck)             Before: 429C17BA57D523FD56255DE7F5C7D9CB;362
+(rerunfilecheck)             After:  A7AD8D53A57D565927783DE3636629CB;1364.
  ) 
 Here is how much of TeX's memory you used:
- 14892 strings out of 473835
- 288399 string characters out of 5731946
- 731127 words of memory out of 5000000
- 37789 multiletter control sequences out of 15000+600000
+ 14905 strings out of 473835
+ 288830 string characters out of 5731946
+ 737127 words of memory out of 5000000
+ 37798 multiletter control sequences out of 15000+600000
  565178 words of font info for 77 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 79i,11n,93p,301b,343s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 79i,11n,93p,552b,478s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.pdf (2 pag
+Output written on Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.pdf (5 pag
 es).
