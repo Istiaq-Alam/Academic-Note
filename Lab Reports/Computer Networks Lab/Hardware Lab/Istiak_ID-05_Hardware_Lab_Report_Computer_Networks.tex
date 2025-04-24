@@ -15,11 +15,13 @@
 \usepackage{setspace}
 \usepackage{geometry}
 \geometry{a4paper, margin=1in}
-\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\renewcommand{\contentsname}{Table of Contents}
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=blue}
+
 
 \pagestyle{fancy}
 \fancyhf{} 							% Header Middle
-\rhead{Computer Network Lab}
+\rhead{Computer Networks Lab}
 \lhead{Hardware Lab Report}
 \rfoot{\thepage}
 
@@ -71,7 +73,9 @@
 \end{titlepage}						% Cover End
 
 \tableofcontents
-\newpage
+\thispagestyle{empty}
+\clearpage
+\pagenumbering{arabic}
 
 \section*{Introduction}
 \addcontentsline{toc}{section}{Introduction}
@@ -82,59 +86,214 @@ In this report, we explore the practical application and functionality of essent
 
 Additionally, the report covers the Open Systems Interconnection (OSI) model, a conceptual framework that categorizes and standardizes the functions of a communication system into seven distinct layers. Each hardware topic is supported with descriptions and relevant images to aid in practical understanding.
 
-This lab aims to enhance students’ hands-on skills in identifying, using, and configuring networking hardware, thereby building a strong foundation for designing and managing robust network systems.
+This lab aims to enhance student's hands-on skills in identifying, using, and configuring networking hardware, thereby building a strong foundation for designing and managing robust network systems.
+
+\newpage
 
 \section{Cable Tracer}
-A \textbf{Cable Tracer} is used to trace and identify cables or wires within a group without damaging the insulation. It is useful for locating breaks or shorts in cables and identifying signal paths.
+A \textbf{Cable Tracer} is an essential diagnostic tool used in computer networking to detect and follow the physical route of cables, especially in complex or hidden wiring environments. It is most commonly used during network installation, troubleshooting, and maintenance to identify the exact path and endpoints of cables such as twisted pair (Ethernet), coaxial, or telephone wires.
+The cable tracer typically consists of two main components: 
+\begin{itemize}
+    \item \textbf{Tone Generator (Transmitter)} – This device sends a low-voltage signal through the cable under test.
+    \item \textbf{Probe (Receiver)} – This hand-held device detects the electromagnetic signal emitted from the cable, allowing technicians to follow its path.
+\end{itemize}
 
 \begin{center}
-%\includegraphics[width=0.5\textwidth]{https://ae01.alicdn.com/kf/HLB10vTCa6LuK1Rjy0Fhq6xpdFXaz/1-Set-Network-Line-Finder-Cable-Detector-JW-360-LAN-Network-Cable-Tester-RJ11-RJ45-UTP.jpg}
+    \includegraphics[width=0.3\textwidth]{CableTracer.jpg} \\
+    {\small \textbf{Figure 1:} Cable Tracer}
 \end{center}
+
+\subsection{Working Principle:}  
+The tone generator is connected to one end of the cable, and it emits a specific frequency. The technician then moves the receiver probe along the suspected cable route. The probe produces an audible tone that gets louder as it nears the cable carrying the signal, helping to trace the cable's direction through walls, ceilings, or cable trays.
+
+\subsection{Usage in Lab:}  
+In our lab exercise, the cable tracer was used to identify and trace Ethernet cables running between workstations and the central switch panel. This was particularly useful in verifying that each workstation was correctly connected to the intended switch port. We also practiced identifying disconnected or mislabeled cables using the tone and probe method. This exercise demonstrated the importance of cable management and verification in real-world networking environments.
+
+\subsection{Advantages:}
+\begin{itemize}
+    \item Helps in quickly identifying cable paths without disconnecting network devices.
+    \item Useful in locating broken or damaged cables within walls or conduits.
+    \item Saves time during troubleshooting and network deployment.
+\end{itemize}
+
 
 \section{Cable Tester}
-A \textbf{Cable Tester} is a device used to test the strength and connectivity of a particular type of cable or other wired assemblies. It checks for continuity, wiring configuration, and signal loss.
+A \textbf{cable tester} is an essential diagnostic tool used in computer networking to test the physical integrity and wiring configuration of network cables, particularly twisted-pair Ethernet cables terminated with RJ-45 connectors. The main purpose of a cable tester is to identify issues such as open circuits, short circuits, crossed wires, miswiring, and split pairs that can disrupt data transmission.
+Cable testers typically consist of two units:
+\begin{itemize}
+    \item \textbf{Main Unit (Transmitter)}: Sends electrical signals through each wire in the cable.
+    \item \textbf{Remote Unit (Receiver)}: Receives the signal and verifies whether each wire is correctly terminated.
+\end{itemize}
 
 \begin{center}
-%\includegraphics[width=0.5\textwidth]{https://cdn.sparkfun.com//assets/parts/1/2/2/5/6/16227-CableTester__main.jpg}
+    \includegraphics[width=0.3\textwidth]{CableTester.jpg} \\
+    {\small \textbf{Figure 2:} Cable Tester}
 \end{center}
+The cable tester visually displays the status of each pin via a row of LED indicators. If the cable is wired correctly (e.g., using the T-568B standard), all LEDs light up in a sequential and matching order on both ends. If there is a wiring error, such as a missing connection or reversed pair, the LEDs will either not light up or show an incorrect sequence.
+
+\subsection{Usage in Lab:}  
+During our networking hardware lab session, we used the cable tester to verify the integrity of custom-made Ethernet cables. After crimping RJ-45 connectors onto CAT5e cables following the T-568B wiring standard, we connected each end of the cable to the main and remote units of the tester. The LED lights helped us confirm whether all eight wires were correctly connected. If the lights did not match the correct pattern, we identified the faulty end and re-crimped the connector.
+
+\subsection{Benefits:}
+\begin{itemize}
+    \item Saves time during troubleshooting by quickly identifying bad cables.
+    \item Ensures that cables meet required standards before connecting them to network devices.
+    \item Reduces network downtime caused by faulty or miswired cables.
+\end{itemize}
+Overall, the cable tester is a valuable tool in both academic and professional networking environments for ensuring reliable physical layer connectivity.
+
 
 \section{T-568B Wiring Standard}
-The \textbf{T-568B} standard is a wiring scheme used for terminating network cables (Ethernet) using RJ-45 connectors. The order of colored wires is:
-\begin{enumerate}
-\item White Orange
-\item Orange
-\item White Green
-\item Blue
-\item White Blue
-\item Green
-\item White Brown
-\item Brown
-\end{enumerate}
 
+The \textbf{T-568B Wiring Standard} is one of the two recognized wiring configurations for terminating Ethernet cables using RJ-45 connectors. It defines the pin-out order the sequence of wire colors for the eight conductors inside a twisted-pair Ethernet cable. The standard is defined by the Telecommunications Industry Association (TIA) and is used to ensure uniformity and compatibility across network devices and installations. \textbf{Color Order : wo-o-wg-b-wb-g-wc-c}
+
+\subsection{Color Code Order}
+The color sequence for the T-568B standard, from pin 1 to pin 8, is as follows: 
 \begin{center}
-%\includegraphics[width=0.6\textwidth]{https://www.tech-faq.com/wp-content/uploads/images/eia-tia-568a-568b.png}
+    \includegraphics[width=0.4\textwidth]{WireStandard.jpg} \\
+    {\small \textbf{Figure 3:} Wiring Standard}
 \end{center}
+Each pair of colors represents a twisted pair of wires. The T-568B configuration places specific twisted pairs on specific pins to reduce cross-talk and ensure proper signal transmission.
+
+\subsection{Applications}
+The T-568B wiring standard is widely used in both residential and commercial Ethernet installations. It is compatible with modern networking equipment like switches, routers, and network interface cards (NICs). While both T-568A and T-568B are acceptable under ANSI/TIA standards, T-568B is more popular in the United States, especially in data installations.
+
+\subsection{Straight-Through and Crossover Cables}
+\textbf{Straight-through Cable:} Both ends of the cable use the T-568B wiring configuration. Used to connect dissimilar devices, such as a PC to a switch or a router to a modem. \\
+\textbf{Crossover Cable:} One end uses T-568A and the other T-568B. Used to connect similar devices, such as switch-to-switch or PC-to-PC connections.
+
+
+\subsection{Importance in Lab}
+In our lab activities, we used the T-568B standard while crimping RJ-45 connectors onto Ethernet cables. This ensured consistency and correct connectivity throughout our network setup. The cables were then tested using a cable tester to confirm that all wires were correctly placed according to the T-568B configuration.
 
 \section{RS-232 Cable}
-The \textbf{RS-232 Cable} is used for serial communication between devices. It was commonly used for connecting PCs to modems and is still used in networking hardware for console connections.
+
+The \textbf{RS-232 cable}, also known as a \textbf{serial cable}, is a standard communication cable used for \textbf{serial communication} between computers and peripheral devices. It is based on the \textbf{Recommended Standard 232 (RS-232)} developed by the \textbf{Electronic Industries Association (EIA)}, which defines the electrical characteristics and timing of signals, as well as the size and pin-out of connectors.
+
+\subsection{Purpose and Function}
+RS-232 cables are used to transmit \textbf{data serially (bit-by-bit)} between devices, typically between \textbf{Data Terminal Equipment (DTE)} like computers and \textbf{Data Communication Equipment (DCE)} like modems, printers, or routers. It is most commonly used for:
+\begin{itemize}
+  \item Configuration of routers and switches via \textbf{console ports}
+  \item Connection to serial modems
+  \item Communication between PCs and embedded systems
+  \item Debugging and monitoring microcontrollers
+\end{itemize}
+
+\subsection{Physical Characteristics}
+\begin{itemize}
+  \item \textbf{Connectors}: RS-232 typically uses \textbf{DB9 (9-pin)} or \textbf{DB25 (25-pin)} connectors.
+  \item \textbf{Cable type}: Unshielded twisted pair (UTP) or shielded cables depending on environment.
+  \item \textbf{Voltage levels}: Logic levels are represented by \textbf{\textpm3V to \textpm15V} (where +3 to +15V = logic 0 and -3 to -15V = logic 1).
+\end{itemize}
+
+\subsection{Pin Configuration (DB9)}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{Pin} & \textbf{Signal Name} & \textbf{Description} \\
+\hline
+1 & DCD (Data Carrier Detect) & Detects modem connection \\
+2 & RXD (Receive Data) & Data received by DTE \\
+3 & TXD (Transmit Data) & Data sent by DTE \\
+4 & DTR (Data Terminal Ready) & DTE is ready to communicate \\
+5 & GND (Ground) & Common reference ground \\
+6 & DSR (Data Set Ready) & DCE is ready to communicate \\
+7 & RTS (Request to Send) & DTE requests transmission \\
+8 & CTS (Clear to Send) & DCE is ready to receive \\
+9 & RI (Ring Indicator) & Telephone ring indicator \\
+\hline
+\end{tabular}
+\caption{RS-232 DB9 Pin Configuration}
+\end{table}
 
 \begin{center}
-%\includegraphics[width=0.5\textwidth]{https://upload.wikimedia.org/wikipedia/commons/0/07/Serial_Cable.jpg}
+    \includegraphics[width=0.4\textwidth]{OIP.jpeg} \\
+    {\small \textbf{Figure 4:} RS-232 Cable}
 \end{center}
+
+\subsection{Communication Standard}
+\begin{itemize}
+  \item \textbf{Baud Rate}: Typically from \textbf{9600 to 115200 bps}.
+  \item \textbf{Synchronous vs Asynchronous}: RS-232 uses \textbf{asynchronous communication}, where start and stop bits define each byte.
+  \item \textbf{Distance Limitation}: Reliable communication is possible up to \textbf{15 meters (50 feet)}.
+\end{itemize}
+
+\subsection{Use in Lab}
+In networking hardware labs, RS-232 cables are often used to:
+\begin{itemize}
+  \item Connect PCs to routers or switches through the \textbf{console port}.
+  \item Access command-line interfaces (CLI) using terminal software like \textbf{PuTTY}, \textbf{Tera Term}, or \textbf{Cisco Packet Tracer Terminal}.
+  \item Perform initial configuration, IP assignment, and troubleshoot when no network access is available.
+\end{itemize}
+
+\newpage
 
 \section{Fiber Optic (Duplex) Cable}
-A \textbf{Fiber Optic Duplex Cable} consists of two fiber optic strands in a single cable, used for bidirectional data transfer. It allows high-speed and long-distance data communication.
+
+Fiber optic cables are a critical component of modern high-speed communication networks. They use light signals to transmit data over long distances with minimal loss and electromagnetic interference. A \textbf{duplex fiber optic cable} consists of two optical fibers: one for transmitting (Tx) and one for receiving (Rx) data. This allows for simultaneous two-way communication, making duplex cables ideal for full-duplex networking.
+
+\subsection{Structure and Composition}
+Each fiber in the duplex cable is typically composed of:
+\begin{itemize}
+    \item \textbf{Core:} The innermost glass or plastic region where light is transmitted.
+    \item \textbf{Cladding:} Surrounds the core and reflects light back into the core using a lower refractive index.
+    \item \textbf{Buffer Coating:} Protects the fiber from moisture and physical damage.
+    \item \textbf{Outer Jacket:} Provides additional protection and structural integrity.
+\end{itemize}
+
+Duplex cables are often color-coded or labeled for easier installation and maintenance, with connectors on both ends, such as LC, SC, or ST types.
 
 \begin{center}
-%\includegraphics[width=0.6\textwidth]{https://www.fs.com/images/fs/images2019/product/duplex-fiber-optic-cable.jpg}
+    \includegraphics[width=0.4\textwidth]{FOP.png} \\
+    {\small \textbf{Figure 5:} Fiber Optic Cable}
 \end{center}
+
+\subsection{Types of Fiber}
+There are two main types of fiber used in duplex cables:
+\begin{itemize}
+    \item \textbf{Single-mode Fiber (SMF):} Used for long-distance communication, has a small core and transmits infrared laser light (wavelength ~1310 or 1550 nm).
+    \item \textbf{Multi-mode Fiber (MMF):} Used for short-distance communication, has a larger core and transmits LED light (wavelength ~850 or 1300 nm).
+\end{itemize}
+
+\subsection{Applications in Networking}
+\begin{itemize}
+    \item Backbone connections in LANs and WANs
+    \item Internet Service Provider (ISP) infrastructures
+    \item Data centers and server farms
+    \item High-speed long-distance communication
+\end{itemize}
 
 \section{SFP Module}
-The \textbf{Small Form-factor Pluggable (SFP)} module is a hot-swappable transceiver used in networking devices for fiber optic and Ethernet connections.
+
+The \textbf{Small Form-factor Pluggable (SFP)} module is a compact, hot-swappable transceiver used in network hardware for both telecommunication and data communication applications. It is designed to provide flexibility in network configuration and scalability by supporting various communication standards, such as Ethernet, Fibre Channel, and SONET/SDH.
+
+\subsection{Functionality}
+An SFP module acts as an interface between a network device (like a switch or router) and a fiber optic or copper network cable. It enables the device to send and receive data over different types of media by converting electrical signals to optical signals (or vice versa) depending on the media type.
 
 \begin{center}
-%\includegraphics[width=0.5\textwidth]{https://media.fs.com/images/community/uploads/20200424/1-sfp-transceiver.jpg}
+    \includegraphics[width=0.4\textwidth]{sfp.jpg} \\
+    {\small \textbf{Figure 6:} SFP Module}
 \end{center}
+
+\subsection{Types of SFP Modules}
+There are several types of SFP modules available, depending on speed, range, and transmission medium:
+\begin{itemize}
+    \item \textbf{SX (Short Wavelength)} – Typically used for short-range communication over multi-mode fiber.
+    \item \textbf{LX (Long Wavelength)} – Designed for long-range communication over single-mode fiber.
+    \item \textbf{ZX (Extended Range)} – Supports even longer distances using single-mode fiber.
+    \item \textbf{Copper SFP (RJ-45)} – Used for Gigabit Ethernet over twisted pair copper cabling.
+\end{itemize}
+
+
+\subsection{Applications in Networking}
+SFP modules are widely used in:
+\begin{itemize}
+    \item Data centers
+    \item Enterprise backbone links
+    \item Telecommunication networks
+    \item Campus LANs and WANs
+\end{itemize}
 
 \section{Switch}
 A \textbf{Switch} is a network device that connects devices in a LAN and uses MAC addresses to forward data to the correct destination.

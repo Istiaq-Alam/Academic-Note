@@ -16,6 +16,7 @@
 \usepackage{geometry}
 \geometry{a4paper, margin=1in}
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\renewcommand{\contentsname}{Table of Contents}
 
 \pagestyle{fancy}
 \fancyhf{} 							% Header Middle
@@ -69,6 +70,11 @@
     \end{flushleft}
 \end{center}
 \end{titlepage}						% Cover End
+
+\tableofcontents
+\thispagestyle{empty}
+\clearpage
+\pagenumbering{arabic}
 
 \section*{Introduction}
 
