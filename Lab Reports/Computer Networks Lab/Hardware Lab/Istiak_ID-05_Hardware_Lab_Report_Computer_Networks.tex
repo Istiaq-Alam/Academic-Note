@@ -77,9 +77,15 @@
 \clearpage
 \pagenumbering{arabic}
 
+\begin{abstract}
+This lab report provides a comprehensive overview of essential computer networking hardware components and configurations encountered in practical networking environments. The main objective of this lab was to familiarize students with various networking tools and equipment such as cable testers, cable tracers, RS-232 cables, fiber optic duplex cables, SFP modules, and to understand the physical and logical aspects of network devices like switches and routers.\\
+Through hands-on activities, we learned how to identify, test, and properly connect network cables using T-568B wiring standards, configure routers for Dynamic NAT and DHCP, and establish effective connections between switches and routers. The report also discusses the conceptual framework of the OSI Model to better understand the layer-wise interaction of network protocols and hardware.\\
+By engaging in these exercises, students developed a strong foundational understanding of how computer networks are physically built and logically managed, which is crucial for further studies and careers in networking and IT infrastructure. The inclusion of real-world scenarios and step-by-step procedures reinforced the theoretical knowledge with practical implementation, bridging the gap between textbook learning and field expertise.\\
+\end{abstract}
+
+
 \section*{Introduction}
 \addcontentsline{toc}{section}{Introduction}
-
 The rapid growth of computer networks and internet-based technologies has significantly increased the demand for reliable and high-performance network infrastructure. Understanding the physical hardware components that form the foundation of such networks is essential for any networking professional or student. This lab report provides a comprehensive overview of various fundamental hardware tools and equipment used in networking environments.
 
 In this report, we explore the practical application and functionality of essential devices such as cable tracers, cable testers, RS-232 cables, fiber optic duplex cables, and SFP modules. We also study network components like switches and routers, along with their configurations and interconnections. A key focus is placed on the T-568B Ethernet cabling standard, which defines the proper arrangement of wire pairs in twisted-pair cables for effective network communication.
@@ -103,13 +109,13 @@ The cable tracer typically consists of two main components:
     {\small \textbf{Figure 1:} Cable Tracer}
 \end{center}
 
-\subsection{Working Principle:}  
+\subsection{Working Principle}  
 The tone generator is connected to one end of the cable, and it emits a specific frequency. The technician then moves the receiver probe along the suspected cable route. The probe produces an audible tone that gets louder as it nears the cable carrying the signal, helping to trace the cable's direction through walls, ceilings, or cable trays.
 
-\subsection{Usage in Lab:}  
+\subsection{Usage in Lab}  
 In our lab exercise, the cable tracer was used to identify and trace Ethernet cables running between workstations and the central switch panel. This was particularly useful in verifying that each workstation was correctly connected to the intended switch port. We also practiced identifying disconnected or mislabeled cables using the tone and probe method. This exercise demonstrated the importance of cable management and verification in real-world networking environments.
 
-\subsection{Advantages:}
+\subsection{Advantages}
 \begin{itemize}
     \item Helps in quickly identifying cable paths without disconnecting network devices.
     \item Useful in locating broken or damaged cables within walls or conduits.
@@ -131,10 +137,10 @@ Cable testers typically consist of two units:
 \end{center}
 The cable tester visually displays the status of each pin via a row of LED indicators. If the cable is wired correctly (e.g., using the T-568B standard), all LEDs light up in a sequential and matching order on both ends. If there is a wiring error, such as a missing connection or reversed pair, the LEDs will either not light up or show an incorrect sequence.
 
-\subsection{Usage in Lab:}  
+\subsection{Usage in Lab}  
 During our networking hardware lab session, we used the cable tester to verify the integrity of custom-made Ethernet cables. After crimping RJ-45 connectors onto CAT5e cables following the T-568B wiring standard, we connected each end of the cable to the main and remote units of the tester. The LED lights helped us confirm whether all eight wires were correctly connected. If the lights did not match the correct pattern, we identified the faulty end and re-crimped the connector.
 
-\subsection{Benefits:}
+\subsection{Benefits}
 \begin{itemize}
     \item Saves time during troubleshooting by quickly identifying bad cables.
     \item Ensures that cables meet required standards before connecting them to network devices.
@@ -325,42 +331,187 @@ In our laboratory, network switches were used to interconnect multiple PCs and r
 
 
 \section{Router Configuration}
-A \textbf{Router} connects different networks and directs data between them. Configuration typically involves setting IP addresses, routing protocols, and NAT.
+A \textbf{router} is a networking device that connects different networks together and directs data packets between them. It operates primarily at the \textbf{Network Layer (Layer 3)} of the OSI model and is responsible for routing packets based on IP addresses. Router configuration is a critical task in network design, allowing proper communication, traffic control, and access between different segments of a network.
 
-\textbf{Example CLI Commands:}
-\begin{verbatim}
-interface fastethernet0/0
-ip address 192.168.1.1 255.255.255.0
-no shutdown
-exit
-\end{verbatim}
+\subsection{Basic Router Configuration Tasks}
+Router configuration typically involves several essential tasks, which can be performed via the router's Command Line Interface (CLI). The most common configuration steps are:
 
-\begin{center}
-%\includegraphics[width=0.4\textwidth]{https://cdn.ttgtmedia.com/rms/misc/router-wifi-mobile.png}
-\end{center}
-
-\section{Switch to Router Connection}
-\textbf{Switch to Router Connection} is usually done through a straight-through Ethernet cable. The router's LAN port connects to the switch, enabling device communication and internet access.
-
-\begin{center}
-%\includegraphics[width=0.5\textwidth]{https://i.stack.imgur.com/sGb5w.png}
-\end{center}
-
-\section{OSI Model}
-The \textbf{OSI (Open Systems Interconnection) Model} is a conceptual framework that standardizes the functions of a telecommunication or computing system into seven abstraction layers:
 \begin{enumerate}
-\item Physical
-\item Data Link
-\item Network
-\item Transport
-\item Session
-\item Presentation
-\item Application
+    \item \textbf{Accessing the CLI:} Connect to the router using a console cable and open a terminal emulator or use console access in network simulators like Cisco Packet Tracer.
+    \item \textbf{Entering Privileged Mode:}
+    \begin{verbatim}
+    Router> enable
+    \end{verbatim}
+    
+    \item \textbf{Entering Global Configuration Mode:}
+    \begin{verbatim}
+    Router# configure terminal
+    \end{verbatim}
+    
+    \item \textbf{Setting the Hostname:}
+    \begin{verbatim}
+    Router(config)# hostname R1
+    \end{verbatim}
+    
+    \item \textbf{Configuring Interfaces:}
+    Assign IP addresses to interfaces and enable them.
+    \begin{verbatim}
+    R1(config)# interface gig0/0
+    R1(config-if)# ip address 192.168.1.1 255.255.255.0
+    R1(config-if)# no shutdown
+    \end{verbatim}
+    
+    \item \textbf{Setting a Default Route (Optional):}
+    Used when the router needs to forward unknown destination packets.
+    \begin{verbatim}
+    R1(config)# ip route 0.0.0.0 0.0.0.0 192.168.1.254
+    \end{verbatim}
+    
+    \item \textbf{Saving Configuration:}
+    \begin{verbatim}
+    R1# write memory
+    \end{verbatim}
 \end{enumerate}
 
 \begin{center}
-%\includegraphics[width=0.6\textwidth]{https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Osi-model-jb.svg/1920px-Osi-model-jb.svg.png}
+    \includegraphics[width=0.4\textwidth]{router.jpeg} \\
+    {\small \textbf{Figure 8:} Router}
 \end{center}
 
+\subsection{Advanced Configuration Examples}
+\begin{itemize}
+    \item \textbf{Dynamic Routing Protocols (like RIP):}
+    \begin{verbatim}
+    R1(config)# router rip
+    R1(config-router)# version 2
+    R1(config-router)# network 192.168.1.0
+    \end{verbatim}
+    
+    \item \textbf{NAT Configuration:}
+    Configure NAT to translate private IP addresses to public ones.
+    \item \textbf{DHCP Configuration:}
+    Routers can be configured to act as DHCP servers in small networks.
+\end{itemize}
+
+\subsection{Importance in Lab}
+In our Computer Network Hardware Lab, routers were configured to simulate real-world network scenarios. Tasks included setting up IP addresses on interfaces, configuring static and dynamic routing, enabling NAT, and establishing inter-VLAN routing. Through these configurations, we gained practical experience in how routers manage traffic between networks and ensure communication across different subnets.
+
+\newpage
+
+\section{Switch to Router Connection}
+
+In computer networking, connecting a switch to a router is a fundamental setup for enabling communication between local area network (LAN) devices and external networks (such as the internet). This configuration is also known as a \textbf{Router-on-a-Stick} setup when involving VLANs. The switch and router work together to forward traffic, manage network segmentation, and provide routing capabilities.
+
+\subsection{Purpose of Switch to Router Connection}
+\begin{itemize}
+    \item To allow hosts connected to the switch to communicate with devices in other networks.
+    \item To route traffic between different VLANs when VLANs are configured on the switch.
+    \item To provide internet access to LAN devices through the router.
+\end{itemize}
+
+\subsection{Required Devices and Cables}
+\begin{itemize}
+    \item \textbf{Devices:} One router and one switch.
+    \item \textbf{Cable:} Use a straight-through Ethernet cable for connecting a switch port to a router interface.
+\end{itemize}
+
+\begin{center}
+    \includegraphics[width=0.9\textwidth]{swrt.png} \\
+    {\small \textbf{Figure 9:} Switch to Router Connection in Cisco Packet Tracer}
+\end{center}
+
+\subsection{Basic Configuration Steps}
+Assume the following:
+\begin{itemize}
+    \item Switch port: FastEthernet0/1
+    \item Router port: GigabitEthernet0/0
+    \item Subnet: 192.168.1.0/24
+\end{itemize}
+
+\textbf{Step 1: Configure the Router Interface}
+\begin{verbatim}
+Router> enable
+Router# configure terminal
+Router(config)# interface gig0/0
+Router(config-if)# ip address 192.168.1.1 255.255.255.0
+Router(config-if)# no shutdown
+\end{verbatim}
+
+\textbf{Step 2: Connect Devices}
+\begin{itemize}
+    \item Use a straight-through cable from the router's GigabitEthernet0/0 to the switch's FastEthernet0/1.
+    \item Ensure devices connected to the switch (like PCs) are in the same subnet, e.g., 192.168.1.X, with default gateway set to 192.168.1.1 (router's IP).
+\end{itemize}
+
+\textbf{Step 3: Test the Network}
+\begin{itemize}
+    \item From any PC connected to the switch, open the command prompt and ping the router’s IP address:
+    \begin{verbatim}
+    ping 192.168.1.1
+    \end{verbatim}
+    \item Successful replies confirm the switch-to-router connection is functional.
+\end{itemize}
+
+\subsection{Use in Lab Practice}
+In our lab, the switch-to-router connection was used to simulate a basic office LAN setup. By connecting the switch to a router and configuring the correct IP addressing, we enabled PCs connected to the switch to access other networks via the router. This helped us understand how routers manage traffic and how switches extend network connectivity within a LAN.
+
+\newpage
+
+\section{OSI Model}
+The \textbf{OSI (Open Systems Interconnection) Model} is a conceptual framework developed by the International Organization for Standardization (ISO) that standardizes the functions of a telecommunication or computing system into seven distinct layers. This model helps different networking systems to communicate with each other, regardless of their underlying architecture.
+
+\subsection{Purpose of the OSI Model}
+\begin{itemize}
+    \item Provides a universal standard for networking hardware and software.
+    \item Helps in troubleshooting by isolating network problems layer by layer.
+    \item Supports interoperability between various types of systems and technologies.
+\end{itemize}
+
+\subsection{The Seven Layers of the OSI Model}
+
+\begin{enumerate}
+    \item \textbf{Application Layer (Layer 7)}\\
+    This is the topmost layer that interacts directly with user applications. It provides services such as email, file transfer, and web browsing (e.g., HTTP, FTP, SMTP).
+
+    \item \textbf{Presentation Layer (Layer 6)}\\
+    Responsible for translating data formats, data encryption/decryption, and compression. It ensures that data is readable by the receiving system (e.g., JPEG, MPEG, SSL/TLS).
+
+    \item \textbf{Session Layer (Layer 5)}\\
+    Manages sessions between applications. It establishes, maintains, and terminates connections between devices (e.g., NetBIOS, RPC).
+
+    \item \textbf{Transport Layer (Layer 4)}\\
+    Provides reliable data transfer through flow control, error checking, and segmentation (e.g., TCP, UDP).
+
+    \item \textbf{Network Layer (Layer 3)}\\
+    Handles data routing, packet forwarding, and logical addressing (IP addressing). Routers operate at this layer (e.g., IP, ICMP).
+
+    \item \textbf{Data Link Layer (Layer 2)}\\
+    Manages physical addressing (MAC addresses), error detection, and frame delivery. Switches operate at this layer (e.g., Ethernet, PPP).
+
+    \item \textbf{Physical Layer (Layer 1)}\\
+    Deals with the physical connection between devices including cables, switches, voltages, and pin layouts. It transmits raw bit streams over a physical medium.
+\end{enumerate}
+
+\begin{center}
+    \includegraphics[width=1\textwidth]{OSI.jpg} \\
+    {\small \textbf{Figure 10:} OSI Model} \\
+\end{center}
+
+\subsection{Mnemonic to Remember the Layers}
+\textbf{"All People Seem To Need Data Processing"} (from Layer 7 to Layer 1). \\
+
+\subsection{OSI Model in Networking Labs}
+In our networking lab, the OSI Model helped us to understand and troubleshoot communication between devices. For example:
+\begin{itemize}
+    \item When a PC failed to ping another device, we checked Layer 1 (cable), Layer 2 (MAC), and Layer 3 (IP).
+    \item During router configuration, we mainly worked with Layer 3 (Network Layer).
+    \item Switch configuration tasks related to Layer 2 (Data Link Layer). \\
+\end{itemize}
+\newpage
+\section{Conclusion}
+In conclusion, this lab provided a practical and insightful exploration into the foundational hardware and configurations used in modern computer networks. By working hands-on with tools such as cable tracers, cable testers, and various types of networking cables, we gained essential skills in identifying, connecting, and troubleshooting physical network components. The understanding and application of the T-568B wiring standard were especially important for ensuring correct cable assembly and communication between devices.\\
+Moreover, the lab enabled us to explore vital networking equipment, including switches, routers, fiber optic cables, and SFP modules. Through router configurations involving Dynamic NAT and DHCP, we learned how data is dynamically translated and IP addresses are distributed, emphasizing the role of logical configurations in real-time networking. The demonstration of switch-to-router connections further reinforced our grasp of both physical and logical connectivity.\\
+The introduction and discussion of the OSI Model allowed us to contextualize each hardware and protocol interaction within a structured framework. This layered approach to understanding network behavior proved invaluable when diagnosing connectivity issues and planning network architecture.\\
+Overall, the lab successfully bridged theoretical networking concepts with their real-world applications, enhancing both our knowledge and confidence in setting up, maintaining, and troubleshooting basic to intermediate network infrastructures.\\
 
 \end{document}
