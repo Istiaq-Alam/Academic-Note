@@ -26,6 +26,10 @@
 \contentsline {subsection}{\numberline {6.2}Types of SFP Modules}{8}{subsection.6.2}%
 \contentsline {subsection}{\numberline {6.3}Applications in Networking}{8}{subsection.6.3}%
 \contentsline {section}{\numberline {7}Switch}{9}{section.7}%
-\contentsline {section}{\numberline {8}Router Configuration}{9}{section.8}%
-\contentsline {section}{\numberline {9}Switch to Router Connection}{9}{section.9}%
-\contentsline {section}{\numberline {10}OSI Model}{9}{section.10}%
+\contentsline {subsection}{\numberline {7.1}Functionality}{9}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Types of Switches}{9}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Applications in Networking}{9}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Importance in Lab}{9}{subsection.7.4}%
+\contentsline {section}{\numberline {8}Router Configuration}{10}{section.8}%
+\contentsline {section}{\numberline {9}Switch to Router Connection}{10}{section.9}%
+\contentsline {section}{\numberline {10}OSI Model}{10}{section.10}%

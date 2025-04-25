@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.4.24)  25 APR 2025 12:20
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.4.24)  25 APR 2025 14:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -696,6 +696,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [8]
+File: sfp.jpg Graphic file (type bmp)
+<sfp.jpg>
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -703,23 +706,39 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[9] (Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.aux)
+[9]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[10] (Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
-Package rerunfilecheck Info: File `Istiak_ID-05_Hardware_Lab_Report_Computer_Ne
-tworks.out' has not changed.
-(rerunfilecheck)             Checksum: B157CEBB80A97A097AC785967C78181A;4468.
+
+
+Package rerunfilecheck Warning: File `Istiak_ID-05_Hardware_Lab_Report_Computer
+_Networks.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Istiak_ID-05_Hardware_Lab_Report_Co
+mputer_Networks.out':
+(rerunfilecheck)             Before: 57B5975A035BC48FF0F5B0F227441C2A;5204
+(rerunfilecheck)             After:  DE70B5F35237210732F0802EB3912502;5083.
  ) 
 Here is how much of TeX's memory you used:
- 15054 strings out of 409617
- 289073 string characters out of 5774013
- 1931191 words of memory out of 5000000
- 36967 multiletter control sequences out of 15000+600000
+ 15055 strings out of 409617
+ 289084 string characters out of 5774013
+ 1932191 words of memory out of 5000000
+ 36968 multiletter control sequences out of 15000+600000
  567194 words of font info for 92 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  79i,12n,93p,562b,435s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.pdf (11 pa
+Output written on Istiak_ID-05_Hardware_Lab_Report_Computer_Networks.pdf (12 pa
 ges).

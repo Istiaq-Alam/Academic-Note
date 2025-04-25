@@ -296,11 +296,33 @@ SFP modules are widely used in:
 \end{itemize}
 
 \section{Switch}
-A \textbf{Switch} is a network device that connects devices in a LAN and uses MAC addresses to forward data to the correct destination.
+A \textbf{network switch} is a fundamental device in computer networking that connects multiple devices (such as computers, printers, and servers) within a Local Area Network (LAN) and facilitates efficient data communication between them. It operates at the \textbf{Data Link Layer (Layer 2)} of the OSI model but can also support Layer 3 routing functions in advanced models.
+
+\subsection{Functionality}
+Unlike a hub, which broadcasts data to all ports, a switch is intelligent—it learns the MAC addresses of connected devices and forwards data only to the appropriate port based on the destination MAC address. This improves network efficiency and reduces unnecessary data traffic.
+
+\subsection{Types of Switches}
+\begin{itemize}
+    \item \textbf{Unmanaged Switch:} Plug-and-play device with no configuration needed; commonly used in home or small office networks.
+    \item \textbf{Managed Switch:} Provides advanced features like VLANs, SNMP monitoring, port mirroring, and security settings; ideal for enterprise-level networks.
+    \item \textbf{Layer 3 Switch:} Combines the functions of a router and switch, capable of performing routing functions based on IP addresses.
+\end{itemize}
 
 \begin{center}
-%\includegraphics[width=0.5\textwidth]{https://media.cablematters.com/images/thumbnails/515/515/detailed/5/2020011106560335.jpg}
+    \includegraphics[width=0.4\textwidth]{sfp.jpg} \\
+    {\small \textbf{Figure 7:} Switch}
 \end{center}
+
+\subsection{Applications in Networking}
+\begin{itemize}
+    \item Core component of LAN infrastructure
+    \item Used in data centers to connect servers and storage
+    \item Supports security and traffic management in enterprise networks
+\end{itemize}
+
+\subsection{Importance in Lab}
+In our laboratory, network switches were used to interconnect multiple PCs and routers to form a structured LAN. We configured VLANs on managed switches to simulate departmental segmentation and observed how switches learn MAC addresses to forward frames efficiently. This provided hands-on experience in designing scalable and structured networks.
+
 
 \section{Router Configuration}
 A \textbf{Router} connects different networks and directs data between them. Configuration typically involves setting IP addresses, routing protocols, and NAT.
