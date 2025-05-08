@@ -1,4 +1,4 @@
-# Failover Network Using Redundant Paths
+# [Failover Network Using Redundant Paths](https://github.com/Istiaq-Alam/Failover-Network-Using-Redundant-Paths.git)🔗
 
 This project demonstrates how to build a **highly available and resilient network** by implementing **Spanning Tree Protocol (STP)** and **Hot Standby Router Protocol (HSRP)**. The goal is to prevent network failures, loops, and downtime in mission-critical environments such as hospitals, banks, and universities.
 
