@@ -1,0 +1,49 @@
+1. Project Name
+2. Project Motivation 
+3. Types of Metal Detector
+4. Main Project 
+5. Block Diagram 
+6. Circuit Diagram
+7. Uses of this project 
+8. Advantages 
+9. Application of the System
+10. In future progress (future এ আর কি কি upgrade করতে চাই)
+
+
+
+Slide 1 introduce the team
+
+Slide 2 Motivation: Metal detector is a very common device that is used for checking persons, luggage or bags in shopping malls, hotels, cinema halls, etc. to ensure that person is not carrying any metals or illegal things like guns, bombs etc. Metal Detectors detect the presence of metals. 
+
+Slide 3 Types: There are different types of metal detectors like hand held metal detectors, walk through metal detectors and ground search metal detectors. Metal detectors can be created easily and the circuit for a basic metal detector is not that complex. 
+
+Slide 4 Our Main Project
+
+Slide 5-12 Components 
+
+Slide 13 block diagram: There are three main parts in the metal detector circuit: 
+the LC Circuit, the Proximity Sensor , output LED and the Buzzer. The coil and the capacitor C1, which are connected in parallel, will form the LC circuit.
+LC Circuit: LC circuit has inductor and capacitor connected in parallel.This circuit sarts resonating when there is same frequency material near to it. The LC circuit charges capacitor and inductor alternatively.When the capacitor is charged fully ,charge is applied to inductor.
+Proximity Sensor: The proximity sensor can detect the objects with out any physical interference. The proximity sensor will work same as infrared sensor, proximity also release a signal, it will not give output unless and until there is no change in the reflected back signal.
+
+Slide 14 Circuit Diagram
+
+Slide 15-16 Uses of this project
+The LC Circuit, which consists of L1 (coil) and C1, is the main metal detector part of the circuit. With the help of this LC Circuit, which is also called as Tank Circuit or Tuned Circuit, the TDA0161 IC acts as an oscillator and oscillates at a particular frequency.
+When the LC circuit detects any resonating frequency from any metal which is near to it, electric field will be created which will lead to induces current in the coil and changes in the signal flow through the coil.
+Variable resistor is used to change the proximity sensor value equal to the LC circuit, it is better to check the value when the coil is not near any metal object. When the metal is detected, the LC circuit will have changed signal.
+When the output pin is high, the resistor R3 will provide positive voltage to transistor Q1. Q1 will be turned on and LED will glow (not shown in the circuit) and buzzer will be activated.
+
+Slide 17 Advantages:
+●The Proximity Detector IC TDA0161 based Metal Detector Circuit is a very simple and easy to construct metal detector that can be used to detect small metals in our homes, offices and gardens.
+●There is need for any microcontroller as the Proximity Sensor will be sufficient to implement the project.
+
+Slide 18 Disadvantages:
+●The main disadvantage of this Metal Detector Circuit is the range of detection. The metal object has to be at a distance of 10mm for the detector to detect it. 
+
+Slide 19 Application:
+
+Slide 20  In future progress: 
+
+Slide 21 QNA Session:
+
