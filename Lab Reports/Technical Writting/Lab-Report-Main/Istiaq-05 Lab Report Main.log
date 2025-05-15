@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2025/dev/Debian) (preloaded format=xelatex 2025.3.28)  15 MAY 2025 18:20
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2025/dev/Debian) (preloaded format=xelatex 2025.3.28)  15 MAY 2025 23:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -922,11 +922,11 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 ] (./Istiaq-05 Lab Report Main.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 2.
+(Font)              <12> on input line 1.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 2.
+(Font)              <8> on input line 1.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 2.
+(Font)              <6> on input line 1.
 )
 \tf@toc=\write6
 \openout6 = `"Istiaq-05 Lab Report Main.toc"'.
@@ -1006,6 +1006,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [5]
+File: lab4.pdf Graphic file (type pdf)
+<use lab4.pdf>
+File: lab4.pdf Graphic file (type pdf)
+<use lab4.pdf, page 1>
+File: lab4.pdf Graphic file (type pdf)
+<use lab4.pdf, page 1>
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1014,7 +1021,239 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[6] (./Istiaq-05 Lab Report Main.aux)
+[6]
+File: lab4.pdf Graphic file (type pdf)
+<use lab4.pdf, page 1>
+File: lab4.pdf Graphic file (type pdf)
+<use lab4.pdf, page 1>
+
+
+File: lab4.pdf Graphic file (type pdf)
+<use lab4.pdf, page 1>
+[7
+
+]
+File: lab4.pdf Graphic file (type pdf)
+<use lab4.pdf, page 2>
+File: lab4.pdf Graphic file (type pdf)
+<use lab4.pdf, page 2>
+
+
+File: lab4.pdf Graphic file (type pdf)
+<use lab4.pdf, page 2>
+[8
+
+]
+File: lab4.pdf Graphic file (type pdf)
+<use lab4.pdf, page 3>
+File: lab4.pdf Graphic file (type pdf)
+<use lab4.pdf, page 3>
+
+
+File: lab4.pdf Graphic file (type pdf)
+<use lab4.pdf, page 3>
+[9
+
+]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[10]
+File: lab42.pdf Graphic file (type pdf)
+<use lab42.pdf>
+File: lab42.pdf Graphic file (type pdf)
+<use lab42.pdf, page 1>
+File: lab42.pdf Graphic file (type pdf)
+<use lab42.pdf, page 1>
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[11]
+File: lab42.pdf Graphic file (type pdf)
+<use lab42.pdf, page 1>
+File: lab42.pdf Graphic file (type pdf)
+<use lab42.pdf, page 1>
+
+
+File: lab42.pdf Graphic file (type pdf)
+<use lab42.pdf, page 1>
+[12
+
+]
+File: lab42.pdf Graphic file (type pdf)
+<use lab42.pdf, page 2>
+File: lab42.pdf Graphic file (type pdf)
+<use lab42.pdf, page 2>
+
+
+File: lab42.pdf Graphic file (type pdf)
+<use lab42.pdf, page 2>
+[13
+
+]
+File: lab5.pdf Graphic file (type pdf)
+<use lab5.pdf>
+File: lab5.pdf Graphic file (type pdf)
+<use lab5.pdf, page 1>
+File: lab5.pdf Graphic file (type pdf)
+<use lab5.pdf, page 1>
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[14]
+File: lab5.pdf Graphic file (type pdf)
+<use lab5.pdf, page 1>
+File: lab5.pdf Graphic file (type pdf)
+<use lab5.pdf, page 1>
+
+
+File: lab5.pdf Graphic file (type pdf)
+<use lab5.pdf, page 1>
+[15
+
+]
+File: lab5.png Graphic file (type bmp)
+<lab5.png>
+
+Underfull \hbox (badness 10000) in paragraph at lines 419--424
+
+ []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[16]
+File: lab6.pdf Graphic file (type pdf)
+<use lab6.pdf>
+File: lab6.pdf Graphic file (type pdf)
+<use lab6.pdf, page 1>
+File: lab6.pdf Graphic file (type pdf)
+<use lab6.pdf, page 1>
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[17]
+File: lab6.pdf Graphic file (type pdf)
+<use lab6.pdf, page 1>
+File: lab6.pdf Graphic file (type pdf)
+<use lab6.pdf, page 1>
+
+
+File: lab6.pdf Graphic file (type pdf)
+<use lab6.pdf, page 1>
+[18
+
+]
+File: lab6.pdf Graphic file (type pdf)
+<use lab6.pdf, page 2>
+File: lab6.pdf Graphic file (type pdf)
+<use lab6.pdf, page 2>
+
+
+File: lab6.pdf Graphic file (type pdf)
+<use lab6.pdf, page 2>
+[19
+
+]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[20]
+File: lab7.png Graphic file (type bmp)
+<lab7.png>
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[21]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[22] (./Istiaq-05 Lab Report Main.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 603--1
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 603--1
+
+ []
+
+)
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[23]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[24]
+File: lab8.png Graphic file (type bmp)
+<lab8.png>
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[25] (./Istiaq-05 Lab Report Main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1024,12 +1263,12 @@ nged.
 (rerunfilecheck)             Checksum: <no file>.
  ) 
 Here is how much of TeX's memory you used:
- 26662 strings out of 473835
- 535906 string characters out of 5731946
- 953999 words of memory out of 5000000
- 49291 multiletter control sequences out of 15000+600000
- 567962 words of font info for 92 fonts, out of 8000000 for 9000
+ 26763 strings out of 473835
+ 537827 string characters out of 5731946
+ 958999 words of memory out of 5000000
+ 49378 multiletter control sequences out of 15000+600000
+ 567970 words of font info for 93 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 84i,11n,93p,438b,541s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,17n,93p,438b,541s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Istiaq-05 Lab Report Main.pdf (8 pages).
+Output written on Istiaq-05 Lab Report Main.pdf (27 pages).
