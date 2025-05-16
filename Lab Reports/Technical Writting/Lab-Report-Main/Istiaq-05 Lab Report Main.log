@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2025/dev/Debian) (preloaded format=xelatex 2025.3.28)  15 MAY 2025 23:42
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2025/dev/Debian) (preloaded format=xelatex 2025.3.28)  16 MAY 2025 22:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -922,11 +922,11 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 ] (./Istiaq-05 Lab Report Main.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 1.
+(Font)              <12> on input line 2.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 1.
+(Font)              <8> on input line 2.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 1.
+(Font)              <6> on input line 2.
 )
 \tf@toc=\write6
 \openout6 = `"Istiaq-05 Lab Report Main.toc"'.
@@ -1263,10 +1263,10 @@ nged.
 (rerunfilecheck)             Checksum: <no file>.
  ) 
 Here is how much of TeX's memory you used:
- 26763 strings out of 473835
- 537827 string characters out of 5731946
+ 26764 strings out of 473835
+ 537838 string characters out of 5731946
  958999 words of memory out of 5000000
- 49378 multiletter control sequences out of 15000+600000
+ 49379 multiletter control sequences out of 15000+600000
  567970 words of font info for 93 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  84i,17n,93p,438b,541s stack positions out of 10000i,1000n,20000p,200000b,200000s
