@@ -62,7 +62,7 @@
 		\vspace{0.3cm}        
         \textbf{\Large Batch: CSE-20} \\
         \vspace{0.5cm}
-        \textbf{\Large Submission Date: }{\Large \textbf{\today}\par}
+        \textbf{\Large Submission Date: }{\Large \textbf{May 29, 2025}\par}
     \end{flushleft}
     \vfill
     \begin{flushleft}
@@ -85,7 +85,7 @@
 
 \section{Lab Report-04 : CPU Scheduling}
 \subsection{Implementation of FCFS Scheduling}
-$\bullet$ \underline{\textbf{Code :}}
+ $\bullet$ \underline{\textbf{Code :}}
 \begin{Verbatim}[fontsize=\small, formatcom=\hackfont\color{black}]
 #include <bits/stdc++.h>
 using namespace std;
@@ -95,7 +95,6 @@ int main()
     //cout << "Enter Number of Process : ";
     int n=3;
     //cin >> n;
-
     int i, j, CT[n], TAT[n], WT[n];
     int PS[]={1,2,3};
     int AT[]={1,2,3};
@@ -114,18 +113,15 @@ int main()
         {
             if(AT[j] > AT[j+1])
             {
-
                 swap(AT[j],AT[j+1]);
             }
         }
     }
-
     CT[0]=AT[0]+BT[0];
     for(i=1; i<n; i++)
     {
         CT[i]=CT[i-1]+BT[i];
     }
-
     int Total_T, Total_W;
     for(i=0; i<n; i++)
     {
@@ -135,14 +131,21 @@ int main()
         Total_T=Total_T+TAT[i];
         Total_W=Total_W+WT[i];
     }
-
-    cout << "Process\tArrival time\tBurst time\tCompletition time\tTurnaround time\tWaiting time"<<endl;
+    cout << "AT - Arrival Time" << endl;
+    cout << "BT - Brust Time" << endl;
+    cout << "CT - Completition Time" << endl;
+    cout << "TT - Turnaround Time" << endl;
+    cout << "WT - Waiting Time" << endl<<endl;
+    cout << "-------------------------------------------------"<<endl;
+    cout << "|Process |AT\t|BT\t|CT\t|TT\t|WT\t|"<<endl;
+    cout << "-------------------------------------------------"<<endl;
 
     for (i=0; i<n; i++)
     {
-        cout << "P"<<PS[i]<<"\t"<<AT[i]<<"\t"<<BT[i]<<"\t"<<CT[i]<<"\t"<<TAT[i]<<"\t"<<WT[i]<<endl;
+        cout << "|P"<<PS[i]<<"\t |"<<AT[i]<<"\t|"<<BT[i]<<"\t|"
+        <<CT[i]<<"\t|"<<TAT[i]<<"\t|"<<WT[i]<<"\t|"<<endl;
     }
-
+    cout << "-------------------------------------------------"<<endl;
     cout << "Average Turnaround Time : " <<Total_T/n<<endl;
     cout << "Average Waiting Time : " <<Total_W/n<<endl;
 }
@@ -150,8 +153,8 @@ int main()
 $\bullet$ \underline{\textbf{Input / Output :}}
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\linewidth]{logo.png}
-    \caption{Enter Caption}
+    \includegraphics[width=0.9\linewidth]{1.png}
+    \caption{Output}
     \label{fig:enter-label}
 \end{figure}
 \newpage
@@ -160,22 +163,73 @@ $\bullet$ \underline{\textbf{ \Large Description :}}
 
 \subsection{Implementation of Shortest Job First (SJF)}
  $\bullet$ \underline{\textbf{Code :}}
-\begin{verbatim}
-\documentclass{article}
-\begin{document}
-\title{Practice Lab-01 :}
-\author{Istiak Alam}
-\maketitle
-In March 2006, Congress raised that ceiling an additional \$0.79 trillion 
-to \$8.97 trillion, which is approximately 68\% of GDP. As of October 4, 
-2008, the ``Emergency Economic Srabilization Act of 2008" raised the 
-current debt ceiling to \$11.3 trillion.
-\end{document}
-\end{verbatim}
+\begin{Verbatim}[fontsize=\small, formatcom=\hackfont\color{black}]
+#include <iostream>
+using namespace std;
+
+int main() {
+    int A[100][4];
+    int i, j, n, total = 0, index, temp;
+    float avg_wt, avg_tat;
+    cout << "Enter number of process: ";
+    cin >> n;
+    cout << "Enter Burst Time:" << endl;
+
+    // User Input Burst Time and alloting Process Id.
+    for (i = 0; i < n; i++) {
+        cout << "P" << i + 1 << ": ";
+        cin >> A[i][1];
+        A[i][0] = i + 1;
+    }
+
+    // Sorting process according to their Burst Time.
+    for (i = 0; i < n; i++) {
+        index = i;
+        for (j = i + 1; j < n; j++)
+            if (A[j][1] < A[index][1])
+                index = j;
+        temp = A[i][1];
+        A[i][1] = A[index][1];
+        A[index][1] = temp;
+
+        temp = A[i][0];
+        A[i][0] = A[index][0];
+        A[index][0] = temp;
+    }
+
+    A[0][2] = 0;
+    // Calculation of Waiting Times
+    for (i = 1; i < n; i++) {
+        A[i][2] = 0;
+        for (j = 0; j < i; j++)
+            A[i][2] += A[j][1];
+        total += A[i][2];
+    }
+
+    avg_wt = (float)total / n;
+    total = 0;
+    cout << "P     BT     WT     TAT" << endl;
+
+    // Calculation of Turn Around Time and printing the
+    // data.
+    for (i = 0; i < n; i++) {
+        A[i][3] = A[i][1] + A[i][2];
+        total += A[i][3];
+        cout << "P" << A[i][0] << "     " << A[i][1] << "     " << A[i][2] << "      " << A[i][3] << endl;
+    }
+
+    avg_tat = (float)total / n;
+    cout << "Average Waiting Time= " << avg_wt << endl;
+    cout << "Average Turnaround Time= " << avg_tat << endl;
+}
+
+\end{Verbatim}
 $\bullet$ \underline{\textbf{Input / Output :}}
 \begin{figure}[h!]
-\includegraphics[width=0.4\textwidth]{logo.png}
-%\caption{\label{table}Output of the Article}
+    \centering
+    \includegraphics[width=0.9\linewidth]{2.png}
+    \caption{Output}
+    \label{fig:enter-label}
 \end{figure}
 \newpage
 $\bullet$ \underline{\textbf{ \Large Description :}}
@@ -184,22 +238,105 @@ $\bullet$ \underline{\textbf{ \Large Description :}}
 \section{Lab Report-05 : Deadlock - Bankers Algorithm}
 \subsection{Implementation of Bankers Algorithm}
  $\bullet$ \underline{\textbf{Code :}}
-\begin{verbatim}
-\documentclass{article}
-\begin{document}
-\title{Practice Lab-01 :}
-\author{Istiak Alam}
-\maketitle
-In March 2006, Congress raised that ceiling an additional \$0.79 trillion 
-to \$8.97 trillion, which is approximately 68\% of GDP. As of October 4, 
-2008, the ``Emergency Economic Srabilization Act of 2008" raised the 
-current debt ceiling to \$11.3 trillion.
-\end{document}
-\end{verbatim}
+\begin{Verbatim}[fontsize=\small, formatcom=\hackfont\color{black}]
+// Bankers Algorithm
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int p, r ;
+    cout << "Enter no of processes : ";
+    cin >> p;
+    cout << "Enter no of resources : ";
+    cin >> r;
+
+    int al[p][r], mx[p][r], av[r], need[p][r];
+
+    //input allocation
+    cout << "Enter Allocated resources : " << endl;
+    for (int i=0; i<p; i++)
+    {
+        for (int j=0; j<r; j++)
+        {
+            cin >> al[i][j];
+        }
+    }
+    cout << endl;
+
+    //input max instances
+    cout << "Enter maximum need of resources : " << endl;
+    for (int i=0; i<p; i++)
+    {
+        for (int j=0; j<r; j++)
+        {
+            cin >> mx[i][j];
+        }
+    }
+    cout << endl;
+
+    //input available resources
+    cout << "Enter Available resources : " << endl;
+    for (int i=0; i<r; i++)
+    {
+        cin >> av[i];
+    }
+    cout << endl;
+
+    // Print need values
+    cout << "Need values : " << endl;
+    for (int i=0; i<p; i++)
+    {
+        for (int j=0; j<r; j++)
+        {
+            //need = max - allocation
+            need[i][j] = mx[i][j] - al[i][j];   
+            cout << need[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+
+    int x = 1; 
+    int y = 0; 
+    cout << "Safe State : " << endl;
+    while (x != 0)
+    {
+        for (int i=0; i<p; i++)
+        {
+        int z = 0; 
+        for (int j=0; j<r; j++)
+        {
+            if (need[i][j] <= av[j] && (need[i][0] != -1))  
+            {
+                z++;  // counting process
+            }
+        }
+            if (z == r) // all resourse satisfied
+            {
+                for (int k=0; k<r; k++)
+                {
+                    av[k] += al[i][k]; 
+                }
+                cout << "Process :" << i << endl;
+                need[i][0] = -1;    
+                y++;    // counting if process done
+            }
+        } 
+
+        if (y == p)  x = 0;  
+    } 
+    cout << endl;
+    return 0;
+}
+\end{Verbatim}
+\newpage
 $\bullet$ \underline{\textbf{Input / Output :}}
 \begin{figure}[h!]
-\includegraphics[width=0.4\textwidth]{logo.png}
-%\caption{\label{table}Output of the Article}
+    \centering
+    \includegraphics[width=0.9\linewidth]{3.png}
+    \caption{Output}
+    \label{fig:enter-label}
 \end{figure}
 \newpage
 $\bullet$ \underline{\textbf{ \Large Description :}}
@@ -208,115 +345,334 @@ $\bullet$ \underline{\textbf{ \Large Description :}}
 \section{Lab Report-06 : Dynamic Storage-Allocation Problem}
 \subsection{Dynamic Storage-Allocation using FirstFit}
  $\bullet$ \underline{\textbf{Code :}}
-\begin{verbatim}
-\documentclass{article}
-\begin{document}
-\title{Practice Lab-01 :}
-\author{Istiak Alam}
-\maketitle
-In March 2006, Congress raised that ceiling an additional \$0.79 trillion 
-to \$8.97 trillion, which is approximately 68\% of GDP. As of October 4, 
-2008, the ``Emergency Economic Srabilization Act of 2008" raised the 
-current debt ceiling to \$11.3 trillion.
-\end{document}
-\end{verbatim}
+\begin{Verbatim}[fontsize=\small, formatcom=\hackfont\color{black}]
+//First - Fit algorithm
+#include<bits/stdc++.h>
+using namespace std;
+
+void firstFit(int blockSize[], int m,
+              int processSize[], int n){
+    int allocation[n];
+    memset(allocation, -1, sizeof(allocation));
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < m; j++){
+            if (blockSize[j] >= processSize[i]){
+                // allocate block j to p[i] process
+                allocation[i] = j;
+                
+                // Reduce available memory in this block.
+                blockSize[j] -= processSize[i];
+                break;
+            }   }    }
+    cout << "\n----------------------------------------------"<<endl;
+    cout << "|Process No.\t|Process Size\t|Block no.\n";
+    cout << "----------------------------------------------"<<endl;
+    for (int i = 0; i < n; i++){
+        cout << "| " << i+1 << "\t\t|  "
+             << processSize[i] << "\t\t|";
+        if (allocation[i] != -1)
+            cout << allocation[i] + 1<<"  ";
+        else
+            cout << "Not Allocated";
+        cout << endl;
+    }
+}
+int main()
+{
+    int blockSize[] = {100, 500, 200, 300, 600};
+    int processSize[] = {212, 417, 112, 426};
+    int m = sizeof(blockSize) / sizeof(blockSize[0]);
+    int n = sizeof(processSize) / sizeof(processSize[0]);
+
+    firstFit(blockSize, m, processSize, n);
+    return 0 ;
+}
+\end{Verbatim}
+\newpage
 $\bullet$ \underline{\textbf{Input / Output :}}
 \begin{figure}[h!]
-\includegraphics[width=0.4\textwidth]{logo.png}
-%\caption{\label{table}Output of the Article}
+    \centering
+    \includegraphics[width=0.9\linewidth]{4.png}
+    \caption{Output \\}
+    \label{fig:enter-label}
 \end{figure}
-\newpage
+
 $\bullet$ \underline{\textbf{ \Large Description :}}
 \newpage
 
 \subsection{Dynamic Storage-Allocation using BestFit}
  $\bullet$ \underline{\textbf{Code :}}
-\begin{verbatim}
-\documentclass{article}
-\begin{document}
-\title{Practice Lab-01 :}
-\author{Istiak Alam}
-\maketitle
-In March 2006, Congress raised that ceiling an additional \$0.79 trillion 
-to \$8.97 trillion, which is approximately 68\% of GDP. As of October 4, 
-2008, the ``Emergency Economic Srabilization Act of 2008" raised the 
-current debt ceiling to \$11.3 trillion.
-\end{document}
-\end{verbatim}
+\begin{Verbatim}[fontsize=\small, formatcom=\hackfont\color{black}]
+// C++ implementation of Best - Fit algorithm
+#include<iostream>
+using namespace std;
+
+void bestFit(int blockSize[], int m, int processSize[], int n){
+    int allocation[n];
+    for (int i = 0; i < n; i++)
+        allocation[i] = -1;
+        
+    for (int i = 0; i < n; i++){
+        int bestIdx = -1;
+        for (int j = 0; j < m; j++){
+            if (blockSize[j] >= processSize[i]){
+                if (bestIdx == -1)
+                    bestIdx = j;
+                else if (blockSize[bestIdx] > blockSize[j])
+                    bestIdx = j;
+            }
+        }
+        if (bestIdx != -1){
+            allocation[i] = bestIdx;
+            
+            blockSize[bestIdx] -= processSize[i];
+        }
+    }
+    cout << "\n-------------------------------------------"<<endl;
+    cout << "|Process No.\t|Process Size\t|Block no.|\n";
+    cout << "-------------------------------------------"<<endl;
+    for (int i = 0; i < n; i++){
+        cout << "| " << i+1 << "\t\t| " << processSize[i] << "\t\t| ";
+        if (allocation[i] != -1)
+            cout << allocation[i] + 1<<"\t  |";
+        else
+            cout << "Not Allocated";
+        cout << endl;
+    }
+}
+int main(){
+    int blockSize[] = {100, 500, 200, 300, 600};
+    int processSize[] = {212, 417, 112, 426};
+    int m = sizeof(blockSize) / sizeof(blockSize[0]);
+    int n = sizeof(processSize) / sizeof(processSize[0]);
+
+    bestFit(blockSize, m, processSize, n);
+    return 0 ;
+}
+\end{Verbatim}
+\newpage
 $\bullet$ \underline{\textbf{Input / Output :}}
 \begin{figure}[h!]
-\includegraphics[width=0.4\textwidth]{logo.png}
-%\caption{\label{table}Output of the Article}
+    \centering
+    \includegraphics[width=0.9\linewidth]{5.png}
+    \caption{Output}
+    \label{fig:enter-label}
 \end{figure}
-\newpage
+
 $\bullet$ \underline{\textbf{ \Large Description :}}
 \newpage
 
 \subsection{Dynamic Storage-Allocation using WorstFit}
  $\bullet$ \underline{\textbf{Code :}}
-\begin{verbatim}
-\documentclass{article}
-\begin{document}
-\title{Practice Lab-01 :}
-\author{Istiak Alam}
-\maketitle
-In March 2006, Congress raised that ceiling an additional \$0.79 trillion 
-to \$8.97 trillion, which is approximately 68\% of GDP. As of October 4, 
-2008, the ``Emergency Economic Srabilization Act of 2008" raised the 
-current debt ceiling to \$11.3 trillion.
-\end{document}
-\end{verbatim}
+\begin{Verbatim}[fontsize=\small, formatcom=\hackfont\color{black}]
+// C++ implementation of worst - Fit algorithm
+#include<bits/stdc++.h>
+using namespace std;
+
+void worstFit(int blockSize[], int m, int processSize[],int n){
+    int allocation[n];
+    memset(allocation, -1, sizeof(allocation));
+
+    for (int i=0; i<n; i++){
+        int wstIdx = -1;
+        for (int j=0; j<m; j++){
+            if (blockSize[j] >= processSize[i]){
+                if (wstIdx == -1)
+                    wstIdx = j;
+                else if (blockSize[wstIdx] < blockSize[j])
+                    wstIdx = j;
+            }
+        }
+
+        if (wstIdx != -1){
+            allocation[i] = wstIdx;
+            blockSize[wstIdx] -= processSize[i];
+        }
+    }
+    cout << "\n-----------------------------------------------"<<endl;
+    cout << "|Process No.\t|Process Size\t|Block no.    |\n";
+    cout << "-----------------------------------------------"<<endl;
+    for (int i = 0; i < n; i++){
+        cout << "| " << i+1 << "\t\t| " << processSize[i] << "\t\t|";
+        if (allocation[i] != -1)
+            cout << allocation[i] + 1<<"\t      |";
+        else
+            cout << "Not Allocated|";
+        cout << endl;
+    }
+    cout << "-----------------------------------------------"<<endl;
+}
+int main(){
+    int blockSize[] = {100, 500, 200, 300, 600};
+    int processSize[] = {212, 417, 112, 426};
+    int m = sizeof(blockSize)/sizeof(blockSize[0]);
+    int n = sizeof(processSize)/sizeof(processSize[0]);
+
+    worstFit(blockSize, m, processSize, n);
+    
+    return 0 ;
+}
+
+\end{Verbatim}
 $\bullet$ \underline{\textbf{Input / Output :}}
 \begin{figure}[h!]
-\includegraphics[width=0.4\textwidth]{logo.png}
-%\caption{\label{table}Output of the Article}
+    \centering
+    \includegraphics[width=0.9\linewidth]{6.png}
+    \caption{Output}
+    \label{fig:enter-label}
 \end{figure}
-\newpage
+
 $\bullet$ \underline{\textbf{ \Large Description :}}
 \newpage
 
 \section{Lab Report-07 : Page Replacement Algorithms}
 \subsection{Implementation of Page Replacement using FIFO Algorithm}
  $\bullet$ \underline{\textbf{Code :}}
-\begin{verbatim}
-\documentclass{article}
-\begin{document}
-\title{Practice Lab-01 :}
-\author{Istiak Alam}
-\maketitle
-In March 2006, Congress raised that ceiling an additional \$0.79 trillion 
-to \$8.97 trillion, which is approximately 68\% of GDP. As of October 4, 
-2008, the ``Emergency Economic Srabilization Act of 2008" raised the 
-current debt ceiling to \$11.3 trillion.
-\end{document}
-\end{verbatim}
+ \begin{Verbatim}[fontsize=\small, formatcom=\hackfont\color{black}]
+//Page Replacement using FIFO 
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int process[] = {7,7,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1};
+    int length = sizeof(process) / sizeof(process[0]);
+    vector<int> main_mem;
+    int max_main_mem = 3, start = 0;
+    int hit = 0, miss = 0;
+    for(int i=0; i<length; i++){
+        auto fnd = find(main_mem.begin(), main_mem.end(), process[i]);
+        if(main_mem.size() < 3){
+            if(fnd != main_mem.end()){
+                cout << "Page hit for " << process[i] << ".\n\n";
+                hit++;
+            }
+            else{
+                main_mem.push_back(process[i]);
+                cout << "Page miss for " << process[i] << ".\n";
+                for(auto it: main_mem) cout << it << " ";
+                cout << "\n\n";
+                miss++;
+            }
+            continue;
+        }      
+        if(fnd != main_mem.end()) {
+            cout << "Page hit for " << process[i] << ".\n\n";
+            hit++;
+        }
+        else{
+            cout << "Page miss for " << process[i] << ".\n";
+            main_mem[start] = process[i];
+            miss++;
+            start++;
+            
+            for(auto it: main_mem) cout << it << " ";
+            if(start == max_main_mem) start = 0;
+            cout << "\n\n";
+        }
+    }
+    cout << "Total page hit : " << hit << endl;
+    cout << "Total page miss : " << miss << endl;
+    return 0;
+}
+\end{Verbatim}
 $\bullet$ \underline{\textbf{Input / Output :}}
 \begin{figure}[h!]
-\includegraphics[width=0.4\textwidth]{logo.png}
-%\caption{\label{table}Output of the Article}
+    \centering
+    \includegraphics[width=0.5\linewidth]{9.png}
+    \caption{Output}
+    \label{fig:enter-label}
 \end{figure}
-\newpage
+
 $\bullet$ \underline{\textbf{ \Large Description :}}
 \newpage
 
 \subsection{Implementation of Optimal Algorithm}
  $\bullet$ \underline{\textbf{Code :}}
-\begin{verbatim}
-\documentclass{article}
-\begin{document}
-\title{Practice Lab-01 :}
-\author{Istiak Alam}
-\maketitle
-In March 2006, Congress raised that ceiling an additional \$0.79 trillion 
-to \$8.97 trillion, which is approximately 68\% of GDP. As of October 4, 
-2008, the ``Emergency Economic Srabilization Act of 2008" raised the 
-current debt ceiling to \$11.3 trillion.
-\end{document}
-\end{verbatim}
+\begin{Verbatim}[fontsize=\small, formatcom=\hackfont\color{black}]
+#include<bits/stdc++.h>
+using namespace std;
+
+void print(vector<int> main_mem){
+    for(auto x: main_mem)
+        cout << x << " ";
+    cout << "\n";
+}
+int victim(int process[], int length, int start,
+vector<int> main_mem, int max_mem){
+    int page_index = 0;
+    int distance = 0;
+    for(int i = 0; i<max_mem; i++){
+        bool found = false;
+        for(int j = start+1; j<length; j++){
+            if(main_mem[i] == process[j]){
+                found = true;
+
+                int current_distance = j - start;
+                if(distance < current_distance)
+                {
+                    distance = current_distance;
+                    page_index = i;
+                }
+                break;
+            }
+        }
+        if(found == false) return i;
+    }
+    return page_index;
+}
+int main(){
+    int process[] = {7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1};
+    int length = sizeof(process) / sizeof(process[0]);
+
+    vector<int> main_mem;
+    int max_main_mem = 3, start = 0;
+    int hit = 0, miss = 0;
+
+    for(int i=0; i<length; i++){
+        auto fnd = find(main_mem.begin(), main_mem.end(), process[i]);
+        if(main_mem.size() < 3){
+            if(fnd != main_mem.end()){
+                cout << "Page hit for " << process[i] << ":- ";
+                print(main_mem);
+                hit++;
+            }
+
+            else{
+                main_mem.push_back(process[i]);
+                cout << "Page miss for " << process[i] << ":- " ;
+                print(main_mem);
+                miss++;
+            }
+            continue;
+        }
+        else{
+            if(fnd != main_mem.end()){
+                cout << "Page hit for " << process[i] << ":- ";
+                print(main_mem);
+                hit++;
+            }
+            else{
+                cout << "Page miss for " << process[i] << ":- ";
+                miss++;
+
+    int replace  = victim(process, length, i, main_mem, max_main_mem);
+                main_mem[replace] = process[i];
+                print(main_mem);
+            }
+        }
+    }
+    cout << "\nTotal page hit : " << hit << endl;
+    cout << "Total page miss : " << miss << endl;
+    return 0;
+}
+
+\end{Verbatim}
 $\bullet$ \underline{\textbf{Input / Output :}}
 \begin{figure}[h!]
-\includegraphics[width=0.4\textwidth]{logo.png}
-%\caption{\label{table}Output of the Article}
+    \centering
+    \includegraphics[width=0.5\linewidth]{10.png}
+    \caption{Output}
+    \label{fig:enter-label}
 \end{figure}
 \newpage
 $\bullet$ \underline{\textbf{ \Large Description :}}
@@ -324,22 +680,76 @@ $\bullet$ \underline{\textbf{ \Large Description :}}
 
 \subsection{Page Replacement using LRU}
  $\bullet$ \underline{\textbf{Code :}}
-\begin{verbatim}
-\documentclass{article}
-\begin{document}
-\title{Practice Lab-01 :}
-\author{Istiak Alam}
-\maketitle
-In March 2006, Congress raised that ceiling an additional \$0.79 trillion 
-to \$8.97 trillion, which is approximately 68\% of GDP. As of October 4, 
-2008, the ``Emergency Economic Srabilization Act of 2008" raised the 
-current debt ceiling to \$11.3 trillion.
-\end{document}
-\end{verbatim}
+\begin{Verbatim}[fontsize=\small, formatcom=\hackfont\color{black}]
+#include <bits/stdc++.h>
+using namespace std;
+
+void print(const list<int>& main_mem)
+{
+    for(auto x: main_mem)
+        cout << x << " ";
+    cout << "\n";
+}
+
+int main()
+{
+    int process[] = {7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1};
+    int length = sizeof(process) / sizeof(process[0]);
+
+    int max_main_mem = 3;
+    int hit = 0, miss = 0;
+
+    list<int> main_mem; 
+    unordered_map<int, list<int>::iterator> page_table; 
+
+    for(int i=0; i<length; i++)
+    {
+        int page = process[i];
+
+        // Page hit: present in memory (LRU cache)
+        if(page_table.find(page) != page_table.end())
+        {
+            // Move this page to front (most recently used)
+            main_mem.erase(page_table[page]);
+            main_mem.push_front(page);
+            page_table[page] = main_mem.begin();
+
+            cout << "Page hit for " << page << ":- ";
+            print(main_mem);
+            hit++;
+        }
+        else
+        {
+            // Page miss
+            miss++;
+            cout << "Page miss for " << page << ":- ";
+
+            // If memory is full, remove least recently used (from back)
+            if((int)main_mem.size() == max_main_mem)
+            {
+                int lru_page = main_mem.back();
+                main_mem.pop_back();
+                page_table.erase(lru_page);
+            }
+            // Insert the new page at front (most recent)
+            main_mem.push_front(page);
+            page_table[page] = main_mem.begin();
+
+            print(main_mem);
+        }
+    }
+    cout << "\nTotal page hit : " << hit << endl;
+    cout << "Total page miss : " << miss << endl;
+    return 0;
+}
+
+\end{Verbatim}
 $\bullet$ \underline{\textbf{Input / Output :}}
 \begin{figure}[h!]
-\includegraphics[width=0.4\textwidth]{logo.png}
-%\caption{\label{table}Output of the Article}
+    \centering
+    \includegraphics[width=0.7\linewidth]{10.png}
+    \caption{Output}
+    \label{fig:enter-label}
 \end{figure}
 \newpage
 $\bullet$ \underline{\textbf{ \Large Description :}}
@@ -347,22 +757,72 @@ $\bullet$ \underline{\textbf{ \Large Description :}}
 
 \subsection{Implementation of Page fitting (hit/miss)}
  $\bullet$ \underline{\textbf{Code :}}
-\begin{verbatim}
-\documentclass{article}
-\begin{document}
-\title{Practice Lab-01 :}
-\author{Istiak Alam}
-\maketitle
-In March 2006, Congress raised that ceiling an additional \$0.79 trillion 
-to \$8.97 trillion, which is approximately 68\% of GDP. As of October 4, 
-2008, the ``Emergency Economic Srabilization Act of 2008" raised the 
-current debt ceiling to \$11.3 trillion.
-\end{document}
-\end{verbatim}
+\begin{Verbatim}[fontsize=\small, formatcom=\hackfont\color{black}]
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <algorithm>
+using namespace std;
+
+void printFrames(const vector<int>& frames) {
+    cout << "Frames: ";
+    for (int page : frames) {
+        if (page == -1)
+            cout << "[ ] ";
+        else
+            cout << "[" << page << "] ";
+    }
+    cout << "\n";
+}
+int main() {
+    int frames_count = 3;
+    int pages[] = {1,2,3,2,1,4,5,2,1,2,3,4,5};
+    int n = sizeof(pages) / sizeof(pages[0]);
+    vector<int> frames(frames_count, -1); // -1 means empty
+    queue<int> fifo_order;
+    int hits = 0, misses = 0;
+
+    cout << "Page reference string: ";
+    for (int i = 0; i < n; ++i)
+        cout << pages[i] << " ";
+    cout << "\n\n";
+
+    for (int i = 0; i < n; ++i) {
+        int page = pages[i];
+        // Check if the page is already in a frame
+        auto it = find(frames.begin(), frames.end(), page);
+        if (it != frames.end()) {
+            cout << "Page " << page << ": HIT   ";
+            hits++;
+        } else {
+            cout << "Page " << page << ": MISS  ";
+            misses++;
+            // Find an empty frame if available
+            auto empty = find(frames.begin(), frames.end(), -1);
+            if (empty != frames.end()) {
+                *empty = page;
+                fifo_order.push(distance(frames.begin(), empty));
+            } else {
+                // Replace the oldest page (FIFO order)
+                int idx = fifo_order.front(); fifo_order.pop();
+                frames[idx] = page;
+                fifo_order.push(idx);
+            }
+        }
+        printFrames(frames);
+    }
+    cout << "\nTotal page hits: " << hits << endl;
+    cout << "Total page misses: " << misses << endl;
+    return 0;
+}
+
+\end{Verbatim}
 $\bullet$ \underline{\textbf{Input / Output :}}
 \begin{figure}[h!]
-\includegraphics[width=0.4\textwidth]{logo.png}
-%\caption{\label{table}Output of the Article}
+    \centering
+    \includegraphics[width=0.8\linewidth]{11.png}
+    \caption{Output}
+    \label{fig:enter-label}
 \end{figure}
 \newpage
 $\bullet$ \underline{\textbf{ \Large Description :}}
@@ -371,68 +831,187 @@ $\bullet$ \underline{\textbf{ \Large Description :}}
 \section{Lab Report-08 : Disk Scheduling Algorithms}
 \subsection{Disk scheduling using FCFS Algorithm}
  $\bullet$ \underline{\textbf{Code :}}
-\begin{verbatim}
-\documentclass{article}
-\begin{document}
-\title{Practice Lab-01 :}
-\author{Istiak Alam}
-\maketitle
-In March 2006, Congress raised that ceiling an additional \$0.79 trillion 
-to \$8.97 trillion, which is approximately 68\% of GDP. As of October 4, 
-2008, the ``Emergency Economic Srabilization Act of 2008" raised the 
-current debt ceiling to \$11.3 trillion.
-\end{document}
-\end{verbatim}
+\begin{Verbatim}[fontsize=\small, formatcom=\hackfont\color{black}]
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+using namespace std;
+
+int main() {
+    vector<int> requests = {98, 183, 37, 122, 14, 124, 65, 67};
+    int start = 53;
+
+    cout << "FCFS Disk Scheduling Simulation (C++)" << endl;
+    cout << "Initial start position: " << start << endl;
+    cout << "Request queue: ";
+    for (size_t i = 0; i < requests.size(); ++i)
+        cout << requests[i] << (i < requests.size()-1 ? " -> " : "");
+    cout << endl << endl;
+
+    int total_movement = 0;
+    int current = start;
+
+    cout << "Servicing order and head movements:" << endl;
+    for (size_t i = 0; i < requests.size(); ++i) {
+        int move = abs(requests[i] - current);
+        cout << "Move from " << current << " to " << requests[i]
+             << " [movement: " << move << "]" << endl;
+        total_movement += move;
+        current = requests[i];
+    }
+
+    double average_movement = (double)total_movement / requests.size();
+
+    cout << "\nTotal head movement: " << total_movement << endl;
+    cout << "Average head movement: " << average_movement << endl;
+
+    return 0;
+}
+\end{Verbatim}
+\newpage
 $\bullet$ \underline{\textbf{Input / Output :}}
 \begin{figure}[h!]
-\includegraphics[width=0.4\textwidth]{logo.png}
-%\caption{\label{table}Output of the Article}
+    \centering
+    \includegraphics[width=0.9\linewidth]{12.png}
+    \caption{Output}
+    \label{fig:enter-label}
 \end{figure}
-\newpage
+
 $\bullet$ \underline{\textbf{ \Large Description :}}
 \newpage
 
 \subsection{Disk scheduling using SSTF Algorithm}
  $\bullet$ \underline{\textbf{Code :}}
-\begin{verbatim}
-\documentclass{article}
-\begin{document}
-\title{Practice Lab-01 :}
-\author{Istiak Alam}
-\maketitle
-In March 2006, Congress raised that ceiling an additional \$0.79 trillion 
-to \$8.97 trillion, which is approximately 68\% of GDP. As of October 4, 
-2008, the ``Emergency Economic Srabilization Act of 2008" raised the 
-current debt ceiling to \$11.3 trillion.
-\end{document}
-\end{verbatim}
+\begin{Verbatim}[fontsize=\small, formatcom=\hackfont\color{black}]
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+#include <climits>
+using namespace std;
+
+int main() {
+    vector<int> requests = {98, 183, 37, 122, 14, 124, 65, 67};
+    vector<bool> visited(requests.size(), false);
+    int start = 53;
+
+    cout << "SSTF Disk Scheduling Simulation (C++)" << endl;
+    cout << "Initial start position: " << start << endl;
+    cout << "Request queue: ";
+    for (size_t i = 0; i < requests.size(); ++i)
+        cout << requests[i] << (i < requests.size()-1 ? " -> " : "");
+    cout << endl << endl;
+
+    int total_movement = 0;
+    int current = start;
+
+    cout << "Servicing order and start movements:" << endl;
+    for (size_t done = 0; done < requests.size(); ++done) {
+        int min_dist = INT_MAX, idx = -1;
+        // Find unserviced request with minimum distance to current head
+        for (size_t i = 0; i < requests.size(); ++i) {
+            if (!visited[i]) {
+                int dist = abs(current - requests[i]);
+                if (dist < min_dist) {
+                    min_dist = dist;
+                    idx = i;
+                }
+            }
+        }
+        // Service this request
+        cout << "Move from " << current << " to " << requests[idx]
+             << " [movement: " << min_dist << "]" << endl;
+        total_movement += min_dist;
+        current = requests[idx];
+        visited[idx] = true;
+    }
+    double average_movement = (double)total_movement / requests.size();
+
+    cout << "\nTotal head movement: " << total_movement << endl;
+    cout << "Average head movement: " << average_movement << endl;
+    return 0;
+}
+\end{Verbatim}
+
+\newpage
 $\bullet$ \underline{\textbf{Input / Output :}}
 \begin{figure}[h!]
-\includegraphics[width=0.4\textwidth]{logo.png}
-%\caption{\label{table}Output of the Article}
+    \centering
+    \includegraphics[width=0.9\linewidth]{13.png}
+    \caption{Output}
+    \label{fig:enter-label}
 \end{figure}
-\newpage
+
 $\bullet$ \underline{\textbf{ \Large Description :}}
 \newpage
 
 \subsection{Disk scheduling using SCAN Algorithm}
  $\bullet$ \underline{\textbf{Code :}}
-\begin{verbatim}
-\documentclass{article}
-\begin{document}
-\title{Practice Lab-01 :}
-\author{Istiak Alam}
-\maketitle
-In March 2006, Congress raised that ceiling an additional \$0.79 trillion 
-to \$8.97 trillion, which is approximately 68\% of GDP. As of October 4, 
-2008, the ``Emergency Economic Srabilization Act of 2008" raised the 
-current debt ceiling to \$11.3 trillion.
-\end{document}
-\end{verbatim}
+\begin{Verbatim}[fontsize=\small, formatcom=\hackfont\color{black}]
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cstdlib>
+using namespace std;
+
+int main() {
+    vector<int> requests = {98, 183, 37, 122, 14, 124, 65, 67};
+    int head = 53;
+    int disk_max = 199; 
+
+    cout << "SCAN (Elevator) Disk Scheduling Simulation (C++)" << endl;
+    cout << "Initial head position: " << head << endl;
+    cout << "Disk max track: " << disk_max << endl;
+    cout << "Request queue: ";
+    for (size_t i = 0; i < requests.size(); ++i)
+        cout << requests[i] << (i < requests.size()-1 ? " -> " : "");
+    cout << endl << endl;
+
+    vector<int> to_service = requests;
+    to_service.push_back(head);
+    sort(to_service.begin(), to_service.end());
+
+    int pos = find(to_service.begin(), to_service.end(), head) -
+    to_service.begin();
+
+    int total_movement = 0;
+    int current = head;
+    cout << "Servicing order and head movements (moving right):" << endl;
+
+    for (size_t i = pos+1; i < to_service.size(); ++i) {
+        cout << "Move from " << current << " to " << to_service[i]
+        << " [movement: " << abs(to_service[i] - current) << "]" << endl;
+        total_movement += abs(to_service[i] - current);
+        current = to_service[i];
+    }
+    if (current != disk_max) {
+        cout << "Move from " << current << " to " << disk_max
+    << " [movement: " << abs(disk_max - current) << "] (reaching end)" << endl;
+        total_movement += abs(disk_max - current);
+        current = disk_max;
+    }
+    cout << "Reversing direction (moving left):" << endl;
+    for (int i = pos-1; i >= 0; --i) {
+        cout << "Move from " << current << " to " << to_service[i]
+        << " [movement: " << abs(to_service[i] - current) << "]" << endl;
+        total_movement += abs(to_service[i] - current);
+        current = to_service[i];
+    }
+    int serviced_requests = requests.size();
+    double avg_movement = (double)total_movement / serviced_requests;
+
+    cout << "\nTotal head movement: " << total_movement << endl;
+    cout << "Average head movement: " << avg_movement << endl;
+
+    return 0;
+}
+\end{Verbatim}
+
 $\bullet$ \underline{\textbf{Input / Output :}}
 \begin{figure}[h!]
-\includegraphics[width=0.4\textwidth]{logo.png}
-%\caption{\label{table}Output of the Article}
+    \centering
+    \includegraphics[width=0.9\linewidth]{14.png}
+    \caption{Output}
+    \label{fig:enter-label}
 \end{figure}
 \newpage
 $\bullet$ \underline{\textbf{ \Large Description :}}
