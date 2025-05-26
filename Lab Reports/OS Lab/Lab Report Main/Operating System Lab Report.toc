@@ -1,0 +1,18 @@
+\contentsline {section}{\numberline {4}Lab Report-04 : CPU Scheduling}{1}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Implementation of FCFS Scheduling}{1}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Implementation of Shortest Job First (SJF)}{3}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Lab Report-05 : Deadlock - Bankers Algorithm}{5}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Implementation of Bankers Algorithm}{5}{subsection.5.1}%
+\contentsline {section}{\numberline {6}Lab Report-06 : Dynamic Storage-Allocation Problem}{7}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Dynamic Storage-Allocation using FirstFit}{7}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Dynamic Storage-Allocation using BestFit}{9}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Dynamic Storage-Allocation using WorstFit}{11}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Lab Report-07 : Page Replacement Algorithms}{13}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Implementation of Page Replacement using FIFO Algorithm}{13}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Implementation of Optimal Algorithm}{15}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Page Replacement using LRU}{17}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Implementation of Page fitting (hit/miss)}{19}{subsection.7.4}%
+\contentsline {section}{\numberline {8}Lab Report-08 : Disk Scheduling Algorithms}{21}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Disk scheduling using FCFS Algorithm}{21}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Disk scheduling using SSTF Algorithm}{23}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Disk scheduling using SCAN Algorithm}{25}{subsection.8.3}%
