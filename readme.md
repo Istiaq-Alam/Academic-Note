@@ -1,5 +1,6 @@
 # File Synchronised with Windows and Linux
 
-  nexy
-
-now what next....??
+## Final Exam :
+Operating System -- Better
+Sociology -- Average
+Bangla   
