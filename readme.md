@@ -4,4 +4,5 @@
 Operating System  -- Better
 Sociology         -- Average
 Bangla            -- Bellow Average
-Computer Networks -- 
+Computer Networks -- Better
+Accounting        -- 
