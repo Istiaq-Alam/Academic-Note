@@ -1,5 +1,0 @@
-\contentsline {section}{\numberline {1}}{25}{section.1}%
-\contentsline {section}{\numberline {2}•}{25}{section.2}%
-\contentsline {section}{\numberline {3}•}{25}{section.3}%
-\contentsline {section}{\numberline {4}•}{25}{section.4}%
-\contentsline {section}{\numberline {5}•}{25}{section.5}%
