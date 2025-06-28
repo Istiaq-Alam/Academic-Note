@@ -5,4 +5,5 @@ Operating System  -- Better
 Sociology         -- Average
 Bangla            -- Bellow Average
 Computer Networks -- Better
-Accounting        -- 
+Accounting        -- Worst
+Computer Architecture -- 
