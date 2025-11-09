@@ -1,0 +1,196 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\newfontfamily\hackfont{Hack}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\renewcommand{\contentsname}{Table of Contents}
+
+\pagestyle{fancy}
+\fancyhf{} 							% Header Middle
+\rhead{Digital System Design Lab}
+\lhead{4bit ALU}
+\rfoot{\thepage}
+
+\begin{document}
+
+\begin{titlepage}					% Cover Start
+\begin{center}
+    \includegraphics[width=0.35\textwidth]{logo.png} \\
+    \vspace{0.5cm}
+    \textbf{\Huge \textcolor{teal}{NOTRE DAME} \textcolor{teal}{UNIVERSITY}} \\
+    \vspace{0.5cm}
+    \textbf{\Huge \textcolor{orange}{BANGLADESH}} \\
+    
+    \vspace{0.9cm}
+    \textbf{\Huge \underline{Digital System Design Lab Task-03}} \\
+    
+    \vspace{1.5em}
+    \begin{flushleft}
+    	\textbf{\Large Course Code: CSE-4106} \\
+		\vspace{0.3cm}        
+        \textbf{\Large Course Title: Digital System Design Lab} \\
+        \vspace{0.3cm}
+        \textbf{\Large Lab Task Topic: Design 4bit Arithmetic Logic Unit } \\        
+    \end{flushleft}
+    
+    \vspace{1em}
+    \begin{flushleft}
+        \textbf{\Huge \textcolor{blue}{Submitted by: Group-05}} \\
+        \vspace{0.3cm}
+        \textbf{\Large Name: Istiak Alam} \\
+        \vspace{0.3cm}
+        \textbf{\Large ID: 0692230005101005} \\
+        \vspace{0.3cm}
+        \textbf{\Large Name: Nazifa Tasnim} \\
+        \vspace{0.3cm}
+        \textbf{\Large ID: 0692230005101007} \\
+		\vspace{0.3cm}        
+        \textbf{\Large Batch: CSE-20} \\
+        \vspace{0.5cm}
+        \textbf{\Large Submission Date: }{\Large \textbf{November 9, 2025}\par}
+    \end{flushleft}
+    \vfill
+    \begin{flushleft}
+        \textbf{\Huge \textcolor{blue}{Submitted to:}} \\
+        \vspace{0.3cm}
+        \textbf{\Large Afsana Sharmin Shanta} \\
+        \vspace{0.3cm}
+        \textbf{\Large Lecturer,} \\
+        \vspace{0.3cm}
+        \textbf{\Large Notre Dame University Bangladesh}
+    \end{flushleft}
+\end{center}
+\end{titlepage}						% Cover End
+
+
+
+\newpage
+
+\section*{Question :}
+\subsection*{Design a 4-bit Arithmetic Logic Unit (ALU), which generates the following operations. Also
+show four status registers (Sign flag, Carry flag, Overflow flag, Zero flag).}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Operations} & \textbf{Functions} \\ \hline
+$F = B + 1$ & Increment B \\ \hline
+$F = B$ & Transfer B \\ \hline
+$F = A - B$ & Subtraction \\ \hline
+$F = A - B - 1$ & Subtraction with Borrow \\ \hline
+$F = A \oplus B$ & Exclusive OR \\ \hline
+$F = A \odot B$ & Exclusive NOR \\ \hline
+\end{tabular}
+\end{center}
+
+
+\section{Abstract}
+This report presents the design and implementation of a 4-bit Arithmetic Logical Unit (ALU) using basic logic gates in Proteus simulation. 
+The ALU performs six operations, both arithmetic and logical, based on select inputs and a carry-in signal. 
+Additionally, status flags such as Sign Flag (SF), Carry Flag (CF), Overflow Flag (OF), and Zero Flag (ZF) are integrated to indicate result conditions.
+
+\section{Introduction}
+An Arithmetic Logical Unit (ALU) is a fundamental component of a CPU that performs arithmetic and logical operations. 
+In this project, a 4-bit ALU was designed to perform operations such as increment, transfer, subtraction, XOR, and XNOR based on control signals.
+
+\section{Truth Table}
+The ALU uses three select lines ($S_2, S_1, S_0$) and one carry-in input ($Cin$) to select the required operation. 
+The complete truth table is shown below:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|c|c|c|c|c|l|}
+\hline
+\textbf{S2} & \textbf{S1} & \textbf{S0} & \textbf{Cin} & \textbf{X} & \textbf{Y} & \textbf{Function} \\ \hline
+0 & 0 & 0 & 1 & 0 & B & Increment B $\rightarrow$ B+1 \\ \hline
+0 & 0 & 1 & 0 & 0 & B & Transfer B $\rightarrow$ B \\ \hline
+0 & 1 & 0 & 1 & A & B' & Subtraction $\rightarrow$ A - B \\ \hline
+0 & 1 & 1 & 0 & A & B' & Subtraction with Borrow $\rightarrow$ A - B - 1 \\ \hline
+1 & 0 & 0 & x & A & B & Logical XOR $\rightarrow$ A $\oplus$ B \\ \hline
+1 & 0 & 1 & x & A & B' & Logical XNOR $\rightarrow$ A $\odot$ B \\ \hline
+\end{tabular}
+\end{center}
+
+\section{Function Derivations}
+The internal signals X, Y, and Z are defined using the select inputs as follows: \\
+
+\begin{itemize}
+    \item $X = A \cdot (S_1 \oplus S_2)$
+    \item $Y = B \oplus (S_1 + (S_2 \cdot S_0))$
+    \item $Z = \overline{S_2} \cdot C_{in}$
+\end{itemize}
+
+
+These functions determine how the ALU inputs are modified for each operation before being processed by the full adder network.
+
+\section{Circuit Diagram}
+The 4-bit ALU circuit was designed in Proteus using:
+\begin{itemize}
+    \item 4-bit Full Adder IC (e.g., 7482)
+    \item Logic gates (XOR, OR, NOT, AND)
+    \item Select pin for operation selection
+    \item Input switches for X, Y, and Cin
+    \item \textbf{Number of Logic Gates are 27}
+\end{itemize}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.95\textwidth]{circuit.png}
+    \caption{4-bit ALU Circuit Diagram (Proteus Simulation)}
+\end{figure}
+
+\section{Status Flags Implementation}
+The ALU generates four status flags to indicate the condition of the result:
+
+\begin{itemize}
+    \item \textbf{Sign Flag (SF):} Indicates the sign of the result. It is set if the MSB of the result (F3) = 1.
+    \[
+    SF = F_3
+    \]
+    
+    \item \textbf{Zero Flag (ZF):} Set when all output bits are 0.
+    \[
+    ZF = \overline{(F_0 + F_1 + F_2 + F_3)}
+    \]
+    
+    \item \textbf{Carry Flag (CF):} Indicates if there is a carry out from the most significant bit.
+    \[
+    CF = \overline{S_2} \cdot C_{out}
+    \]
+    
+    \item \textbf{Overflow Flag (OF):} Set if there is a signed overflow.
+    \[
+    OF = (C_3 \oplus C_{out}) \cdot \overline{S_2}
+    \]
+\end{itemize}
+
+In Proteus, these flags can be displayed using Logicprobe connected to the corresponding outputs of logic circuits:
+\begin{itemize}
+    \item Use XOR gate for OF
+    \item Use NOT and OR gates for ZF
+    \item Connect MSB directly for SF
+    \item Use the carry output and previous carry from adder for CF
+\end{itemize}
+
+\section{Conclusion}
+The designed 4-bit ALU successfully performs both arithmetic and logic operations as expected based on select input combinations. 
+The inclusion of four status flags allows the ALU to be extended easily for microprocessor-like control applications. 
+This experiment provides a clear understanding of how arithmetic logic units function within CPU architecture.
+
+\section{Project File}
+\url{https://github.com/Istiaq-Alam/Digital-System-Design-Lab/tree/main/Lab%20Test/Lab%20Test-03}
+
+\end{document}
