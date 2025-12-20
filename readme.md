@@ -17,3 +17,5 @@ CGPA ---> 3.71
 
 cant do better this semester :(
 
+CGPA ---> 3.47
+
