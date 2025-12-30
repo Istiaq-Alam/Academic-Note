@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Times New Roman", serif;
     margin: 20px;
     line-height: 1.6;
 }
@@ -133,15 +133,96 @@ th {
     color: #c65a12;
     font-weight: bold;
     background: #ffffff;
+    animation: lunchGlow 3s infinite;
 }
 
 .small {
     font-size: 17px;
     font-weight: bold;
 }
+
+.today {
+    background: #d5fbff;
+}
+
+/* ===== HIGHLIGHT ANIMATIONS ===== */
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(31, 79, 255, 0.6);
+    }
+
+    70% {
+        box-shadow: 0 0 0 12px rgba(31, 79, 255, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(31, 79, 255, 0);
+    }
+}
+
+.active-class {
+    background: #eaf0ff !important;
+    animation: pulse 2s infinite;
+    border-radius: 8px;
+}
+
+/* Hover glow */
+td:hover {
+    background: #f3f7ff;
+    transition: 0.3s ease;
+    box-shadow: inset 0 0 10px rgba(31, 79, 255, 0.2);
+}
+
+/* Lunch animation */
+@keyframes lunchGlow {
+    0% {
+        background-color: #fff7e6;
+    }
+
+    50% {
+        background-color: #ffe1a8;
+    }
+
+    100% {
+        background-color: #fff7e6;
+    }
+}
+
+/* ===== COUNTDOWN TIMER ===== */
+.countdown {
+    margin-top: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #1f4fff;
+    background: #ffffff;
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(3px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 @media (max-width: 768px) {
 
-    table, thead, tbody, th, td, tr {
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
         display: block;
         width: 100%;
     }

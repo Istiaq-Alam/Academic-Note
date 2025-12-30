@@ -5,7 +5,7 @@
         <meta name="viewport"
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link href="Lab Reports/1. Cover/logo.png" rel="icon">
-        <link href="./Assets/style.css" rel="stylesheet">
+        <link href="Assets/style.css" rel="stylesheet">
         <!--<link href="./Assets/style.css" rel="stylesheet">-->
         <title>Academic Notes</title>
         <style>
@@ -22,7 +22,7 @@
 
         <!-- Cover Page: Class Routine -->
         <section id="class-routine">
-            <body1>
+            <body1> <h2>CSE-20 Class Routine</h2>
                 <div class="wrapper1">
 
                     <div class="header1">
@@ -44,10 +44,11 @@
 
                             <!-- 8.00 – 9.20 -->
                             <tr>
-                                <td class="time" data-label="Time">8.00 am-9.20 am.</td>
+                                <td class="time" data-label="Time">8.00 am-9.20
+                                    am.</td>
                                 <td class="orange">CHILL</td>
                                 <td class="orange">CHILL</td>
-                                <td>
+                                <td data-start="08:00" data-end="09:20">
                                     CSE 4203<br>
                                     Room no. 309<br>
                                     Humayara ma’am
@@ -59,16 +60,17 @@
 
                             <!-- 9.25 – 10.45 -->
                             <tr>
-                                <td class="time" data-label="Time">9.25 am-10.45 am.</td>
+                                <td class="time" data-label="Time">9.25 am-10.45
+                                    am.</td>
                                 <td class="orange">No class</td>
                                 <td></td>
-                                <td>
+                                <td data-start="09:25" data-end="10:45">
                                     CSE 4213<br>
                                     Room no. 419<br>
                                     Tahmid Sir
                                 </td>
                                 <td class="orange">No class</td>
-                                <td>
+                                <td data-start="09:25" data-end="10:45">
                                     CSE 4203<br>
                                     Room no. 417<br>
                                     Humayara ma’am
@@ -78,12 +80,13 @@
 
                             <!-- 10.50 – 12.10 -->
                             <tr>
-                                <td class="time" data-label="Time">10.50 am-12.10 pm.</td>
+                                <td class="time" data-label="Time">10.50
+                                    am-12.10 pm.</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>
+                                <td data-start="10:50" data-end="12:10">
                                     CSE 4217<br>
                                     Room no. 315<br>
                                     Nafisa ma’am
@@ -93,15 +96,17 @@
 
                             <!-- Lunch -->
                             <tr>
-                                <td class="time" data-label="Time">12.10 pm-12.25 pm.</td>
+                                <td class="time" data-label="Time">12.10
+                                    pm-12.25 pm.</td>
                                 <td colspan="6" class="lunch">Lunch Break</td>
                             </tr>
 
                             <!-- 12.25 – 1.45 -->
                             <tr>
-                                <td class="time" data-label="Time">12.25 pm-1.45 pm.</td>
+                                <td class="time" data-label="Time">12.25 pm-1.45
+                                    pm.</td>
                                 <td></td>
-                                <td>
+                                <td data-start="12:25" data-end="01:45">
                                     CSE 4213<br>
                                     Room no. 609<br>
                                     Tahmid Sir
@@ -109,7 +114,7 @@
                                 <td></td>
                                 <td class="orange">Club<br>Activities</td>
                                 <td></td>
-                                <td>
+                                <td data-start="12:25" data-end="01:45">
                                     CSE 4217<br>
                                     Room no. 417<br>
                                     Nafisa ma’am
@@ -118,9 +123,10 @@
 
                             <!-- 1.50 – 3.10 -->
                             <tr>
-                                <td class="time" data-label="Time">1.50 pm-3.10 pm.</td>
+                                <td class="time" data-label="Time">1.50 pm-3.10
+                                    pm.</td>
                                 <td></td>
-                                <td>
+                                <td data-start="01:50" data-end="03:10">
                                     CSE 4214<br>
                                     Room no. 709<br>
                                     Saiful Sir
@@ -128,7 +134,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>
+                                <td data-start="01:50" data-end="03:10">
                                     CSE 4204<br>
                                     Room no. 418<br>
                                     Humayara ma’am
@@ -137,9 +143,10 @@
 
                             <!-- 3.15 – 4.35 -->
                             <tr>
-                                <td class="time" data-label="Time">3.15 pm-4.35 pm.</td>
+                                <td class="time" data-label="Time">3.15 pm-4.35
+                                    pm.</td>
                                 <td></td>
-                                <td>
+                                <td data-start="03:15" data-end="04:35">
                                     CSE 4214<br>
                                     Room no. 709<br>
                                     Saiful Sir
@@ -147,7 +154,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>
+                                <td data-start="03:15" data-end="04:35">
                                     CSE 4218<br>
                                     Alternate Weeks<br>
                                     Nafisa ma’am
@@ -195,26 +202,6 @@
             </ul>
         </section>
 
-        <!-- Dropdown Section: Books -->
-        <section id="books">
-            <h2>Books</h2>
-            <details>
-                <summary>Recommended Books</summary>
-                <ul>
-                    <li><a href="https://example.com/book1.pdf"
-                            target="_blank">Book 1: Introduction to Calculus
-                            (PDF)</a></li>
-                    <li><a href="https://example.com/book2.pdf"
-                            target="_blank">Book 2: Physics Fundamentals
-                            (PDF)</a></li>
-                    <li><a
-                            href="https://github.com/yourusername/yourrepo/raw/main/book_image.jpg"
-                            target="_blank">Book Cover Image (JPG)</a></li>
-                    <!-- Add more books or images -->
-                </ul>
-            </details>
-        </section>
-
         <!-- Dropdown Section: Lab Reports, Projects, etc. -->
         <section id="lab-reports">
             <h2>Lab Reports and Projects</h2>
@@ -247,8 +234,29 @@
             </details>
         </section>
 
+        <!-- Dropdown Section: Books -->
+        <section id="books">
+            <h2>Books</h2>
+            <details>
+                <summary>Recommended Books</summary>
+                <ul>
+                    <li><a href="https://example.com/book1.pdf"
+                            target="_blank">Book 1: Introduction to Calculus
+                            (PDF)</a></li>
+                    <li><a href="https://example.com/book2.pdf"
+                            target="_blank">Book 2: Physics Fundamentals
+                            (PDF)</a></li>
+                    <li><a
+                            href="https://github.com/yourusername/yourrepo/raw/main/book_image.jpg"
+                            target="_blank">Book Cover Image (JPG)</a></li>
+                    <!-- Add more books or images -->
+                </ul>
+            </details>
+        </section>
+
         <footer class="footer">
             <p>&copy; 2026 Istiak-Alam. All rights reserved.</p>
         </footer>
+        <script src="Assets/script.js"></script>
     </body>
 </html>
