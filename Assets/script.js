@@ -15,58 +15,67 @@ function formatTime(seconds) {
 }
 
 /* ===============================
-   ACTIVE CLASS + COUNTDOWN
+   TODAY COLUMN DETECTION
+================================ */
+function getTodayColumnIndex() {
+    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const today = days[new Date().getDay()];
+
+    let index = -1;
+    document.querySelectorAll("th").forEach((th, i) => {
+        if (th.textContent.trim() === today) {
+            th.classList.add("today");
+            index = i + 1; // nth-child is 1-based
+        }
+    });
+
+    return index;
+}
+
+const todayColumnIndex = getTodayColumnIndex();
+
+/* ===============================
+   ACTIVE CLASS + SINGLE COUNTDOWN
 ================================ */
 function updateClassStatus() {
+    if (todayColumnIndex === -1) return;
+
     const now = new Date();
     const currentSeconds =
         now.getHours() * 3600 +
         now.getMinutes() * 60 +
         now.getSeconds();
 
-    document.querySelectorAll('td[data-start]').forEach(cell => {
-        const start = toSeconds(cell.dataset.start);
-        const end = toSeconds(cell.dataset.end);
+    let alreadyActive = false; // 🔑 KEY FIX
 
-        // cleanup
-        cell.classList.remove('active-class');
-        const oldTimer = cell.querySelector('.countdown');
-        if (oldTimer) oldTimer.remove();
+    document.querySelectorAll(`tr td:nth-child(${todayColumnIndex})[data-start]`)
+        .forEach(cell => {
 
-        // active class
-        if (currentSeconds >= start && currentSeconds <= end) {
-            cell.classList.add('active-class');
+            const start = toSeconds(cell.dataset.start);
+            const end = toSeconds(cell.dataset.end);
 
-            const remaining = end - currentSeconds;
-            const timer = document.createElement('div');
-            timer.className = 'countdown';
-            timer.textContent = `Ends in ${formatTime(remaining)}`;
-            cell.appendChild(timer);
-        }
-    });
-}
+            // cleanup
+            cell.classList.remove('active-class');
+            const oldTimer = cell.querySelector('.countdown');
+            if (oldTimer) oldTimer.remove();
 
-/* ===============================
-   TODAY COLUMN HIGHLIGHT
-================================ */
-function highlightTodayColumn() {
-    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    const today = days[new Date().getDay()];
+            // allow ONLY ONE active cell
+            if (!alreadyActive && currentSeconds >= start && currentSeconds <= end) {
+                alreadyActive = true;
 
-    document.querySelectorAll("th").forEach((th, index) => {
-        if (th.textContent.trim() === today) {
-            th.classList.add("today");
+                cell.classList.add('active-class');
 
-            document.querySelectorAll(`tr td:nth-child(${index + 1})`)
-                .forEach(td => td.classList.add("today"));
-        }
-    });
+                const remaining = end - currentSeconds;
+                const timer = document.createElement('div');
+                timer.className = 'countdown';
+                timer.textContent = `Ends in ${formatTime(remaining)}`;
+                cell.appendChild(timer);
+            }
+        });
 }
 
 /* ===============================
    INIT
 ================================ */
-highlightTodayColumn();
 updateClassStatus();
-setInterval(updateClassStatus, 1000); // live countdown
-
+setInterval(updateClassStatus, 1000);
