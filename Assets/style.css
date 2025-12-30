@@ -56,9 +56,11 @@ body1 {
 }
 
 .wrapper1 {
-    width: 1200px;
+    max-width: 1200px;
     margin: 10px auto;
+    padding: 10px;
 }
+
 
 .header1 {
     text-align: center;
@@ -72,7 +74,7 @@ body1 {
     color: #1f4fff;
     font-weight: bold;
     text-shadow: #000000;
-    
+
 }
 
 .header1 h1 span {
@@ -84,6 +86,11 @@ body1 {
     font-size: 22px;
     color: #1f4fff;
     font-weight: bold;
+}
+
+.table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 table {
@@ -131,4 +138,47 @@ th {
 .small {
     font-size: 17px;
     font-weight: bold;
+}
+@media (max-width: 768px) {
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tr {
+        margin-bottom: 20px;
+        border: 2px solid #1f4fff;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    td {
+        border: none;
+        text-align: left;
+        padding: 8px;
+        font-size: 16px;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        color: #1f4fff;
+        margin-bottom: 3px;
+    }
+
+    .time {
+        background: #f4f6ff;
+        font-weight: bold;
+    }
+
+    .lunch {
+        text-align: center;
+        font-size: 22px;
+    }
 }
