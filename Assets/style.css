@@ -1,4 +1,6 @@
 body {
+    min-width: 1024px;
+    overflow-x: auto;
     font-family: "Times New Roman", serif;
     margin: 20px;
     line-height: 1.6;
