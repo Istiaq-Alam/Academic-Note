@@ -1,4 +1,4 @@
-const username = "Istiak-Alam";
+const username = "istiak-alam";
 const repo = "NDUB-DOC";
 const branch = "main";  // change if needed
 let currentPath = "";
