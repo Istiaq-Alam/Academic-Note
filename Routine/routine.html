@@ -1,282 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>CSE-20 Routine</title>
 
-        <style>
-    body1{
-        margin:0;
-        padding:0;
-        font-family: "Times New Roman", serif;
-        background:#ffffff;
-    }
+<head>
+    <meta charset="UTF-8">
+    <title>CSE-20 Routine</title>
 
-    .wrapper1{
-    max-width:1200px;
-    margin:10px auto;
-    padding:10px;
-}
+    <style>
+        body {
+            min-width: 1024px;
+            overflow-x: auto;
+            font-family: "Times New Roman", serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-image: url(../Lab\ Reports/1.Cover/logo.png) no-repeat;
+        }
+
+        header {
+            text-align: center;
+            background-color: #b9f8ff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 9px 9px rgb(80, 80, 80);
+        }
+
+        section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #ffffff;
+            background: transparent;
+            border: #91e0ff solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 9px 9px rgb(80, 80, 80);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        details {
+            margin: 10px 0;
+        }
+
+        .footer {
+            align-items: center;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        body1 {
+            margin: 0;
+            padding: 0;
+            font-family: "Times New Roman", serif;
+            background: #ffffff;
+        }
+
+        .wrapper1 {
+            max-width: 1200px;
+            margin: 10px auto;
+            padding: 10px;
+        }
 
 
-    .header1{
-        text-align:center;
-        border:2px solid #1f4fff;
-        padding:10px;
-    }
+        .header1 {
+            text-align: center;
+            border: 2px solid #1f4fff;
+            padding: 10px;
+        }
 
-    .header1 h1{
-        margin:0;
-        font-size:34px;
-        color:#1f4fff;
-        font-weight:bold;
-    }
+        .header1 h1 {
+            margin: 0;
+            font-size: 34px;
+            color: #1f4fff;
+            font-weight: bold;
+            text-shadow: #000000;
 
-    .header1 h1 span{
-        color:#f2a400;
-    }
+        }
 
-    .header1 h2{
-        margin-top:5px;
-        font-size:22px;
-        color:#1f4fff;
-        font-weight:bold;
-    }
-.table-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
+        .header1 h1 span {
+            color: #f2a400;
+        }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-    font-size: 18px;
-}
+        .header1 h2 {
+            margin-top: 5px;
+            font-size: 22px;
+            color: #1f4fff;
+            font-weight: bold;
+        }
 
-th,
-td {
-    border: 2px solid #1f4fff;
-    padding: 10px;
-    text-align: center;
-    vertical-align: middle;
-    background: #ffffff;
-    font-weight: bold;
-}
+        .table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
 
-th {
-    font-size: 22px;
-    color: #1f4fff;
-    font-weight: bold;
-}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            font-size: 18px;
+        }
 
-.time {
-    width: 160px;
-    font-weight: bold;
-}
+        th,
+        td {
+            border: 2px solid #1f4fff;
+            padding: 10px;
+            text-align: center;
+            vertical-align: middle;
+            background: #ffffff;
+            font-weight: bold;
+        }
 
-.orange {
-    color: #c65a12;
-    font-weight: bold;
-    font-size: 22px;
-    font-weight: bold;
-}
+        th {
+            font-size: 22px;
+            color: #1f4fff;
+            font-weight: bold;
+        }
 
-.lunch {
-    font-size: 32px;
-    color: #c65a12;
-    font-weight: bold;
-    background: #ffffff;
-}
+        .time {
+            width: 160px;
+            font-weight: bold;
+        }
 
-.small {
-    font-size: 17px;
-    font-weight: bold;
-}
+        .orange {
+            color: #c65a12;
+            font-weight: bold;
+            font-size: 22px;
+            font-weight: bold;
+        }
 
-@media (max-width: 768px) {
+        .lunch {
+            font-size: 32px;
+            color: #c65a12;
+            font-weight: bold;
+            background: #ffffff;
+            animation: lunchGlow 3s infinite;
+        }
 
-    table, thead, tbody, th, td, tr {
-        display: block;
-        width: 100%;
-    }
+        .small {
+            font-size: 17px;
+            font-weight: bold;
+        }
 
-    thead {
-        display: none;
-    }
+        .today {
+            background: #d5fbff;
+        }
 
-    tr {
-        margin-bottom: 20px;
-        border: 2px solid #1f4fff;
-        padding: 10px;
-        border-radius: 8px;
-    }
+        /* ===== HIGHLIGHT ANIMATIONS ===== */
 
-    td {
-        border: none;
-        text-align: left;
-        padding: 8px;
-        font-size: 16px;
-    }
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(31, 79, 255, 0.6);
+            }
 
-    td::before {
-        content: attr(data-label);
-        font-weight: bold;
-        display: block;
-        color: #1f4fff;
-        margin-bottom: 3px;
-    }
+            70% {
+                box-shadow: 0 0 0 12px rgba(31, 79, 255, 0);
+            }
 
-    .time {
-        background: #f4f6ff;
-        font-weight: bold;
-    }
+            100% {
+                box-shadow: 0 0 0 0 rgba(31, 79, 255, 0);
+            }
+        }
 
-    .lunch {
-        text-align: center;
-        font-size: 22px;
-    }
-}
+        .active-class {
+            background: #eaf0ff !important;
+            animation: pulse 2s infinite;
+            border-radius: 8px;
+        }
 
-</style>
-    </head>
+        /* Hover glow */
+        td:hover {
+            background: #f3f7ff;
+            transition: 0.3s ease;
+            box-shadow: inset 0 0 10px rgba(31, 79, 255, 0.2);
+        }
 
-    <body1>
+        /* Lunch animation */
+        @keyframes lunchGlow {
+            0% {
+                background-color: #fff7e6;
+            }
 
-        <div class="wrapper1">
+            50% {
+                background-color: #ffe1a8;
+            }
 
-            <div class="header1">
-                <h1>Notre Dame University <span>Bangladesh</span></h1>
-                <h2>CSE-20, Spring-26 Effective from January 6<sup>th</sup>,
-                    2025</h2>
+            100% {
+                background-color: #fff7e6;
+            }
+        }
+
+        /* ===== COUNTDOWN TIMER ===== */
+        .countdown {
+            margin-top: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #1f4fff;
+            background: #ffffff;
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 6px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(3px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        @media (max-width: 768px) {
+
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+                width: 100%;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 20px;
+                border: 2px solid #1f4fff;
+                padding: 10px;
+                border-radius: 8px;
+            }
+
+            td {
+                border: none;
+                text-align: left;
+                padding: 8px;
+                font-size: 16px;
+            }
+
+            td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                display: block;
+                color: #1f4fff;
+                margin-bottom: 3px;
+            }
+
+            .time {
+                background: #f4f6ff;
+                font-weight: bold;
+            }
+
+            .lunch {
+                text-align: center;
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section id="class-routine">
+        <body1>
+            <div class="wrapper1">
+
+                <div class="header1">
+                    <h1>Notre Dame University <span>Bangladesh</span></h1>
+                    <h2>CSE-20, Spring-26 Effective from January
+                        6<sup>th</sup>, 2025</h2>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th class="time">Time</th>
+                            <th>Saturday</th>
+                            <th>Sunday</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                        </tr>
+
+                        <!-- 8.00 – 9.20 -->
+                        <tr>
+                            <td class="time" data-label="Time">8.00 am-9.20
+                                am.</td>
+                            <td class="orange">CHILL</td>
+                            <td class="orange">CHILL</td>
+                            <td data-start="08:00" data-end="09:20">
+                                CSE 4203<br>
+                                Room no. 309<br>
+                                Humayara ma’am
+                            </td>
+                            <td class="orange">CHILL</td>
+                            <td class="orange">CHILL</td>
+                            <td></td>
+                        </tr>
+
+                        <!-- 9.25 – 10.45 -->
+                        <tr>
+                            <td class="time" data-label="Time">9.25 am-10.45
+                                am.</td>
+                            <td class="orange">No class</td>
+                            <td></td>
+                            <td data-start="09:25" data-end="10:45">
+                                CSE 4213<br>
+                                Room no. 419<br>
+                                Tahmid Sir
+                            </td>
+                            <td class="orange">No class</td>
+                            <td data-start="09:25" data-end="10:45">
+                                CSE 4203<br>
+                                Room no. 417<br>
+                                Humayara ma’am
+                            </td>
+                            <td></td>
+                        </tr>
+
+                        <!-- 10.50 – 12.10 -->
+                        <tr>
+                            <td class="time" data-label="Time">10.50
+                                am-12.10 pm.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td data-start="10:50" data-end="12:10">
+                                CSE 4217<br>
+                                Room no. 315<br>
+                                Nafisa ma’am
+                            </td>
+                            <td></td>
+                        </tr>
+
+                        <!-- Lunch -->
+                        <tr>
+                            <td class="time" data-label="Time">12.10
+                                pm-12.25 pm.</td>
+                            <td colspan="6" class="lunch">Lunch Break</td>
+                        </tr>
+
+                        <!-- 12.25 – 1.45 -->
+                        <tr>
+                            <td class="time" data-label="Time">12.25 pm-1.45
+                                pm.</td>
+                            <td></td>
+                            <td data-start="12:25" data-end="01:45">
+                                CSE 4213<br>
+                                Room no. 609<br>
+                                Tahmid Sir
+                            </td>
+                            <td></td>
+                            <td class="orange">Club<br>Activities</td>
+                            <td></td>
+                            <td data-start="12:25" data-end="01:45">
+                                CSE 4217<br>
+                                Room no. 417<br>
+                                Nafisa ma’am
+                            </td>
+                        </tr>
+
+                        <!-- 1.50 – 3.10 -->
+                        <tr>
+                            <td class="time" data-label="Time">1.50 pm-3.10
+                                pm.</td>
+                            <td></td>
+                            <td data-start="01:50" data-end="03:10">
+                                CSE 4214<br>
+                                Room no. 709<br>
+                                Saiful Sir
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td data-start="01:50" data-end="03:10">
+                                CSE 4204<br>
+                                Room no. 418<br>
+                                Humayara ma’am
+                            </td>
+                        </tr>
+
+                        <!-- 3.15 – 4.35 -->
+                        <tr>
+                            <td class="time" data-label="Time">3.15 pm-4.35
+                                pm.</td>
+                            <td></td>
+                            <td data-start="03:15" data-end="04:35">
+                                CSE 4214<br>
+                                Room no. 709<br>
+                                Saiful Sir
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td data-start="03:15" data-end="04:35">
+                                CSE 4218<br>
+                                Alternate Weeks<br>
+                                Nafisa ma’am
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
             </div>
-            <div class="table-container">
-                <table>
-                    <tr>
-                        <th class="time">Time</th>
-                        <th>Saturday</th>
-                        <th>Sunday</th>
-                        <th>Monday</th>
-                        <th>Tuesday</th>
-                        <th>Wednesday</th>
-                        <th>Thursday</th>
-                    </tr>
 
-                    <!-- 8.00 – 9.20 -->
-                    <tr>
-                        <td class="time">8.00 am-9.20 am.</td>
-                        <td class="orange">CHILL</td>
-                        <td class="orange">CHILL</td>
-                        <td>
-                            CSE 4203<br>
-                            Room no. 309<br>
-                            Humayara ma’am
-                        </td>
-                        <td class="orange">CHILL</td>
-                        <td class="orange">CHILL</td>
-                        <td></td>
-                    </tr>
+        </body1>
+    </section>
 
-                    <!-- 9.25 – 10.45 -->
-                    <tr>
-                        <td class="time">9.25 am-10.45 am.</td>
-                        <td class="orange">No class</td>
-                        <td></td>
-                        <td>
-                            CSE 4213<br>
-                            Room no. 419<br>
-                            Tahmid Sir
-                        </td>
-                        <td class="orange">No class</td>
-                        <td>
-                            CSE 4203<br>
-                            Room no. 417<br>
-                            Humayara ma’am
-                        </td>
-                        <td></td>
-                    </tr>
+    <script>
 
-                    <!-- 10.50 – 12.10 -->
-                    <tr>
-                        <td class="time">10.50 am-12.10 pm.</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            CSE 4217<br>
-                            Room no. 315<br>
-                            Nafisa ma’am
-                        </td>
-                        <td></td>
-                    </tr>
+        /* ===============================
+           UTILITIES
+        ================================ */
+        function toSeconds(time) {
+            const [h, m] = time.split(":").map(Number);
+            return h * 3600 + m * 60;
+        }
 
-                    <!-- Lunch -->
-                    <tr>
-                        <td class="time">12.10 pm-12.25 pm.</td>
-                        <td colspan="6" class="lunch">Lunch Break</td>
-                    </tr>
+        function formatTime(seconds) {
+            const h = Math.floor(seconds / 3600);
+            const m = Math.floor((seconds % 3600) / 60);
+            const s = seconds % 60;
+            return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
 
-                    <!-- 12.25 – 1.45 -->
-                    <tr>
-                        <td class="time">12.25 pm-1.45 pm.</td>
-                        <td></td>
-                        <td>
-                            CSE 4213<br>
-                            Room no. 609<br>
-                            Tahmid Sir
-                        </td>
-                        <td></td>
-                        <td class="orange">Club<br>Activities</td>
-                        <td></td>
-                        <td>
-                            CSE 4217<br>
-                            Room no. 417<br>
-                            Nafisa ma’am
-                        </td>
-                    </tr>
+        /* ===============================
+           TODAY COLUMN DETECTION
+        ================================ */
+        function getTodayColumnIndex() {
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const today = days[new Date().getDay()];
 
-                    <!-- 1.50 – 3.10 -->
-                    <tr>
-                        <td class="time">1.50 pm-3.10 pm.</td>
-                        <td></td>
-                        <td>
-                            CSE 4214<br>
-                            Room no. 709<br>
-                            Saiful Sir
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            CSE 4204<br>
-                            Room no. 418<br>
-                            Humayara ma’am
-                        </td>
-                    </tr>
+            let index = -1;
+            document.querySelectorAll("th").forEach((th, i) => {
+                if (th.textContent.trim() === today) {
+                    th.classList.add("today");
+                    index = i + 1; // nth-child is 1-based
+                }
+            });
 
-                    <!-- 3.15 – 4.35 -->
-                    <tr>
-                        <td class="time">3.15 pm-4.35 pm.</td>
-                        <td></td>
-                        <td>
-                            CSE 4214<br>
-                            Room no. 709<br>
-                            Saiful Sir
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            CSE 4218<br>
-                            Alternate Weeks<br>
-                            Nafisa ma’am
-                        </td>
-                    </tr>
+            return index;
+        }
 
-                </table>
-            </div>
-        </div>
+        const todayColumnIndex = getTodayColumnIndex();
 
-    </body1>
+        /* ===============================
+           ACTIVE CLASS + SINGLE COUNTDOWN
+        ================================ */
+        function updateClassStatus() {
+            if (todayColumnIndex === -1) return;
+
+            const now = new Date();
+            const currentSeconds =
+                now.getHours() * 3600 +
+                now.getMinutes() * 60 +
+                now.getSeconds();
+
+            let alreadyActive = false; // 🔑 KEY FIX
+
+            document.querySelectorAll(`tr td:nth-child(${todayColumnIndex})[data-start]`)
+                .forEach(cell => {
+
+                    const start = toSeconds(cell.dataset.start);
+                    const end = toSeconds(cell.dataset.end);
+
+                    // cleanup
+                    cell.classList.remove('active-class');
+                    const oldTimer = cell.querySelector('.countdown');
+                    if (oldTimer) oldTimer.remove();
+
+                    // allow ONLY ONE active cell
+                    if (!alreadyActive && currentSeconds >= start && currentSeconds <= end) {
+                        alreadyActive = true;
+
+                        cell.classList.add('active-class');
+
+                        const remaining = end - currentSeconds;
+                        const timer = document.createElement('div');
+                        timer.className = 'countdown';
+                        timer.textContent = `Ends in ${formatTime(remaining)}`;
+                        cell.appendChild(timer);
+                    }
+                });
+        }
+
+        /* ===============================
+           INIT
+        ================================ */
+        updateClassStatus();
+        setInterval(updateClassStatus, 1000);
+
+    </script>
+
+</body>
+
 </html>
