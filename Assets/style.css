@@ -16,13 +16,15 @@ header {
   top: 0;
   z-index: 100;
   width: 100%;
+scrollbar-width: none;   /* hides scrollbar in Firefox */
+white-space: nowrap;     /* ✅ keeps items on one line */
 }
 
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1200px;
+  min-width: 1024px; /* matches your forced desktop width */
   margin: 0 auto;
 }
 
@@ -38,6 +40,7 @@ header {
   gap: 25px;
   margin: 0;
   padding: 0;
+white-space: nowrap; /* keeps items in one row */
 }
 
 .navbar a {
