@@ -334,7 +334,7 @@ td:hover {
     padding: 10px;
     width: 50%;             /* two cards side by side */
     min-width: auto;        /* ensures good mobile width */
-    margin: 20px 0;
+    margin: 10px 0;
     border: 1px solid #01004e;
     backdrop-filter: blur(10px);
     border-radius: 10px;
