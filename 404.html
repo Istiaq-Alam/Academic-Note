@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1024, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>404 - File Not Found</title>
+  <style>
+    body {
+      background-color: #1e1e2e;
+      color: #eee;
+      font-family: "Segoe UI", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .error-box {
+      text-align: center;
+      background: #2b2b3c;
+      padding: 40px 60px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      color: #ff5555;
+      font-size: 3em;
+      margin: 0;
+    }
+
+    p {
+      color: #ccc;
+      font-size: 1.2em;
+      margin: 10px 0 20px;
+    }
+
+    button {
+      background-color: #4b8bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3a74d8;
+    }
+  </style>
+</head>
+<body>
+  <div class="error-box">
+    <h1>404 :")</h1>
+    <p>File Not Found or Didn't uploaded</p>
+    <button onclick="goHome()">🏠 Back to File Manager</button>
+  </div>
+
+  <script>
+    function goHome() {
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
