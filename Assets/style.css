@@ -340,6 +340,7 @@ td:hover {
     border-radius: 10px;
     box-shadow: 0 9px 9px rgb(80, 80, 80);
 }
+}
 .section-row {
     display: flex;
     flex-wrap: wrap;
