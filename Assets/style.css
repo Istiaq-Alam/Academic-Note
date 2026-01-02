@@ -321,7 +321,13 @@ td:hover {
         font-size: 22px;
     }
 }
-
+@media (max-width: 768px) {
+  body {
+    transform: scale(0.9);
+    transform-origin: top left;
+    width: 111%;
+  }
+}
 .section-row {
     display: flex;
     flex-wrap: wrap;
