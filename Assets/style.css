@@ -332,7 +332,7 @@ td:hover {
     color: #ddd;
     border-radius: 10px;
     padding: 10px;
-    width: 50%;             /* two cards side by side */
+    width: 70%;             /* two cards side by side */
     min-width: auto;        /* ensures good mobile width */
     margin: 10px 0;
     border: 1px solid #01004e;
