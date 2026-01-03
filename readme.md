@@ -34,7 +34,7 @@
                             </td>
                             <td class="orange" align="center">CHILL</td>
                             <td class="orange" align="center">CHILL</td>
-                            <td></td>
+                            <td class="orange" align="center">CHILL</td>
                         </tr>
                         <!-- 9.25 – 10.45 -->
                         <tr>
