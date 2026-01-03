@@ -11,7 +11,7 @@
                         6<sup>th</sup>, 2025</h2>
                 </div>
                 <div class="table-container">
-                    <table>
+                    <table align="center">
                         <tr>
                             <th class="time">Time</th>
                             <th>Saturday</th>
