@@ -1,4 +1,4 @@
-# Academic Notes [website](https://academic-note.vercel.app/) For CSE-20
+<h1 align="center"> Academic Notes <a href="https://academic-note.vercel.app">website</a> For CSE-20 </h1>
 <!--## &nbsp;-->
 
  
