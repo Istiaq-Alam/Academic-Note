@@ -9,50 +9,57 @@ body {
 
 /* Header Styles */
 header {
-  background-color: #1e1e2e;
-  color: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  width: 100%;
-scrollbar-width: none;   /* hides scrollbar in Firefox */
-white-space: nowrap;     /* ✅ keeps items on one line */
+    background-color: #1e1e2e;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    scrollbar-width: none;
+    /* hides scrollbar in Firefox */
+    white-space: nowrap;
+    /* ✅ keeps items on one line */
+    overflow-x: auto; 
 }
 
 .header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-width: 1024px; /* matches your forced desktop width */
-  margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 1024px;
+    /* matches your forced desktop width */
+    margin: 0 auto;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .site-title {
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #ffd369;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffd369;
 }
 
 .navbar ul {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-  margin: 0;
-  padding: 0;
-white-space: nowrap; /* keeps items in one row */
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    /* keeps items in one row */
 }
 
 .navbar a {
-  color: #ddd;
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.2s;
+    color: #ddd;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
 }
 
 .navbar a:hover {
-  color: #ffd369;
-  text-shadow: 0 0 5px #ffd369;
+    color: #ffd369;
+    text-shadow: 0 0 5px #ffd369;
 }
 
 
@@ -79,7 +86,7 @@ section {
 
 h2 {
     color: #333;
-    
+
 }
 
 ul {
@@ -110,7 +117,7 @@ body1 {
     padding: 0;
     font-family: "Times New Roman", serif;
     background: #ffffff;
-    
+
 }
 
 .wrapper1 {
@@ -321,26 +328,31 @@ td:hover {
         font-size: 22px;
     }
 }
+
 @media (max-width: 768px) {
-  body {
-    transform: scale(0.9);
-    transform-origin: top left;
-    width: 111%;
-  }
-.info-card {
-    background: #2a2a3d;
-    color: #ddd;
-    border-radius: 10px;
-    padding: 10px;
-    width: 70%;             /* two cards side by side */
-    min-width: auto;        /* ensures good mobile width */
-    margin: 10px 0;
-    border: 1px solid #01004e;
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    box-shadow: 0 9px 9px rgb(80, 80, 80);
+    body {
+        transform: scale(0.9);
+        transform-origin: top left;
+        width: 111%;
+    }
+
+    .info-card {
+        background: #2a2a3d;
+        color: #ddd;
+        border-radius: 10px;
+        padding: 10px;
+        width: 70%;
+        /* two cards side by side */
+        min-width: auto;
+        /* ensures good mobile width */
+        margin: 10px 0;
+        border: 1px solid #01004e;
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        box-shadow: 0 9px 9px rgb(80, 80, 80);
+    }
 }
-}
+
 .section-row {
     display: flex;
     flex-wrap: wrap;
@@ -356,8 +368,10 @@ td:hover {
     color: #ddd;
     border-radius: 10px;
     padding: 20px;
-    width: 45%;             /* two cards side by side */
-    min-width: auto;        /* ensures good mobile width */
+    width: 45%;
+    /* two cards side by side */
+    min-width: auto;
+    /* ensures good mobile width */
     margin: 20px 0;
     border: 1px solid #01004e;
     backdrop-filter: blur(10px);
@@ -395,40 +409,40 @@ td:hover {
 
 /* Footer Styles */
 footer {
-  background-color: #2a2a3d;
-  color: #bbb;
-  padding: 25px 0;
-  text-align: center;
-  border-top: 2px solid #3a3a4f;
-  margin-top: 40px;
+    background-color: #2a2a3d;
+    color: #bbb;
+    padding: 25px 0;
+    text-align: center;
+    border-top: 2px solid #3a3a4f;
+    margin-top: 40px;
 }
 
 .footer-container {
-  max-width: 1100px;
-  margin: 0 auto;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .footer-links {
-  list-style: none;
-  padding: 0;
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .footer-links a {
-  color: #aaa;
-  text-decoration: none;
-  transition: color 0.2s;
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.2s;
 }
 
 .footer-links a:hover {
-  color: #ffd369;
+    color: #ffd369;
 }
 
 footer p {
-  margin: 0;
-  font-size: 0.95em;
+    margin: 0;
+    font-size: 0.95em;
 }
