@@ -4,7 +4,7 @@ body {
     font-family: "Times New Roman", serif;
     margin: 0px;
     line-height: 1.6;
-    background-image: url(../Lab\ Reports/1.Cover/logo.png) no-repeat;
+    background-color: #afd1ff;
 }
 
 /* Header Styles */
@@ -124,12 +124,17 @@ body1 {
     max-width: 1200px;
     margin: 10px auto;
     padding: 10px;
+    border: #91e0ff solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 9px 9px rgb(80, 80, 80);
 }
 
 
 .header1 {
     text-align: center;
     border: 2px solid #1f4fff;
+    background-color: #ffffff;
     padding: 10px;
 }
 
