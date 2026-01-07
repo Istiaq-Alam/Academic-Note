@@ -1,6 +1,6 @@
 <h1 align="center"> Academic Notes <a href="https://academic-note.vercel.app">website</a> For CSE-20 </h1>
 <!--## &nbsp;-->
-
+ 
  
 <section id="class-routine">
         <body1>
