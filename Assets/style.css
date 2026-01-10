@@ -370,7 +370,7 @@ footer p {
     font-size: 0.95em;
 }
 
-@media (max-width: 312px) {
+@media (max-width: 768px) {
     body {
         transform: scale(2);
         transform-origin: top center;
