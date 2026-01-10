@@ -373,7 +373,7 @@ footer p {
 @media (max-width: 768px) {
     body {
         transform: scale(2);
-        transform-origin: top middle;
+        transform-origin: top center;
         width: 111%;
     }
     table,
