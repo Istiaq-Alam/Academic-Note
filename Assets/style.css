@@ -63,14 +63,6 @@ header {
 }
 
 
-/*header {
-    text-align: center;
-    background-color: #b9f8ff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 9px 9px rgb(80, 80, 80);
-}*/
-
 section {
     margin: 20px 0;
     padding: 20px;
@@ -284,77 +276,6 @@ td:hover {
     }
 }
 
-
-@media (max-width: 768px) {
-    body {
-        transform: scale(0.9);
-        transform-origin: top left;
-        width: 111%;
-    }
-    table,
-    thead,
-    tbody,
-    th,
-    td,
-    tr {
-        display: block;
-        width: 100%;
-    }
-
-    thead {
-        display: none;
-    }
-
-    tr {
-        margin-bottom: 20px;
-        border: 2px solid #1f4fff;
-        padding: 10px;
-        border-radius: 8px;
-    }
-
-    td {
-        border: none;
-        text-align: left;
-        padding: 8px;
-        font-size: 16px;
-    }
-
-    td::before {
-        content: attr(data-label);
-        font-weight: bold;
-        display: block;
-        color: #1f4fff;
-        margin-bottom: 3px;
-    }
-
-    .time {
-        background: #f4f6ff;
-        font-weight: bold;
-    }
-
-    .lunch {
-        text-align: center;
-        font-size: 22px;
-    }
-
-    .info-card {
-        background: #3d2a2a;
-        color: #ddd;
-        border-radius: 10px;
-        padding: 10px;
-        width: 100%;
-        /* two cards side by side */
-        min-width: 768px;
-        /* ensures good mobile width */
-        margin: 5px 0;
-        border: 1px solid #01004e;
-        backdrop-filter: blur(10px);
-        border-radius: 10px;
-        box-shadow: 0 9px 9px rgb(80, 80, 80);
-    }
-}
-
-
 .section-row {
     display: flex;
     flex-wrap: wrap;
@@ -448,3 +369,74 @@ footer p {
     margin: 0;
     font-size: 0.95em;
 }
+
+@media (max-width: 768px) {
+    body {
+        transform: scale(0.9);
+        transform-origin: top left;
+        width: 111%;
+    }
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tr {
+        margin-bottom: 20px;
+        border: 2px solid #1f4fff;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    td {
+        border: none;
+        text-align: left;
+        padding: 8px;
+        font-size: 16px;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        color: #1f4fff;
+        margin-bottom: 3px;
+    }
+
+    .time {
+        background: #f4f6ff;
+        font-weight: bold;
+    }
+
+    .lunch {
+        text-align: center;
+        font-size: 22px;
+    }
+
+    .info-card {
+        background: #3d2a2a;
+        color: #ddd;
+        border-radius: 10px;
+        padding: 10px;
+        width: 100%;
+        /* two cards side by side */
+        min-width: 768px;
+        /* ensures good mobile width */
+        margin: 5px 0;
+        border: 1px solid #01004e;
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        box-shadow: 0 9px 9px rgb(80, 80, 80);
+    }
+}
+
+
