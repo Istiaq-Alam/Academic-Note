@@ -1,0 +1,195 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\newfontfamily\hackfont{Hack}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\renewcommand{\contentsname}{Table of Contents}
+
+\pagestyle{fancy}
+\fancyhf{} 							% Header Middle
+\rhead{Computer Graphics Lab}
+\lhead{Lab-01: House Lab}
+\rfoot{\thepage}
+
+\begin{document}
+
+\begin{titlepage}					% Cover Start
+\begin{center}
+    \includegraphics[width=0.35\textwidth]{logo.png} \\
+    \vspace{0.5cm}
+    \textbf{\Huge \textcolor{teal}{NOTRE DAME} \textcolor{teal}{UNIVERSITY}} \\
+    \vspace{0.5cm}
+    \textbf{\Huge \textcolor{orange}{BANGLADESH}} \\
+    
+    \vspace{0.9cm}
+    \textbf{\Huge \underline{Computer Graphics Lab Report-01}} \\
+    
+    \vspace{1.5em}
+    \begin{flushleft}
+    	\textbf{\Large Course Code: CSE-4218} \\
+		\vspace{0.3cm}        
+        \textbf{\Large Course Title: Computer Graphics Lab} \\
+        \vspace{0.3cm}
+        \textbf{\Large Lab Task Topic: Setting Up Glut \& Draw a House} \\        
+    \end{flushleft}
+    
+    \vspace{1em}
+    \begin{flushleft}
+        \textbf{\Huge \textcolor{blue}{Submitted by:}} \\
+        \vspace{0.3cm}
+        \textbf{\Large Name: Istiak Alam} \\
+        \vspace{0.3cm}
+        \textbf{\Large ID: 0692230005101005} \\
+		\vspace{0.3cm}        
+        \textbf{\Large Batch: CSE-20} \\
+        \vspace{0.5cm}
+        \textbf{\Large Submission Date: }{\Large \textbf{\today}\par}
+    \end{flushleft}
+    \vfill
+    \begin{flushleft}
+        \textbf{\Huge \textcolor{blue}{Submitted to:}} \\
+        \vspace{0.3cm}
+        \textbf{\Large Humayara Binte Rashid} \\
+        \vspace{0.3cm}
+        \textbf{\Large Lecturer, Dept. of CSE} \\
+        \vspace{0.3cm}
+        \textbf{\Large Notre Dame University Bangladesh}
+    \end{flushleft}
+\end{center}
+\end{titlepage}						% Cover End
+
+\tableofcontents
+\thispagestyle{empty}
+\clearpage
+\pagenumbering{arabic}
+
+\section{Objective}
+The objective of this lab is to understand the basics of Computer Graphics programming using OpenGL and GLUT. In this experiment, a simple house structure is created using basic geometric primitives such as quadrilaterals and triangles in a 2D orthographic projection.
+
+%-------------------------------------
+\section{Tools and Environment}
+\begin{itemize}
+    \item Programming Language: C++
+    \item Graphics Library: OpenGL with GLUT
+    \item IDE: Code::Blocks
+    \item Operating System: Kali Linux
+\end{itemize}
+
+
+
+%-------------------------------------
+\section{Algorithm}
+\begin{enumerate}
+    \item Initialize GLUT and create a window.
+    \item Set the background color and projection using \texttt{glClearColor()} and \texttt{glOrtho()}.
+    \item Clear the color buffer.
+    \item Draw the house base using quadrilaterals.
+    \item Draw the roof using triangles.
+    \item Draw door and windows using quadrilaterals.
+    \item Display the final output on the screen.
+\end{enumerate}
+
+%-------------------------------------
+\section{Code Explanation}
+The program begins by initializing the OpenGL environment. The \texttt{init()} function sets the background color to white and defines a 2D orthographic viewing volume.
+
+The \texttt{display()} function is responsible for rendering the house. Different parts of the house such as the base, roof, door, and windows are drawn using OpenGL primitives. Colors are assigned using the \texttt{glColor3f()} function.
+
+The main function initializes GLUT, creates a window, registers the display callback, and starts the event loop.
+
+%-------------------------------------
+\section{Source Code}
+\lstset{
+    language=C++,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    breaklines=true,
+    frame=single
+}
+
+\begin{lstlisting}
+/*
+ * Lab Task-01
+ * Creating a House using quad line
+ */
+
+#include <GL/glut.h>
+
+void init() {
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(-10, 10, -10, 10, -1, 1);
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glColor3f(1.0f, 0.8f, 0.0f);
+    glBegin(GL_QUADS);
+        glVertex2f(-5.0f, -3.0f);
+        glVertex2f( 5.0f, -3.0f);
+        glVertex2f( 5.0f,  3.0f);
+        glVertex2f(-5.0f,  3.0f);
+    glEnd();
+
+    glColor3f(0.8f, 0.0f, 0.0f);
+    glBegin(GL_TRIANGLES);
+        glVertex2f(-6.0f, 3.0f);
+        glVertex2f( 6.0f, 3.0f);
+        glVertex2f( 0.0f, 7.0f);
+    glEnd();
+
+    glFlush();
+}
+
+int main(int argc, char** argv) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(800, 900);
+    glutCreateWindow("House - Computer Graphics Lab-01");
+    init();
+    glutDisplayFunc(display);
+    glutMainLoop();
+    return 0;
+}
+\end{lstlisting}
+
+%-------------------------------------
+\section{Output}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{output.png}
+    \caption{Output of House Drawing Using OpenGL}
+\end{figure}
+
+%-------------------------------------
+\section{Discussion}
+This experiment demonstrates how simple geometric shapes can be combined to form complex objects using OpenGL. The use of orthographic projection simplifies the coordinate calculations and is suitable for 2D graphics applications.
+
+%-------------------------------------
+\section{Conclusion}
+In this lab, a house was successfully drawn using OpenGL and GLUT. The experiment helped in understanding basic OpenGL functions, coordinate systems, and drawing primitives. This knowledge forms the foundation for more advanced graphics programming.
+
+
+
+
+
+
+\end{document}
