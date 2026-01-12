@@ -1,0 +1,183 @@
+\documentclass[11pt]{article}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+\usepackage{parskip}
+
+\geometry{margin=1in}
+
+\title{\textbf{Machine Learning Lab -- 01}\\
+Data Loading and Preprocessing Using Pandas}
+\author{Student Name: \\
+ID: \\
+Course: Machine Learning Lab}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Objective}
+The objective of this experiment is to familiarize with basic data handling and preprocessing techniques required before applying Machine Learning algorithms. This lab focuses on loading a dataset, inspecting its structure, handling categorical variables, and converting them into numerical representations suitable for model training.
+
+\section{Dataset Description}
+The dataset used in this experiment is \texttt{bank.csv}, which contains customer information related to a banking institution. The dataset includes demographic details, financial attributes, and campaign-related information. The target variable indicates whether a customer subscribed to a term deposit.
+
+\section{Experiment--1: Loading CSV Data}
+
+\subsection*{Objective}
+To load a CSV dataset into a Pandas DataFrame and inspect the initial records.
+
+\subsection*{Algorithm}
+\begin{enumerate}
+    \item Import the Pandas library.
+    \item Read the CSV file using \texttt{read\_csv()}.
+    \item Display the first few rows using \texttt{head()}.
+\end{enumerate}
+
+\subsection*{Explanation}
+Pandas provides the \texttt{read\_csv()} function to load structured data into a DataFrame. Initially, the dataset was loaded without specifying the delimiter, which resulted in improper column parsing. This step helps identify formatting issues in raw data.
+
+\subsection*{Output}
+The output displays the first five records of the dataset, revealing incorrect column separation due to the delimiter mismatch.
+
+\section{Experiment--2: Library Import for Data Analysis}
+
+\subsection*{Objective}
+To import essential Python libraries required for numerical computation, visualization, and data analysis.
+
+\subsection*{Algorithm}
+\begin{enumerate}
+    \item Import NumPy for numerical operations.
+    \item Import Pandas for data manipulation.
+    \item Import Matplotlib and Seaborn for visualization.
+\end{enumerate}
+
+\subsection*{Explanation}
+Machine Learning workflows require multiple libraries. NumPy supports mathematical operations, Pandas handles data structures, Matplotlib and Seaborn assist in data visualization. The missing Seaborn module error highlights environment dependency issues.
+
+\subsection*{Output}
+A \texttt{ModuleNotFoundError} is generated indicating that Seaborn is not installed.
+
+\section{Experiment--3: Correct CSV Parsing}
+
+\subsection*{Objective}
+To correctly load the dataset by specifying the appropriate delimiter.
+
+\subsection*{Algorithm}
+\begin{enumerate}
+    \item Use \texttt{read\_csv()} with \texttt{sep=';'}.
+    \item Display the first few rows.
+\end{enumerate}
+
+\subsection*{Explanation}
+The dataset uses a semicolon (\texttt{;}) as a separator. Specifying the delimiter ensures correct column separation and proper DataFrame structure.
+
+\subsection*{Output}
+The dataset is correctly loaded with all attributes properly aligned.
+
+\section{Experiment--4: Viewing Dataset Structure}
+
+\subsection*{Objective}
+To examine the last few records of the dataset.
+
+\subsection*{Algorithm}
+\begin{enumerate}
+    \item Use \texttt{tail()} to display last entries.
+\end{enumerate}
+
+\subsection*{Explanation}
+Inspecting the tail of the dataset helps verify data consistency and check for anomalies at the end of the dataset.
+
+\subsection*{Output}
+The last five records of the dataset are displayed.
+
+\section{Experiment--5: Encoding Marital Status}
+
+\subsection*{Objective}
+To convert the categorical \texttt{marital} attribute into numerical form.
+
+\subsection*{Algorithm}
+\begin{enumerate}
+    \item Define a replacement function.
+    \item Encode `single` as 0 and others as 1.
+    \item Apply the function to the column.
+\end{enumerate}
+
+\subsection*{Explanation}
+Machine Learning algorithms require numerical inputs. Binary encoding is applied to simplify categorical data while preserving information relevance.
+
+\subsection*{Output}
+The marital column is successfully converted to numeric values.
+
+\section{Experiment--6: Encoding Housing Loan}
+
+\subsection*{Objective}
+To convert the \texttt{housing} attribute from categorical to numerical format.
+
+\subsection*{Algorithm}
+\begin{enumerate}
+    \item Map `yes` to 1 and `no` to 0.
+\end{enumerate}
+
+\subsection*{Explanation}
+Binary mapping simplifies boolean categorical features and reduces preprocessing complexity.
+
+\subsection*{Output}
+The housing column is transformed into numerical values.
+
+\section{Experiment--7: Encoding Personal Loan}
+
+\subsection*{Objective}
+To convert the \texttt{loan} attribute into numerical form.
+
+\subsection*{Algorithm}
+\begin{enumerate}
+    \item Replace `yes` with 1 and `no` with 0.
+\end{enumerate}
+
+\subsection*{Explanation}
+This step ensures compatibility with ML models by removing string-based attributes.
+
+\subsection*{Output}
+The loan column is numerically encoded.
+
+\section{Experiment--8: Encoding Job Categories}
+
+\subsection*{Objective}
+To convert job categories into numerical representations.
+
+\subsection*{Algorithm}
+\begin{enumerate}
+    \item Identify unique job categories.
+    \item Assign numeric values based on professional relevance.
+    \item Replace unknown values with NaN.
+\end{enumerate}
+
+\subsection*{Explanation}
+Encoding job roles allows models to learn patterns related to occupation types. Missing or unknown categories are marked as NaN for later handling.
+
+\subsection*{Output}
+The job column is successfully converted to numeric form.
+
+\section{Experiment--9: Month Encoding}
+
+\subsection*{Objective}
+To convert month names into numerical values.
+
+\subsection*{Algorithm}
+\begin{enumerate}
+    \item Map month abbreviations to numbers (1--12).
+\end{enumerate}
+
+\subsection*{Explanation}
+Temporal features must be numerical to allow models to learn seasonal patterns effectively.
+
+\subsection*{Output}
+The month column is transformed into numerical values.
+
+\section{Conclusion}
+This lab demonstrated essential data preprocessing techniques required before applying Machine Learning algorithms. Proper data loading, cleaning, and encoding significantly improve model performance and reliability. These preprocessing steps form the foundation of any real-world Machine Learning pipeline.
+
+\end{document}
