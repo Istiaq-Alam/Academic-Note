@@ -477,11 +477,11 @@
 \end{center}
 \end{titlepage}		
 
-%    
-%\tableofcontents
-%\thispagestyle{empty}
-%\clearpage
-%\pagenumbering{arabic}
+    
+\tableofcontents
+\thispagestyle{empty}
+\clearpage
+\pagenumbering{arabic}
     
 	
 \section*{Objective}
@@ -490,38 +490,10 @@ The objective of this experiment is to familiarize with basic data handling and 
 \section*{Dataset Description}
 The dataset used in this experiment is \texttt{bank.csv}, which contains customer information related to a banking institution. The dataset includes demographic details, financial attributes, and campaign-related information. The target variable indicates whether a customer subscribed to a term deposit. The main objective is to load a CSV dataset into a Pandas DataFrame and inspect the initial records.
 
-\section{Loading CSV Data}
+\section{Importing Required Libraries}
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{1}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
-
-\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bank.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
-\PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
-\end{Verbatim}
-\end{tcolorbox}
-
-\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{1}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-  age;"job";"marital";"education";"default";"balance";"housing";"loan";"contact"
-;"day";"month";"duration";"campaign";"pdays";"previous";"poutcome";"y"
-0  30;"unemployed";"married";"primary";"no";1787;{\ldots}
-1  33;"services";"married";"secondary";"no";4789;{\ldots}
-2  35;"management";"single";"tertiary";"no";1350;{\ldots}
-3  30;"management";"married";"tertiary";"no";1476{\ldots}
-4  59;"blue-collar";"married";"secondary";"no";0;{\ldots}
-\end{Verbatim}
-\end{tcolorbox}
-
-\subsection*{Explanation}
-Pandas provides the \texttt{read\_csv()} function to load structured data into a DataFrame. Initially, the dataset was loaded without specifying the delimiter, which resulted in improper column parsing. This step helps identify formatting issues in raw data.
-\subsection*{Output}
-The output displays the first five records of the dataset, revealing incorrect column separation due to the delimiter mismatch.
-
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{2}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
@@ -530,7 +502,12 @@ The output displays the first five records of the dataset, revealing incorrect c
 \end{Verbatim}
 \end{tcolorbox}
 
-    \begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
+\subsection*{Explanation}
+Machine Learning workflows rely on multiple Python libraries, each serving a specific purpose. NumPy provides efficient data structures and mathematical functions for numerical computation. Pandas enables loading, cleaning, and manipulating structured datasets. Matplotlib is used to generate basic plots and graphs, while Seaborn builds on Matplotlib to produce more informative and visually appealing statistical visualizations. Importing these libraries prepares the environment for data analysis and model development.
+\subsection*{Output}
+No visible output is produced if the libraries are successfully imported. If any library is missing from the environment, an error message such as \texttt{ModuleNotFoundError} is displayed.
+
+\begin{Verbatim}[commandchars=\\\{\}, frame=single, framerule=2mm, rulecolor=\color{outerrorbackground}]
 \textcolor{ansi-red}{---------------------------------------------------------------------------}
 \textcolor{ansi-red}{ModuleNotFoundError}                       Traceback (most recent call last)
 Cell \textcolor{ansi-green}{In[2], line 4}
@@ -540,6 +517,42 @@ Cell \textcolor{ansi-green}{In[2], line 4}
 
 \textcolor{ansi-red}{ModuleNotFoundError}: No module named 'seaborn'
     \end{Verbatim}
+    
+
+\section{Loading CSV Data}
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bank.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Explanation}
+Pandas provides the \texttt{read\_csv()} function to load structured data into a DataFrame. Initially, the dataset was loaded without specifying the delimiter, which resulted in improper column parsing. This step helps identify formatting issues in raw data.
+
+\subsection*{Output}
+The output displays the first five records of the dataset, revealing incorrect column separation due to the delimiter mismatch.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+age;"job";"marital";"education";"default";"balance";"housing";"loan";
+"contact";"day";"month";"duration";"campaign";"pdays";"previous";"poutcome";
+"y"
+0  30;"unemployed";"married";"primary";"no";1787;{\ldots}
+1  33;"services";"married";"secondary";"no";4789;{\ldots}
+2  35;"management";"single";"tertiary";"no";1350;{\ldots}
+3  30;"management";"married";"tertiary";"no";1476{\ldots}
+4  59;"blue-collar";"married";"secondary";"no";0;{\ldots}
+\end{Verbatim}
+\end{tcolorbox}
+
+
+
+\section{Loading the Dataset and Displaying Records}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{3}{\boxspacing}
@@ -548,6 +561,12 @@ Cell \textcolor{ansi-green}{In[2], line 4}
 \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
+
+\subsection*{Explanation}
+The dataset \texttt{bank.csv} uses a semicolon (\texttt{;}) as its field separator instead of the default comma. Therefore, the delimiter is explicitly specified while loading the file. The \texttt{read\_csv()} function stores the data in a Pandas DataFrame, which is a tabular data structure. The \texttt{head()} function is then used to display the first five records of the dataset, allowing quick verification of data correctness and column structure.
+
+\subsection*{Output}
+The output displays the first five rows of the dataset along with all column names, confirming that the data has been loaded correctly into the DataFrame.
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{3}{\boxspacing}
@@ -568,6 +587,8 @@ Cell \textcolor{ansi-green}{In[2], line 4}
 \end{Verbatim}
 \end{tcolorbox}
         
+        
+\section{Displaying the Last Records of the Dataset}
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{4}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -575,6 +596,11 @@ Cell \textcolor{ansi-green}{In[2], line 4}
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+The \texttt{tail()} function in Pandas is used to display the last few entries of a DataFrame. By default, it returns the final five rows. This operation is useful for verifying that the dataset has been loaded completely and for checking any anomalies or missing values at the end of the dataset.
+
+\subsection*{Output}
+The output displays the last five rows of the dataset along with all corresponding column values.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{4}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -594,6 +620,9 @@ Cell \textcolor{ansi-green}{In[2], line 4}
 \end{Verbatim}
 \end{tcolorbox}
         
+        
+        
+\section{Encoding Marital Status Attribute}
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{5}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -608,6 +637,11 @@ Cell \textcolor{ansi-green}{In[2], line 4}
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+In this step, the categorical attribute \texttt{marital} is converted into a numerical format to make it suitable for Machine Learning algorithms. A user-defined function named \texttt{replace\_marital} is created, which assigns the value 0 to customers with marital status \texttt{single} and the value 1 to all other categories. The \texttt{apply()} function is then used to apply this transformation to the entire \texttt{marital} column of the dataset. This process simplifies categorical data while preserving relevant information.
+
+\subsection*{Output}
+The output displays the first five rows of the dataset where the \texttt{marital} column is successfully transformed into numerical values. Customers with marital status \texttt{single} are represented by 0, while all other marital statuses are represented by 1.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{5}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -627,6 +661,8 @@ Cell \textcolor{ansi-green}{In[2], line 4}
 \end{Verbatim}
 \end{tcolorbox}
         
+
+\section{Encoding Housing Loan Attribute}
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{6}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -635,6 +671,12 @@ Cell \textcolor{ansi-green}{In[2], line 4}
 \end{Verbatim}
 \end{tcolorbox}
 
+
+\subsection*{Explanation}
+In this step, the categorical attribute \texttt{housing} is converted into a numerical format using the \texttt{map()} function. The values \texttt{yes} and \texttt{no} are mapped to 1 and 0 respectively. This conversion is necessary because Machine Learning algorithms require numerical input features. The \texttt{get} method ensures safe mapping of values within the column.
+
+\subsection*{Output}
+The output displays the first five rows of the dataset where the \texttt{housing} column has been successfully transformed into numerical values. A value of 1 indicates the presence of a housing loan, while 0 indicates the absence of a housing loan.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{6}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -654,6 +696,9 @@ Cell \textcolor{ansi-green}{In[2], line 4}
 \end{Verbatim}
 \end{tcolorbox}
         
+        
+        
+\section{Encoding Loan Attribute}
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{7}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -662,15 +707,13 @@ Cell \textcolor{ansi-green}{In[2], line 4}
 \end{Verbatim}
 \end{tcolorbox}
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-/tmp/ipykernel\_18086/1568368702.py:1: FutureWarning: Downcasting behavior in
-`replace` is deprecated and will be removed in a future version. To retain the
-old behavior, explicitly call `result.infer\_objects(copy=False)`. To opt-in to
-the future behavior, set `pd.set\_option('future.no\_silent\_downcasting', True)`
-  df["loan"] = df["loan"].replace(\{"yes": 1, "no": 0\})
-    \end{Verbatim}
+\subsection*{Explanation}
+In this step, the categorical attribute \texttt{loan} is converted into numerical form to ensure compatibility with Machine Learning algorithms. The \texttt{replace()} function is used to map the value \texttt{yes} to 1 and \texttt{no} to 0. This binary encoding simplifies the data representation while retaining the original meaning of the attribute.
 
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\subsection*{Output}
+The output displays the first five rows of the dataset, where the \texttt{loan} column is successfully transformed into numerical values. A value of 1 indicates the presence of a personal loan, while 0 indicates the absence of a loan.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{7}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
    age          job  marital  education default  balance  housing  loan  \textbackslash{}
@@ -689,44 +732,23 @@ the future behavior, set `pd.set\_option('future.no\_silent\_downcasting', True)
 \end{Verbatim}
 \end{tcolorbox}
         
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{22}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{p}{\PYZob{}}
-\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{yes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
-\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{no}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{\PYZcb{}}\PY{p}{)}
-\PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{22}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-   age  job  marital  education default  balance  housing  loan   contact  \textbackslash{}
-0   30  0.0        1        1.0      no     1787        0     0  cellular
-1   33  0.0        1        2.0      no     4789        1     1  cellular
-2   35  1.0        0        3.0      no     1350        1     0  cellular
-3   30  1.0        1        3.0      no     1476        1     1   unknown
-4   59  0.0        1        2.0      no        0        1     0   unknown
-
-   day  month  duration  campaign  pdays  previous poutcome   y
-0   19    NaN        79         1     -1         0  unknown  no
-1   11    NaN       220         1    339         4  failure  no
-2   16    NaN       185         1    330         1  failure  no
-3    3    NaN       199         4     -1         0  unknown  no
-4    5    NaN       226         1     -1         0  unknown  no
-\end{Verbatim}
-\end{tcolorbox}
+\section{Checking Unique Job Categories}    
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{9}{\boxspacing}
+\prompt{In}{incolor}{8}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{job}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+The \texttt{unique()} function is used to identify all distinct values present in the \texttt{job} column of the dataset. This helps in understanding the different job categories of the customers and is useful for preprocessing and encoding categorical variables before applying Machine Learning algorithms.
+
+\subsection*{Output}
+The output displays an array of unique job categories present in the dataset, such as \texttt{unemployed}, \texttt{services}, \texttt{management}, \texttt{blue-collar}, \texttt{self-employed}, \texttt{technician}, \texttt{entrepreneur}, \texttt{admin.}, \texttt{student}, \texttt{housemaid}, \texttt{retired}, and \texttt{unknown}.
+
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{9}{\boxspacing}
+\prompt{Out}{outcolor}{8}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array(['unemployed', 'services', 'management', 'blue-collar',
        'self-employed', 'technician', 'entrepreneur', 'admin.', 'student',
@@ -734,8 +756,10 @@ array(['unemployed', 'services', 'management', 'blue-collar',
 \end{Verbatim}
 \end{tcolorbox}
         
+
+\section{Encoding Job Attribute}
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{18}{\boxspacing}
+\prompt{In}{incolor}{9}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{job}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{job}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unemployed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,}
                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{services}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,}
@@ -753,8 +777,13 @@ array(['unemployed', 'services', 'management', 'blue-collar',
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+The categorical attribute \texttt{job} is transformed into a numerical format to make it suitable for Machine Learning algorithms. The \texttt{replace()} function is used to map specific job categories to binary values: jobs considered as professional or managerial (e.g., \texttt{management}, \texttt{technician}, \texttt{entrepreneur}, \texttt{student}) are assigned 1, while other jobs (e.g., \texttt{unemployed}, \texttt{services}, \texttt{blue-collar}, \texttt{self-employed}, \texttt{admin.}, \texttt{housemaid}, \texttt{retired}) are assigned 0. Any unknown job entries are replaced with \texttt{NaN}. This encoding simplifies categorical data for model training.
+
+\subsection*{Output}
+The output displays the first five rows of the dataset with the \texttt{job} column converted to numerical values. Job categories are represented as 0 or 1, and any unknown values are represented as \texttt{NaN}.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{18}{\boxspacing}
+\prompt{Out}{outcolor}{9}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
    age  job  marital  education default  balance  housing  loan   contact  \textbackslash{}
 0   30  0.0        1        1.0      no     1787        0     0  cellular
@@ -772,23 +801,33 @@ array(['unemployed', 'services', 'management', 'blue-collar',
 \end{Verbatim}
 \end{tcolorbox}
         
+        
+\section{Checking Unique Values of Month Attribute}
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{11}{\boxspacing}
+\prompt{In}{incolor}{10}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+The \texttt{unique()} function is used to identify all distinct values present in the \texttt{month} column of the dataset. This operation helps to understand the range of months represented in the data and is useful for preprocessing, such as converting categorical month names into numerical values for Machine Learning algorithms.
+
+\subsection*{Output}
+The output displays an array of unique month names in the dataset. For example:
+
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{11}{\boxspacing}
+\prompt{Out}{outcolor}{10}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array(['oct', 'may', 'apr', 'jun', 'feb', 'aug', 'jan', 'jul', 'nov',
        'sep', 'mar', 'dec'], dtype=object)
 \end{Verbatim}
 \end{tcolorbox}
         
+        
+\section{Encoding Month Attribute}        
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{20}{\boxspacing}
+\prompt{In}{incolor}{11}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{o}{.}\PY{n}{month} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{month}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{p}{\PYZob{}}
     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{oct}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{10}\PY{p}{,}
@@ -808,8 +847,14 @@ array(['oct', 'may', 'apr', 'jun', 'feb', 'aug', 'jan', 'jul', 'nov',
 \end{Verbatim}
 \end{tcolorbox}
 
+
+\subsection*{Explanation}
+The \texttt{month} column contains the names of months as categorical string values. To convert this categorical data into a numerical format suitable for Machine Learning models, a mapping is applied where each month name is replaced with its corresponding integer value (e.g., \texttt{'jan'} = 1, \texttt{'feb'} = 2, ..., \texttt{'dec'} = 12). The \texttt{map()} function is used to transform the entire \texttt{month} column according to this mapping. This preprocessing step ensures that the month attribute can be interpreted quantitatively by algorithms.
+
+\subsection*{Output}
+The output displays the first ten rows of the dataset after transformation. The \texttt{month} column now contains integer values representing the months, while all other columns remain unchanged.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{20}{\boxspacing}
+\prompt{Out}{outcolor}{11}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
    age  job  marital  education default  balance  housing  loan   contact  \textbackslash{}
 0   30  0.0        1        1.0      no     1787        0     0  cellular
@@ -837,22 +882,32 @@ array(['oct', 'may', 'apr', 'jun', 'feb', 'aug', 'jan', 'jul', 'nov',
 \end{Verbatim}
 \end{tcolorbox}
         
+        
+\section{Inspecting Unique Values of Education Attribute}        
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{13}{\boxspacing}
+\prompt{In}{incolor}{12}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{education}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+The \texttt{unique()} function is used on the \texttt{education} column to identify all distinct categories present in the dataset. This step helps in understanding the range of values for the attribute and is useful before encoding categorical variables into numerical format for Machine Learning models.
+
+\subsection*{Output}
+The output is an array of unique values in the \texttt{education} column. For example: \texttt{['primary', 'secondary', 'tertiary', 'unknown']}, which shows all education levels present in the dataset.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{13}{\boxspacing}
+\prompt{Out}{outcolor}{12}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array(['primary', 'secondary', 'tertiary', 'unknown'], dtype=object)
 \end{Verbatim}
 \end{tcolorbox}
-        
+\newpage
+
+
+\section{Encoding Education Attribute}
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{14}{\boxspacing}
+\prompt{In}{incolor}{13}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{o}{.}\PY{n}{education} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{education}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{p}{\PYZob{}}
     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{primary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} 
@@ -860,18 +915,17 @@ array(['primary', 'secondary', 'tertiary', 'unknown'], dtype=object)
     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tertiary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,}
     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unknown}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{nan}
 \PY{p}{\PYZcb{}}\PY{p}{)}
-\end{Verbatim}
-\end{tcolorbox}
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{19}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+The \texttt{education} column contains categorical values representing the education level of customers. To prepare the data for Machine Learning models, these categorical values are converted to numerical values using the \texttt{map()} function. The mapping is as follows: \texttt{'primary'} = 1, \texttt{'secondary'} = 2, \texttt{'tertiary'} = 3, and \texttt{'unknown'} is replaced with \texttt{NaN} to indicate missing data. This transformation allows algorithms to process the education levels quantitatively.
+
+\subsection*{Output}
+The output displays the first ten rows of the dataset after the transformation. The \texttt{education} column now contains numerical values (1, 2, 3) corresponding to education levels, with \texttt{NaN} for unknown entries.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{19}{\boxspacing}
+\prompt{Out}{outcolor}{13}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
    age  job  marital  education default  balance  housing  loan   contact  \textbackslash{}
 0   30  0.0        1        1.0      no     1787        0     0  cellular
@@ -898,23 +952,39 @@ array(['primary', 'secondary', 'tertiary', 'unknown'], dtype=object)
 9   17      4       313         1    147         2  failure  no
 \end{Verbatim}
 \end{tcolorbox}
-        
+\newpage
+
+
+
+\section{Unique Values of the Outcome of Previous Marketing Campaign (\texttt{poutcome})}        
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{23}{\boxspacing}
+\prompt{In}{incolor}{14}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{poutcome}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+The \texttt{unique()} function is used to identify all distinct values present in the \texttt{poutcome} column of the dataset. This column represents the result of the previous marketing campaign for each customer. Determining unique values helps in understanding the different categories present and assists in further preprocessing or encoding steps required for Machine Learning.
+
+\subsection*{Output}
+The output is an array of all unique values in the \texttt{poutcome} column, for example:
+\begin{verbatim}
+array(['unknown', 'failure', 'other', 'success'], dtype=object)
+\end{verbatim}
+This shows that the column contains four distinct categories indicating the previous campaign outcome.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{23}{\boxspacing}
+\prompt{Out}{outcolor}{14}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array(['unknown', 'failure', 'other', 'success'], dtype=object)
 \end{Verbatim}
 \end{tcolorbox}
         
+        
+        
+\section{Encoding Poutcome Attribute}        
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{24}{\boxspacing}
+\prompt{In}{incolor}{15}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}\PY{o}{.}\PY{n}{poutcome} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{poutcome}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{p}{\PYZob{}}
     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unknown}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{,} 
@@ -926,8 +996,13 @@ array(['unknown', 'failure', 'other', 'success'], dtype=object)
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+The \texttt{poutcome} column represents the outcome of the previous marketing campaign and is a categorical variable. To make it compatible with Machine Learning algorithms, it is mapped to numerical values using the \texttt{map()} function. The mapping assigns \texttt{failure} to 1, \texttt{other} to 2, \texttt{success} to 3, and replaces \texttt{unknown} values with \texttt{NaN} to handle missing information. This encoding simplifies the dataset while preserving meaningful distinctions between campaign outcomes.
+
+\subsection*{Output}
+The output displays the first ten rows of the dataset with the \texttt{poutcome} column transformed into numerical values. Entries that were \texttt{unknown} are now shown as \texttt{NaN}, while other outcomes are represented by 1, 2, or 3 accordingly.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{24}{\boxspacing}
+\prompt{Out}{outcolor}{15}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
    age  job  marital  education default  balance  housing  loan   contact  \textbackslash{}
 0   30  0.0        1        1.0      no     1787        0     0  cellular
@@ -955,22 +1030,28 @@ array(['unknown', 'failure', 'other', 'success'], dtype=object)
 \end{Verbatim}
 \end{tcolorbox}
         
+        
+        
+\section{Normalizing the Balance Attribute}        
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{25}{\boxspacing}
+\prompt{In}{incolor}{16}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{balance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{balance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{v}\PY{p}{:} \PY{p}{(}\PY{n}{v} \PY{o}{\PYZhy{}} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{balance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{balance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{balance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
-\end{Verbatim}
-\end{tcolorbox}
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{26}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{balance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{balance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{v}\PY{p}{:} \PY{p}{(}\PY{n}{v} \PY{o}{\PYZhy{}} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{balance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{balance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{balance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
 \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+The \texttt{balance} column is a numerical feature representing the account balance of customers. To scale this feature between 0 and 1, min-max normalization is applied. The formula used is:
+\[
+\text{normalized\_value} = \frac{v - \text{min(balance)}}{\text{max(balance)} - \text{min(balance)}}
+\]
+where \(v\) is the original balance value. This transformation ensures that all values of \texttt{balance} lie within the range [0, 1], improving the performance and convergence of many Machine Learning algorithms.
+
+\subsection*{Output}
+The output displays the first ten rows of the dataset after normalization. The \texttt{balance} column values are now scaled between 0 and 1 while all other columns remain unchanged.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{26}{\boxspacing}
+\prompt{Out}{outcolor}{16}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
    age  job  marital  education default   balance  housing  loan   contact  \textbackslash{}
 0   30  0.0        1        1.0      no  0.068455        0     0  cellular
@@ -998,22 +1079,25 @@ array(['unknown', 'failure', 'other', 'success'], dtype=object)
 \end{Verbatim}
 \end{tcolorbox}
         
+        
+        
+\section{Normalization of pdays Attribute}        
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{27}{\boxspacing}
+\prompt{In}{incolor}{17}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pdays}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pdays}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{v}\PY{p}{:} \PY{p}{(}\PY{n}{v} \PY{o}{\PYZhy{}} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pdays}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pdays}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pdays}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
-\end{Verbatim}
-\end{tcolorbox}
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{28}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pdays}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pdays}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{v}\PY{p}{:} \PY{p}{(}\PY{n}{v} \PY{o}{\PYZhy{}} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pdays}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pdays}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pdays}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
 \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
+    
+\subsection*{Explanation}
+The \texttt{pdays} column, which represents the number of days since a client was last contacted, is normalized using the Min-Max scaling technique. This transformation scales all values to a range between 0 and 1, which helps improve the performance and convergence of Machine Learning algorithms.
+
+\subsection*{Output}
+The first ten rows of the dataset are displayed. The \texttt{pdays} column now contains values scaled between 0 and 1, while the other columns remain unchanged.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{28}{\boxspacing}
+\prompt{Out}{outcolor}{17}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
    age  job  marital  education default   balance  housing  loan   contact  \textbackslash{}
 0   30  0.0        1        1.0      no  0.068455        0     0  cellular
@@ -1041,16 +1125,13 @@ array(['unknown', 'failure', 'other', 'success'], dtype=object)
 \end{Verbatim}
 \end{tcolorbox}
         
+        
+\section{Feature Scaling using Min-Max Scaler}
+ 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{29}{\boxspacing}
+\prompt{In}{incolor}{18}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k+kn}{import} \PY{n}{MinMaxScaler}
-\end{Verbatim}
-\end{tcolorbox}
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{30}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{scaler} \PY{o}{=} \PY{n}{MinMaxScaler}\PY{p}{(}\PY{p}{)}
 \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
 \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pdays}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pdays}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
@@ -1058,8 +1139,14 @@ array(['unknown', 'failure', 'other', 'success'], dtype=object)
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+Feature scaling is performed to normalize the numerical attributes \texttt{duration} and \texttt{pdays} into a fixed range, usually between 0 and 1, which helps in faster convergence and better performance of Machine Learning algorithms. The \texttt{MinMaxScaler} from \texttt{sklearn.preprocessing} is used. The \texttt{fit\_transform()} method calculates the minimum and maximum values of each feature and scales all values accordingly. This ensures that the features contribute proportionally to the model training.
+
+\subsection*{Output}
+The output displays the first five rows of the dataset where the \texttt{duration} and \texttt{pdays} columns have been scaled to values between 0 and 1, while all other columns remain unchanged.
+
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{30}{\boxspacing}
+\prompt{Out}{outcolor}{18}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
    age  job  marital  education default   balance  housing  loan   contact  \textbackslash{}
 0   30  0.0        1        1.0      no  0.068455        0     0  cellular
@@ -1077,15 +1164,9 @@ array(['unknown', 'failure', 'other', 'success'], dtype=object)
 \end{Verbatim}
 \end{tcolorbox}
         
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{ }{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-
-\end{Verbatim}
-\end{tcolorbox}
 
 
-    % Add a bibliography block to the postdoc
+  
     
     
     
