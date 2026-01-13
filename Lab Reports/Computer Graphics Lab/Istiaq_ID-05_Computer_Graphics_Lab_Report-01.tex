@@ -126,34 +126,63 @@ The main function initializes GLUT, creates a window, registers the display call
 /*
  * Lab Task-01
  * Creating a House using quad line
+ * Written by Istiak Alam
  */
 
-#include <GL/glut.h>
+#include <GL/glut.h>  // GLUT header is important
+#include <stdlib.h>
+#include <math.h>
+#include <cmath>
 
+
+// Setup and Projection
 void init() {
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // White background
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-10, 10, -10, 10, -1, 1);
+    glOrtho(-10, 10, -10, 10, -1, 1);    // Its just like margine or padding
     glMatrixMode(GL_MODELVIEW);
 }
 
-void display() {
+void display() {					// Display function
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glColor3f(1.0f, 0.8f, 0.0f);
-    glBegin(GL_QUADS);
+    glColor3f(1.0f, 0.8f, 0.0f); // Light orange
+    glBegin(GL_QUADS);			// House Base (Rectangle)
         glVertex2f(-5.0f, -3.0f);
         glVertex2f( 5.0f, -3.0f);
         glVertex2f( 5.0f,  3.0f);
         glVertex2f(-5.0f,  3.0f);
     glEnd();
 
-    glColor3f(0.8f, 0.0f, 0.0f);
-    glBegin(GL_TRIANGLES);
-        glVertex2f(-6.0f, 3.0f);
-        glVertex2f( 6.0f, 3.0f);
-        glVertex2f( 0.0f, 7.0f);
+    glColor3f(0.8f, 0.0f, 0.0f); // Dark red
+    glBegin(GL_TRIANGLES);		// Roof (Triangle)
+        glVertex2f(-6.0f,  3.0f);
+        glVertex2f( 6.0f,  3.0f);
+        glVertex2f( 0.0f,  7.0f);
+    glEnd();
+
+    glColor3f(0.3f, 0.2f, 0.1f); // Brown
+    glBegin(GL_QUADS);			// Door (Rectangle)
+        glVertex2f(-1.0f, -3.0f);
+        glVertex2f( 1.0f, -3.0f);
+        glVertex2f( 1.0f,  0.0f);
+        glVertex2f(-1.0f,  0.0f);
+    glEnd();
+
+    glColor3f(0.0f, 0.6f, 1.0f); // Light blue
+    glBegin(GL_QUADS);			// Window 1 (Left)
+        glVertex2f(-4.0f,  0.5f);
+        glVertex2f(-2.0f,  0.5f);
+        glVertex2f(-2.0f,  2.0f);
+        glVertex2f(-4.0f,  2.0f);
+    glEnd();
+
+    glBegin(GL_QUADS);			// Window 2 (Right)
+        glVertex2f( 2.0f,  0.5f);
+        glVertex2f( 4.0f,  0.5f);
+        glVertex2f( 4.0f,  2.0f);
+        glVertex2f( 2.0f,  2.0f);
     glEnd();
 
     glFlush();
@@ -164,13 +193,21 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(800, 900);
     glutCreateWindow("House - Computer Graphics Lab-01");
+
     init();
     glutDisplayFunc(display);
     glutMainLoop();
     return 0;
 }
-\end{lstlisting}
 
+\end{lstlisting}
+\section{Graph Implementation}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{logo.png}
+    \caption{Graph View}
+\end{figure}
+\newpage
 %-------------------------------------
 \section{Output}
 \begin{figure}[!h]
