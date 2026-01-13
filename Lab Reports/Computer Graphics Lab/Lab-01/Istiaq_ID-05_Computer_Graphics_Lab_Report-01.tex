@@ -89,29 +89,20 @@ The objective of this lab is to understand the basics of Computer Graphics progr
 \end{itemize}
 
 
-
 %-------------------------------------
-\section{Algorithm}
-\begin{enumerate}
-    \item Initialize GLUT and create a window.
-    \item Set the background color and projection using \texttt{glClearColor()} and \texttt{glOrtho()}.
-    \item Clear the color buffer.
-    \item Draw the house base using quadrilaterals.
-    \item Draw the roof using triangles.
-    \item Draw door and windows using quadrilaterals.
-    \item Display the final output on the screen.
-\end{enumerate}
-
-%-------------------------------------
-\section{Code Explanation}
-The program begins by initializing the OpenGL environment. The \texttt{init()} function sets the background color to white and defines a 2D orthographic viewing volume.
-
-The \texttt{display()} function is responsible for rendering the house. Different parts of the house such as the base, roof, door, and windows are drawn using OpenGL primitives. Colors are assigned using the \texttt{glColor3f()} function.
-
-The main function initializes GLUT, creates a window, registers the display callback, and starts the event loop.
+\section{Graph Implementation}
+Here is the Graph file \href{https://virtual-graph-paper.com/YjgxMmNiMDE2MjVj}{Link}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=1\textwidth]{graph.png}
+    \caption{Graph View}
+\end{figure}
 
 %-------------------------------------
 \section{Source Code}
+The program begins by initializing the OpenGL environment. The \texttt{init()} function sets the background color to white and defines a 2D orthographic viewing volume.
+The \texttt{display()} function is responsible for rendering the house. Different parts of the house such as the base, roof, door, and windows are drawn using OpenGL primitives. Colors are assigned using the \texttt{glColor3f()} function.
+The main function initializes GLUT, creates a window, registers the display callback, and starts the event loop. \\
 \lstset{
     language=C++,
     basicstyle=\ttfamily\small,
@@ -140,11 +131,11 @@ void init() {
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // White background
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-10, 10, -10, 10, -1, 1);    // Its just like margine or padding
+    glOrtho(-10, 10, -10, 10, -1, 1); // Its just like margine 
     glMatrixMode(GL_MODELVIEW);
 }
 
-void display() {					// Display function
+void display() {		// Display function
     glClear(GL_COLOR_BUFFER_BIT);
 
     glColor3f(1.0f, 0.8f, 0.0f); // Light orange
@@ -201,18 +192,13 @@ int main(int argc, char** argv) {
 }
 
 \end{lstlisting}
-\section{Graph Implementation}
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.4\textwidth]{logo.png}
-    \caption{Graph View}
-\end{figure}
+
 \newpage
 %-------------------------------------
 \section{Output}
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.6\textwidth]{output.png}
+    \includegraphics[width=0.7\textwidth]{output.png}
     \caption{Output of House Drawing Using OpenGL}
 \end{figure}
 
