@@ -20,8 +20,8 @@
 
 \pagestyle{fancy}
 \fancyhf{} 							% Header Middle
-\rhead{Computer Graphics Lab}
-\lhead{Lab-01: House}
+\rhead{VLSI Design Lab}
+\lhead{Lab-01: Logic gates in DSCH2}
 \rfoot{\thepage}
 
 \begin{document}
@@ -76,32 +76,241 @@
 \clearpage
 \pagenumbering{arabic}
 
-\section{Objective}
-The objective of this lab is to understand the basics of Computer Graphics programming using OpenGL and GLUT. In this experiment, a simple house structure is created using basic geometric primitives such as quadrilaterals and triangles in a 2D orthographic projection.
-
-%-------------------------------------
-\section{Tools and Environment}
-\begin{itemize}
-    \item Programming Language: C++
-    \item Graphics Library: OpenGL with GLUT
-    \item IDE: Code::Blocks
-    \item Operating System: Kali Linux
-\end{itemize}
+\section{Introduction}
+The objective of this experiment was to gain familiarity with the schematic-based Electronic Design Automation (EDA) tool DSCH2 and to design, simulate, and verify basic logic gates using CMOS logic. The lab focuses on the schematic representation of fundamental logic gates such as AND, OR, NOT, NAND, NOR, XOR and the functional verification using simulation. The schematic editor DSCH2 was used to create the gate designs and simulate their logical behavior.
 
 
+\section{Logic Gate design in DSCH2}
+\subsection{Inverter / NOT Gate}
+A NOT gate, also known as an inverter, produces the complement of its input.
+
+\subsection*{Truth Table}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+A & Y \\ \hline
+0 & 1 \\
+1 & 0 \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection*{Schematic Image}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{1in-inverter.png}
+    \caption{Schematic of the 1-input Inverter}
+\end{figure}
+
+\subsection*{Discussion}
+The NOT gate was implemented using a single CMOS inverter in DSCH2. Simulation confirmed correct inversion of the input signal.The inverter operated correctly, validating CMOS inverter design using DSCH2.
 
 
-%-------------------------------------
-\section{Discussion}
-This experiment demonstrates how simple geometric shapes can be combined to form complex objects using OpenGL. The use of orthographic projection simplifies the coordinate calculations and is suitable for 2D graphics applications.
 
-%-------------------------------------
+
+
+\subsection{2-input NAND}
+A 2-input NAND gate is a universal logic gate that produces a logic LOW output only when both inputs are logic HIGH. For all other input combinations, the output remains logic HIGH. Due to its universality, complex digital circuits can be implemented using only NAND gates.
+
+\subsection*{Truth Table}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+A & B & Y \\ \hline
+0 & 0 & 1 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 0 \\ \hline
+\end{tabular}
+\end{center}
+
+
+\subsection*{Schematic Image}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{2in-NAND.png}
+    \caption{Schematic of the 2-input NAND}
+\end{figure}
+
+\subsection*{Discussion}
+The 2-input NAND gate was implemented in DSCH2 using CMOS logic. The pull-down network consists of two NMOS transistors connected in series, while the pull-up network consists of two PMOS transistors connected in parallel. Simulation results confirmed that the output becomes LOW only when both inputs are HIGH, validating the correct functionality of the design. The 2-input NAND gate was successfully designed and simulated using DSCH2. The output behavior matched the theoretical truth table, confirming the correctness of the schematic implementation.
+
+
+
+\subsection{3-input NAND}
+A 3-input NAND gate outputs a logic LOW only when all three inputs are logic HIGH. For any other input combination, the output remains logic HIGH.
+
+\subsection*{Truth Table}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+A & B & C & Y \\ \hline
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 1 \\
+0 & 1 & 0 & 1 \\
+0 & 1 & 1 & 1 \\
+1 & 0 & 0 & 1 \\
+1 & 0 & 1 & 1 \\
+1 & 1 & 0 & 1 \\
+1 & 1 & 1 & 0 \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection*{Schematic Image}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{3in-NAND.png}
+    \caption{Schematic of the 3-input NAND}
+\end{figure}
+
+\subsection*{Discussion}
+The 3-input NAND gate was implemented in DSCH2 by extending the series NMOS and parallel PMOS structure. Simulation results showed that the output becomes LOW only when all three inputs are HIGH, confirming correct operation. The DSCH2 simulation verified the proper functioning of the 3-input NAND gate, demonstrating scalability of NAND-based logic design.
+
+% ---------------------------------------------------
+
+
+\subsection{2-input NOR}
+A 2-input NOR gate produces a logic HIGH output only when both inputs are logic LOW. For all other input combinations, the output is logic LOW. NOR gates are also universal gates in digital logic design.
+
+\subsection*{Truth Table}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+A & B & Y \\ \hline
+0 & 0 & 1 \\
+0 & 1 & 0 \\
+1 & 0 & 0 \\
+1 & 1 & 0 \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection*{Schematic Image}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{2in-NOR.png}
+    \caption{Schematic of the 2-input NOR}
+\end{figure}
+
+\subsection*{Discussion}
+In DSCH2, the NOR gate was designed using parallel NMOS transistors in the pull-down network and series PMOS transistors in the pull-up network. Simulation verified that the output remains HIGH only when both inputs are LOW, which matches the expected NOR logic behavior. The 2-input NOR gate design was correctly implemented and verified using DSCH2. The simulation results aligned with the theoretical truth table.
+
+% ---------------------------------------------------
+
+
+\subsection{3-input NOR}
+A 3-input NOR gate produces a logic HIGH output only when all three inputs are logic LOW.
+
+\subsection*{Truth Table}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+A & B & C & Y \\ \hline
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 1 & 1 & 0 \\
+1 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 \\
+1 & 1 & 0 & 0 \\
+1 & 1 & 1 & 0 \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection*{Schematic Image}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.65\textwidth]{3in-NOR.png}
+    \caption{Schematic of the 3-input NOR}
+\end{figure}
+
+\subsection*{Discussion}
+The 3-input NOR gate was designed in DSCH2 using parallel NMOS and series PMOS transistors. Simulation results confirmed that the output remains HIGH only when all inputs are LOW. The correct logical behavior of the 3-input NOR gate was verified through DSCH2 simulation.
+
+% ---------------------------------------------------
+
+
+\subsection{AND Gate}
+An AND gate outputs logic HIGH only when all inputs are HIGH.
+
+\subsection*{Truth Table}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+A & B & Y \\ \hline
+0 & 0 & 0 \\
+0 & 1 & 0 \\
+1 & 0 & 0 \\
+1 & 1 & 1 \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection*{Schematic Image}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{2in-AND.png}
+    \caption{Schematic of the AND Gate}
+\end{figure}
+
+\subsection*{Discussion}
+The AND gate was implemented in DSCH2 using a combination of NAND and NOT gates. Simulation verified correct output behavior. The AND gate functionality was successfully verified using DSCH2.
+
+% ---------------------------------------------------
+
+\newpage
+\subsection{OR Gaate}
+An OR gate produces logic HIGH when at least one input is HIGH.
+
+\subsection*{Truth Table}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+A & B & Y \\ \hline
+0 & 0 & 0 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 1 \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection*{Schematic Image}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{2in-OR.png}
+    \caption{Schematic of the OR Gate}
+\end{figure}
+
+\subsection*{Discussion}
+The OR gate was constructed in DSCH2 using NOR and inverter combinations. Simulation confirmed expected OR behavior. The OR gate design performed as expected in DSCH2 simulations.
+
+% ---------------------------------------------------
+
+
+\subsection{2-input XOR}
+An XOR gate outputs logic HIGH when the inputs are different.
+
+\subsection*{Truth Table}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+A & B & Y \\ \hline
+0 & 0 & 0 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 0 \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection*{Schematic Image}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{2in-XOR.png}
+    \caption{Schematic of the XOR Gate}
+\end{figure}
+
+\subsection*{Discussion}
+The XOR gate was implemented using a combination of basic logic gates in DSCH2. Simulation verified that the output is HIGH only when inputs differ. The XOR gate schematic functioned correctly, confirming accurate logic implementation using DSCH2.
+
+
 \section{Conclusion}
-In this lab, a house was successfully drawn using OpenGL and GLUT. The experiment helped in understanding basic OpenGL functions, coordinate systems, and drawing primitives. This knowledge forms the foundation for more advanced graphics programming.
-
-
-
-
-
+In this laboratory exercise, schematic implementations of fundamental logic gates were created and simulated using the DSCH2 environment. For each gate, the simulated outputs matched the theoretical expectations based on Boolean logic. This laboratory reinforced the fundamental concepts of digital logic design and the practical use of DSCH2 for schematic entry and simulation.
 
 \end{document}
