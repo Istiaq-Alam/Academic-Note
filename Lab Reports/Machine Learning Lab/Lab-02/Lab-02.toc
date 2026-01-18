@@ -1,0 +1,6 @@
+\contentsline {section}{\numberline {1}Linear Regression Implementation-01}{1}{section.1}%
+\contentsline {section}{\numberline {2}Multiple Linear Regression Implementation-01}{4}{section.2}%
+\contentsline {subsubsection}{\numberline {2.0.1}Yes it is the same , Congratulations!!!}{6}{subsubsection.2.0.1}%
+\contentsline {section}{\numberline {3}Multiple Linear Regression Implementation-02}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}converting categorical values to numeric values}{7}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Here in the above output , six coefficients for our six training features}{9}{subsubsection.3.1.1}%
