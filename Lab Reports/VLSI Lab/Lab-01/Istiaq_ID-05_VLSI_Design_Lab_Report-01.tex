@@ -43,7 +43,7 @@
 		\vspace{0.3cm}        
         \textbf{\Large Course Title: VLSI Design Lab} \\
         \vspace{0.3cm}
-        \textbf{\Large Lab Task Topic: Setting Up DSCH2 \& build logic gates} \\        
+        \textbf{\Large Experiment Name: Setting Up DSCH2 \& build logic gates} \\        
     \end{flushleft}
     
     \vspace{1em}
@@ -84,6 +84,15 @@ The objective of this experiment was to gain familiarity with the schematic-base
 \subsection{Inverter / NOT Gate}
 A NOT gate, also known as an inverter, produces the complement of its input.
 
+
+
+\subsection*{Schematic Image}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{1in-inverter.png}
+    \caption{Schematic of the 1-input Inverter}
+\end{figure}
+
 \subsection*{Truth Table}
 \begin{center}
 \begin{tabular}{|c|c|}
@@ -94,15 +103,8 @@ A & Y \\ \hline
 \end{tabular}
 \end{center}
 
-\subsection*{Schematic Image}
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.5\textwidth]{1in-inverter.png}
-    \caption{Schematic of the 1-input Inverter}
-\end{figure}
-
-\subsection*{Discussion}
-The NOT gate was implemented using a single CMOS inverter in DSCH2. Simulation confirmed correct inversion of the input signal.The inverter operated correctly, validating CMOS inverter design using DSCH2.
+\subsection*{Observation}
+From the truth table and simulation results, it is observed that the output of the inverter is always the logical complement of the input. When the input \(A = 0\), the output \(Y\) becomes logic HIGH (1), and when the input \(A = 1\), the output \(Y\) becomes logic LOW (0). This confirms that the inverter correctly performs logical inversion for all possible input conditions.
 
 
 
@@ -131,8 +133,9 @@ A & B & Y \\ \hline
     \caption{Schematic of the 2-input NAND}
 \end{figure}
 
-\subsection*{Discussion}
-The 2-input NAND gate was implemented in DSCH2 using CMOS logic. The pull-down network consists of two NMOS transistors connected in series, while the pull-up network consists of two PMOS transistors connected in parallel. Simulation results confirmed that the output becomes LOW only when both inputs are HIGH, validating the correct functionality of the design. The 2-input NAND gate was successfully designed and simulated using DSCH2. The output behavior matched the theoretical truth table, confirming the correctness of the schematic implementation.
+\subsection*{Observation}
+From the simulation results in DSCH2, it was observed that the output of the 2-input NAND gate remains at logic HIGH for all input combinations except when both inputs A and B are logic HIGH. When either input is logic LOW, the output stays HIGH. The output transitions to logic LOW only for the input condition A = 1 and B = 1. These observations are fully consistent with the theoretical truth table of a 2-input NAND gate, confirming correct logical operation of the designed schematic.
+
 
 
 
@@ -158,12 +161,13 @@ A & B & C & Y \\ \hline
 \subsection*{Schematic Image}
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\textwidth]{3in-NAND.png}
+    \includegraphics[width=0.7\textwidth]{3in-NAND.png}
     \caption{Schematic of the 3-input NAND}
 \end{figure}
 
-\subsection*{Discussion}
-The 3-input NAND gate was implemented in DSCH2 by extending the series NMOS and parallel PMOS structure. Simulation results showed that the output becomes LOW only when all three inputs are HIGH, confirming correct operation. The DSCH2 simulation verified the proper functioning of the 3-input NAND gate, demonstrating scalability of NAND-based logic design.
+\subsection*{Observation}
+From the truth table and simulation results, it was observed that the output of the 3-input NAND gate remains at logic HIGH for all input combinations except when all three inputs (A, B, and C) are simultaneously at logic HIGH. In the case where A = 1, B = 1, and C = 1, the output transitions to logic LOW. This behavior confirms that the gate performs the logical negation of the AND operation for three inputs. The observed output values from the DSCH2 simulation precisely matched the theoretical truth table, indicating correct functionality of the 3-input NAND gate.
+
 
 % ---------------------------------------------------
 
@@ -190,14 +194,15 @@ A & B & Y \\ \hline
     \caption{Schematic of the 2-input NOR}
 \end{figure}
 
-\subsection*{Discussion}
-In DSCH2, the NOR gate was designed using parallel NMOS transistors in the pull-down network and series PMOS transistors in the pull-up network. Simulation verified that the output remains HIGH only when both inputs are LOW, which matches the expected NOR logic behavior. The 2-input NOR gate design was correctly implemented and verified using DSCH2. The simulation results aligned with the theoretical truth table.
+
+\subsection*{Observation}
+From the truth table and simulation results, it is observed that the output of the 2-input NOR gate remains at logic HIGH only when both inputs A and B are at logic LOW. For all other input combinations where at least one input is logic HIGH, the output transitions to logic LOW. This behavior confirms that the circuit performs the logical NOR operation correctly, as verified through DSCH2 simulation.
+
 
 % ---------------------------------------------------
 
 
 \subsection{3-input NOR}
-A 3-input NOR gate produces a logic HIGH output only when all three inputs are logic LOW.
 
 \subsection*{Truth Table}
 \begin{center}
@@ -222,8 +227,9 @@ A & B & C & Y \\ \hline
     \caption{Schematic of the 3-input NOR}
 \end{figure}
 
-\subsection*{Discussion}
-The 3-input NOR gate was designed in DSCH2 using parallel NMOS and series PMOS transistors. Simulation results confirmed that the output remains HIGH only when all inputs are LOW. The correct logical behavior of the 3-input NOR gate was verified through DSCH2 simulation.
+\subsection*{Observation}
+From the simulation results, it is observed that the output of the 3-input NOR gate becomes logic HIGH only when all three inputs (A, B, and C) are at logic LOW. For any input combination where at least one input is HIGH, the output remains logic LOW. This behavior is consistent with the truth table of the 3-input NOR gate. The DSCH2 simulation output accurately reflects the expected NOR operation, confirming the correctness of the schematic design.
+
 
 % ---------------------------------------------------
 
@@ -250,13 +256,14 @@ A & B & Y \\ \hline
     \caption{Schematic of the AND Gate}
 \end{figure}
 
-\subsection*{Discussion}
-The AND gate was implemented in DSCH2 using a combination of NAND and NOT gates. Simulation verified correct output behavior. The AND gate functionality was successfully verified using DSCH2.
+\subsection*{Observation}
+From the simulation results of the 2-input AND gate in DSCH2, it was observed that the output remains at logic LOW when any one or both of the inputs are at logic LOW. The output transitions to logic HIGH only when both inputs A and B are simultaneously at logic HIGH. This behavior is consistent with the truth table of an AND gate, confirming that the implemented schematic operates correctly.
+
 
 % ---------------------------------------------------
 
 \newpage
-\subsection{OR Gaate}
+\subsection{OR Gate}
 An OR gate produces logic HIGH when at least one input is HIGH.
 
 \subsection*{Truth Table}
@@ -278,13 +285,15 @@ A & B & Y \\ \hline
     \caption{Schematic of the OR Gate}
 \end{figure}
 
-\subsection*{Discussion}
-The OR gate was constructed in DSCH2 using NOR and inverter combinations. Simulation confirmed expected OR behavior. The OR gate design performed as expected in DSCH2 simulations.
+\subsection*{Observation}
+From the simulation results obtained in DSCH2, it was observed that the output of the 2-input OR gate becomes logic HIGH whenever at least one of the inputs is at logic HIGH. When both inputs A and B are at logic LOW, the output remains logic LOW. The simulation output exactly follows the theoretical truth table of the OR gate, confirming that the gate correctly performs the logical OR operation.
+
+
 
 % ---------------------------------------------------
 
 
-\subsection{2-input XOR}
+\subsection{XOR Gate}
 An XOR gate outputs logic HIGH when the inputs are different.
 
 \subsection*{Truth Table}
@@ -306,8 +315,9 @@ A & B & Y \\ \hline
     \caption{Schematic of the XOR Gate}
 \end{figure}
 
-\subsection*{Discussion}
-The XOR gate was implemented using a combination of basic logic gates in DSCH2. Simulation verified that the output is HIGH only when inputs differ. The XOR gate schematic functioned correctly, confirming accurate logic implementation using DSCH2.
+\subsection*{Observation}
+From the simulation results of the 2-input XOR gate in DSCH2, it was observed that the output remains logic LOW when both inputs are at the same logic level, i.e., when both inputs are LOW (0,0) or both inputs are HIGH (1,1). The output becomes logic HIGH when the inputs are different, i.e., for input combinations (0,1) and (1,0). These observations exactly match the theoretical truth table of the XOR gate, confirming that the circuit correctly performs the exclusive-OR operation.
+
 
 
 \section{Conclusion}
