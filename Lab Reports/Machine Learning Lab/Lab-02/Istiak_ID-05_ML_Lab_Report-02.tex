@@ -865,6 +865,7 @@ The output displays the complete contents of the \texttt{car data.csv} dataset i
 \end{Verbatim}
 \end{tcolorbox}
         
+\subsection{Checking Missing Values in the Dataset}        
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{21}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -902,6 +903,12 @@ The output displays the complete contents of the \texttt{car data.csv} dataset i
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+This step is used to identify missing or null values present in the dataset. The \texttt{isnull()} function returns a boolean DataFrame indicating missing values, while the \texttt{sum()} function is applied to count the total number of missing values in each column. Initially, the reference to the \texttt{sum} method without parentheses does not compute the result. The correct usage with \texttt{sum()} provides the total count of null values for each attribute, which is essential for data cleaning and preprocessing.
+
+\subsection*{Output}
+The output displays the total number of missing values for each column in the dataset. If no missing values are present, all columns show a count of zero.   
+
     \begin{Verbatim}[commandchars=\\\{\}]
 speed         0
 car\_age       0
@@ -929,6 +936,15 @@ dtype: int64
 Name: experience, dtype: float64
 \end{Verbatim}
 \end{tcolorbox}
+        
+\subsection{Handling Missing Values in Experience Attribute}
+
+\subsection*{Explanation}
+In this step, the \texttt{experience} attribute is analyzed and preprocessed to handle missing values. Initially, the \texttt{experience} column is inspected, and its mean and median values are computed to understand the data distribution. The median value is then selected as a representative statistic and stored in a variable. This median value is used to replace missing values in the \texttt{experience} column using the \texttt{fillna()} function. Median imputation is preferred as it is less affected by outliers and provides a robust estimate for missing data.
+
+\subsection*{Code \& Output}
+The output displays the \texttt{experience} column before and after preprocessing. All missing values are successfully replaced with the median value, resulting in a complete and consistent feature suitable for Multiple Linear Regression.
+        
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{25}{\boxspacing}
@@ -1006,6 +1022,16 @@ Name: experience, dtype: float64
 \end{Verbatim}
 \end{tcolorbox}
         
+\subsection{Multiple Linear Regression Model Training}
+
+\subsection*{Explanation}
+In this step, a Multiple Linear Regression model is created using the \texttt{LinearRegression} class from \texttt{sklearn.linear\_model}. Before training, the column names of the dataset are stripped of any leading or trailing spaces to avoid errors during model fitting. The model is then trained using three independent features: \texttt{speed}, \texttt{car\_age}, and \texttt{experience}, to predict the dependent variable \texttt{risk}. The \texttt{fit()} method estimates the coefficients and intercept of the linear equation that best fits the training data.
+
+\subsection*{Code \& Output}
+The output displays the column names of the dataset to verify that there are no unwanted spaces. The model is successfully fitted to the dataset, ready for prediction. No immediate numerical output is shown, but the model's coefficients and intercept can be accessed using \texttt{reg.coef\_} and \texttt{reg.intercept\_}.
+        
+        
+        
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{31}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1027,11 +1053,6 @@ Index(['speed ', 'car\_age', 'experience', 'risk'], dtype='object')
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{33}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{}Strip Leading/Trailing Spaces from Column Names:}
-\PY{c+c1}{\PYZsh{}Sometimes column names may have invisible spaces. You can strip any leading/tr}
-\PY{c+c1}{\PYZsh{} from the column names using:Strip Leading/Trailing Spaces from Column Names:}
-
-
 \PY{n}{df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
@@ -1050,6 +1071,8 @@ LinearRegression()
 \end{Verbatim}
 \end{tcolorbox}
         
+        
+\subsection{Prediction using Multiple Linear Regression}        
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{35}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1058,7 +1081,11 @@ LinearRegression()
 \PY{n}{reg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{160}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{]}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
+\subsection*{Explanation}
+The \texttt{predict()} method of the trained Multiple Linear Regression model is used to estimate the target value for a new observation. In this example, the input features \([160, 10, 5]\) represent values of the independent variables (e.g., \texttt{speed}, \texttt{car\_age}, \texttt{experience}). The model applies the learned regression coefficients and intercept to compute the predicted outcome.
 
+\subsection*{Output}
+The output is a single numerical value corresponding to the predicted target variable for the given input features. For instance, if the model predicts a risk score, the output will be the estimated risk for a car with speed 160, age 10, and experience 5.
     \begin{Verbatim}[commandchars=\\\{\}]
 /usr/lib/python3/dist-packages/sklearn/utils/validation.py:2749: UserWarning: X
 does not have valid feature names, but LinearRegression was fitted with feature
@@ -1072,7 +1099,12 @@ names
 array([71.37146872])
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+
+\subsection{Regression Coefficients}
+
+
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{36}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1080,13 +1112,21 @@ array([71.37146872])
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+The attribute \texttt{reg.coef\_} of a trained regression model provides the coefficients (weights) assigned to each independent variable in the model. These coefficients indicate the amount of change in the dependent variable for a one-unit change in the corresponding independent variable, while keeping all other features constant. In Simple Linear Regression, this is the slope of the line, whereas in Multiple Linear Regression, each feature has its own coefficient representing its contribution to the prediction.
+
+\subsection*{Output}
+The output is an array of numerical values representing the coefficients of the independent variables. For example, in a dataset with three features, the output could look like \texttt{[0.85, -0.12, 2.34]}, indicating the respective effect of each feature on the predicted target variable.
+
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{36}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([ 0.33059217,  1.61053246, -6.20772074])
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+
+\subsection{Model Intercept}
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{37}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1094,13 +1134,26 @@ array([ 0.33059217,  1.61053246, -6.20772074])
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+The \texttt{reg.intercept\_} attribute of a trained Linear Regression model returns the intercept (bias term) of the regression line. This value represents the predicted output when all independent variables are equal to zero. It is an essential part of the regression equation: 
+
+\[
+y = b_0 + b_1x_1 + b_2x_2 + \dots + b_nx_n
+\]
+
+where \(b_0\) is the intercept.
+
+\subsection*{Output}
+The output is a single numerical value representing the intercept of the trained regression model. For example, if \texttt{reg.intercept\_} returns \texttt{89.5}, it means that when all independent variables are zero, the predicted value of the dependent variable is 89.5.
+
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{37}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 np.float64(33.4100009104359)
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+\subsection{Prediction Using Multiple Linear Regression Equation}       
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{38}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1110,19 +1163,26 @@ np.float64(33.4100009104359)
 \PY{l+m+mi}{160}\PY{o}{*}\PY{l+m+mf}{0.33059217} \PY{o}{+} \PY{l+m+mi}{10}\PY{o}{*}\PY{l+m+mf}{1.61053246} \PY{o}{+} \PY{l+m+mi}{5}\PY{o}{*}\PY{o}{\PYZhy{}}\PY{l+m+mf}{6.20772074} \PY{o}{+} \PY{l+m+mf}{33.410000910435855}
 \end{Verbatim}
 \end{tcolorbox}
+\subsection*{Explanation}
+This step cross-checks the predicted value obtained from the Multiple Linear Regression model by manually computing the regression equation. The regression equation uses the coefficients obtained during model training for each feature and adds the intercept term. In this example, the predicted value is calculated as:
+\[
+\text{Predicted Value} = (160 \times 0.33059217) + (10 \times 1.61053246) + (5 \times -6.20772074) + 33.410000910435855
+\]
+This helps verify that the model prediction aligns with the mathematical formulation of the regression model.
 
+\subsection*{Output}
+The computed output of the equation represents the predicted value of the dependent variable based on the provided feature values. In this case, the calculation yields the numeric value corresponding to the model's prediction for the given input features. Yes it is the same , Congratulations!!!
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{38}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 71.37146901043586
 \end{Verbatim}
 \end{tcolorbox}
-        
-    \subsubsection{Yes it is the same ,
-Congratulations!!!}\label{yes-it-is-the-same-congratulations}
+
 
     \section{Multiple Linear Regression
 Implementation-02}\label{multiple-linear-regression-implementation-02}
+\subsection{Loading Dataset for Multiple Linear Regression}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{39}{\boxspacing}
@@ -1146,6 +1206,11 @@ Implementation-02}\label{multiple-linear-regression-implementation-02}
 \PY{n}{df}
 \end{Verbatim}
 \end{tcolorbox}
+\subsection*{Explanation}
+In this step, the required Python libraries are imported to support data handling, visualization, and model preparation. The Pandas library is used to load the dataset \texttt{dhaka insurance.csv} into a DataFrame, which provides a structured tabular representation of the data. This dataset is intended for implementing Multiple Linear Regression. Loading the dataset allows for initial inspection and verification of the data before applying further preprocessing and model training.
+
+\subsection*{Output}
+The output displays the complete contents of the \texttt{insurance.csv} dataset in tabular form, showing all rows and columns stored in the DataFrame.
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{41}{\boxspacing}
@@ -1179,6 +1244,12 @@ values}\label{converting-categorical-values-to-numeric-values}
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+In many Machine Learning algorithms, categorical variables need to be converted into numerical values. The code converts the \texttt{sex} column in the dataset into a categorical type and then encodes it as numeric codes. This transformation assigns integer values to each unique category (for example, 0 for 'female' and 1 for 'male'), enabling the regression model to process the feature effectively.
+
+\subsection*{Output}
+The output displays the dataset with the \texttt{sex} column converted to numeric codes. All other columns remain unchanged. The \texttt{sex} column now contains integer values representing the original categories.
+
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{42}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1198,7 +1269,9 @@ values}\label{converting-categorical-values-to-numeric-values}
 [1338 rows x 7 columns]
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+
+\subsection{Encoding Categorical Variables}
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{43}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1209,6 +1282,8 @@ values}\label{converting-categorical-values-to-numeric-values}
 \PY{n}{df}
 \end{Verbatim}
 \end{tcolorbox}
+
+
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{43}{\boxspacing}

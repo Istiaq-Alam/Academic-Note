@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Debian) (preloaded format=xelatex 2026.1.1)  26 JAN 2026 20:48
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Debian) (preloaded format=xelatex 2026.1.1)  26 JAN 2026 23:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1694,6 +1694,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [9]
+Overfull \hbox (5.61406pt too wide) detected at line 1170
+[] [] [][][][] [] [][][][][][][][][][][] [] [][][] [] [][][][][][][][][][][] []
+ [][] [] [][][][][][][][][][][][] [] [][][][][][][][][][][][][][][][][][]
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1742,13 +1747,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [15]
-File: output_64_0.png Graphic file (type bmp)
-<output_64_0.png>
-
-Underfull \hbox (badness 10000) in paragraph at lines 1679--1680
-
- []
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1757,13 +1755,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [16]
-File: output_65_0.png Graphic file (type bmp)
-<output_65_0.png>
-
-Underfull \hbox (badness 10000) in paragraph at lines 1704--1705
-
- []
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1772,13 +1763,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [17]
-File: output_68_0.png Graphic file (type bmp)
-<output_68_0.png>
-
-Underfull \hbox (badness 10000) in paragraph at lines 1751--1752
-
- []
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1787,10 +1771,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [18]
-File: output_70_0.png Graphic file (type bmp)
-<output_70_0.png>
+File: output_64_0.png Graphic file (type bmp)
+<output_64_0.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 1788--1789
+Underfull \hbox (badness 10000) in paragraph at lines 1754--1755
 
  []
 
@@ -1802,10 +1786,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [19]
-File: output_71_0.png Graphic file (type bmp)
-<output_71_0.png>
+File: output_65_0.png Graphic file (type bmp)
+<output_65_0.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 1811--1812
+Underfull \hbox (badness 10000) in paragraph at lines 1779--1780
 
  []
 
@@ -1816,7 +1800,50 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[20] (./Istiak_ID-05_ML_Lab_Report-02.aux)
+[20]
+File: output_68_0.png Graphic file (type bmp)
+<output_68_0.png>
+
+Underfull \hbox (badness 10000) in paragraph at lines 1826--1827
+
+ []
+
+File: output_70_0.png Graphic file (type bmp)
+<output_70_0.png>
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 1863--1864
+
+ []
+
+File: output_71_0.png Graphic file (type bmp)
+<output_71_0.png>
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 1886--1887
+
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[23] (./Istiak_ID-05_ML_Lab_Report-02.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-14>
@@ -1826,17 +1853,27 @@ L3 programming layer <2025-11-14>
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.475pt have occurred.
 
-Package rerunfilecheck Info: File `Istiak_ID-05_ML_Lab_Report-02.out' has not c
-hanged.
-(rerunfilecheck)             Checksum: 35A689FB3BC26407296E3A5B0F71A904;3812.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `Istiak_ID-05_ML_Lab_Report-02.out' has ch
+anged.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Istiak_ID-05_ML_Lab_Report-02.out':
+
+(rerunfilecheck)             Before: A89C252C8221842E19053236768C9816;5610
+(rerunfilecheck)             After:  97369B16432F79E497EFF6360EC29312;5824.
  ) 
 Here is how much of TeX's memory you used:
- 35319 strings out of 468178
- 695257 string characters out of 5435578
- 1608010 words of memory out of 5000000
- 63442 multiletter control sequences out of 15000+600000
- 640469 words of font info for 134 fonts, out of 8000000 for 9000
+ 35320 strings out of 468178
+ 695414 string characters out of 5435578
+ 1610010 words of memory out of 5000000
+ 63441 multiletter control sequences out of 15000+600000
+ 640485 words of font info for 136 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 98i,12n,108p,1218b,760s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 98i,12n,108p,1218b,762s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Istiak_ID-05_ML_Lab_Report-02.pdf (22 pages).
+Output written on Istiak_ID-05_ML_Lab_Report-02.pdf (25 pages).
