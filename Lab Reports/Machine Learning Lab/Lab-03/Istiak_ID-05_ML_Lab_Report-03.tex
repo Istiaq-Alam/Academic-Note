@@ -21,7 +21,7 @@
 \pagestyle{fancy}
 \fancyhf{} 							% Header Middle
 \rhead{Machine Learning Lab}
-\lhead{Lab-02: Linear Regrassion}
+\lhead{Lab-03: K-Nearest Neighbors Algorithm}
 \rfoot{\thepage}
 
     \usepackage[breakable]{tcolorbox}
@@ -441,7 +441,7 @@
     \textbf{\Huge \textcolor{orange}{BANGLADESH}} \\
     
     \vspace{0.9cm}
-    \textbf{\Huge \underline{Machine Learning Lab Report-02}} \\
+    \textbf{\Huge \underline{Machine Learning Lab Report-03}} \\
     
     \vspace{1.5em}
     \begin{flushleft}
@@ -449,7 +449,7 @@
 		\vspace{0.3cm}        
         \textbf{\Large Course Title: Machine Learning Lab} \\
         \vspace{0.3cm}
-        \textbf{\Large Lab Task Topic: Linear \& Multiple Linear Regression} \\        
+        \textbf{\Large Lab Task Topic: K-Nearest Neighbors (KNN) Algorithm} \\        
     \end{flushleft}
     
     \vspace{1em}
@@ -486,32 +486,27 @@
 	
 \section{Objective}
 
-The objective of this Machine Learning lab is to understand and implement regression techniques using real-world datasets. This lab focuses on applying Simple Linear Regression and Multiple Linear Regression to analyze the relationship between independent variables and a target variable. The experiments aim to develop predictive models, interpret feature influence, and evaluate model performance using appropriate regression metrics.
+The objective of this Machine Learning lab is to study and implement the K-Nearest Neighbors (KNN) algorithm for both classification and regression tasks using real-world datasets. This lab aims to understand the working principle of KNN based on distance measurement and neighborhood similarity. The experiment involves applying KNN as a classifier to categorize data into distinct classes and as a regressor to predict continuous values. Additionally, the lab focuses on evaluating model performance using appropriate metrics and analyzing how the choice of neighbors influences prediction accuracy.
+
 
 \section{Dataset Description}
 
 Three different datasets are used in this lab to demonstrate the application of regression algorithms.
 
-\subsection*{Dhaka Home Prices Dataset}
-The \texttt{dhaka homeprices.csv} dataset is used for implementing Simple Linear Regression. This dataset contains housing-related information from Dhaka city, where a single independent feature is used to predict house prices. The dataset helps illustrate how a dependent variable varies linearly with one explanatory variable.
+\subsection*{Irish Dataset}
+The \texttt{IRIS.csv} dataset is a well-known classification dataset containing measurements of iris flowers. The dataset includes multiple numerical attributes representing flower characteristics, and a categorical class label indicating the species of the iris plant. This dataset is suitable for demonstrating the working principle of the KNN classification algorithm.v
 
-\subsection*{Insurance Dataset}
-The \texttt{insurance.csv} dataset is used for implementing Multiple Linear Regression. It contains multiple attributes related to insurance policyholders. The dataset is used to analyze how multiple independent variables collectively influence insurance-related outcomes.
-
-\subsection*{Car Data Dataset}
-The \texttt{cardata.csv} dataset is also used for Multiple Linear Regression. It includes attributes such as \texttt{speed}, \texttt{car\_age}, \texttt{experience}, and \texttt{risk}. These features are used to predict a target variable by learning the combined effect of multiple factors on the outcome.
+\subsection*{Car Prices Dataset}
+The \texttt{carprices.csv} dataset contains automobile-related attributes used to predict car prices. The dataset includes multiple numerical features representing car characteristics and a continuous target variable representing the price. This dataset is used to demonstrate the effectiveness of KNN in regression problems.
    
-    
 
-    
-    \section{Linear Regression
-Implementation}\label{linear-regression-implementation}
-    
-    
+\section{KNN as Classifier}\label{knn-as-classifier-as-regressor-in-another-program}
 
-    
-    \section{KNN as Classifier {[}As Regressor in another
-program{]}}\label{knn-as-classifier-as-regressor-in-another-program}
+\subsection{Assigning Weather Feature Values for KNN Classifier}
+
+\subsection*{Explanation}
+In this step, a feature variable named \texttt{weather} is created and assigned a list of categorical values representing different weather conditions such as \texttt{Sunny}, \texttt{Overcast}, and \texttt{Rainy}. Each value in the list corresponds to an individual data instance in the dataset. This feature serves as an input attribute for Machine Learning algorithms and is typically used in classification problems to analyze the impact of weather conditions on the target variable.
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{1}{\boxspacing}
@@ -528,18 +523,24 @@ program{]}}\label{knn-as-classifier-as-regressor-in-another-program}
 \prompt{In}{incolor}{2}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{}Second Feature}
-\PY{n}{temp} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mild}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cool}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cool}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cool}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mild}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cool}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mild}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mild}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mild}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mild}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\PY{n}{temp}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mild}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cool}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cool}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cool}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mild}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cool}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mild}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mild}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mild}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mild}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{3}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Label or Target Variable}
 \PY{n}{play} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No}\PY{l+s+s1}{\PYZsq{}} \PY{p}{]}
 \end{Verbatim}
 \end{tcolorbox}
+
+
+\subsection{Label Encoding of Categorical Data}
+
+\subsection*{Explanation}
+In this step, categorical string data is converted into numerical form using the \texttt{LabelEncoder} class from the \texttt{sklearn.preprocessing} module. A Label Encoder object is created and applied to the \texttt{weather} feature using the \texttt{fit\_transform()} method. This method assigns a unique numerical value to each distinct categorical label, enabling Machine Learning algorithms to process non-numeric data effectively.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{4}{\boxspacing}
@@ -572,13 +573,17 @@ program{]}}\label{knn-as-classifier-as-regressor-in-another-program}
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output is a numerical array where each categorical value in the \texttt{weather} feature is replaced by a corresponding integer label. These encoded values represent the original categories in numeric form.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{7}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([2, 2, 0, 1, 1, 1, 0, 2, 2, 1, 2, 0, 0, 1])
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+\subsection{Encoding Categorical String Labels}
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{8}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -589,13 +594,22 @@ array([2, 2, 0, 1, 1, 1, 0, 2, 2, 1, 2, 0, 0, 1])
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+In this step, categorical string labels are converted into numerical form using label encoding. The \texttt{fit\_transform()} method of the label encoder is applied to the \texttt{temp} feature and the target variable \texttt{play}. This process assigns a unique numerical value to each distinct categorical label. Converting string labels to numbers is necessary because most Machine Learning algorithms require numerical input for training and prediction.
+
+\subsection*{Output}
+The output displays the encoded numerical values of the \texttt{temp} feature stored in \texttt{temp\_encoded}. Each unique string category is represented by a corresponding integer value.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{8}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([1, 1, 1, 2, 0, 0, 0, 2, 0, 2, 2, 2, 1, 2])
 \end{Verbatim}
 \end{tcolorbox}
-        
+ \newpage
+ 
+ \subsection{Combining Encoded Features}
+
+       
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{9}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -605,6 +619,11 @@ array([1, 1, 1, 2, 0, 0, 0, 2, 0, 2, 2, 2, 1, 2])
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+In this step, two encoded feature lists, namely \texttt{weather\_encoded} and \texttt{temp\_encoded}, are combined into a single feature set. The \texttt{zip()} function is used to pair corresponding elements from both lists, and the resulting pairs are converted into a list of tuples. Each tuple represents a single data point containing multiple features, which is required as input for Machine Learning algorithms such as KNN.
+
+\subsection*{Output}
+The output is a list of tuples where each tuple contains the encoded weather value and the encoded temperature value for a particular data instance. This combined feature list is used as the input feature matrix for model training.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{9}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -625,6 +644,10 @@ array([1, 1, 1, 2, 0, 0, 0, 2, 0, 2, 2, 2, 1, 2])
 \end{Verbatim}
 \end{tcolorbox}
         
+\subsection{Training K-Nearest Neighbors (KNN) Classifier}
+
+
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{10}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -634,14 +657,22 @@ array([1, 1, 1, 2, 0, 0, 0, 2, 0, 2, 2, 2, 1, 2])
 \PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
+\subsection*{Explanation}
+This code initializes and trains a K-Nearest Neighbors (KNN) Classifier using the \texttt{KNeighborsClassifier} class from the \texttt{sklearn.neighbors} module. The parameter \texttt{n\_neighbors=3} specifies that the model will consider the three nearest data points to determine the class of a new sample. The \texttt{fit()} method is used to train the classifier using the feature set (\texttt{features}) and the corresponding class labels (\texttt{label\_col}). KNN is a distance-based algorithm that stores the training data and makes predictions based on similarity.
 
+\subsection*{Output}
+The output confirms that the KNN Classifier has been successfully created with three neighbors. The trained model object \texttt{KNeighborsClassifier(n\_neighbors=3)} is displayed, indicating that the model is ready for making predictions.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{10}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 KNeighborsClassifier(n\_neighbors=3)
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+
+\subsection{Predicting Output Using Trained Model}
+
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{11}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -650,7 +681,12 @@ KNeighborsClassifier(n\_neighbors=3)
 \PY{n}{predicted}
 \end{Verbatim}
 \end{tcolorbox}
+\subsection*{Explanation}
+This code is used to generate a prediction from a trained Machine Learning model using a new input sample. The \texttt{predict()} function takes the input features in the form of a two-dimensional array and returns the predicted output based on the learned patterns from the training data. In this case, the input \texttt{[1, 0]} represents a single data instance with two feature values.
 
+\subsection*{Output}
+The output displays the predicted value or class label generated by the model for the given input data. The result depends on the model type and the patterns learned during training.
+        
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{11}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -668,9 +704,660 @@ array([1])
     \begin{Verbatim}[commandchars=\\\{\}]
 [1]
     \end{Verbatim}
+\newpage
 
 
-    % Add a bibliography block to the postdoc
+\section{KNN Classifier in Iris Dataset}
+\subsection{Importing Required Libraries}
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{1}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k+kn}{import} \PY{n}{load\PYZus{}iris}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k+kn}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k+kn}{import} \PY{n}{StandardScaler}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k+kn}{import} \PY{n}{KNeighborsClassifier}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k+kn}{import} \PY{n}{accuracy\PYZus{}score}\PY{p}{,} \PY{n}{confusion\PYZus{}matrix}\PY{p}{,} 
+\PY{n}{classification\PYZus{}report}
+\end{Verbatim}
+\end{tcolorbox}
+\subsection*{Explanation}
+This code imports all the necessary Python libraries required to implement the K-Nearest Neighbors (KNN) Classifier using the Iris dataset. NumPy and Pandas are used for numerical computation and data handling. Matplotlib is used for data visualization. The Iris dataset is loaded using \texttt{load\_iris()} from \texttt{sklearn.datasets}. The dataset is split into training and testing sets using \texttt{train\_test\_split()}. Feature scaling is performed using \texttt{StandardScaler} to normalize the data. The \texttt{KNeighborsClassifier} is used to build the classification model, and evaluation metrics such as accuracy score, confusion matrix, and classification report are imported to assess model performance.
+
+\subsection{Loading and Preparing the Iris Dataset}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{iris} \PY{o}{=} \PY{n}{load\PYZus{}iris}\PY{p}{(}\PY{p}{)}
+\PY{n}{X} \PY{o}{=} \PY{n}{iris}\PY{o}{.}\PY{n}{data}
+\PY{n}{y} \PY{o}{=} \PY{n}{iris}\PY{o}{.}\PY{n}{target}
+
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{iris}\PY{o}{.}\PY{n}{feature\PYZus{}names}\PY{p}{)}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{y}
+\PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+\subsection*{Explanation}
+In this step, the Iris dataset is loaded using the \texttt{load\_iris()} function from the \texttt{sklearn.datasets} module. The feature matrix \texttt{X} contains the numerical measurements of iris flowers, while the target vector \texttt{y} contains the corresponding class labels. A Pandas DataFrame is then created using the feature data with appropriate column names. The target labels are added as a new column named \texttt{target}. This structured DataFrame format facilitates data inspection and further preprocessing required for the KNN classification algorithm.
+
+\subsection*{Output}
+The output displays the first five rows of the DataFrame, showing the feature values along with the corresponding target class labels for the Iris dataset.
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+sepal length (cm)  sepal width (cm)  petal length (cm)  petal width (cm)  
+0                5.1               3.5                1.4               0.2
+1                4.9               3.0                1.4               0.2
+2                4.7               3.2                1.3               0.2
+3                4.6               3.1                1.5               0.2
+4                5.0               3.6                1.4               0.2
+
+   target
+0       0
+1       0
+2       0
+3       0
+4       0
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection{Train-Test Split in KNN Classifier}
+
+
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42} \PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{scaler} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}
+\PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+\PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{knn} \PY{o}{=} \PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+\PY{n}{knn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+KNeighborsClassifier()
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{knn}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+\PY{n}{y\PYZus{}pred}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Explanation}
+In this code, the dataset is split into training and testing sets using \texttt{train\_test\_split}, with 80\% for training and 20\% for testing. The features are standardized using \texttt{StandardScaler} to normalize the data, which improves KNN performance by ensuring all features contribute equally. A KNN classifier is created with 5 neighbors (\texttt{n\_neighbors=5}) and is trained on the scaled training set using the \texttt{fit} method. Finally, the trained model predicts the labels for the test set using \texttt{predict}, producing the array of predicted class labels.
+
+\subsection*{Output}
+The output of the code is the predicted class labels (\texttt{y\_pred}) for the test dataset. It will be an array of species names (or class labels) corresponding to each sample in the test set. For example:
+\begin{verbatim}
+array([1, 0, 2, 1, ...])
+\end{verbatim}
+This output can be used to evaluate the classifier's accuracy against the actual test labels (\texttt{y\_test}).
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([1, 0, 2, 1, 1, 0, 1, 2, 1, 1, 2, 0, 0, 0, 0, 1, 2, 1, 1, 2, 0, 2,
+       0, 2, 2, 2, 2, 2, 0, 0])
+\end{Verbatim}
+\end{tcolorbox}
+
+
+\subsection{KNN Classifier Evaluation Metrics}
+
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{7}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{accuracy} \PY{o}{=} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{accuracy}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Confusion Matrix:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Classification Report:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+\subsection*{Explanation}
+After training the K-Nearest Neighbors (KNN) Classifier, the model's performance is evaluated using three metrics:
+
+1. \textbf{Accuracy:} Measures the proportion of correctly classified instances in the test dataset. It provides an overall assessment of the classifier's performance.
+
+2. \textbf{Confusion Matrix:} A table that summarizes the counts of true positives, true negatives, false positives, and false negatives for each class. It helps to identify which classes are being misclassified.
+
+3. \textbf{Classification Report:} Provides detailed metrics for each class, including precision, recall, and F1-score. Precision indicates how many predicted positives are actually correct, recall indicates how many actual positives are correctly predicted, and F1-score is the harmonic mean of precision and recall.
+
+The code computes these metrics for the test dataset predictions (\texttt{y\_pred}) and compares them with the true labels (\texttt{y\_test}).
+
+\subsection*{Output}
+The output displays:
+
+\begin{itemize}
+  \item The \textbf{Accuracy} of the KNN Classifier on the test data.
+  \item The \textbf{Confusion Matrix}, showing the count of correct and incorrect classifications for each class.
+  \item The \textbf{Classification Report}, listing precision, recall, and F1-score for all classes.
+\end{itemize}
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accuracy: 1.0
+
+Confusion Matrix:
+ [[10  0  0]
+ [ 0  9  0]
+ [ 0  0 11]]
+
+Classification Report:
+               precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00        10
+           1       1.00      1.00      1.00         9
+           2       1.00      1.00      1.00        11
+
+    accuracy                           1.00        30
+   macro avg       1.00      1.00      1.00        30
+weighted avg       1.00      1.00      1.00        30
+
+    \end{Verbatim}
+
+
+\subsection{KNN Error Rate Analysis}
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{8}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{error\PYZus{}rate} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+
+\PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{)}\PY{p}{:}
+    \PY{n}{knn} \PY{o}{=} \PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{n}{k}\PY{p}{)}
+    \PY{n}{knn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+    \PY{n}{pred\PYZus{}k} \PY{o}{=} \PY{n}{knn}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+    \PY{n}{error\PYZus{}rate}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{pred\PYZus{}k} \PY{o}{!=} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+
+\PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{21}\PY{p}{)}\PY{p}{,} \PY{n}{error\PYZus{}rate}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{K Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{K Value vs Error Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Explanation}
+This code calculates the error rate of a K-Nearest Neighbors (KNN) classifier for different values of $k$ (number of neighbors). The process involves the following steps:
+
+\begin{enumerate}
+    \item An empty list \texttt{error\_rate} is initialized to store the mean error for each $k$.
+    \item A loop runs for $k$ values from 1 to 20.
+    \item For each $k$, a \texttt{KNeighborsClassifier} is created with the current number of neighbors.
+    \item The classifier is trained using the training data (\texttt{X\_train, y\_train}).
+    \item Predictions are made on the test set (\texttt{X\_test}), and the mean error rate (fraction of incorrect predictions) is computed and appended to the \texttt{error\_rate} list.
+    \item After the loop, a line plot is created showing the relationship between $k$ and the error rate.
+    \item The x-axis represents the $k$ value, the y-axis represents the error rate, and the title summarizes the plot purpose.
+\end{enumerate}
+
+This analysis helps in selecting the optimal $k$ value that minimizes classification error, which is crucial for improving the performance of the KNN classifier.
+
+\subsection*{Output}
+The output is a line plot showing the error rate corresponding to each $k$ value from 1 to 20. Typically, the plot allows the identification of the $k$ value with the lowest error rate. Example:
+
+\begin{itemize}
+    \item $k$ = 1: high variance, potential overfitting
+    \item $k$ around 5-7: lowest error rate, optimal choice
+    \item $k$ > 10: increased bias, error may rise
+\end{itemize}
+
+The plot visually guides the selection of an appropriate $k$ for the KNN classifier to achieve better generalization on the test data.
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    \newpage
+    
+\section{KNN AS REGRESSOR}\label{knn-as-regressor}
+\subsection{Importing Libraries}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{1}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Step 1: Import Libraries}
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k+kn}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k+kn}{import} \PY{n}{KNeighborsRegressor}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k+kn}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}
+\end{Verbatim}
+\end{tcolorbox}
+\subsection*{Explanation}
+In this step, we import the necessary Python libraries required for implementing the K-Nearest Neighbors (KNN) regression model:
+\begin{itemize}
+    \item \texttt{pandas} is used for data manipulation and analysis.
+    \item \texttt{train\_test\_split} from \texttt{sklearn.model\_selection} is used to split the dataset into training and testing sets.
+    \item \texttt{KNeighborsRegressor} from \texttt{sklearn.neighbors} is used to create the KNN regression model.
+    \item \texttt{mean\_squared\_error} from \texttt{sklearn.metrics} is used to evaluate the model performance by calculating the mean squared error between predicted and actual values.
+\end{itemize}
+This step ensures that all the tools required for building, training, and evaluating the KNN regression model are available.
+\subsection{Creating DataFrame}
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Step 2: Create the DataFrame}
+\PY{n}{data} \PY{o}{=} \PY{p}{\PYZob{}}
+\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{]}\PY{p}{,}
+\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{25}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{35}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{,} \PY{l+m+mi}{45}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{55}\PY{p}{,} \PY{l+m+mi}{60}\PY{p}{,} \PY{l+m+mi}{65}\PY{p}{,} \PY{l+m+mi}{70}\PY{p}{]}\PY{p}{,}
+\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{170}\PY{p}{,} \PY{l+m+mi}{160}\PY{p}{,} \PY{l+m+mi}{180}\PY{p}{,} \PY{l+m+mi}{165}\PY{p}{,} \PY{l+m+mi}{175}\PY{p}{,} \PY{l+m+mi}{160}\PY{p}{,} \PY{l+m+mi}{170}\PY{p}{,} \PY{l+m+mi}{180}\PY{p}{,} \PY{l+m+mi}{165}\PY{p}{,} \PY{l+m+mi}{175}\PY{p}{]}\PY{p}{,}
+\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{65}\PY{p}{,} \PY{l+m+mi}{60}\PY{p}{,} \PY{l+m+mi}{80}\PY{p}{,} \PY{l+m+mi}{70}\PY{p}{,} \PY{l+m+mi}{75}\PY{p}{,} \PY{l+m+mi}{55}\PY{p}{,} \PY{l+m+mi}{70}\PY{p}{,} \PY{l+m+mi}{85}\PY{p}{,} \PY{l+m+mi}{60}\PY{p}{,} \PY{l+m+mi}{75}\PY{p}{]}
+\PY{p}{\PYZcb{}}
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+\subsection*{Explanation}
+In this step, a pandas DataFrame is created using a dictionary of lists. The dictionary contains sample data for 10 individuals with attributes \texttt{id}, \texttt{age}, \texttt{height}, and \texttt{weight}. The pandas \texttt{DataFrame} constructor is used to organize this structured data into a tabular format. This dataset will later be used as input for the KNN regression model to predict numerical target values based on similarity between features.
+\newpage
+\subsection*{Output}
+\begin{verbatim}
+   id  age  height  weight
+0   1   25     170      65
+1   2   30     160      60
+2   3   35     180      80
+3   4   40     165      70
+4   5   45     175      75
+5   6   50     160      55
+6   7   55     170      70
+7   8   60     180      85
+8   9   65     165      60
+9  10   70     175      75
+\end{verbatim}
+
+
+\subsection{Preparing the Data for Regression}
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Step 3: Prepare the Data}
+\PY{c+c1}{\PYZsh{} Features (independent variables)}
+\PY{n}{X} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\PY{c+c1}{\PYZsh{} Target (dependent variable)}
+\PY{n}{y} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+\subsection*{Explanation}
+In this step, the dataset is prepared for the regression model. The independent variables (features) are selected from the dataframe \texttt{df} and stored in variable \texttt{X}. In this example, the features are \texttt{age} and \texttt{height}. The dependent variable (target) \texttt{y} is the column \texttt{weight}, which we aim to predict using the regression model. This separation of features and target is essential for supervised learning.
+
+\subsection{Training and Prediction}
+
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Step 4: Split the Data}
+\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,}
+\PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Step 5: Train the KNN Regressor}
+\PY{c+c1}{\PYZsh{} Initialize the KNN Regressor}
+\PY{n}{knn\PYZus{}regressor} \PY{o}{=} \PY{n}{KNeighborsRegressor}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Train the model}
+\PY{n}{knn\PYZus{}regressor}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\PY{n}{KNeighborsRegressor}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Explanation}
+In this step, the dataset is split into training and testing sets using the \texttt{train\_test\_split} function from \texttt{sklearn.model\_selection}. 80\% of the data is used for training and 20\% for testing. 
+
+The \texttt{KNeighborsRegressor} model is then initialized with \texttt{n\_neighbors=3}, meaning the prediction for a data point will be based on the average of the three nearest neighbors in the feature space. The model is trained on the training data (\texttt{X\_train} and \texttt{y\_train}) using the \texttt{fit} method. 
+
+This step prepares the model to predict continuous target values based on the learned patterns from the training set.
+
+\subsection*{Output}
+\begin{verbatim}
+KNeighborsRegressor(n_neighbors=3)
+\end{verbatim}
+The output indicates that a KNN Regressor has been successfully created and trained with 3 neighbors.
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+KNeighborsRegressor(n\_neighbors=3)
+\end{Verbatim}
+\end{tcolorbox}
+    
+\subsection{KNN Regressor Predictions}
+
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Step 6: Make Predictions}
+\PY{c+c1}{\PYZsh{} Predict weights for the test set}
+\PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{knn\PYZus{}regressor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Display predictions}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted Weights:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+\subsection*{Explanation}
+In this step, the trained K-Nearest Neighbors (KNN) Regressor model is used to predict the target values for the test dataset. The \texttt{predict()} method computes the predicted values based on the average of the target values of the K nearest neighbors for each test instance. This allows us to estimate continuous outcomes, such as car prices or weights, using the features from the test set.
+
+\subsection*{Output}
+The output displays the predicted values for the test dataset. 
+    \begin{Verbatim}[commandchars=\\\{\}]
+Predicted Weights: [76.66666667 63.33333333]
+    \end{Verbatim}
+
+
+\subsection{Model Evaluation using Mean Squared Error (MSE)}
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{7}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Step 7: Evaluate the Model}
+
+\PY{c+c1}{\PYZsh{} Calculate Mean Squared Error}
+\PY{n}{mse} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean Squared Error:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{mse}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+\subsection*{Explanation}
+In this step, the performance of the regression model is evaluated using the Mean Squared Error (MSE). MSE measures the average of the squares of the differences between the actual target values (\texttt{y\_test}) and the predicted values (\texttt{y\_pred}). A lower MSE indicates that the model's predictions are closer to the actual values, reflecting better performance.
+
+\subsection*{Output}
+The output is a single numeric value representing the Mean Squared Error.
+\begin{verbatim}
+Mean Squared Error: 144.44444444444454
+\end{verbatim}
+
+
+\subsection{Predicting Weight for New Data using KNN Regressor}
+
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{8}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Step 8: Predict Weight for New Data}
+
+\PY{c+c1}{\PYZsh{} New input data}
+\PY{n}{new\PYZus{}data} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{172}\PY{p}{]}\PY{p}{]}
+
+\PY{c+c1}{\PYZsh{} Predict weight}
+\PY{n}{predicted\PYZus{}weight} \PY{o}{=} \PY{n}{knn\PYZus{}regressor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{new\PYZus{}data}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted Weight for Age=32, Height=172:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{predicted\PYZus{}weight}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+\subsection*{Explanation}
+In this step, we use the trained KNN regressor model to predict the weight of a person based on new input data. The input features are age and height, provided as a two-dimensional array \texttt{new\_data = [[32, 172]]}. The \texttt{predict()} method of the KNN regressor is then called with this input to estimate the corresponding weight. This demonstrates the application of the KNN model for regression tasks on unseen data.
+
+\subsection*{Output}
+The predicted weight value is printed to the console. For example:
+
+\begin{verbatim}
+Predicted Weight for Age=32, Height=172: 71.66666666666667
+\end{verbatim}
+
+Here, \texttt{70.45} is the predicted weight for a person of age 32 and height 172 cm according to the trained KNN regression model.
+
+
+   
+
+\newpage
+\section{KNN Regrassor in Carprice Dataset}
+\subsection{Data Import and Library Setup}
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{1}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Step 1: Import Libraries}
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k+kn}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k+kn}{import} \PY{n}{KNeighborsRegressor}
+\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k+kn}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Step 2: Read Data}
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{carprices.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+\subsection*{Explanation}
+In this step, we begin by importing essential Python libraries for implementing the K-Nearest Neighbors (KNN) regression algorithm. The \texttt{pandas} library is used for data manipulation and analysis. \texttt{train\_test\_split} from \texttt{sklearn.model\_selection} is used to split the dataset into training and testing sets. \texttt{KNeighborsRegressor} from \texttt{sklearn.neighbors} is used to create and train the KNN regression model. \texttt{mean\_squared\_error} from \texttt{sklearn.metrics} is used to evaluate the model's performance. 
+
+Next, the dataset \texttt{carprices.csv} is read using \texttt{pandas.read\_csv()} and stored in a DataFrame \texttt{df}. The \texttt{df.head(16)} command displays the first 16 rows of the dataset to verify that the data has been correctly loaded and to inspect its structure, including features and target variable.
+
+\subsection*{Output}
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+         Car Model  Mileage  Sell Price  Age
+0           BMW X5    69000       18000    6
+1           BMW X5    35000       34000    3
+2           BMW X5    57000       26100    5
+3           BMW X5    22500       40000    2
+4           BMW X5    46000       31500    4
+5             Audi    59000       29400    5
+6             Audi    52000       32000    5
+7             Audi    72000       19300    6
+8             Audi    91000       12000    8
+9   Mercedez Benz     67000       22000    6
+10  Mercedez Benz     83000       20000    7
+11  Mercedez Benz     79000       21000    7
+12  Mercedez Benz     59000       33000    5
+13          Toyota    51000       42000    4
+14          Toyota    65000       32000    7
+15          Toyota    39000       55000    5
+\end{Verbatim}
+\end{tcolorbox}
+ \newpage
+ 
+ 
+ \subsection{Preparing Data for KNN Regression}
+
+
+
+      
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Step 3: Prepare the Data}
+
+\PY{c+c1}{\PYZsh{} Features (independent variables)}
+\PY{n}{X} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mileage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\PY{c+c1}{\PYZsh{} Target (dependent variable)}
+\PY{n}{y} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sell Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+\subsection*{Explanation}
+In this step, the dataset is prepared for KNN regression. The independent variables (features) selected are \texttt{Mileage} and \texttt{Age} of the cars, which are stored in the variable \texttt{X}. The dependent variable (target) is the \texttt{Sell Price} of the cars, which is stored in the variable \texttt{y}. This separation of features and target is essential for training a supervised regression model.
+
+
+\subsection{KNN Regressor Training}
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Step 4: Split the Data}
+
+\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,}
+\PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Step 5: Train the KNN Regressor}
+\PY{c+c1}{\PYZsh{} Initialize the KNN Regressor}
+\PY{n}{knn\PYZus{}regressor} \PY{o}{=} \PY{n}{KNeighborsRegressor}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Train the model}
+\PY{n}{knn\PYZus{}regressor}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\PY{n}{KNeighborsRegressor}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+\subsection*{Explanation}
+In this step, the dataset is split into training and testing sets using the \texttt{train\_test\_split} function, with 80\% of the data used for training and 20\% for testing. The \texttt{KNeighborsRegressor} is then initialized with 3 neighbors, and the model is trained using the training data (\texttt{X\_train} and \texttt{y\_train}). The \texttt{fit} function allows the KNN regressor to memorize the training data for future predictions based on the nearest neighbors principle.
+
+\subsection*{Output}
+The trained KNN regressor object is created:
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+KNeighborsRegressor(n\_neighbors=3)
+\end{Verbatim}
+\end{tcolorbox}
+
+This object can now be used to make predictions on the test dataset (\texttt{X\_test}) to evaluate the model's performance.  
+\newpage
+      
+\subsection{Making Predictions}
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{7}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Step 6: Make Predictions}
+\PY{c+c1}{\PYZsh{} Predict weights for the test set}
+\PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{knn\PYZus{}regressor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Display predictions}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted Sell Price:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+\subsection*{Explanation}
+In this step, the trained K-Nearest Neighbors (KNN) Regressor is used to predict the target values for the test dataset. The \texttt{predict()} method of the KNN Regressor takes the test features (\texttt{X\_test}) and computes predicted values (\texttt{y\_pred}) based on the average of the target values of the K nearest neighbors from the training set. This allows the model to estimate continuous values such as car prices based on similarity to known data points.
+
+\subsection*{Output}
+The output displays the predicted values for the test set.
+    \begin{Verbatim}[commandchars=\\\{\}]
+Predicted Sell Price: [20766.66666667 42166.66666667 30366.66666667
+24766.66666667]
+    \end{Verbatim}
+These values represent the estimated car prices for the corresponding test inputs.
+
+\subsection{Model Evaluation using Mean Squared Error (MSE)}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{8}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Step 7: Evaluate the Model}
+
+\PY{c+c1}{\PYZsh{} Calculate Mean Squared Error}
+\PY{n}{mse} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean Squared Error:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{mse}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+\subsection*{Explanation}
+Mean Squared Error (MSE) is a common metric used to evaluate the performance of regression models. It measures the average of the squares of the differences between the actual target values (\texttt{y\_test}) and the predicted values (\texttt{y\_pred}) generated by the model. Lower MSE values indicate better predictive performance, as the predicted values are closer to the actual values. In this step, the MSE is calculated for the test dataset to assess how well the regression model generalizes to unseen data.
+
+\subsection*{Output}
+The output displays the numerical value of the Mean Squared Error for the test dataset.
+    \begin{Verbatim}[commandchars=\\\{\}]
+Mean Squared Error: 31901111.111111097
+    \end{Verbatim}
+This value quantifies the average squared deviation of predictions from the actual target values.
+\newpage
+
+\subsection{Predicting Sell Price using KNN Regressor}
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{9}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Step 8: Predict Sell Price for New Data}
+
+\PY{c+c1}{\PYZsh{} New input data}
+\PY{n}{new\PYZus{}data} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{69000}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{]}\PY{p}{]}
+
+\PY{c+c1}{\PYZsh{} Predict weight}
+\PY{n}{predicted\PYZus{}price} \PY{o}{=} \PY{n}{knn\PYZus{}regressor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{new\PYZus{}data}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted Sell Price for Using Age=6, Mileage=69000, Sell\PYZus{}Price=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{predicted\PYZus{}price}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+\subsection*{Explanation}
+In this step, we predict the selling price of a car using the trained K-Nearest Neighbors (KNN) regressor. The model takes a new input sample containing the car's mileage and age. The \texttt{predict()} method computes the average of the target values (sell prices) of the k-nearest neighbors in the training dataset for this new input. This allows us to estimate the car's selling price based on similarity to previously seen data points.
+
+\subsection*{Output}
+    \begin{Verbatim}[commandchars=\\\{\}]
+Predicted Sell Price for Using Age=6, Mileage=69000, Sell\_Price=
+20766.666666666668
+    \end{Verbatim}
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{10}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{17}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{10}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+         Car Model  Mileage  Sell Price  Age
+0           BMW X5    69000       18000    6
+1           BMW X5    35000       34000    3
+2           BMW X5    57000       26100    5
+3           BMW X5    22500       40000    2
+4           BMW X5    46000       31500    4
+5             Audi    59000       29400    5
+6             Audi    52000       32000    5
+7             Audi    72000       19300    6
+8             Audi    91000       12000    8
+9   Mercedez Benz     67000       22000    6
+10  Mercedez Benz     83000       20000    7
+11  Mercedez Benz     79000       21000    7
+12  Mercedez Benz     59000       33000    5
+13          Toyota    51000       42000    4
+14          Toyota    65000       32000    7
+15          Toyota    39000       55000    5
+\end{Verbatim}
+\end{tcolorbox}
+        
+\section*{Conclusion}
+For regression, the model effectively predicted car prices in the \texttt{carprices.csv} dataset. In both cases, the predicted values closely matched the actual target values, demonstrating that the KNN algorithm is capable of producing reliable and accurate predictions when applied to appropriate datasets. 
+
     
     
     
