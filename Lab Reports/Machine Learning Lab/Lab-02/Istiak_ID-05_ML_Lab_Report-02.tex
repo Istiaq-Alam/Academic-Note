@@ -484,17 +484,30 @@
 \pagenumbering{arabic}
     
 	
-\section*{Objective}
-The objective of this experiment is to familiarize with basic data handling and preprocessing techniques required before applying Machine Learning algorithms. This lab focuses on loading a dataset, inspecting its structure, handling categorical variables, and converting them into numerical representations suitable for model training.
+\section{Objective}
 
-\section*{Dataset Description}
-The dataset used in this experiment is \texttt{bank.csv}, which contains customer information related to a banking institution. The dataset includes demographic details, financial attributes, and campaign-related information. The target variable indicates whether a customer subscribed to a term deposit. The main objective is to load a CSV dataset into a Pandas DataFrame and inspect the initial records.
-    
+The objective of this Machine Learning lab is to understand and implement regression techniques using real-world datasets. This lab focuses on applying Simple Linear Regression and Multiple Linear Regression to analyze the relationship between independent variables and a target variable. The experiments aim to develop predictive models, interpret feature influence, and evaluate model performance using appropriate regression metrics.
+
+\section{Dataset Description}
+
+Three different datasets are used in this lab to demonstrate the application of regression algorithms.
+
+\subsection*{Dhaka Home Prices Dataset}
+The \texttt{dhaka homeprices.csv} dataset is used for implementing Simple Linear Regression. This dataset contains housing-related information from Dhaka city, where a single independent feature is used to predict house prices. The dataset helps illustrate how a dependent variable varies linearly with one explanatory variable.
+
+\subsection*{Insurance Dataset}
+The \texttt{insurance.csv} dataset is used for implementing Multiple Linear Regression. It contains multiple attributes related to insurance policyholders. The dataset is used to analyze how multiple independent variables collectively influence insurance-related outcomes.
+
+\subsection*{Car Data Dataset}
+The \texttt{cardata.csv} dataset is also used for Multiple Linear Regression. It includes attributes such as \texttt{speed}, \texttt{car\_age}, \texttt{experience}, and \texttt{risk}. These features are used to predict a target variable by learning the combined effect of multiple factors on the outcome.
+   
     
 
     
     \section{Linear Regression
-Implementation-01}\label{linear-regression-implementation-01}
+Implementation}\label{linear-regression-implementation}
+
+\subsection{Loading Dataset for Linear Regression}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{1}{\boxspacing}
@@ -520,6 +533,12 @@ Implementation-01}\label{linear-regression-implementation-01}
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+In this step, the required Python libraries are imported to support data handling, visualization, and model preparation. The Pandas library is used to load the dataset \texttt{dhaka homeprices.csv} into a DataFrame, which provides a structured tabular representation of the data. This dataset is intended for implementing Simple Linear Regression. Loading the dataset allows for initial inspection and verification of the data before applying further preprocessing and model training.
+
+\subsection*{Output}
+The output displays the complete contents of the \texttt{dhaka homeprices.csv} dataset in tabular form, showing all rows and columns stored in the DataFrame.
+
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{3}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -537,6 +556,11 @@ Implementation-01}\label{linear-regression-implementation-01}
 \end{Verbatim}
 \end{tcolorbox}
         
+\subsection{Data Visualization of Home Prices}
+
+
+
+        
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{4}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -551,6 +575,12 @@ Implementation-01}\label{linear-regression-implementation-01}
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+This step visualizes the relationship between house area and house price using a scatter plot. The \texttt{xlabel()} and \texttt{ylabel()} functions are used to label the x-axis and y-axis respectively. The \texttt{scatter()} function plots the data points representing house area versus price, where red plus-shaped markers are used for better visibility. The plot title provides contextual information about home prices in Dhaka city. This visualization helps in identifying the linear relationship between the independent and dependent variables.
+
+\subsection*{Output}
+The output displays a scatter plot showing house prices plotted against area in square feet. The graph indicates an increasing trend, suggesting a positive linear relationship between area and price.
+
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{4}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -562,6 +592,11 @@ Implementation-01}\label{linear-regression-implementation-01}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_1.png}
     \end{center}
     { \hspace*{\fill} \\}
+    
+\subsection{Splitting Dataset into Training and Testing Sets}
+
+
+    
     
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{5}{\boxspacing}
@@ -590,6 +625,12 @@ Implementation-01}\label{linear-regression-implementation-01}
 \PY{c+c1}{\PYZsh{}xtrain}
 \end{Verbatim}
 \end{tcolorbox}
+
+\subsection*{Explanation}
+In this step, the independent variable \texttt{area} is assigned to \texttt{x}, and the dependent variable \texttt{price} is assigned to \texttt{y}. The dataset is then divided into training and testing subsets using the \texttt{train\_test\_split()} function. Forty percent of the data is reserved for testing, while the remaining sixty percent is used for training the model. The \texttt{random\_state} parameter ensures reproducibility of the split. Displaying \texttt{xtest} allows verification of the test data samples.
+
+\subsection*{Output}
+The output displays the feature values of the testing dataset (\texttt{xtest}), which contains 40\% of the total data selected randomly from the original dataset.
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{7}{\boxspacing}
@@ -640,6 +681,8 @@ Name: price, dtype: int64
 \end{Verbatim}
 \end{tcolorbox}
         
+        
+\subsection{Training and Evaluating the Linear Regression Model}        
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{10}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -689,6 +732,12 @@ LinearRegression()
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+In this step, the Linear Regression model is imported from the \texttt{sklearn.linear\_model} module and initialized. The \texttt{fit()} method is used to train the model using the training data (\texttt{xtrain} and \texttt{ytrain}). After training, the model performance is evaluated using the \texttt{score()} method on the testing dataset (\texttt{xtest} and \texttt{ytest}). The \texttt{score()} function returns the coefficient of determination (R-squared value), which indicates how well the model explains the variance in the target variable.
+
+\subsection*{Output}
+The output displays the R-squared score of the Linear Regression model. A value closer to 1 indicates better predictive performance, while a lower value indicates weaker model accuracy.
+
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{14}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -696,6 +745,15 @@ LinearRegression()
 \end{Verbatim}
 \end{tcolorbox}
         
+
+\subsection{Prediction Using Trained Linear Regression Model}
+
+\subsection*{Explanation}
+After training the Linear Regression model, the \texttt{predict()} method is used to estimate the target variable for new input values. In this step, the model predicts the output for given feature values \texttt{3300}, \texttt{3200}, and \texttt{2850}. These values represent unseen data points, and the trained model applies the learned linear relationship to generate corresponding predictions.
+
+\subsection*{Output}
+The output consists of three numerical predicted values returned by the regression model. Each value represents the estimated target variable corresponding to the input values \texttt{3300}, \texttt{3200}, and \texttt{2850}, respectively.
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{15}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -761,6 +819,9 @@ array([48501.96432364])
         
     \section{Multiple Linear Regression
 Implementation-01}\label{multiple-linear-regression-implementation-01}
+\subsection{Loading Car Dataset for Multiple Linear Regression}
+
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{18}{\boxspacing}
@@ -784,6 +845,12 @@ Implementation-01}\label{multiple-linear-regression-implementation-01}
 \PY{n}{df}
 \end{Verbatim}
 \end{tcolorbox}
+
+\subsection*{Explanation}
+In this step, essential Python libraries are imported to support data handling and regression modeling. The Pandas library is used to load and manipulate the dataset, NumPy is utilized for numerical operations, and the \texttt{linear\_model} module from Scikit-learn provides tools for implementing regression algorithms. The \texttt{car data.csv} dataset is then loaded into a Pandas DataFrame using the \texttt{read\_csv()} function, preparing the data for Multiple Linear Regression analysis.
+
+\subsection*{Output}
+The output displays the complete contents of the \texttt{car data.csv} dataset in tabular form, showing all records and attributes such as \texttt{speed}, \texttt{car\_age}, \texttt{experience}, and \texttt{risk}.
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{20}{\boxspacing}
