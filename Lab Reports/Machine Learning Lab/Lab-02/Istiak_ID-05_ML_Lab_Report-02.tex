@@ -1283,6 +1283,10 @@ The output displays the dataset with the \texttt{sex} column converted to numeri
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+Categorical variables in the dataset, such as \texttt{smoker} and \texttt{region}, cannot be directly used in numerical computations for Machine Learning models. To handle this, the variables are first converted to the \texttt{category} data type and then encoded into numerical codes using \texttt{cat.codes}. This process assigns a unique integer to each category, allowing the regression model to process these features effectively.
+
+\subsection*{Output}
 
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
@@ -1293,18 +1297,19 @@ The output displays the dataset with the \texttt{sex} column converted to numeri
 1      18    1  33.770         1       0       2   1725.55230
 2      28    1  33.000         3       0       2   4449.46200
 3      33    1  22.705         0       0       1  21984.47061
-4      32    1  28.880         0       0       1   3866.85520
-{\ldots}   {\ldots}  {\ldots}     {\ldots}       {\ldots}     {\ldots}     {\ldots}          {\ldots}
+4      32    1  28.880         0       0       1   3866.85520 ... ... ...
 1333   50    1  30.970         3       0       1  10600.54830
 1334   18    0  31.920         0       0       0   2205.98080
 1335   18    0  36.850         0       0       2   1629.83350
 1336   21    0  25.800         0       0       3   2007.94500
 1337   61    0  29.070         0       1       1  29141.36030
-
 [1338 rows x 7 columns]
 \end{Verbatim}
 \end{tcolorbox}
         
+        
+\subsection{Checking Missing Values in the Dataset}
+ 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{44}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1313,6 +1318,12 @@ The output displays the dataset with the \texttt{sex} column converted to numeri
 \end{Verbatim}
 \end{tcolorbox}
 
+
+\subsection*{Explanation}
+The \texttt{df.isnull().sum()} function is used to identify missing values in the dataset. It checks each column for null (NaN) entries and returns the total number of missing values per column. This step is crucial in data preprocessing because missing values can negatively affect the performance of machine learning models. After checking for nulls, displaying \texttt{df} shows the entire dataset including all columns and rows.
+
+\subsection*{Output}
+The output lists the count of missing values for each column in the dataset. A zero indicates no missing values in that column. Following this, the full dataset is displayed, allowing inspection of data entries for correctness and completeness.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{44}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1332,7 +1343,9 @@ The output displays the dataset with the \texttt{sex} column converted to numeri
 [1338 rows x 7 columns]
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+
+\subsection{Feature Selection using DataFrame Drop}        
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{45}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1340,6 +1353,11 @@ The output displays the dataset with the \texttt{sex} column converted to numeri
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+The code \texttt{x = df.drop(columns='charges')} is used to create a new DataFrame \texttt{x} that contains all the features from the original dataset \texttt{df} except the target column \texttt{charges}. This step is performed in preparation for training a regression model, where \texttt{x} represents the independent variables (features) and \texttt{charges} represents the dependent variable (target).
+
+\subsection*{Output}
+The output is a DataFrame \texttt{x} containing all columns of the original dataset except \texttt{charges}. This DataFrame is ready to be used as the input for the regression model.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{46}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1366,7 +1384,10 @@ The output displays the dataset with the \texttt{sex} column converted to numeri
 [1338 rows x 6 columns]
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+\subsection{Selecting the Target Variable}
+
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{47}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1380,6 +1401,11 @@ The output displays the dataset with the \texttt{sex} column converted to numeri
 \PY{n}{y}
 \end{Verbatim}
 \end{tcolorbox}
+\subsection*{Explanation}
+In this step, the target variable for regression is selected. The code \texttt{y = df['charges']} assigns the \texttt{charges} column of the dataset \texttt{df} to the variable \texttt{y}. This variable represents the dependent variable that the model will learn to predict based on the input features.
+
+\subsection*{Output}
+The output is a Pandas Series containing all the values of the \texttt{charges} column from the dataset. It shows the target values that the regression model will use for training.
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{48}{\boxspacing}
@@ -1395,9 +1421,27 @@ The output displays the dataset with the \texttt{sex} column converted to numeri
 1335     1629.83350
 1336     2007.94500
 1337    29141.36030
+
 Name: charges, Length: 1338, dtype: float64
 \end{Verbatim}
 \end{tcolorbox}
+\newpage
+
+\subsection{Train-Test Split}
+
+\subsection*{Explanation}
+The \texttt{train\_test\_split} function from \texttt{sklearn.model\_selection} is used to divide the dataset into training and testing subsets. Here, \texttt{x} and \texttt{y} represent the independent and dependent variables, respectively. The parameter \texttt{test\_size = 0.3} specifies that 30\% of the data will be used for testing, while the remaining 70\% is used for training the model. \texttt{random\_state = 0} ensures reproducibility of the split by initializing the random number generator to a fixed state.
+
+\subsection*{Output}
+The output includes four arrays:
+\begin{itemize}
+    \item \texttt{xtrain} – Features for training the model.
+    \item \texttt{xtest} – Features for testing the model.
+    \item \texttt{ytrain} – Target values corresponding to \texttt{xtrain}.
+    \item \texttt{ytest} – Target values corresponding to \texttt{xtest}.
+\end{itemize}
+These subsets are used to train the regression model and evaluate its performance on unseen data.
+
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{49}{\boxspacing}
@@ -1405,6 +1449,8 @@ Name: charges, Length: 1338, dtype: float64
 \PY{n}{xtrain}\PY{p}{,} \PY{n}{xtest}\PY{p}{,} \PY{n}{ytrain}\PY{p}{,} \PY{n}{ytest} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
+
+\subsection{Simple Linear Regression Model Fitting}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{50}{\boxspacing}
@@ -1448,13 +1494,26 @@ LinearRegression()
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+The code implements a Simple Linear Regression model using the \texttt{LinearRegression} class from \texttt{sklearn.linear\_model}. The model object \texttt{lr} is created and trained using the \texttt{fit()} method with training features \texttt{xtrain} and target variable \texttt{ytrain}. After training, the model's intercept (the constant term in the regression equation) is stored in variable \texttt{c}. The intercept represents the predicted value of the target when all independent features are zero.
+
+\subsection*{Output}
+The output displays the intercept value of the trained regression model. For example, if \texttt{c = 50000}, it indicates that the base predicted value of the target variable is 50,000 when all independent variables are zero. This intercept is a key component of the regression equation: 
+\[
+\hat{y} = c + m \cdot x
+\]
+where \(m\) is the slope and \(x\) is the independent feature.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{54}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 np.float64(-11827.733141795718)
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+\subsection{Model Coefficients}
+
+
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{55}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1469,6 +1528,11 @@ np.float64(-11827.733141795718)
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+In Linear Regression, the coefficients represent the weight of each independent variable in predicting the dependent variable. The code \texttt{m = lr.coef\_} extracts the coefficients learned by the trained Linear Regression model \texttt{lr}. Each value in \texttt{m} corresponds to the change in the target variable for a one-unit change in the respective feature, assuming all other features remain constant.
+
+\subsection*{Output}
+The output is an array of numerical values representing the slope(s) of the regression line(s) for the feature(s) used in the model. For example, in Simple Linear Regression, this will be a single value, while in Multiple Linear Regression, there will be one value for each independent variable.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{56}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1476,10 +1540,10 @@ array([  256.5772619 ,   -49.39232379,   329.02381564,   479.08499828,
        23400.28378787,  -276.31576201])
 \end{Verbatim}
 \end{tcolorbox}
-        
-    \subsubsection{Here in the above output , six coefficients for our six
-training
-features}\label{here-in-the-above-output-six-coefficients-for-our-six-training-features}
+ 
+ 
+ 
+ \subsection{Prediction using Trained Linear Regression Model}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{57}{\boxspacing}
@@ -1495,6 +1559,19 @@ features}\label{here-in-the-above-output-six-coefficients-for-our-six-training-f
 \end{Verbatim}
 \end{tcolorbox}
 
+
+\subsection*{Explanation}
+After training the Linear Regression model, predictions are generated for the training dataset using the \texttt{predict()} method. The variable \texttt{y\_pred\_train} stores the predicted values of the dependent variable corresponding to the input features in \texttt{xtrain}. This step allows us to compare the predicted values with the actual target values to evaluate the model's performance on the training data.
+
+\subsection*{Output}
+The output displays an array of predicted values for each record in the training dataset. These values represent the model's estimation of the target variable based on the learned relationship from the training data. For example:
+
+\begin{verbatim}
+[ 45000.12, 56000.34, 62000.45, 48000.00, ... ]
+\end{verbatim}
+      
+\subsubsection*{Here in the above output , six coefficients for our six training features :-}
+\newpage
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{58}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1734,7 +1811,10 @@ array([ 2074.0645306 ,  8141.81393908, 18738.94132528,  7874.86959064,
        11139.64465512,  6085.25078246,  4411.74291809,  2376.39480234])
 \end{Verbatim}
 \end{tcolorbox}
-        
+\newpage
+       
+ \subsection{Scatter Plot of Actual vs Predicted Values}
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{59}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1748,11 +1828,22 @@ array([ 2074.0645306 ,  8141.81393908, 18738.94132528,  7874.86959064,
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+This code visualizes the relationship between actual and predicted values of the target variable using a scatter plot. The independent variable on the x-axis represents the actual values (\texttt{y\_train}), while the dependent variable on the y-axis represents the predicted values (\texttt{y\_pred\_train}) from the regression model. Color-coded axis labels are used to enhance readability. Such a plot helps in evaluating the model's performance: points closer to the diagonal line indicate better predictions.
+
+\subsection*{Output}
+The output is a scatter plot where each point represents a data instance. The x-axis shows the actual target values, and the y-axis shows the predicted values. Ideally, points lying close to the line \texttt{y = x} indicate accurate predictions. The plot provides a visual assessment of the regression model's accuracy.
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_64_0.png}
     \end{center}
     { \hspace*{\fill} \\}
-    
+ 
+ 
+ 
+ \subsection{Actual vs Predicted Charges Scatter Plot}
+
+
+   
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{60}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1772,12 +1863,20 @@ array([ 2074.0645306 ,  8141.81393908, 18738.94132528,  7874.86959064,
 \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
+\subsection*{Explanation}
+This code visualizes the performance of the regression model on the training dataset. Two sets of data points are plotted. The x-axis represents the actual charges, while the y-axis represents the predicted charges. A legend is added to differentiate between the actual and predicted values. The plot provides a visual understanding of how closely the predicted values follow the actual values.
+
+\subsection*{Output}
+The output is a scatter plot titled ``Actual vs Predicted Charges''.
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_65_0.png}
+    \adjustimage{max size={0.8\linewidth}{0.9\paperheight}}{output_65_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
     
+\newpage
+
+\subsection{R-squared Score Evaluation}
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{61}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1786,19 +1885,33 @@ array([ 2074.0645306 ,  8141.81393908, 18738.94132528,  7874.86959064,
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Explanation}
+The R-squared score is a statistical metric used to evaluate the performance of a regression model. It indicates the proportion of variance in the dependent variable that is predictable from the independent variable(s). The function \texttt{r2\_score} from \texttt{sklearn.metrics} compares the actual values (\texttt{ytrain}) with the predicted values (\texttt{y\_pred\_train}) to calculate this score. An R-squared value closer to 1 indicates a better fit of the model to the data.
+
+\subsection*{Output}
+The output is a single numerical value representing the R-squared score for the training dataset. For example, if the output is \texttt{0.85}, it means that 85\% of the variance in the dependent variable is explained by the model.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{61}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 0.7306840408360217
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+\subsection{Prediction using Trained Linear Regression Model}
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{62}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{y\PYZus{}pred\PYZus{}test} \PY{o}{=} \PY{n}{lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{xtest}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
+
+\subsection*{Explanation}
+The code \texttt{y\_pred\_test = lr.predict(xtest)} uses the trained Linear Regression model \texttt{lr} to predict the values of the dependent variable for the test dataset \texttt{xtest}. The \texttt{predict()} method applies the learned coefficients and intercept from the training phase to the new input data, generating predicted outputs. This step is essential for evaluating the model's performance on unseen data.
+
+\subsection{Actual vs Predicted Charges Plot}
+
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{63}{\boxspacing}
@@ -1819,12 +1932,36 @@ array([ 2074.0645306 ,  8141.81393908, 18738.94132528,  7874.86959064,
 \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
+\subsection*{Explanation}
+This code visualizes the performance of a regression model by comparing the actual values of the target variable (\texttt{ytest}) with the predicted values (\texttt{y\_pred\_test}). A scatter plot is used where each point represents an observation. The actual charges are represented on the x-axis, while the predicted charges are represented on the y-axis. The plot helps in assessing how closely the predictions match the actual data. The legend differentiates between actual and predicted values.
+
+\subsection*{Output}
+The output is a scatter plot where:
+\begin{itemize}
+    \item The x-axis shows the actual charges from the test dataset.
+    \item The y-axis shows the predicted charges obtained from the regression model.
+    \item Data points are marked with '*' for predicted values.
+    \item A legend is displayed to distinguish between actual and predicted charges.
+    \item The plot title is "Actual vs Predicted Charges".
+\end{itemize}
+
+The closer the points are to a straight diagonal line, the more accurate the model's predictions.
+
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_68_0.png}
+    \adjustimage{max size={1\linewidth}{1\paperheight}}{output_68_0.png}
     \end{center}
-    { \hspace*{\fill} \\}
-    
+  \newpage
+ 
+ 
+\subsection{R-squared Score Evaluation}
+
+\subsection*{Explanation}
+The \texttt{r2\_score} function from \texttt{sklearn.metrics} is used to evaluate the performance of a regression model. It measures how well the predicted values match the actual values. The R-squared value ranges from 0 to 1, where 1 indicates perfect prediction and 0 indicates that the model does not explain any variability in the target variable. In this code, \texttt{r2\_score(y\_test, y\_pred\_test)} calculates the R-squared score for the test dataset predictions, providing a quantitative assessment of the model's accuracy.
+
+\subsection*{Output}
+The output is a single numerical value between 0 and 1 representing the coefficient of determination (R-squared) for the regression model. Higher values indicate better model performance.
+   
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{64}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1838,6 +1975,19 @@ array([ 2074.0645306 ,  8141.81393908, 18738.94132528,  7874.86959064,
 0.7911113876316933
 \end{Verbatim}
 \end{tcolorbox}
+
+
+\subsection{Scatter Plot of Actual vs Predicted Values}
+
+\subsection*{Explanation}
+This code visualizes the performance of the regression model by plotting a scatter plot of actual values (\texttt{ytrain}) versus predicted values (\texttt{y\_pred\_train}) for the training dataset. 
+
+- Blue stars (\texttt{*}) represent the actual values from the training set.  
+- Red plus signs (\texttt{+}) represent the predicted values from the model.  
+
+The scatter plot helps in visually assessing how closely the predicted values match the actual values. A perfect prediction would align all red points exactly on top of the blue points. Labels, title, and legend are added for clarity.
+
+
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{65}{\boxspacing}
@@ -1856,11 +2006,22 @@ array([ 2074.0645306 ,  8141.81393908, 18738.94132528,  7874.86959064,
 \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
-
+\subsection*{Output}
+The output is a scatter plot with:
+- X-axis labeled as "Actual Charges"
+- Y-axis labeled as "Predicted Charges"
+- Blue stars representing \texttt{ytrain}
+- Red plus signs representing \texttt{y\_pred\_train}
+- A legend indicating which points correspond to actual and predicted values.
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_70_0.png}
     \end{center}
     { \hspace*{\fill} \\}
+
+
+\subsection{Scatter Plot of Actual vs Predicted Values}
+
+
     
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{66}{\boxspacing}
@@ -1879,7 +2040,11 @@ array([ 2074.0645306 ,  8141.81393908, 18738.94132528,  7874.86959064,
 \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
+\subsection*{Explanation}
+This code generates a scatter plot to visually compare the actual target values (\texttt{ytest}) with the predicted values (\texttt{y\_pred\_test}) from a regression model. The actual values are plotted using blue asterisks (\texttt{*}) and the predicted values using red plus signs (\texttt{+}). Labels for the x-axis and y-axis, as well as a plot title and legend, are added for clarity. This visualization helps to assess the model's performance by showing how closely the predicted values match the actual values.
 
+\subsection*{Output}
+The output is a scatter plot where points lying close to the diagonal line indicate accurate predictions. Blue asterisks represent the actual target values, and red plus signs represent the predicted values. The closer the red points are to the blue points along the diagonal, the better the model's performance.
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_71_0.png}
     \end{center}
