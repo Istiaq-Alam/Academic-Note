@@ -123,13 +123,12 @@ X & X & X & 1 & 0 \\ \hline
 \end{figure}
 
 \subsection*{Timing Diagram}
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=0.7\textwidth]{timing-1.png}
-%\caption{Timing Diagram of $(ABC + D)'$}
-%\end{figure}
-
-\textbf{Description:}  
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.7\textwidth]{timing-1.png}
+\caption{Timing Diagram of $(ABC + D)'$}
+\end{figure}
+  
 The timing diagram shows that the output remains HIGH except when all inputs A, B, and C are HIGH or when input D is HIGH.
 
 \subsection*{Observation}
@@ -150,26 +149,26 @@ Y = ((AB + CD)E)'
 A & B & C & D & E & Y \\ \hline
 0 & X & X & X & X & 1 \\
 1 & 1 & X & X & 1 & 0 \\
-X & X & 1 & 1 & 1 & 0 \\ \hline
-Others & & & & & 1 \\ \hline
+0 & X & 1 & 1 & 1 & 0 \\ 
+1 & X & X & X & 1 & 1 \\ \hline
 \end{tabular}
 \end{center}
 
 \subsection*{Schematic Image}
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.6\textwidth]{output-2.png}
+\includegraphics[width=0.9\textwidth]{output-2.png}
 \caption{CMOS Schematic of $((AB+CD)E)'$}
 \end{figure}
-
+\newpage
 \subsection*{Timing Diagram}
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=0.7\textwidth]{timing-1.png}
-%\caption{Timing Diagram of $(ABC + D)'$}
-%\end{figure}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.9\textwidth]{timing-2.png}
+\caption{Timing Diagram of $(ABC + D)'$}
+\end{figure}
 
-\textbf{Description:}  
+ 
 The output transitions LOW only when E is HIGH and either AB or CD is satisfied.
 
 \subsection*{Observation}
@@ -189,24 +188,30 @@ Y = ((AB + C)(A + B))'
 \begin{tabular}{|c|c|c|c|}
 \hline
 A & B & C & Y \\ \hline
-0 & 0 & X & 1 \\
-0 & 1 & 0 & 0 \\
-1 & 0 & 0 & 0 \\
-1 & 1 & X & 0 \\ \hline
+0 & 0 & 0 & 1 \\
+0 & 1 & 0 & 1 \\
+1 & 0 & 0 & 1 \\
+1 & 1 & 0 & 0 \\
+1 & 0 & 1 & 0 \\ 
+1 & 1 & 1 & 0 \\ \hline
 \end{tabular}
 \end{center}
-
+\newpage
 \subsection*{Schematic Image}
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.7\textwidth]{output-3.png}
+\includegraphics[width=0.8\textwidth]{output-3.png}
 \caption{CMOS Schematic of $((AB + C)(A + B))'$}
 \end{figure}
 
 \subsection*{Timing Diagram}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.8\textwidth]{timing-3.png}
+\caption{Timing Diagram of $(ABC + D)'$}
+\end{figure}
 
-
-\textbf{Description:}  
+ 
 The output remains HIGH only when the AND of the two expressions is false.
 
 \subsection*{Observation}
@@ -237,13 +242,17 @@ X & X & X & 0 & 0 \\
 \subsection*{Schematic Image}
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.7\textwidth]{output-4.png}
+\includegraphics[width=0.9\textwidth]{output-4.png}
 \caption{CMOS Schematic of $(A+B+C)D$}
 \end{figure}
-
+\newpage
 \subsection*{Timing Diagram}
-
-\textbf{Description:}  
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.9\textwidth]{timing-4.png}
+\caption{Timing Diagram of $(ABC + D)'$}
+\end{figure}
+ 
 The output is HIGH only when D is HIGH and at least one of A, B, or C is HIGH.
 
 \subsection*{Observation}
@@ -269,21 +278,23 @@ X & X & X & 0 & 1 \\
 X & 1 & 1 & 1 & 0 \\ \hline
 \end{tabular}
 \end{center}
-
+\newpage
 \subsection*{Schematic Image}
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.7\textwidth]{output-5.png}
+\includegraphics[width=0.8\textwidth]{output-5.png}
 \caption{CMOS Schematic of $((A+B)CD)'$}
 \end{figure}
 
 \subsection*{Timing Diagram}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.8\textwidth]{timing-5.png}
+\caption{Timing Diagram of $(ABC + D)'$}
+\end{figure}
 
-
-\textbf{Description:}  
+\subsection*{Observation} 
 The output goes LOW only when C and D are HIGH and either A or B is HIGH.
-
-\subsection*{Observation}
 Simulation results confirm correct inverted AND–OR CMOS implementation.
 
 % =====================================================
