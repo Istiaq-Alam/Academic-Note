@@ -27,7 +27,7 @@ body {
     min-width: 1024px;
     overflow-x: auto;
     font-family: "Times New Roman", serif;
-    margin: 10px;
+    margin: 0px;
     line-height: 1.6;
     background-color: #1e1e2e; /* CHANGED: was #afd1ff */
 }
@@ -62,26 +62,29 @@ header {
     color: #ffd369;
 }
 
-.navbar ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-    margin: 0;
-    padding: 0;
-    white-space: nowrap;
-}
+nav.navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
 
-.navbar a {
-    color: #ddd;
-    text-decoration: none;
-    font-weight: 500;
-    transition: 0.2s;
-}
+    nav.navbar ul li a {
+      display: block;
+      padding: 6px 14px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 6px;
+      transition: background 0.18s, color 0.18s;
+      white-space: nowrap;
+    }
 
-.navbar a:hover {
-    color: #ffd369;
-    text-shadow: 0 0 5px #ffd369;
-}
+    nav.navbar ul li a:hover {
+      background: rgba(75,139,255,0.15);
+      color: var(--blue);
+    }
 
 /* ─── WELCOME BANNER ─── */
     .welcome-banner {
