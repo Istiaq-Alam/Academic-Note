@@ -22,7 +22,11 @@ function getTodayColumnIndex() {
     const today = days[new Date().getDay()];
 
     let index = -1;
-    document.querySelectorAll("th").forEach((th, i) => {
+    // Scope query to the routine table to avoid scanning all <th> elements on the page
+    const routineTable = document.querySelector('table');
+    if (!routineTable) return index;
+
+    routineTable.querySelectorAll("th").forEach((th, i) => {
         if (th.textContent.trim() === today) {
             th.classList.add("today");
             index = i + 1; // nth-child is 1-based
@@ -35,10 +39,24 @@ function getTodayColumnIndex() {
 const todayColumnIndex = getTodayColumnIndex();
 
 /* ===============================
+   CACHE TODAY'S CLASS CELLS
+================================ */
+// Query and parse once so the interval does not re-query the DOM or
+// re-parse time strings on every tick.
+const todayCells = todayColumnIndex !== -1
+    ? Array.from(document.querySelectorAll(`tr td:nth-child(${todayColumnIndex})[data-start]`))
+        .map(cell => ({
+            el: cell,
+            start: toSeconds(cell.dataset.start),
+            end: toSeconds(cell.dataset.end),
+        }))
+    : [];
+
+/* ===============================
    ACTIVE CLASS + SINGLE COUNTDOWN
 ================================ */
 function updateClassStatus() {
-    if (todayColumnIndex === -1) return;
+    if (todayCells.length === 0) return;
 
     const now = new Date();
     const currentSeconds =
@@ -48,30 +66,26 @@ function updateClassStatus() {
 
     let alreadyActive = false; // 🔑 KEY FIX
 
-    document.querySelectorAll(`tr td:nth-child(${todayColumnIndex})[data-start]`)
-        .forEach(cell => {
+    todayCells.forEach(({ el: cell, start, end }) => {
 
-            const start = toSeconds(cell.dataset.start);
-            const end = toSeconds(cell.dataset.end);
+        // cleanup
+        cell.classList.remove('active-class');
+        const oldTimer = cell.querySelector('.countdown');
+        if (oldTimer) oldTimer.remove();
 
-            // cleanup
-            cell.classList.remove('active-class');
-            const oldTimer = cell.querySelector('.countdown');
-            if (oldTimer) oldTimer.remove();
+        // allow ONLY ONE active cell
+        if (!alreadyActive && currentSeconds >= start && currentSeconds <= end) {
+            alreadyActive = true;
 
-            // allow ONLY ONE active cell
-            if (!alreadyActive && currentSeconds >= start && currentSeconds <= end) {
-                alreadyActive = true;
+            cell.classList.add('active-class');
 
-                cell.classList.add('active-class');
-
-                const remaining = end - currentSeconds;
-                const timer = document.createElement('div');
-                timer.className = 'countdown';
-                timer.textContent = `Ends in ${formatTime(remaining)}`;
-                cell.appendChild(timer);
-            }
-        });
+            const remaining = end - currentSeconds;
+            const timer = document.createElement('div');
+            timer.className = 'countdown';
+            timer.textContent = `Ends in ${formatTime(remaining)}`;
+            cell.appendChild(timer);
+        }
+    });
 }
 
 /* ===============================
