@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NDUB CSE-20 Academic Notes</title>
+  <link rel="icon" href="Lab Reports/1. Cover/logo.png">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-dark:    #1e1e2e;
+      --bg-card:    #2a2a3d;
+      --accent:     #ffd369;
+      --blue:       #4b8bff;
+      --blue-dark:  #3a74d8;
+      --text-light: #eee;
+      --text-muted: #aaa;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: "Segoe UI", Tahoma, Geneva, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(30, 30, 46, 0.92);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-brand img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+    }
+
+    .nav-brand span {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    .nav-cta {
+      background: var(--blue);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--blue-dark);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 20px 60px;
+      background: radial-gradient(ellipse at 50% 30%, #1e2d5a 0%, var(--bg-dark) 70%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(75, 139, 255, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 211, 105, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(75, 139, 255, 0.15);
+      border: 1px solid rgba(75, 139, 255, 0.4);
+      color: var(--blue);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 5px 16px;
+      border-radius: 20px;
+      margin-bottom: 22px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 .highlight {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 620px;
+      margin-bottom: 36px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--text-light);
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      margin-top: 56px;
+      animation: bounce 2s infinite;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .hero-scroll .arrow {
+      font-size: 1.4rem;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* ── STATS ── */
+    .stats {
+      background: rgba(255, 255, 255, 0.03);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 40px 20px;
+    }
+
+    .stats-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      padding: 80px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800;
+      color: var(--text-light);
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 28px 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .card-icon {
+      font-size: 2.2rem;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      background: rgba(255, 255, 255, 0.02);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 80px 20px;
+    }
+
+    .about-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-inner h2 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .about-inner p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 14px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .university-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(75, 139, 255, 0.12);
+      border: 1px solid rgba(75, 139, 255, 0.3);
+      color: var(--blue);
+      padding: 8px 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-top: 10px;
+    }
+
+    /* ── CTA ── */
+    .cta {
+      padding: 90px 20px;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 0%, #1e2d5a 0%, var(--bg-dark) 65%);
+    }
+
+    .cta h2 {
+      font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .cta p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 36px;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg-card);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .stats-inner {
+        gap: 28px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-brand" href="landing.html">
+        <img src="Lab Reports/1. Cover/logo.png" alt="NDUB logo">
+        <span>🎓 CSE-20 Notes</span>
+      </a>
+      <a class="nav-cta" href="index.html">Open Notes →</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-badge">Notre Dame University Bangladesh</span>
+    <h1>
+      Your Academic Notes,<br>
+      <span class="highlight">All in One Place</span>
+    </h1>
+    <p class="hero-sub">
+      Lecture slides, lab reports, class routine, books, assignments, and
+      more — organised for NDUB CSE-20 students.
+    </p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="index.html">📂 Browse Notes</a>
+      <a class="btn-secondary" href="#features">Learn More</a>
+    </div>
+    <a class="hero-scroll" href="#features">
+      Scroll down
+      <span class="arrow">↓</span>
+    </a>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Courses Covered</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Lecture Notes & PDFs</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">20+</div>
+        <div class="stat-label">Lab Reports</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Free to Access</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section id="features" class="features">
+    <div class="section-title">
+      <h2>Everything You Need to Succeed</h2>
+      <p>A single hub for all your CSE academic resources</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">🗓️</div>
+        <h3>Class Routine</h3>
+        <p>
+          Live class schedule with real-time highlighting of your current
+          class and countdown timers so you never miss a lecture.
+        </p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📝</div>
+        <h3>Class Lecture Notes</h3>
+        <p>
+          Organised lecture notes for every subject — downloadable PDFs and
+          images, sorted by course and topic.
+        </p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔬</div>
+        <h3>Lab Reports</h3>
+        <p>
+          Complete lab report write-ups for programming, networking,
+          electronics, and more practical subjects.
+        </p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📚</div>
+        <h3>Books & References</h3>
+        <p>
+          Curated collection of textbooks and reference materials
+          recommended by the department.
+        </p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Presentations</h3>
+        <p>
+          Seminar and assignment presentation slides ready to view or
+          download at any time.
+        </p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🗂️</div>
+        <h3>Archive & Resources</h3>
+        <p>
+          Previous semester materials, past assignments, and extra
+          resources kept in one well-organised archive.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="about-inner">
+      <h2>Built by a Student, for Students</h2>
+      <p>
+        This site was created to make academic life at NDUB a little easier.
+        Instead of hunting through drives and group chats, find everything
+        you need right here — updated every semester.
+      </p>
+      <p>
+        All materials are for educational use only and belong to their
+        respective owners and course instructors.
+      </p>
+      <span class="university-tag">🏛️ Notre Dame University Bangladesh — CSE, Batch 20</span>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Ready to Study Smarter?</h2>
+    <p>Jump straight into the notes and get ahead of your coursework today.</p>
+    <a class="btn-primary" href="index.html">📂 Open the Notes Hub →</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      Made with ❤️ by
+      <a href="https://github.com/Istiaq-Alam" target="_blank" rel="noopener">Istiaq Alam</a>
+      &nbsp;·&nbsp; NDUB CSE-20 &nbsp;·&nbsp;
+      <a href="index.html">Notes Hub</a>
+    </p>
+  </footer>
+
+</body>
+</html>
