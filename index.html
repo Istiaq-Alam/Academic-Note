@@ -269,15 +269,15 @@ th {
 }
 
 @keyframes pulse {
-    0%   { box-shadow: 0 0 0 0 rgba(31, 79, 255, 0.6); }
-    70%  { box-shadow: 0 0 0 12px rgba(31, 79, 255, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(31, 79, 255, 0); }
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.6; }
 }
 
 .active-class {
     background: #eaf0ff !important;
     animation: pulse 2s infinite;
     border-radius: 8px;
+    outline: 2px solid rgba(31, 79, 255, 0.5);
 }
 
 td:hover {
@@ -290,6 +290,15 @@ td:hover {
     0%   { background-color: #fff7e6; }
     50%  { background-color: #ffe1a8; }
     100% { background-color: #fff7e6; }
+}
+
+/* Respect user's preference to reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
 .countdown {
