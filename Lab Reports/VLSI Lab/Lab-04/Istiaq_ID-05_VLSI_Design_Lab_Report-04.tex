@@ -21,7 +21,7 @@
 \pagestyle{fancy}
 \fancyhf{} 							% Header Middle
 \rhead{VLSI Design Lab}
-\lhead{Lab-02: Sequential Circuit}
+\lhead{Lab-04: FlipFlop Circuit}
 \rfoot{\thepage}
 
 \begin{document}
@@ -62,7 +62,7 @@
     \begin{flushleft}
         \textbf{\Huge \textcolor{blue}{Submitted to:}} \\
         \vspace{0.3cm}
-        \textbf{\Large Nfisa Tabassum,} \\
+        \textbf{\Large Nafisa Tabassum,} \\
         \vspace{0.3cm}
         \textbf{\Large Lecturer, Dept. of CSE} \\
         \vspace{0.3cm}
@@ -77,69 +77,64 @@
 \pagenumbering{arabic}
 
 \section*{\center Abstract}
-This laboratory experiment presents the design and CMOS implementation of given Boolean logic functions using the DSCH2 schematic simulation tool. The circuits were designed following standard CMOS pull-up and pull-down network principles. For each logic function, the corresponding truth table was derived and verified through schematic simulation. Timing diagrams were analyzed to observe the dynamic response and switching behavior of the circuits. The experimental results confirm that the implemented CMOS designs satisfy the expected logical and temporal characteristics of the given Boolean expressions.
+This laboratory experiment presents the design and CMOS implementation of a flip-flop circuit using the DSCH2 schematic simulation tool. A D Flip-Flop was realized using CMOS logic principles and its functional behavior was verified through truth table analysis and timing simulation. The circuit operation was analyzed with respect to clock-triggered input transitions, and the timing diagram was used to observe the synchronization between input and output signals. The experimental results confirm that the implemented flip-flop exhibits correct edge-triggered behavior and maintains stable data storage, consistent with theoretical expectations.
 
 
 \section{Introduction}
-The objective of this laboratory experiment is to implement given Boolean expressions using CMOS logic and verify their functional correctness through schematic design and timing simulation. The circuits were designed using the DSCH2 schematic editor, following standard CMOS pull-up and pull-down network principles. Truth tables and timing diagrams were analyzed to validate logical behavior.
-
+This laboratory experiment focuses on the design and implementation of a flip-flop circuit using CMOS logic in the DSCH2 environment. Flip-flops are fundamental sequential elements used for data storage and synchronization in digital systems. In this experiment, a D Flip-Flop was designed using CMOS-based logic gates, and its functionality was verified through truth table analysis and timing simulation. The behavior of the circuit was observed with respect to clock-triggered input transitions.
 
 \section{Objective}
-The objectives of this VLSI-Lab experiment are as follows:
+The objectives of this laboratory experiment are as follows:
 \begin{itemize}
-    \item To implement given Boolean expressions using CMOS logic design methodology.
-    \item To design schematic-level CMOS circuits using the DSCH2 tool.
-    \item To verify the logical correctness of the implemented circuits using truth tables.
-    \item To analyze timing diagrams to observe signal transitions and propagation behavior.
-    \item To develop a clear understanding of CMOS pull-up and pull-down network operation.
+    \item To design and implement a flip-flop circuit using CMOS logic.
+    \item To develop schematic-level circuits using the DSCH2 tool.
+    \item To derive and verify the truth table of the flip-flop from simulation.
+    \item To analyze timing diagrams to observe clock-triggered behavior.
+    \item To understand the operation of sequential circuits and data storage elements.
 \end{itemize}
 
-\section{Function 1: $(ABC + D)'$}
+\section{Function}
+The D Flip-Flop is a clock-controlled bistable device that transfers the input data (D) to the output (Q) on the active edge of the clock signal.
 
-\subsection*{Boolean Function}
 \[
-Y = (ABC + D)'
+Q_{next} = D
 \]
+
+The output changes only at the triggering edge of the clock, ensuring synchronized data storage.
+
 
 \subsection*{Truth Table}
 \begin{center}
-\begin{tabular}{|c|c|c|c|c|}
-\hline 
-A & B & C & D & Y \\ \hline
-0 & 0 & 0 & 0 & 1 \\
-0 & 0 & 1 & 0 & 1 \\
-0 & 1 & 0 & 0 & 1 \\
-0 & 1 & 1 & 0 & 1 \\
-1 & 1 & 1 & 0 & 0 \\
-X & X & X & 1 & 0 \\ \hline
+\begin{tabular}{|c|c|c|}
+\hline
+Clock & D & Q(next) \\ \hline
+$\uparrow$ & 0 & 0 \\
+$\uparrow$ & 1 & 1 \\
+No Edge & X & Q(previous) \\ \hline
 \end{tabular}
 \end{center}
 
 \subsection*{Schematic Image}
 \begin{figure}[!h]
 \centering
-%\includegraphics[width=0.5\textwidth]{output-1.png}
-\caption{CMOS Schematic of $(ABC + D)'$}
+\includegraphics[width=1\textwidth]{FlipFlop.png}
+\caption{CMOS Schematic of D Flip-Flop in DSCH2}
 \end{figure}
+
 
 \subsection*{Timing Diagram}
 \begin{figure}[!h]
 \centering
-%\includegraphics[width=0.7\textwidth]{timing-1.png}
-\caption{Timing Diagram of $(ABC + D)'$}
+\includegraphics[width=1\textwidth]{Timing Diagram.png}
+\caption{Timing Diagram of D Flip-Flop}
 \end{figure}
-  
-The timing diagram shows that the output remains HIGH except when all inputs A, B, and C are HIGH or when input D is HIGH.
 
-\subsection*{Observation}
-The simulation confirms that the output goes LOW when either $ABC=1$ or $D=1$. This matches the expected inverted logic behavior.
-
-
+The timing diagram shows that the output Q follows the input D only at the rising edge of the clock signal. Between clock edges, the output remains constant regardless of changes in the input. \\
+From the simulation results, it was observed that the D Flip-Flop changes its output state only at the rising edge of the clock signal. When the clock transitions from LOW to HIGH, the output Q takes the value of the input D. At all other times, the output remains unchanged, preserving the previously stored value. This behavior confirms the correct operation of the edge-triggered D Flip-Flop implemented using CMOS logic.
 
 % =====================================================
-
-
 \section{Conclusion}
-All CMOS circuits were successfully implemented and verified using DSCH2. Truth tables and timing diagrams matched theoretical expectations, confirming correct logical and temporal behavior of each function.
+The CMOS-based D Flip-Flop was successfully designed and simulated using the DSCH2 tool. The truth table and timing diagram verified that the circuit operates correctly as a clocked storage element. This experiment reinforces the understanding of sequential logic design and the role of flip-flops in digital systems.
+
 
 \end{document}
