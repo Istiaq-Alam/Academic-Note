@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAVEMAN MODE — Ultra-Compressed Claude</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #141414;
+    --border: #2a2a2a;
+    --accent: #e8ff00;
+    --accent2: #ff4500;
+    --text: #e8e8e0;
+    --muted: #666;
+    --code-bg: #1a1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px;
+    position: relative;
+    border-bottom: 2px solid var(--border);
+    background: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 39px,
+        #ffffff04 39px,
+        #ffffff04 40px
+      );
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse 60% 50% at 80% 50%, #e8ff0010, transparent);
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #000;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    padding: 4px 12px;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+    animation: fadein 0.4s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 14vw, 200px);
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    animation: slidein 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .hero-title span {
+    color: var(--accent);
+    display: block;
+  }
+
+  .hero-sub {
+    margin-top: 40px;
+    max-width: 520px;
+    font-size: 13px;
+    color: var(--muted);
+    border-left: 2px solid var(--accent);
+    padding-left: 20px;
+    animation: fadein 0.6s 0.2s ease both;
+  }
+
+  .hero-stat {
+    margin-top: 48px;
+    display: flex;
+    gap: 48px;
+    animation: fadein 0.6s 0.35s ease both;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 80px 60px;
+    border-bottom: 1px solid var(--border);
+    animation: fadein 0.5s ease both;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1;
+    margin-bottom: 32px;
+    letter-spacing: 0.02em;
+  }
+
+  /* TRIGGERS */
+  .triggers-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .trigger-chip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    transition: all 0.15s;
+    cursor: default;
+  }
+
+  .trigger-chip:hover {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* LEVELS TABLE */
+  .levels-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+
+  .levels-table th {
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .levels-table td {
+    padding: 16px;
+    border-bottom: 1px solid #1c1c1c;
+    vertical-align: top;
+    font-size: 13px;
+  }
+
+  .levels-table tr:last-child td { border-bottom: none; }
+
+  .levels-table tr:hover td {
+    background: var(--surface);
+  }
+
+  .level-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .badge-lite { background: #1a2a1a; color: #7dff7d; border: 1px solid #2a4a2a; }
+  .badge-full { background: #2a1a00; color: var(--accent); border: 1px solid #4a3a00; }
+  .badge-ultra { background: #1a0a0a; color: var(--accent2); border: 1px solid #4a1a1a; }
+  .badge-wenyan { background: #1a1a2a; color: #8888ff; border: 1px solid #2a2a4a; }
+
+  /* DEMO SECTION */
+  .demo-prompt {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    font-size: 14px;
+  }
+
+  .demo-prompt .label {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .demo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  @media (max-width: 700px) {
+    .demo-grid { grid-template-columns: 1fr; }
+    .hero { padding: 60px 24px; }
+    .section { padding: 60px 24px; }
+    .hero-stat { gap: 24px; }
+  }
+
+  .demo-card {
+    background: var(--surface);
+    padding: 24px;
+    position: relative;
+    border: 1px solid var(--border);
+    transition: border-color 0.15s;
+  }
+
+  .demo-card:hover { border-color: var(--accent); }
+
+  .demo-card .level-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+
+  .demo-card .response {
+    font-size: 12px;
+    color: #aaa;
+    font-family: 'Space Mono', monospace;
+    line-height: 1.6;
+  }
+
+  .demo-card code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    color: var(--accent);
+    font-size: 11px;
+    border: 1px solid #2a2a2a;
+  }
+
+  /* EXCEPTIONS */
+  .exception-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .exception-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: border-color 0.15s;
+  }
+
+  .exception-item:hover { border-color: var(--accent2); }
+
+  .exception-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .exception-text {
+    font-size: 12px;
+    color: #bbb;
+    line-height: 1.5;
+  }
+
+  .exception-text strong {
+    display: block;
+    color: var(--text);
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+
+  /* BOUNDS */
+  .bounds-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .bounds-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    font-size: 13px;
+    color: #bbb;
+    padding: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .bounds-list li::before {
+    content: '//';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  @media (max-width: 700px) { footer { padding: 40px 24px; } }
+
+  .footer-file {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadein { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes slidein { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: none; } }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">Claude Skill — Runtime Mode</div>
+  <h1 class="hero-title">
+    CAVE<span>MAN</span>
+  </h1>
+  <p class="hero-sub">
+    Ultra-compressed communication mode. Drops linguistic fluff. Preserves full technical accuracy. Code blocks and error messages always quoted exactly.
+  </p>
+  <div class="hero-stat">
+    <div class="stat">
+      <span class="stat-num">~75%</span>
+      <span class="stat-label">Token Reduction</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">6</span>
+      <span class="stat-label">Intensity Levels</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">∞</span>
+      <span class="stat-label">Session Persistence</span>
+    </div>
+  </div>
+</section>
+
+<!-- TRIGGERS -->
+<section class="section">
+  <div class="section-label">01 — Activation</div>
+  <h2>TRIGGER PHRASES</h2>
+  <div class="triggers-grid">
+    <div class="trigger-chip">caveman mode</div>
+    <div class="trigger-chip">talk like caveman</div>
+    <div class="trigger-chip">use caveman</div>
+    <div class="trigger-chip">less tokens</div>
+    <div class="trigger-chip">be brief</div>
+    <div class="trigger-chip">/caveman</div>
+  </div>
+</section>
+
+<!-- LEVELS -->
+<section class="section">
+  <div class="section-label">02 — Configuration</div>
+  <h2>INTENSITY LEVELS</h2>
+  <p style="color:var(--muted);font-size:12px;margin-bottom:28px;">Switch anytime with <code style="background:var(--code-bg);padding:2px 8px;color:var(--accent);border:1px solid var(--border);">/caveman &lt;level&gt;</code> — default is <strong style="color:var(--text);">full</strong></p>
+  <table class="levels-table">
+    <thead>
+      <tr>
+        <th>Level</th>
+        <th>Style</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="level-badge badge-lite">lite</span></td>
+        <td>No filler or hedging. Articles and full sentences kept. Professional but tight.</td>
+      </tr>
+      <tr>
+        <td><span class="level-badge badge-full">full</span></td>
+        <td>Drop articles. Fragments OK. Short synonyms. Classic caveman.</td>
+      </tr>
+      <tr>
+        <td><span class="level-badge badge-ultra">ultra</span></td>
+        <td>Abbreviate everything (DB/auth/fn/req/res). Arrows for causality. One word when one word enough.</td>
+      </tr>
+      <tr>
+        <td><span class="level-badge badge-wenyan">wenyan-lite</span></td>
+        <td>Semi-classical Chinese. Drop filler, keep grammar structure.</td>
+      </tr>
+      <tr>
+        <td><span class="level-badge badge-wenyan">wenyan-full</span></td>
+        <td>Full 文言文. ~80–90% character reduction. Classical particles and patterns.</td>
+      </tr>
+      <tr>
+        <td><span class="level-badge badge-wenyan">wenyan-ultra</span></td>
+        <td>Maximum classical Chinese compression. Extreme terseness.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- DEMO -->
+<section class="section">
+  <div class="section-label">03 — Example</div>
+  <h2>QUICK DEMO</h2>
+  <div class="demo-prompt">
+    <div class="label">Prompt</div>
+    "Why does my React component re-render?"
+  </div>
+  <div class="demo-grid">
+    <div class="demo-card">
+      <div class="level-name" style="color:#7dff7d;">LITE</div>
+      <div class="response">Your component re-renders because you create a new object reference each render. Wrap it in <code>useMemo</code>.</div>
+    </div>
+    <div class="demo-card">
+      <div class="level-name" style="color:var(--accent);">FULL</div>
+      <div class="response">New object ref each render. Inline object prop = new ref = re-render. Wrap in <code>useMemo</code>.</div>
+    </div>
+    <div class="demo-card">
+      <div class="level-name" style="color:var(--accent2);">ULTRA</div>
+      <div class="response">Inline obj prop → new ref → re-render. <code>useMemo</code>.</div>
+    </div>
+    <div class="demo-card">
+      <div class="level-name" style="color:#8888ff;">WENYAN-FULL</div>
+      <div class="response" style="font-size:14px;">物出新參照，致重繪。<code>useMemo</code>包之。</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXCEPTIONS -->
+<section class="section">
+  <div class="section-label">04 — Auto-Clarity</div>
+  <h2>EXCEPTIONS</h2>
+  <p style="color:var(--muted);font-size:12px;margin-bottom:28px;">Caveman mode pauses automatically. Resumes immediately after the critical part.</p>
+  <div class="exception-list">
+    <div class="exception-item">
+      <div class="exception-icon">⚠️</div>
+      <div class="exception-text">
+        <strong>Security Warnings</strong>
+        Full clarity required. No compression.
+      </div>
+    </div>
+    <div class="exception-item">
+      <div class="exception-icon">🔥</div>
+      <div class="exception-text">
+        <strong>Irreversible Actions</strong>
+        Destructive or permanent action confirmations get full language.
+      </div>
+    </div>
+    <div class="exception-item">
+      <div class="exception-icon">🔢</div>
+      <div class="exception-text">
+        <strong>Multi-step Sequences</strong>
+        When fragment order risks misread, clarity wins.
+      </div>
+    </div>
+    <div class="exception-item">
+      <div class="exception-icon">😕</div>
+      <div class="exception-text">
+        <strong>User Confusion</strong>
+        When user is confused, caveman pauses to be clear.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Setup -->
+<section class="section">
+  <div class="section-label">05 — Setup</div>
+  <h2>SETUP</h2>
+  <ul class="bounds-list">
+    <li>Download the SKILL.md file from the bottom of the page.</li>
+    <li>Open ClaudeAI.</li>
+    <li>On the Tab open <strong style="color:var(--text);">Customize -> Skills.</strong></li>
+    <li>Click (+) icon and upload the SKILL.md.</li>
+    <li>Done...!! Now use it by typing <strong style="color:var(--text);">"/caveman"</strong> or <strong style="color:var(--text);">"use caveman"</strong></li>
+  </ul>
+</section>
+
+<!-- BOUNDARIES -->
+<section class="section">
+  <div class="section-label">06 — Rules</div>
+  <h2>BOUNDARIES</h2>
+  <ul class="bounds-list">
+    <li>Code, commits, and PRs are always written normally regardless of level.</li>
+    <li>Level persists across the entire session until explicitly changed.</li>
+    <li>Say <strong style="color:var(--text);">"stop caveman"</strong> or <strong style="color:var(--text);">"normal mode"</strong> to exit caveman entirely.</li>
+  </ul>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>CAVEMAN MODE — Claude Skill</span>
+  <a href="SKILL.md"><span class="footer-file">Download SKILL.md</span></a>
+</footer>
+
+</body>
+</html>
