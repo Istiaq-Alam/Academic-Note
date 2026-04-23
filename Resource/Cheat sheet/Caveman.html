@@ -382,6 +382,94 @@
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border); }
+  /* ── RESPONSIVE ── */
+
+@media (max-width: 768px) {
+  /* Hero */
+  .hero {
+    padding: 48px 20px 60px;
+    min-height: auto;
+  }
+  .hero::before {
+    background: radial-gradient(ellipse 80% 40% at 50% 20%, #e8ff0010, transparent);
+  }
+  .hero-title {
+    font-size: clamp(72px, 22vw, 120px);
+  }
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 12px;
+    max-width: 100%;
+  }
+  .hero-stat {
+    margin-top: 36px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .stat-num  { font-size: 40px; }
+  .stat-label { font-size: 9px; }
+
+  /* Sections */
+  .section { padding: 48px 20px; }
+  h2 {
+    font-size: clamp(32px, 9vw, 48px);
+    margin-bottom: 24px;
+  }
+  .section-label {
+    font-size: 9px;
+    margin-bottom: 28px;
+  }
+
+  /* Triggers */
+  .triggers-grid { gap: 8px; }
+  .trigger-chip  { padding: 8px 14px; font-size: 12px; }
+
+  /* Levels table — stack rows, hide header */
+  .levels-table thead { display: none; }
+  .levels-table,
+  .levels-table tbody,
+  .levels-table tr,
+  .levels-table td  { display: block; width: 100%; }
+  .levels-table tr  {
+    border: 1px solid var(--border);
+    margin-bottom: 8px;
+    padding: 14px;
+    background: var(--surface);
+  }
+  .levels-table tr:hover td { background: transparent; }
+  .levels-table td  { padding: 4px 0; border: none; font-size: 12px; }
+  .levels-table td:first-child { margin-bottom: 8px; }
+
+  /* Demo */
+  .demo-prompt      { padding: 16px; font-size: 13px; }
+  .demo-grid        { grid-template-columns: 1fr; gap: 8px; }
+  .demo-card        { padding: 18px; }
+  .demo-card .level-name  { font-size: 24px; }
+  .demo-card .response    { font-size: 12px; }
+
+  /* Exceptions */
+  .exception-list { grid-template-columns: 1fr; gap: 10px; }
+  .exception-item { padding: 16px; }
+  .exception-icon { font-size: 20px; }
+
+  /* Bounds */
+  .bounds-list li { font-size: 12px; padding: 14px; gap: 12px; }
+
+  /* Footer */
+  footer {
+    padding: 28px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-title  { font-size: 64px; }
+  .hero-stat   { flex-direction: column; gap: 16px; }
+  .stat-num    { font-size: 36px; }
+}
 </style>
 </head>
 <body>
