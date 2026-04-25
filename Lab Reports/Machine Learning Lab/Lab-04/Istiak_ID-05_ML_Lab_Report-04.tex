@@ -1,0 +1,1578 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\newfontfamily\hackfont{Hack}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\renewcommand{\contentsname}{Table of Contents}
+
+\pagestyle{fancy}
+\fancyhf{} 							% Header Middle
+\rhead{Machine Learning Lab}
+\lhead{Lab-04: Label \& Onehot Encoding}
+\rfoot{\thepage}
+
+
+    \usepackage[breakable]{tcolorbox}
+    \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
+    
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % Keep aspect ratio if custom image width or height is specified
+    \setkeys{Gin}{keepaspectratio}
+    % Maintain compatibility with old templates. Remove in nbconvert 6.0
+    \let\Oldincludegraphics\includegraphics
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionFormat{nocaption}{}
+    \captionsetup{format=nocaption,aboveskip=0pt,belowskip=0pt}
+
+    \usepackage{float}
+    \floatplacement{figure}{H} % forces figures to be placed at the correct location
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+
+    \usepackage{iftex}
+    \ifPDFTeX
+        \usepackage[T1]{fontenc}
+        \IfFileExists{alphabeta.sty}{
+              \usepackage{alphabeta}
+          }{
+              \usepackage[mathletters]{ucs}
+              \usepackage[utf8x]{inputenc}
+          }
+    \else
+        \usepackage{fontspec}
+        \usepackage{unicode-math}
+    \fi
+
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics
+                         % to support a larger range
+    \makeatletter % fix for old versions of grffile with XeLaTeX
+    \@ifpackagelater{grffile}{2019/11/01}
+    {
+      % Do nothing on new versions
+    }
+    {
+      \def\Gread@@xetex#1{%
+        \IfFileExists{"\Gin@base".bb}%
+        {\Gread@eps{\Gin@base.bb}}%
+        {\Gread@@xetex@aux#1}%
+      }
+    }
+    \makeatother
+    \usepackage[Export]{adjustbox} % Used to constrain images to a maximum size
+    \adjustboxset{max size={0.9\linewidth}{0.9\paperheight}}
+
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    % The default LaTeX title has an obnoxious amount of whitespace. By default,
+    % titling removes some of it. It also provides customization options.
+    \usepackage{titling}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{array}     % table support for pandoc >= 2.11.3
+    \usepackage{calc}      % table minipage width calculation for pandoc >= 2.11.1
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{soul}      % strikethrough (\st) support for pandoc >= 3.0.0
+    \usepackage{mathrsfs}
+    
+
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % common color for the border for error outputs.
+    \definecolor{outerrorbackground}{HTML}{FFDFDF}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \makeatletter
+    \newsavebox\pandoc@box
+    \newcommand*\pandocbounded[1]{%
+      \sbox\pandoc@box{#1}%
+      % scaling factors for width and height
+      \Gscale@div\@tempa\textheight{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+      \Gscale@div\@tempb\linewidth{\wd\pandoc@box}%
+      % select the smaller of both
+      \ifdim\@tempb\p@<\@tempa\p@
+        \let\@tempa\@tempb
+      \fi
+      % scaling accordingly (\@tempa < 1)
+      \ifdim\@tempa\p@<\p@
+        \scalebox{\@tempa}{\usebox\pandoc@box}%
+      % scaling not needed, use as it is
+      \else
+        \usebox{\pandoc@box}%
+      \fi
+    }
+    \makeatother
+
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{Label-and-one-hot-encoding}
+    
+    
+    
+    
+    
+    
+    
+% Pygments definitions
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\@namedef{PY@tok@w}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.61,0.40,0.00}{##1}}}
+\@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kt}{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\@namedef{PY@tok@o}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@ow}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\@namedef{PY@tok@nb}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@nc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@nn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.80,0.25,0.22}{##1}}}
+\@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.46,0.46,0.00}{##1}}}
+\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.41,0.47,0.13}{##1}}}
+\@namedef{PY@tok@nt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sd}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.36,0.12}{##1}}}
+\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+\@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@gh}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\@namedef{PY@tok@gu}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\@namedef{PY@tok@gd}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.52,0.00}{##1}}}
+\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{0.89,0.00,0.00}{##1}}}
+\@namedef{PY@tok@ge}{\let\PY@it=\textit}
+\@namedef{PY@tok@gs}{\let\PY@bf=\textbf}
+\@namedef{PY@tok@ges}{\let\PY@bf=\textbf\let\PY@it=\textit}
+\@namedef{PY@tok@gp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+\@namedef{PY@tok@gt}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\@namedef{PY@tok@err}{\def\PY@bc##1{{\setlength{\fboxsep}{\string -\fboxrule}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}}
+\@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kd}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kr}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@bp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@fm}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@vc}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vg}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vi}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vm}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@sa}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sb}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sc}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@dl}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@s2}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sh}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@s1}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@mb}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mf}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mh}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % For linebreaks inside Verbatim environment from package fancyvrb.
+    \makeatletter
+        \newbox\Wrappedcontinuationbox
+        \newbox\Wrappedvisiblespacebox
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}}
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}}
+        \newcommand*\Wrappedcontinuationindent {3ex }
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox}
+        % Take advantage of the already applied Pygments mark-up to insert
+        % potential linebreaks for TeX processing.
+        %        {, <, #, %, $, ' and ": go to next line.
+        %        _, }, ^, &, >, - and ~: stay at end of broken line.
+        % Use of \textquotesingle for straight quote.
+        \newcommand*\Wrappedbreaksatspecials {%
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}%
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}%
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}%
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}%
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}%
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}%
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}%
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}%
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}%
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}%
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}%
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}%
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}%
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}%
+        }
+        % Some characters . , ; ? ! / are not pygmentized.
+        % This macro makes them "active" and they will insert potential linebreaks
+        \newcommand*\Wrappedbreaksatpunct {%
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}%
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}%
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}%
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}%
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}%
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}%
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}%
+            \catcode`\.\active
+            \catcode`\,\active
+            \catcode`\;\active
+            \catcode`\:\active
+            \catcode`\?\active
+            \catcode`\!\active
+            \catcode`\/\active
+            \lccode`\~`\~
+        }
+    \makeatother
+
+    \let\OriginalVerbatim=\Verbatim
+    \makeatletter
+    \renewcommand{\Verbatim}[1][1]{%
+        %\parskip\z@skip
+        \sbox\Wrappedcontinuationbox {\Wrappedcontinuationsymbol}%
+        \sbox\Wrappedvisiblespacebox {\FV@SetupFont\Wrappedvisiblespace}%
+        \def\FancyVerbFormatLine ##1{\hsize\linewidth
+            \vtop{\raggedright\hyphenpenalty\z@\exhyphenpenalty\z@
+                \doublehyphendemerits\z@\finalhyphendemerits\z@
+                \strut ##1\strut}%
+        }%
+        % If the linebreak is at a space, the latter will be displayed as visible
+        % space at end of first line, and a continuation symbol starts next line.
+        % Stretch/shrink are however usually zero for typewriter font.
+        \def\FV@Space {%
+            \nobreak\hskip\z@ plus\fontdimen3\font minus\fontdimen4\font
+            \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
+            {\kern\fontdimen2\font}%
+        }%
+
+        % Allow breaks at special characters using \PYG... macros.
+        \Wrappedbreaksatspecials
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active
+        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
+    }
+    \makeatother
+
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+
+    % prompt
+    \makeatletter
+    \newcommand{\boxspacing}{\kern\kvtcb@left@rule\kern\kvtcb@boxsep}
+    \makeatother
+    \newcommand{\prompt}[4]{
+        {\ttfamily\llap{{\color{#2}[#3]:\hspace{3pt}#4}}\vspace{-\baselineskip}}
+    }
+    
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+\begin{document}
+    
+    \begin{titlepage}					% Cover Start
+\begin{center}
+    \includegraphics[width=0.35\textwidth]{logo.png} \\
+    \vspace{0.5cm}
+    \textbf{\Huge \textcolor{cyan}{NOTRE DAME} \textcolor{cyan}{UNIVERSITY}} \\
+    \vspace{0.5cm}
+    \textbf{\Huge \textcolor{orange}{BANGLADESH}} \\
+    
+    \vspace{0.9cm}
+    \textbf{\Huge \underline{Machine Learning Lab Report-04}} \\
+    
+    \vspace{1.5em}
+    \begin{flushleft}
+    	\textbf{\Large Course Code: CSE4214} \\
+		\vspace{0.3cm}        
+        \textbf{\Large Course Title: Machine Learning Lab} \\
+        \vspace{0.3cm}
+        \textbf{\Large Lab Task Topic: Label and Onehot Encoding \& K-means Clustering} \\        
+    \end{flushleft}
+    
+    \vspace{1em}
+    \begin{flushleft}
+        \textbf{\Huge \textcolor{blue}{Submitted by:}} \\
+        \vspace{0.3cm}
+        \textbf{\Large Name: Istiak Alam} \\
+        \vspace{0.3cm}
+        \textbf{\Large ID: 0692230005101005} \\
+		\vspace{0.3cm}        
+        \textbf{\Large Batch: CSE-20} \\
+        \vspace{0.5cm}
+        \textbf{\Large Submission Date: }{\Large \textbf{\today}\par}
+    \end{flushleft}
+    \vfill
+    \begin{flushleft}
+        \textbf{\Huge \textcolor{blue}{Submitted to:}} \\
+        \vspace{0.3cm}
+        \textbf{\Large A. H. M. Saiful Islam} \\
+        \vspace{0.3cm}
+        \textbf{\Large Chairman, Dept of CSE} \\
+        \vspace{0.3cm}
+        \textbf{\Large Notre Dame University Bangladesh}
+    \end{flushleft}
+\end{center}
+\end{titlepage}		
+
+    
+\tableofcontents
+\thispagestyle{empty}
+\clearpage
+\pagenumbering{arabic}
+    
+
+\section{Objective}
+The objective of this experiment is to understand and implement data preprocessing and unsupervised learning techniques in Machine Learning. Specifically, this lab focuses on applying Label Encoding and One-Hot Encoding to transform categorical data into numerical format suitable for machine learning models. Additionally, the experiment aims to apply the K-Means Clustering algorithm to group similar data points based on feature similarity.
+
+The goals of this experiment are:
+\begin{itemize}
+    \item To learn how to convert categorical variables into numerical representations using Label Encoding and One-Hot Encoding.
+    \item To analyze the impact of encoding techniques on dataset structure.
+    \item To implement the K-Means clustering algorithm for unsupervised learning.
+    \item To identify natural groupings (clusters) in customer data based on features such as income and spending behavior.
+    \item To visualize clusters and interpret patterns in the dataset.
+\end{itemize}
+
+\section{Dataset Description}
+
+\subsection*{Encoding Dataset (encoding.csv)}
+The dataset \texttt{encoding.csv} is used to demonstrate categorical data preprocessing techniques. It contains one or more categorical features such as gender, country, or other non-numeric attributes.
+
+Key characteristics:
+\begin{itemize}
+    \item Contains categorical variables that cannot be directly used in machine learning models.
+    \item Used to apply Label Encoding, where each category is assigned a unique integer.
+    \item Used to apply One-Hot Encoding, where categorical values are converted into binary columns.
+    \item Helps in understanding how different encoding techniques affect data representation.
+\end{itemize}
+
+\subsection*{Mall Customer Dataset (Mall\_Customers.csv)}
+The dataset \texttt{Mall\_Customers.csv} is used for K-Means clustering. It contains customer information collected from a shopping mall.
+
+Typical attributes include:
+\begin{itemize}
+    \item \textbf{CustomerID}: Unique identifier for each customer
+    \item \textbf{Gender}: Male or Female
+    \item \textbf{Age}: Age of the customer
+    \item \textbf{Annual Income (k\$)}: Customer's yearly income
+    \item \textbf{Spending Score (1-100)}: Score assigned based on purchasing behavior
+\end{itemize}
+
+\newpage
+
+\section{Label and Onehot Encoding}
+
+\subsection{Label Encoding on Categorical Data}
+
+\subsection*{Explanation}
+In this step, the dataset \texttt{encoding.csv} is loaded using the \texttt{pandas} library. The dataset contains categorical features such as \texttt{Color} and \texttt{Size}, which cannot be directly used in machine learning models.
+
+To convert these categorical values into numerical form, \texttt{LabelEncoder} from \texttt{sklearn.preprocessing} is used. Label Encoding assigns a unique integer value to each category in a column.
+
+For example:
+\begin{itemize}
+    \item \texttt{Color}: Red, Green, Blue $\rightarrow$ 2, 1, 0 (mapping may vary)
+    \item \texttt{Size}: Small, Medium, Large $\rightarrow$ 2, 1, 0 (mapping may vary)
+\end{itemize}
+
+Two new columns are created:
+\begin{itemize}
+    \item \texttt{Color\_LabelEncoded}
+    \item \texttt{Size\_LabelEncoded}
+\end{itemize}
+
+These columns contain the numeric representation of the original categorical values.
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{1}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{pandas}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{pd}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{LabelEncoder}\PY{p}{,} \PY{n}{OneHotEncoder}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+ \PY{c+c1}{\PYZsh{} Load the dataset}
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{encoding.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Output}
+After applying Label Encoding, the dataset will include additional columns with encoded values. A output may look like:
+
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Apply Label Encoding (Converting categorical columns into numeric labels)}
+\PY{n}{label\PYZus{}enc} \PY{o}{=} \PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Color\PYZus{}LabelEncoded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{label\PYZus{}enc}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Size\PYZus{}LabelEncoded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{label\PYZus{}enc}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{n}\\{df}
+\end{Verbatim}
+\end{tcolorbox}
+
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+   ID  Color    Size  Price  Color\_LabelEncoded  Size\_LabelEncoded
+0   1    Red   Small   10.5                   2                  2
+1   2   Blue  Medium   15.0                   0                  1
+2   3  Green   Large   12.3                   1                  0
+3   4   Blue   Small   14.2                   0                  2
+4   5    Red   Large   13.1                   2                  0
+5   6  Green  Medium   16.8                   1                  1
+6   7    Red   Small   11.5                   2                  2
+7   8   Blue   Large   17.3                   0                  0
+8   9  Green  Medium   14.9                   1                  1
+9  10    Red   Large   15.7                   2                  0
+\end{Verbatim}
+\end{tcolorbox}
+        
+        
+\subsection{One-Hot Encoding of Categorical Features}
+
+\subsection*{Explanation}
+In this step, One-Hot Encoding is applied to the categorical columns \texttt{Color} and \texttt{Size} using the \texttt{pd.get\_dummies()} function from the pandas library. One-Hot Encoding converts each unique category value into a separate binary column. Instead of assigning a single numeric label (as in Label Encoding), it creates multiple columns, where:
+\begin{itemize}
+    \item Each column represents one category
+    \item Values are either 0 or 1
+    \item 1 indicates the presence of that category, and 0 indicates absence
+\end{itemize}
+
+The parameter \texttt{columns=['Color','Size']} specifies which columns to encode, and \texttt{prefix} is used to name the new columns clearly.
+
+As a result, the original \texttt{Color} and \texttt{Size} columns are removed and replaced with multiple new binary columns such as:
+\begin{itemize}
+    \item \texttt{Color\_Red, Color\_Green, Color\_Blue}
+    \item \texttt{Size\_Small, Size\_Medium, Size\_Large}
+\end{itemize} 
+
+      
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+ \PY{c+c1}{\PYZsh{} Apply One\PYZhy{}Hot Encoding (Creating binary columns)}
+\PY{n}{df\PYZus{}onehot} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{prefix}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+ \PY{n}{df\PYZus{}onehot}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Output}
+After applying One-Hot Encoding, the dataset will look like this:
+Each row now represents categorical information using binary (0/1) values, making the dataset suitable for machine learning models.
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+   ID  Price  Color\_LabelEncoded  Size\_LabelEncoded  Color\_Blue  Color\_Green  \textbackslash{}
+0   1   10.5                   2                  2       False        False
+1   2   15.0                   0                  1        True        False
+2   3   12.3                   1                  0       False         True
+3   4   14.2                   0                  2        True        False
+4   5   13.1                   2                  0       False        False
+5   6   16.8                   1                  1       False         True
+6   7   11.5                   2                  2       False        False
+7   8   17.3                   0                  0        True        False
+8   9   14.9                   1                  1       False         True
+9  10   15.7                   2                  0       False        False
+
+   Color\_Red  Size\_Large  Size\_Medium  Size\_Small
+0       True       False        False        True
+1      False       False         True       False
+2      False        True        False       False
+3      False       False        False        True
+4       True        True        False       False
+5      False       False         True       False
+6       True       False        False        True
+7      False        True        False       False
+8      False       False         True       False
+9       True        True        False       False
+\end{Verbatim}
+\end{tcolorbox}
+        
+        
+\subsection{Convert One-Hot Encoded Boolean Values to Integer}
+
+\subsection*{Explanation}
+After applying One-Hot Encoding, the dataset \texttt{df\_onehot} may contain boolean values (\texttt{True}/\texttt{False}). To make the dataset more suitable for machine learning models, these boolean values are converted into integer format using \texttt{astype(int)}.
+
+This converts:
+\begin{itemize}
+    \item \texttt{True} $\rightarrow$ 1
+    \item \texttt{False} $\rightarrow$ 0
+\end{itemize}
+
+As a result, all columns in \texttt{df\_onehot} become numeric.        
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Convert boolean values to integers}
+\PY{n}{df\PYZus{}onehot} \PY{o}{=} \PY{n}{df\PYZus{}onehot}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\\\PY{n}{df\PYZus{}onehot}
+\end{Verbatim}
+\end{tcolorbox}
+
+
+\subsection*{Output}
+After conversion, the dataset will contain only integer values (0 and 1).
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+   ID  Price  Color\_LabelEncoded  Size\_LabelEncoded  Color\_Blue  Color\_Green  \textbackslash{}
+0   1     10                   2                  2           0            0
+1   2     15                   0                  1           1            0
+2   3     12                   1                  0           0            1
+3   4     14                   0                  2           1            0
+4   5     13                   2                  0           0            0
+5   6     16                   1                  1           0            1
+6   7     11                   2                  2           0            0
+7   8     17                   0                  0           1            0
+8   9     14                   1                  1           0            1
+9  10     15                   2                  0           0            0
+
+   Color\_Red  Size\_Large  Size\_Medium  Size\_Small
+0          1           0            0           1
+1          0           0            1           0
+2          0           1            0           0
+3          0           0            0           1
+4          1           1            0           0
+5          0           0            1           0
+6          1           0            0           1
+7          0           1            0           0
+8          0           0            1           0
+9          1           1            0           0
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection{Displaying One-Hot Encoded Data}
+
+\subsection*{Explanation}
+In this step, the one-hot encoded dataset \texttt{df\_onehot} is displayed using two methods. The \texttt{print()} function outputs the dataset in plain text format in the console. The \texttt{display()} function from \texttt{IPython.display} provides a more structured and readable tabular format, especially useful in Jupyter Notebook environments.
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{7}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df\PYZus{}onehot}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+   ID  Price  Color\_LabelEncoded  Size\_LabelEncoded  Color\_Blue  Color\_Green  \textbackslash{}
+0   1     10                   2                  2           0            0
+1   2     15                   0                  1           1            0
+2   3     12                   1                  0           0            1
+3   4     14                   0                  2           1            0
+4   5     13                   2                  0           0            0
+5   6     16                   1                  1           0            1
+6   7     11                   2                  2           0            0
+7   8     17                   0                  0           1            0
+8   9     14                   1                  1           0            1
+9  10     15                   2                  0           0            0
+
+   Color\_Red  Size\_Large  Size\_Medium  Size\_Small
+0          1           0            0           1
+1          0           0            1           0
+2          0           1            0           0
+3          0           0            0           1
+4          1           1            0           0
+5          0           0            1           0
+6          1           0            0           1
+7          0           1            0           0
+8          0           0            1           0
+9          1           1            0           0
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{8}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{display}
+\PY{n}{display}\PY{p}{(}\PY{n}{df\PYZus{}onehot}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+ \subsection*{Output}
+The output shows the transformed dataset where categorical columns are converted into multiple binary (0/1) columns. The \texttt{display()} output presents the same data in a cleaner table format for better visualization.
+    \begin{Verbatim}[commandchars=\\\{\}]
+   ID  Price  Color\_LabelEncoded  Size\_LabelEncoded  Color\_Blue  Color\_Green  \textbackslash{}
+0   1     10                   2                  2           0            0   
+1   2     15                   0                  1           1            0   
+2   3     12                   1                  0           0            1   
+3   4     14                   0                  2           1            0   
+4   5     13                   2                  0           0            0   
+5   6     16                   1                  1           0            1   
+6   7     11                   2                  2           0            0   
+7   8     17                   0                  0           1            0   
+8   9     14                   1                  1           0            1   
+9  10     15                   2                  0           0            0   
+
+   Color\_Red  Size\_Large  Size\_Medium  Size\_Small  
+0          1           0            0           1  
+1          0           0            1           0  
+2          0           1            0           0  
+3          0           0            0           1  
+4          1           1            0           0  
+5          0           0            1           0  
+6          1           0            0           1  
+7          0           1            0           0  
+8          0           0            1           0  
+9          1           1            0           0  
+    \end{Verbatim}
+
+    
+
+\section{K-means-clustering}\label{k-means-clustering}
+\lhead{Lab-04: K-means Clustering}
+\subsection{Dataset Loading}
+
+\subsection*{Explanation}
+In this step, the required libraries such as \texttt{pandas}, \texttt{numpy}, \texttt{seaborn}, and \texttt{matplotlib} are imported for data handling and visualization. The dataset \texttt{Mall\_Customers.csv} is then loaded into a DataFrame using \texttt{pd.read\_csv()}.
+
+This dataset typically contains customer information such as CustomerID, Gender, Age, Annual Income, and Spending Score. Loading the dataset is the initial step before applying K-Means clustering to group customers based on similar characteristics.
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{1}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{pandas}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{pd}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{numpy}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{np}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{seaborn}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{plt}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mall\PYZus{}Customers.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Output}
+After executing \texttt{df}, the dataset is displayed in tabular form. 
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+     CustomerID  Gender  Age  Annual Income (k\$)  Spending Score (1-100)
+0             1    Male   19                  15                      39
+1             2    Male   21                  15                      81
+2             3  Female   20                  16                       6
+3             4  Female   23                  16                      77
+4             5  Female   31                  17                      40
+..          {\ldots}     {\ldots}  {\ldots}                 {\ldots}                     {\ldots}
+195         196  Female   35                 120                      79
+196         197  Female   45                 126                      28
+197         198    Male   32                 126                      74
+198         199    Male   32                 137                      18
+199         200    Male   30                 137                      83
+
+[200 rows x 5 columns]
+\end{Verbatim}
+\end{tcolorbox}
+
+
+\subsection{Renaming Dataset Columns}
+\subsection*{Explanation}
+In this step, the \texttt{rename()} function is used to modify column names of the dataset for simplicity and consistency. The original column names such as \texttt{Gender}, \texttt{Age}, \texttt{Annual Income (k\$)}, and \texttt{Spending Score (1-100)} are replaced with shorter and cleaner names: \texttt{gender}, \texttt{age}, \texttt{income}, and \texttt{score}. The parameter \texttt{inplace=True} ensures that the changes are applied directly to the original DataFrame.
+
+  
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{rename} \PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gender}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gender}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Annual Income (k\PYZdl{})}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spending Score (1\PYZhy{}100)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}} \PY{p}{\PYZcb{}}\PY{p}{,}\PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}
+\end{Verbatim}
+\end{tcolorbox}
+
+
+\subsection*{Output}
+After renaming, the dataset will have updated column names. A sample output may look like:
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+     CustomerID  gender  age  income  score
+0             1    Male   19      15     39
+1             2    Male   21      15     81
+2             3  Female   20      16      6
+3             4  Female   23      16     77
+4             5  Female   31      17     40
+..          {\ldots}     {\ldots}  {\ldots}     {\ldots}    {\ldots}
+195         196  Female   35     120     79
+196         197  Female   45     126     28
+197         198    Male   32     126     74
+198         199    Male   32     137     18
+199         200    Male   30     137     83
+
+[200 rows x 5 columns]
+\end{Verbatim}
+\end{tcolorbox}
+\newpage
+
+\subsection{Checking Dataset Shape}
+\subsection*{Explanation}
+The \texttt{df.shape} function is used to determine the dimensions of the dataset. It returns a tuple containing the number of rows and columns in the DataFrame. This helps to quickly understand the size of the dataset.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Output}
+The output is shown in the form of a tuple:
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+(200, 5)
+\end{Verbatim}
+\end{tcolorbox}
+
+
+\subsection{Missing Value Check and Statistical Summary}
+
+\subsection*{Explanation}
+In this step, the dataset is analyzed to check for missing values and to generate a statistical summary. The function \texttt{df.isnull().values.any()} is used to determine whether any missing (null) values exist in the dataset. It returns \texttt{True} if at least one missing value is found, otherwise \texttt{False}.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{7}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Output}
+The output of \texttt{df.isnull().values.any()} will be either:
+         
+
+Next, \texttt{df.describe()} is used to generate descriptive statistics of all numerical columns. This includes count, mean, standard deviation, minimum value, maximum value, and quartiles (25\%, 50\%, and 75\%). This helps in understanding the distribution and spread of the dataset.
+
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{7}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+np.False\_
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{8}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{8}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+       CustomerID         age      income       score
+count  200.000000  200.000000  200.000000  200.000000
+mean   100.500000   38.850000   60.560000   50.200000
+std     57.879185   13.969007   26.264721   25.823522
+min      1.000000   18.000000   15.000000    1.000000
+25\%     50.750000   28.750000   41.500000   34.750000
+50\%    100.500000   36.000000   61.500000   50.000000
+75\%    150.250000   49.000000   78.000000   73.000000
+max    200.000000   70.000000  137.000000   99.000000
+\end{Verbatim}
+\end{tcolorbox}
+        
+        
+\newpage
+\subsection{Pairplot Visualization using Seaborn}
+
+\subsection*{Explanation}
+The \texttt{seaborn.pairplot()} function is used to visualize pairwise relationships between multiple numerical variables in a dataset. In this case, the selected features are \texttt{age}, \texttt{income}, and \texttt{score}.
+
+This function automatically generates:
+\begin{itemize}
+    \item Scatter plots for each pair of variables.
+    \item Histograms (or KDE plots) along the diagonal to show distribution of each feature.
+\end{itemize}
+
+It helps in understanding correlations, patterns, and distributions among features, which is useful for exploratory data analysis (EDA).
+
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{9}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{seaborn}\PY{o}{.}\PY{n}{pairplot} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Output}
+The output is a grid of plots where, Each off-diagonal plot shows the relationship between two variables (e.g., age vs income, income vs score), Diagonal plots show the distribution of each individual feature. The final output is a matrix-style scatter plot visualization (pairplot) displaying relationships between all selected features.
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{9}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<seaborn.axisgrid.PairGrid at 0x7f6173154290>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.8\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    
+ 
+ 
+\subsection{K-Means Clustering Implementation}
+
+\subsection*{Explanation}
+In this step, the K-Means clustering algorithm is applied using the \texttt{sklearn.cluster} library. The dataset is grouped based on two features: \texttt{score} and \texttt{income}. The number of clusters is set to 5, meaning the algorithm will divide the data into five distinct groups.
+
+The K-Means algorithm works by:
+\begin{itemize}
+    \item Randomly initializing 5 cluster centroids.
+    \item Assigning each data point to the nearest centroid.
+    \item Updating centroids based on the mean of assigned points.
+    \item Repeating the process until convergence.
+\end{itemize}
+
+After fitting the model, the cluster centroids are extracted using \texttt{cluster\_centers\_}, which represent the central point of each cluster.
+   
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{10}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{cluster}
+\PY{n}{kmeans} \PY{o}{=} \PY{n}{cluster}\PY{o}{.}\PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{11}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{kmeans} \PY{o}{=} \PY{n}{kmeans}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{12}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}Finding out the centroids}
+\PY{n}{kmeans}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+
+\subsection*{Output}
+The output of this step is the coordinates of the 5 cluster centroids in the feature space \texttt{(score, income)}. Each row represents the center of a cluster, showing the average \texttt{score} and \texttt{income} values for that group.
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{12}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[82.12820513, 86.53846154],
+       [49.51851852, 55.2962963 ],
+       [79.36363636, 25.72727273],
+       [17.11428571, 88.2       ],
+       [20.91304348, 26.30434783]])
+\end{Verbatim}
+\end{tcolorbox}
+ 
+\subsection{K-Means Model Training and Cluster Centers Extraction}
+
+\subsection*{Explanation}
+In this step, the K-Means clustering algorithm is applied to the dataset using two selected features: \texttt{income} and \texttt{score}. The model is trained using the \texttt{fit()} function, which groups the data into clusters based on similarity between data points.
+
+After training the model, the \texttt{cluster\_centers\_} attribute is used to retrieve the centroid (center point) of each cluster. These centroids represent the average position of all data points within each cluster and help in understanding the grouping pattern of the dataset.
+
+       
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{13}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{kmeans} \PY{o}{=} \PY{n}{kmeans}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{14}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{kmeans}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+
+\subsection*{Output}
+The output of \texttt{kmeans.cluster\_centers\_} is a set of numerical values representing the center of each cluster in the feature space:
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{14}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[26.30434783, 20.91304348],
+       [86.53846154, 82.12820513],
+       [88.2       , 17.11428571],
+       [25.72727273, 79.36363636],
+       [55.2962963 , 49.51851852]])
+\end{Verbatim}
+\end{tcolorbox}
+        
+
+\subsection{Assigning K-Means Cluster Labels to Dataset}
+
+\subsection*{Explanation}
+In this step, the cluster labels generated by the K-Means algorithm are assigned to the original dataset. The attribute \texttt{kmeans.labels\_} contains the cluster index for each data point after training the model.
+
+These labels represent the cluster group to which each record belongs. By storing them in a new column named \texttt{income\_clusters}, we can easily analyze and visualize the segmented groups within the dataset.
+
+This step is essential for interpreting the clustering results in a structured tabular format.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{15}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income\PYZus{}clusters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{kmeans}\PY{o}{.}\PY{n}{labels\PYZus{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{16}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}
+\end{Verbatim}
+\end{tcolorbox}
+
+
+\subsection*{Output}
+After executing the code, a new column \texttt{income\_clusters} is added to the dataset. Each row now includes a cluster label (e.g., 0, 1, 2, etc.), indicating the assigned cluster group.
+
+The updated dataset will look like:
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{16}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+     CustomerID  gender  age  income  score  income\_clusters
+0             1    Male   19      15     39                0
+1             2    Male   21      15     81                3
+2             3  Female   20      16      6                0
+3             4  Female   23      16     77                3
+4             5  Female   31      17     40                0
+..          {\ldots}     {\ldots}  {\ldots}     {\ldots}    {\ldots}              {\ldots}
+195         196  Female   35     120     79                1
+196         197  Female   45     126     28                2
+197         198    Male   32     126     74                1
+198         199    Male   32     137     18                2
+199         200    Male   30     137     83                1
+
+[200 rows x 6 columns]
+\end{Verbatim}
+\end{tcolorbox}
+        
+
+\subsection{Cluster Value Count using value\_counts()}
+
+\subsection*{Explanation}
+This step is used after applying clustering (e.g., K-Means) on the dataset. The column \texttt{income\_clusters} contains the cluster labels assigned to each data point.
+
+The function \texttt{value\_counts()} is used to count how many data points belong to each cluster. This helps in understanding the distribution of customers across different clusters and checking whether the clustering is balanced or not.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{17}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} counting in which cluster how many values}
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income\PYZus{}clusters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Output}
+The output shows the number of records in each cluster.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{17}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+income\_clusters
+4    81
+1    39
+2    35
+0    23
+3    22
+Name: count, dtype: int64
+\end{Verbatim}
+\end{tcolorbox}
+        
+
+\subsection{K-Means Cluster Visualization using Scatter Plot}
+
+\subsection*{Explanation}
+This code uses Seaborn's \texttt{scatterplot} function to visualize the results of K-Means clustering. The dataset (\texttt{df}) contains customer information where \texttt{score} and \texttt{income} are used as feature variables.
+
+The parameter \texttt{hue='income\_clusters'} is used to color the data points based on the cluster labels generated by the K-Means algorithm. This helps in visually distinguishing different customer groups based on their income and spending behavior.
+
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{18}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{seaborn}\PY{o}{.}\PY{n}{scatterplot}\PY{p}{(}\PY{n}{x}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income\PYZus{}clusters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=} \PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+
+\subsection*{Output}
+The output is a scatter plot where:
+\begin{itemize}
+    \item X-axis represents \texttt{score} (customer spending score)
+    \item Y-axis represents \texttt{income} (customer income)
+    \item Different colors represent different clusters formed by K-Means
+\end{itemize}
+
+The plot visually shows how customers are grouped into distinct clusters. Customers with similar income and spending patterns appear close together in the same colored group.
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{18}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<Axes: xlabel='score', ylabel='income'>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_1.png}
+    \end{center}
+    
+
+\subsection{Scatter Plot for Cluster Visualization}
+
+\subsection*{Explanation}
+This code uses the Seaborn library to visualize clustering results using a scatter plot. The plot displays the relationship between \texttt{income} and \texttt{score} from the dataset, while also differentiating data points based on their assigned cluster labels stored in the column \texttt{income\_clusters}.
+
+Each cluster is represented by a different color, allowing clear visualization of how customers are grouped based on similarity in income and spending behavior. This helps in understanding the distribution and separation of clusters generated by the K-Means algorithm.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{19}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{seaborn}\PY{o}{.}\PY{n}{scatterplot}\PY{p}{(}\PY{n}{x}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income\PYZus{}clusters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=} \PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Output}
+The output is a 2D scatter plot where:
+\begin{itemize}
+    \item X-axis represents \texttt{income}
+    \item Y-axis represents \texttt{score}
+    \item Different colors represent different clusters (\texttt{income\_clusters})
+\end{itemize}
+
+The plot visually shows distinct customer groups, indicating how well the clustering algorithm has separated the data into meaningful segments.
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{19}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<Axes: xlabel='income', ylabel='score'>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+  %  { \hspace*{\fill} \\}
+ 
+ 
+\subsection{K-Means Clustering with 2 Clusters}
+
+\subsection*{Explanation}
+In this step, the K-Means clustering algorithm is applied to the dataset using two features: \texttt{age} and \texttt{score}. The number of clusters is set to 2, meaning the algorithm will divide the data into two distinct groups based on similarity.
+
+The model is first initialized with \texttt{n\_clusters = 2} and then trained using the \texttt{fit()} method on the selected columns. After training, the cluster centers are extracted using \texttt{cluster\_centers\_}, which represent the average position (centroid) of each cluster in the feature space.
+
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{20}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}trying with 2 clusters}
+\PY{n}{kmeans} \PY{o}{=} \PY{n}{cluster}\PY{o}{.}\PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{21}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{kmeans} \PY{o}{=} \PY{n}{kmeans}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{22}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{kmeans}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+
+\subsection*{Output}
+The output of this code is the coordinates of the two cluster centers:
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{22}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+array([[46.16521739, 32.88695652],
+       [28.95294118, 73.62352941]])
+\end{Verbatim}
+\end{tcolorbox}
+These cluster centers are used to understand how the dataset is grouped into two segments based on similarity in age and score.
+
+
+\subsection{Assigning Cluster Labels to Dataset}
+
+\subsection*{Explanation}
+In this step, the output labels generated by the K-Means clustering algorithm are assigned to the original dataset. The attribute \texttt{kmeans.labels\_} contains the cluster ID for each data point after model fitting.
+
+These cluster labels represent which group each record belongs to based on similarity in feature space. The labels are stored in a new column called \texttt{age\_clusters}, allowing easy interpretation and analysis of clustered groups within the dataset.
+
+       
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{23}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age\PYZus{}clusters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{kmeans}\PY{o}{.}\PY{n}{labels\PYZus{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{24}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}
+\end{Verbatim}
+\end{tcolorbox}
+
+
+\subsection*{Output}
+After executing this code, a new column \texttt{age\_clusters} is added to the dataset \texttt{df}. Each row now contains a cluster number (e.g., 0, 1, 2, etc.), indicating the group assigned by the K-Means algorithm.
+
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{24}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+     CustomerID  gender  age  income  score  income\_clusters  age\_clusters
+0             1    Male   19      15     39                0             0
+1             2    Male   21      15     81                3             1
+2             3  Female   20      16      6                0             0
+3             4  Female   23      16     77                3             1
+4             5  Female   31      17     40                0             0
+..          {\ldots}     {\ldots}  {\ldots}     {\ldots}    {\ldots}              {\ldots}           {\ldots}
+195         196  Female   35     120     79                1             1
+196         197  Female   45     126     28                2             0
+197         198    Male   32     126     74                1             1
+198         199    Male   32     137     18                2             0
+199         200    Male   30     137     83                1             1
+
+[200 rows x 7 columns]
+\end{Verbatim}
+\end{tcolorbox}
+The \texttt{age\_clusters} column helps in understanding customer segmentation based on similarity in features.
+
+\subsection{Cluster Distribution Analysis using value-counts()}
+
+\subsection*{Explanation}
+In this step, the distribution of clustered data is analyzed using the \texttt{value\_counts()} function on the column \texttt{age\_clusters}. This column represents cluster labels assigned to each data point after applying a clustering algorithm (such as K-Means).
+
+The function counts how many data points belong to each cluster, helping to understand the balance or imbalance of the formed clusters. Additionally, displaying the full dataframe (\texttt{df}) allows verification of cluster assignments alongside original features.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{25}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age\PYZus{}clusters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Output}
+The output shows the frequency of each cluster label in the dataset.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{25}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+age\_clusters
+0    115
+1     85
+Name: count, dtype: int64
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{26}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{26}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+     CustomerID  gender  age  income  score  income\_clusters  age\_clusters
+0             1    Male   19      15     39                0             0
+1             2    Male   21      15     81                3             1
+2             3  Female   20      16      6                0             0
+3             4  Female   23      16     77                3             1
+4             5  Female   31      17     40                0             0
+..          {\ldots}     {\ldots}  {\ldots}     {\ldots}    {\ldots}              {\ldots}           {\ldots}
+195         196  Female   35     120     79                1             1
+196         197  Female   45     126     28                2             0
+197         198    Male   32     126     74                1             1
+198         199    Male   32     137     18                2             0
+199         200    Male   30     137     83                1             1
+
+[200 rows x 7 columns]
+\end{Verbatim}
+\end{tcolorbox}
+        
+
+\newpage
+\subsection{Scatter Plot Visualization using Seaborn}
+
+\subsection*{Explanation}
+This code uses the \texttt{seaborn.scatterplot()} function to visualize the relationship between \texttt{age} and \texttt{score} in the dataset. The parameter \texttt{hue='age\_clusters'} is used to differentiate data points based on cluster labels generated from a clustering algorithm (such as K-Means).
+
+Each cluster is represented by a different color, allowing us to visually identify how data points are grouped based on age similarity and score distribution. This helps in understanding the clustering pattern and separation between different groups.
+
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{27}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{seaborn}\PY{o}{.}\PY{n}{scatterplot}\PY{p}{(}\PY{n}{x}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age\PYZus{}clusters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=} \PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+
+\subsection*{Output}
+The output is a scatter plot where:
+\begin{itemize}
+    \item X-axis represents \texttt{age}
+    \item Y-axis represents \texttt{score}
+    \item Different colors represent different \texttt{age\_clusters}
+\end{itemize}
+
+The plot visually shows clustered groups of customers, where similar age groups with similar scores are grouped together, indicating the effectiveness of the clustering algorithm.
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{27}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+<Axes: xlabel='age', ylabel='score'>
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    
+\subsection{K-Means Clustering (Elbow Method - WCSS Calculation)}
+
+\subsection*{Explanation}
+In this step, the K-Means clustering algorithm is applied to determine the optimal number of clusters for the dataset. The model uses two features: \texttt{income} and \texttt{score}.
+
+The process calculates the Within-Cluster Sum of Squares (WCSS) for different values of \(k\) (number of clusters). WCSS measures how compact the clusters are; lower values indicate better clustering.
+
+A loop is used to test cluster values from 1 to 11. For each value of \(k\), the KMeans algorithm is trained, and the inertia (WCSS value) is stored in a list.
+
+This helps in identifying the "elbow point", where increasing clusters no longer significantly reduces WCSS.
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{28}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}from sklearn.cluster import kMeans}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{KMeans}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{29}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} to calculate 12 clusters}
+\PY{n}{k\PYZus{}range} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{)}
+\PY{n}{wcss} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{30}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} implementing for loop for 12 clusters to find out wcss value for each cluster}
+\PY{c+c1}{\PYZsh{} adding wcss values of clusters in wcss array}
+
+\PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{k\PYZus{}range}\PY{p}{:}
+    \PY{n}{km}\PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters} \PY{o}{=}\PY{n}{k}\PY{p}{)}
+    \PY{n}{km}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+    \PY{n}{wcss}\PY{o}{.}\PY{n}{append} \PY{p}{(}\PY{n}{km}\PY{o}{.}\PY{n}{inertia\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Output}
+The output of this step is a list of WCSS values corresponding to different cluster numbers:
+
+\begin{verbatim}
+k = 1  -> WCSS = high value
+k = 2  -> WCSS decreases
+k = 3  -> WCSS decreases further
+...
+k = 11 -> WCSS becomes relatively stable
+\end{verbatim}
+
+These values are later plotted in an Elbow Curve graph to determine the optimal number of clusters. The point where the curve bends (elbow point) indicates the best value of \(k\).
+
+
+\subsection{Showing the values of WCSS (Within-Cluster Sum of Squares)}
+\subsection*{Explanation}
+WCSS (Within-Cluster Sum of Squares) is a metric used in K-Means clustering to measure the compactness of clusters. It calculates the sum of squared distances between each data point and the centroid of its assigned cluster. A lower WCSS value indicates that data points are closer to their respective cluster centers, meaning better clustering performance.
+
+WCSS is commonly used in the Elbow Method to determine the optimal number of clusters (K). As the number of clusters increases, WCSS decreases, and the "elbow point" helps identify the most suitable value of K.
+
+ 
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{31}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{wcss}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Output}
+The output of WCSS is a list or array of values corresponding to different numbers of clusters (K values).
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{31}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+[269981.28,
+ 186362.95600651752,
+ 106348.37306211116,
+ 73880.64496247197,
+ 44454.47647967974,
+ 38797.9027638142,
+ 31600.209115340018,
+ 25056.895153616184,
+ 23311.584210674235,
+ 21797.817560054325,
+ 18092.765869660056]
+\end{Verbatim}
+\end{tcolorbox}
+        
+
+\subsection{Elbow Method Visualization for Optimal Clusters}
+
+\subsection*{Explanation}
+This code is used to visualize the Elbow Method in K-Means clustering. The Elbow Method helps to determine the optimal number of clusters ($k$) by plotting the relationship between the number of clusters and the Within-Cluster Sum of Squares (WCSS).
+
+Here:
+\begin{itemize}
+    \item \texttt{k\_range} represents different values of $k$ (number of clusters).
+    \item \texttt{wcss} stores the sum of squared distances between data points and their respective cluster centroids.
+    \item The graph shows how WCSS decreases as the number of clusters increases.
+\end{itemize}
+
+The point where the curve starts to bend (forming an "elbow") indicates the optimal number of clusters.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{32}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{plt}\PY{o}{.}\PY{n}{xlabel} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Clusters(k)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{ylabel} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sum of squared error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{plot} \PY{p}{(}\PY{n}{k\PYZus{}range} \PY{p}{,} \PY{n}{wcss}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+
+\subsection*{Output}
+A line plot is generated with:
+\begin{itemize}
+    \item X-axis: Number of Clusters ($k$)
+    \item Y-axis: Sum of Squared Error (WCSS)
+\end{itemize}
+
+The graph typically shows a decreasing curve, and the "elbow point" is used to select the best value of $k$ for clustering.
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{32}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+[<matplotlib.lines.Line2D at 0x7f616580d910>]
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    
+    
+    
+\end{document}
