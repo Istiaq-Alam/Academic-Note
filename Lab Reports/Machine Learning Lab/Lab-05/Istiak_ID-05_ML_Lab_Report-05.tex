@@ -484,11 +484,45 @@
 \pagenumbering{arabic}
     
     
-    
+\section{Objective}
+The objective of this experiment is to implement the Naive Bayes classification algorithm using the \texttt{CategoricalNB} model from the Scikit-learn library. The model is used to predict whether a customer will make a purchase based on categorical features such as Day, Discount availability, and Free Delivery option. Additionally, the experiment aims to understand the process of data preprocessing, label encoding, model training, and evaluation of classification performance.
+
+\section{Dataset Description}
+
+The following datasets were used in this Naive Bayes lab experiment:
+
+\begin{itemize}
+    \item \textbf{NaiveBayesDataset.csv} \\
+    This dataset is used for demonstrating the basic implementation of the Naive Bayes classification algorithm. It contains labeled features suitable for probability-based classification tasks.
+
+    \item \textbf{titanic.csv} \\
+    This dataset contains passenger information from the Titanic disaster. It is commonly used for classification problems such as predicting survival based on features like age, gender, and passenger class.
+
+    \item \textbf{cardio\_train.csv} \\
+    This dataset includes medical data used to predict cardiovascular disease. It contains features such as age, blood pressure, cholesterol level, and lifestyle indicators.
+
+    \item \textbf{feature\_selection.csv} \\
+    This dataset is used to analyze feature importance and selection techniques. It helps in identifying the most relevant attributes for improving classification performance.
+\end{itemize}
+
+Since all features are categorical in nature, label encoding is applied to convert them into numerical form before training the Naive Bayes classifier.    
 
     
-    \section{Implementing Naive Bayes
+\section{Implementing Naive Bayes
 Theorem}\label{implementing-naive-bayes-theorem}
+
+\subsection{Data Loading and Library Import for Naive Bayes}
+
+\subsection*{Explanation}
+
+In this step, we import essential Python libraries required for building a Naive Bayes classification model. 
+\texttt{pandas} is used for data handling and analysis. \texttt{train\_test\_split} helps to divide the dataset into training and testing sets. 
+\texttt{CategoricalNB} is the Naive Bayes classifier suitable for categorical features. 
+\texttt{LabelEncoder} is used to convert categorical variables into numerical form. 
+Finally, \texttt{accuracy\_score} and \texttt{classification\_report} are used to evaluate model performance.
+
+After importing the libraries, the dataset \texttt{NaiveBayesDataset.csv} is loaded using \texttt{pd.read\_csv()}, and displayed to verify its structure and contents.
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{1}{\boxspacing}
@@ -516,7 +550,13 @@ Theorem}\label{implementing-naive-bayes-theorem}
 \end{Verbatim}
 \end{tcolorbox}
 
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+
+
+\subsection*{Output}
+
+The dataset is successfully loaded into a pandas DataFrame. The output displays the first view of the dataset in tabular form, showing rows and columns with categorical features and the target label. This confirms that the data is correctly imported and ready for preprocessing and model training.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{3}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
         Day Discount Free\_Delivery Purchase
