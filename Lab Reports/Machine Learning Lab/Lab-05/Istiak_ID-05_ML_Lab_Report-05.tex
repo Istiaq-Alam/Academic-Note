@@ -593,6 +593,13 @@ The dataset is successfully loaded into a pandas DataFrame. The output displays 
 \end{Verbatim}
 \end{tcolorbox}
         
+
+\subsection{Encoding Categorical Variables using Label Encoding}
+
+\subsection*{Explanation}
+This code converts categorical text data into numerical format using \texttt{LabelEncoder} from sklearn. A dictionary \texttt{label\_encoders} is created to store encoders for each column. The loop iterates through selected categorical columns: \texttt{Day}, \texttt{Discount}, \texttt{Free\_Delivery}, and \texttt{Purchase}. For each column, a new LabelEncoder object is initialized, and the categorical values are transformed into integer labels using \texttt{fit\_transform()}.
+        
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{4}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -605,6 +612,20 @@ The dataset is successfully loaded into a pandas DataFrame. The output displays 
 \end{Verbatim}
 \end{tcolorbox}
 
+
+\subsection{Train-Test Split and Categorical Naive Bayes Model Training}
+
+\subsection*{Explanation}
+
+In this step, the dataset is divided into feature variables and target variable. The features \(X\) include \texttt{Day}, \texttt{Discount}, and \texttt{Free\_Delivery}, while the target variable \(y\) is \texttt{Purchase}, which indicates whether a customer made a purchase or not.
+
+After defining the input and output variables, the dataset is split into training and testing sets using an 80:20 ratio. This allows the model to learn patterns from the training data and later be evaluated on unseen test data. The \texttt{random\_state=42} ensures reproducibility of the split.
+
+Next, a \texttt{Categorical Naive Bayes (CategoricalNB)} model is initialized. This model is specifically suitable for categorical features. The model is then trained using the training dataset (\texttt{X\_train}, \texttt{y\_train}) to learn the probabilistic relationship between the features and the target variable.
+
+
+        
+        
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{5}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -631,13 +652,34 @@ The dataset is successfully loaded into a pandas DataFrame. The output displays 
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+
+After executing this code, the model does not produce a direct printed output. However, internally:
+\begin{itemize}
+    \item The dataset is successfully split into training and testing sets.
+    \item The Naive Bayes model is trained and fitted on the training data.
+    \item The trained model is now ready to make predictions on the test set or new unseen data.
+\end{itemize}
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{7}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 CategoricalNB()
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+
+\subsection{Naive Bayes Model Prediction and Evaluation}
+\subsection*{Explanation}
+
+This code uses a trained Naive Bayes classifier (`nb\_model`) to make predictions on the test dataset (`X\_test`). The predicted class labels are stored in `y\_pred`.
+
+After prediction, the model performance is evaluated using two key metrics:
+- **Accuracy Score**: Measures the proportion of correctly classified samples in the test set.
+- **Classification Report**: Provides detailed evaluation including precision, recall, F1-score, and support for each class.
+
+These metrics help to understand how well the model generalizes to unseen data.
+
+       
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{8}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -655,6 +697,14 @@ CategoricalNB()
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+
+The output displays:
+- A single accuracy value (e.g., 0.85 or 85%), indicating overall model correctness.
+- A classification report table showing precision, recall, and F1-score for each class.
+
+From this output, we can interpret whether the model performs consistently across all classes or if it is biased toward any specific class. 
+
     \begin{Verbatim}[commandchars=\\\{\}]
 Accuracy: 1.0
               precision    recall  f1-score   support
@@ -667,6 +717,35 @@ weighted avg       1.00      1.00      1.00         6
 
     \end{Verbatim}
 
+
+\subsection{Naive Bayes Prediction on New Example Data}
+
+\subsection*{Explanation}
+
+This code demonstrates how a trained Naive Bayes model is used to make a prediction on a new unseen sample. The input example consists of categorical features such as Day, Discount, and Free\_Delivery. Since machine learning models cannot directly process categorical text values, each feature is first converted into numerical form using previously fitted LabelEncoder objects.
+
+After encoding, the processed data is passed into the trained Naive Bayes model (nb\_model) to predict whether a customer will make a purchase or not. The predicted numerical output is then converted back into its original categorical label (e.g., "Yes" or "No") using inverse\_transform() for better interpretability.
+
+Finally, the code also prints the encoded classes for the Day feature to verify what categories the encoder has learned during training.
+
+\textbf{Code Logic Summary:}
+\begin{itemize}
+\item Create a new input sample as a DataFrame
+\item Encode categorical variables using label encoders
+\item Predict output using trained Naive Bayes model
+\item Convert prediction back to original label
+\item Display encoded classes of a feature
+\end{itemize}
+
+\subsection*{Output}
+
+The output will display:
+\begin{itemize}
+\item The predicted purchase decision (e.g., "Purchase Prediction: Yes" or "No")
+\item The list of encoded classes for the \textit{Day} feature (e.g., {Holiday, Weekend, Weekday})
+\end{itemize}
+
+This helps verify both the model’s prediction and the encoding structure used during preprocessing.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{10}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -779,8 +858,14 @@ Purchase Prediction: ['Yes']
 Purchase Prediction: ['Yes']
     \end{Verbatim}
 
-    \section{Naive Bayes Classifier -
-Titanic}\label{naive-bayes-classifier---titanic}
+
+
+\section{Naive Bayes Classifier - Titanic}\label{naive-bayes-classifier---titanic}
+\subsection{Loading Dataset using Pandas (head())}
+\subsection*{Explanation}
+
+In this code, we import the Pandas library and load a CSV file named \texttt{titanic.csv} into a DataFrame using \texttt{pd.read\_csv()}. After loading the dataset, we use the \texttt{head()} function to display the first five rows of the dataset. This is commonly used to quickly inspect the structure, column names, and sample data of a dataset before performing further analysis or preprocessing.
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{20}{\boxspacing}
@@ -829,7 +914,9 @@ Titanic}\label{naive-bayes-classifier---titanic}
 \PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
+\subsection*{Output}
 
+The output displays the first 5 rows of the Titanic dataset. It typically includes columns such as \texttt{PassengerId}, \texttt{Survived}, \texttt{Pclass}, \texttt{Name}, \texttt{Sex}, \texttt{Age}, \texttt{SibSp}, \texttt{Parch}, \texttt{Ticket}, \texttt{Fare}, \texttt{Cabin}, and \texttt{Embarked}. Each row represents a passenger record, allowing a quick preview of the dataset’s structure and values.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{22}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -848,7 +935,14 @@ Embarked         0
 dtype: int64
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+
+\subsection{Handling Missing Values in Age Column}
+\subsection*{Explanation}
+
+This code handles missing (null) values in the \texttt{Age} column of the dataset using mean imputation. First, the mean value of the \texttt{Age} column is calculated and stored in the variable \texttt{handle}. Then, all null values in \texttt{Age} are replaced with this mean value using the \texttt{fillna()} function. This is a common preprocessing technique to preserve dataset size while maintaining statistical consistency.
+
+       
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{23}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -857,6 +951,10 @@ dtype: int64
 \PY{n}{handle}
 \end{Verbatim}
 \end{tcolorbox}
+\subsection*{Output}
+
+The output of this operation is the computed mean of the \texttt{Age} column (stored in \texttt{handle}). After execution, the \texttt{Age} column in the dataframe will no longer contain any missing values, as all NaNs are replaced with the calculated mean value.
+
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{23}{\boxspacing}
@@ -864,7 +962,9 @@ dtype: int64
 np.float64(30.272590361445783)
 \end{Verbatim}
 \end{tcolorbox}
-        
+ 
+ 
+       
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{24}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -878,6 +978,7 @@ np.float64(30.272590361445783)
 \PY{n}{df}
 \end{Verbatim}
 \end{tcolorbox}
+
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{25}{\boxspacing}
@@ -924,6 +1025,13 @@ np.float64(30.272590361445783)
 [418 rows x 12 columns]
 \end{Verbatim}
 \end{tcolorbox}
+
+
+
+\subsection{Dropping Irrelevant Columns from Dataset}
+\subsection*{Explanation}
+
+In this step, unnecessary features are removed from the dataset to simplify the model and reduce noise. The selected columns such as \texttt{PassengerId}, \texttt{Name}, \texttt{SibSp}, \texttt{Parch}, \texttt{Ticket}, \texttt{Cabin}, and \texttt{Embarked} are dropped because they are assumed to have weak or no direct influence on the target variable under the naive independence assumption. This helps improve model efficiency and focuses learning on more relevant features.
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{26}{\boxspacing}
@@ -946,6 +1054,9 @@ np.float64(30.272590361445783)
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+
+After executing the code, the specified columns are permanently removed from the dataframe using \texttt{inplace=True}. The command \texttt{df.head()} then displays the first five rows of the updated dataset, showing only the remaining relevant features such as survival-related attributes (e.g., class, sex, age, fare). The output confirms that the dataframe structure has been successfully reduced and cleaned for further analysis or model training.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{28}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -957,7 +1068,15 @@ np.float64(30.272590361445783)
 4         1       3  female  22.0  12.2875
 \end{Verbatim}
 \end{tcolorbox}
-        
+ 
+ 
+\subsection{Data Preparation and Encoding}
+\subsection*{Explanation}
+
+In this step, the dataset is prepared for model training. The \texttt{Survived} column is separated as the target variable, where 1 indicates survived and 0 indicates not survived. The remaining columns are treated as input features by dropping the \texttt{Survived} column.
+
+Next, the categorical column \texttt{Sex} is converted into numerical form using one-hot encoding with \texttt{pd.get\_dummies()}. This creates separate columns (e.g., male and female) with binary values. The values are then converted from boolean (True/False) to integer (1/0) for better compatibility with machine learning models.
+       
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{29}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -998,6 +1117,10 @@ np.float64(30.272590361445783)
 \end{Verbatim}
 \end{tcolorbox}
 
+
+\subsection*{Output}
+
+The output consists of a new dataframe containing encoded columns for the \texttt{Sex} feature. Each row will have values 0 or 1 indicating the presence of a category (male or female), instead of True/False.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{33}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
