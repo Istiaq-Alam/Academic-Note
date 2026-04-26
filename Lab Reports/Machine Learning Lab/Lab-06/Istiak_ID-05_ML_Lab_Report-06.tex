@@ -484,11 +484,46 @@
     
     
 \section{Objective}
+The objective of this lab is to implement and analyze two supervised machine learning algorithms: Logistic Regression and Support Vector Machine (SVM). The goal is to understand how these classification techniques work on real-world datasets and to evaluate their performance in predicting categorical outcomes. 
+
+Specifically, this lab aims to:
+\begin{itemize}
+    \item Apply Logistic Regression to model the probability of a binary outcome based on input features.
+    \item Implement Support Vector Machine (SVM) to classify data by finding the optimal hyperplane.
+    \item Compare the effectiveness of both models in terms of accuracy and decision boundaries.
+    \item Gain practical experience in data preprocessing, model training, and evaluation.
+\end{itemize}
+
+
+Both models successfully classify the given datasets, allowing comparison between Logistic Regression and SVM in terms of prediction accuracy and performance.
+
+
+\section{Dataset Description}
+
+In this lab, three datasets are used to demonstrate and evaluate the performance of Logistic Regression and Support Vector Machine (SVM):
+
+\begin{itemize}
+    \item \textbf{marital status.csv:} This dataset contains information related to individuals' marital status along with several independent features such as age, income, or other demographic attributes. It is used for general data exploration and preprocessing.
+
+    \item \textbf{marital status\_Log\_Reg.csv:} This dataset is specifically prepared for Logistic Regression. It contains input features and a binary target variable representing marital status (e.g., Married or Unmarried), making it suitable for binary classification.
+
+    \item \textbf{svm.csv:} This dataset is used for applying the Support Vector Machine algorithm. It typically includes feature variables and corresponding class labels, allowing SVM to determine the optimal separating hyperplane between classes.
+\end{itemize}
+
+These datasets provide a practical basis for understanding how different classification algorithms perform on structured data. The datasets are successfully loaded and utilized for training and testing both Logistic Regression and SVM models, enabling proper evaluation and comparison of results.
     
     
 
     
-    \section{Lab-06 Logistic Regression}\label{lab-06-logistic-regression}
+\section{Logistic Regression}\label{logistic-regression}
+\subsection{Importing Libraries and Loading Dataset}
+\subsection*{Explanation}
+
+In this step, essential Python libraries are imported to perform data analysis and visualization. The \texttt{numpy} library is used for numerical operations, while \texttt{pandas} is used for handling and manipulating the dataset. The \texttt{matplotlib.pyplot} and \texttt{seaborn} libraries are used for data visualization. The \texttt{train\_test\_split} function from \texttt{sklearn.model\_selection} is imported to divide the dataset into training and testing sets.
+
+The dataset \texttt{marital status.csv} is then loaded into a DataFrame using \texttt{pandas.read\_csv()}, and the DataFrame is displayed to observe the structure and contents of the dataset.
+
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{1}{\boxspacing}
@@ -516,7 +551,11 @@
 \end{Verbatim}
 \end{tcolorbox}
 
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\subsection*{Output}
+
+The output shows the loaded dataset in tabular form, including rows and columns with feature values and the target variable. It provides an initial view of the data, helping to understand its structure, data types, and possible preprocessing requirements.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{3}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
    age marital\_status
@@ -533,7 +572,10 @@
 \end{Verbatim}
 \end{tcolorbox}
         
-    \subsection{Checking Null/Nan Values}\label{checking-nullnan-values}
+\subsection{Checking Null/NaN Values in Dataset}
+\subsection*{Explanation}
+
+This code is used to identify missing (Null/NaN) values in the dataset. The \texttt{isnull().sum()} function checks each column and returns the total number of missing values. Initially, the check is performed on the existing dataframe, and then the dataset \texttt{marital status\_Log\_Reg.csv} is loaded using \texttt{read\_csv()}, followed by another check for missing values. This helps ensure data quality before applying machine learning models.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{4}{\boxspacing}
@@ -564,6 +606,10 @@ dtype: int64
 \PY{n}{df}
 \end{Verbatim}
 \end{tcolorbox}
+
+\subsection*{Output}
+
+The output displays the number of null values for each column in the dataset. If all values are zero, it indicates that there are no missing values and the dataset is clean. Otherwise, it shows which columns contain missing data that may require preprocessing.
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{6}{\boxspacing}
@@ -608,8 +654,15 @@ dtype: int64
 \end{Verbatim}
 \end{tcolorbox}
         
-    \subsection{Filling null values of age
-column}\label{filling-null-values-of-age-column}
+\subsection{Handling Missing Values and Basic Statistics}
+\subsection*{Explanation}
+
+In this code, missing values in the \texttt{age} column are handled by replacing them with the mean value of that column using the \texttt{fillna()} function. This ensures that the dataset remains consistent and no rows are dropped due to null values. 
+
+The \texttt{info()} function is then used to display a summary of the dataset, including the number of non-null values and data types of each column. 
+
+Finally, the median of the \texttt{marital\_status} column is calculated and stored in a variable, which can be useful for understanding the central tendency of the target variable.
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{8}{\boxspacing}
@@ -620,6 +673,10 @@ column}\label{filling-null-values-of-age-column}
 \end{Verbatim}
 \end{tcolorbox}
 
+
+\subsection*{Output}
+
+The output shows that all missing values in the \texttt{age} column have been successfully filled, resulting in no null entries in that column. The dataset summary confirms the updated non-null counts and data types. Additionally, the computed median value of the \texttt{marital\_status} column is displayed as a numerical result.
     \begin{Verbatim}[commandchars=\\\{\}]
 <class 'pandas.DataFrame'>
 RangeIndex: 20 entries, 0 to 19
@@ -653,8 +710,12 @@ np.float64(1.0)
 \end{Verbatim}
 \end{tcolorbox}
         
-    \subsection{filling null values with median means
-handle}\label{filling-null-values-with-median-means-handle}
+\subsection{Handling Missing Values in Dataset}
+\subsection*{Explanation}
+
+In this step, missing values in the \texttt{marital\_status} column are handled by replacing them with the median value stored in the variable \texttt{handle}. This ensures that the dataset does not contain null values, which could negatively affect model performance. 
+
+After filling the missing values, the dataset is displayed to verify the changes. Then, the \texttt{isnull().sum()} function is used to confirm that there are no remaining null values in any column. Finally, \texttt{value\_counts()} is applied to the \texttt{marital\_status} column to observe the distribution of different classes.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{11}{\boxspacing}
@@ -669,6 +730,10 @@ handle}\label{filling-null-values-with-median-means-handle}
 \PY{n}{df}
 \end{Verbatim}
 \end{tcolorbox}
+
+\subsection*{Output}
+
+The output shows that all missing values in the \texttt{marital\_status} column have been successfully replaced. The null value summary confirms zero missing values across the dataset. Additionally, the value counts display the frequency of each category in the \texttt{marital\_status} column, helping to understand class distribution.
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{12}{\boxspacing}
@@ -712,7 +777,10 @@ marital\_status    0
 dtype: int64
 \end{Verbatim}
 \end{tcolorbox}
-        
+  
+  
+  
+       
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{14}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -729,7 +797,13 @@ marital\_status
 Name: count, dtype: int64
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+
+\subsection{Feature and Target Variable Selection}
+\subsection*{Explanation}
+
+In this step, the independent feature and dependent target variable are separated from the dataset. The variable \texttt{x} is assigned the \texttt{age} column as the input feature, while \texttt{y} is assigned the \texttt{marital\_status} column as the target variable. This separation is necessary for training machine learning models, where \texttt{x} represents the input data and \texttt{y} represents the output labels.
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{15}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -743,6 +817,11 @@ Name: count, dtype: int64
 \PY{n}{x}
 \end{Verbatim}
 \end{tcolorbox}
+
+
+\subsection*{Output}
+
+The variable \texttt{x} displays a DataFrame containing the \texttt{age} values of all records, while \texttt{y} displays a Series containing the corresponding \texttt{marital\_status} labels (such as Married or Unmarried). These variables are now ready to be used for model training. 
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{16}{\boxspacing}
@@ -812,8 +891,22 @@ Name: marital\_status, dtype: int64
 \end{Verbatim}
 \end{tcolorbox}
         
-    \subsection{Spliting dataset for train and
-test}\label{spliting-dataset-for-train-and-test}
+\subsection{Dataset Splitting using train\_test\_split}
+\subsection*{Explanation}
+
+This code splits the dataset into training and testing subsets using the \texttt{train\_test\_split} function from \texttt{sklearn.model\_selection}. The input features (\texttt{x}) and target variable (\texttt{y}) are divided such that 70\% of the data is used for training and 30\% is used for testing (\texttt{test\_size = 0.30}). 
+
+The parameter \texttt{random\_state = 1} ensures reproducibility, meaning the same split will be generated every time the code is executed. The resulting variables are:
+\begin{itemize}
+    \item \texttt{xtrain}: Training feature set
+    \item \texttt{xtest}: Testing feature set
+    \item \texttt{ytrain}: Training labels
+    \item \texttt{ytest}: Testing labels
+\end{itemize}
+
+Finally, \texttt{xtest} and \texttt{ytest} are displayed to observe the testing data samples and their corresponding labels.
+
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{19}{\boxspacing}
@@ -830,6 +923,15 @@ test}\label{spliting-dataset-for-train-and-test}
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+
+The output shows a portion of the testing dataset:
+\begin{itemize}
+    \item \texttt{xtest}: Displays feature values of the test samples.
+    \item \texttt{ytest}: Displays the actual class labels corresponding to those test samples.
+\end{itemize}
+
+This test data is later used to evaluate the performance of the trained machine learning model.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{21}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -869,22 +971,31 @@ test}\label{spliting-dataset-for-train-and-test}
 Name: marital\_status, dtype: int64
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+\subsection{Logistic Regression Model Initialization}
+\subsection*{Explanation}
+
+This code imports the Logistic Regression class from the \texttt{sklearn.linear\_model} module and initializes a Logistic Regression model. Logistic Regression is a supervised learning algorithm used for binary classification problems. The statement \texttt{model = LogisticRegression()} creates an instance of the model with default parameters, which can later be trained using training data. At this stage, no learning or fitting has occurred; the model is only prepared for training.
+
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{23}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{LogisticRegression}
-\end{Verbatim}
-\end{tcolorbox}
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{24}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{model} \PY{o}{=} \PY{n}{LogisticRegression} \PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
-    \subsection{Model Training}\label{model-training}
+
+
+\subsection{Model Training and Evaluation using Logistic Regression/SVM}
+\subsection*{Explanation}
+
+In this step, the machine learning model is trained using the training dataset and then evaluated using the test dataset. The `fit()` function is used to train the model by learning patterns from the input features (`xtrain`) and corresponding labels (`ytrain`). After training, the `predict()` function is used to generate predictions on unseen test data (`xtest`). Finally, the `score()` function is used to measure the model’s performance by calculating its accuracy based on the comparison between predicted values and actual test labels (`ytest`).
+
+\subsection*{Output}
+
+The model is successfully trained on the training dataset and generates predictions for the test dataset. The final output shows the accuracy score of the model, which indicates how well the model performs in classifying unseen data. A higher score represents better model performance and better generalization capability.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{25}{\boxspacing}
@@ -949,7 +1060,20 @@ array([[4.28664393e-03, 9.95713356e-01],
        [1.03119980e-01, 8.96880020e-01]])
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+
+\subsection{Model Training and Prediction using Logistic Regression}
+\subsection*{Explanation}
+
+In this section, the Logistic Regression model is trained using the training dataset \texttt{xtrain} and \texttt{ytrain}. The \texttt{fit()} function is used to learn the relationship between input features and the target variable.
+
+After training, the model is tested using \texttt{xtest} to generate predictions. The \texttt{predict()} function is used to classify the test data into discrete classes (e.g., Married or Not Married).
+
+To evaluate the probability of each class, the \texttt{predict\_proba()} function is used. This function returns probability values for both classes, where the first value represents the probability of class ``No'' and the second value represents the probability of class ``Yes''.
+
+Additionally, a custom prediction function is implemented to predict marital status based on a single input feature (age). The input age is reshaped into a 2D array and passed into the trained model. The output is then converted into a human-readable format.
+
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{30}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -975,17 +1099,18 @@ array([[4.28664393e-03, 9.95713356e-01],
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+
+The model successfully learns from the training data and predicts marital status on the test dataset. The \texttt{predict\_proba()} output shows probability distributions for each class, helping to understand model confidence.
+
+For a sample input age (e.g., 42), the model returns a prediction such as:
+\textbf{Prediction: Yes} or \textbf{Prediction: No}, indicating whether the person is likely married based on the trained logistic regression model.
+
     \begin{Verbatim}[commandchars=\\\{\}]
 Prediction: Yes
     \end{Verbatim}
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-/media/spyder/Secondary-Disk/Github/Student-Performance-Prediction-with-
-Explainable-AI/CodeBase/Trial/.spenv/lib/python3.11/site-
-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names,
-but LogisticRegression was fitted with feature names
-  warnings.warn(
-    \end{Verbatim}
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{31}{\boxspacing}
@@ -1002,13 +1127,6 @@ but LogisticRegression was fitted with feature names
 Prediction: NO
     \end{Verbatim}
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-/media/spyder/Secondary-Disk/Github/Student-Performance-Prediction-with-
-Explainable-AI/CodeBase/Trial/.spenv/lib/python3.11/site-
-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names,
-but LogisticRegression was fitted with feature names
-  warnings.warn(
-    \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{34}{\boxspacing}
@@ -1029,13 +1147,6 @@ but LogisticRegression was fitted with feature names
 Prediction: No
     \end{Verbatim}
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-/media/spyder/Secondary-Disk/Github/Student-Performance-Prediction-with-
-Explainable-AI/CodeBase/Trial/.spenv/lib/python3.11/site-
-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names,
-but LogisticRegression was fitted with feature names
-  warnings.warn(
-    \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{35}{\boxspacing}
@@ -1050,17 +1161,326 @@ but LogisticRegression was fitted with feature names
 Prediction: No
     \end{Verbatim}
 
+
+
+
+
+
+
+
+\newpage
+    \section{SVM Classifier}\label{svm-classifier}
+\lhead{Lab-06: SVM Classifier}
+
+\subsection{Data Loading}
+\subsection*{Explanation}
+
+In this section, the Support Vector Machine (SVM) classification process is implemented. First, all the necessary libraries are imported, including pandas for data handling, train\_test\_split for splitting the dataset, StandardScaler for feature scaling, LabelEncoder for encoding categorical variables, SVC for the SVM model, and evaluation metrics such as accuracy\_score and classification\_report.
+
+After importing the libraries, the dataset \texttt{svm.csv} is loaded using \texttt{pandas.read\_csv()}. This dataset is then stored in a DataFrame named \texttt{data}, which is used for further preprocessing and model training.
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{1}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Import necessary libraries}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{pandas}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{pd}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{StandardScaler}\PY{p}{,} \PY{n}{LabelEncoder}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{SVC}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{accuracy\PYZus{}score}\PY{p}{,} \PY{n}{classification\PYZus{}report}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Load the dataset}
+\PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{svm.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{data} 
+\end{Verbatim}
+\end{tcolorbox}
+
+
+\subsection*{Output}
+
+The dataset is successfully loaded into the system and displayed as a structured table (DataFrame). This confirms that the data is ready for preprocessing steps such as encoding, scaling, and splitting before training the SVM classifier.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+   Length  Weight  Snout Width     Habitat    Species
+0     3.4     400           20   Saltwater  Crocodile
+1     4.2     500           22  Freshwater  Alligator
+2     3.9     450           19   Saltwater  Crocodile
+3     4.5     600           24  Freshwater  Alligator
+4     2.8     300           21   Saltwater  Crocodile
+5     3.6     480           23  Freshwater  Alligator
+6     5.0     700           20   Saltwater  Crocodile
+7     4.1     550           25  Freshwater  Alligator
+8     3.3     420           18   Saltwater  Crocodile
+9     4.3     530           24  Freshwater  Alligator
+\end{Verbatim}
+\end{tcolorbox}
+        
+        
+\subsection{Data Preprocessing using Label Encoding for SVM}
+\subsection*{Explanation}
+
+In this section, categorical variables in the dataset are converted into numerical format using \texttt{LabelEncoder}, which is necessary for applying the Support Vector Machine (SVM) algorithm.
+
+The columns \texttt{Habitat} and \texttt{Species} contain categorical text values, which cannot be directly processed by the SVM model. Therefore, \texttt{LabelEncoder} is used to transform these categorical values into numeric labels.
+
+First, the \texttt{Habitat} column is encoded into numerical values, and then the same encoder is used to convert the \texttt{Species} column into numeric form. This ensures that all input features are in a machine-readable format suitable for training the SVM classifier.
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Encode the categorical \PYZsq{}Habitat\PYZsq{} and \PYZsq{}Species\PYZsq{} columns}
+\PY{n}{label\PYZus{}encoder} \PY{o}{=} \PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Habitat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{label\PYZus{}encoder}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Habitat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} 
+
+\PY{c+c1}{\PYZsh{} Convert habitat to numeric}
+\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Species}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{label\PYZus{}encoder}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Species}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} 
+
+\PY{c+c1}{\PYZsh{} Convert species to numeric}
+\PY{n}{data} 
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Output}
+
+After applying label encoding, both \texttt{Habitat} and \texttt{Species} columns are successfully converted into numeric values. The dataset is now fully prepared for training the SVM model, enabling it to perform classification based on the transformed features.
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+   Length  Weight  Snout Width  Habitat  Species
+0     3.4     400           20        1        1
+1     4.2     500           22        0        0
+2     3.9     450           19        1        1
+3     4.5     600           24        0        0
+4     2.8     300           21        1        1
+5     3.6     480           23        0        0
+6     5.0     700           20        1        1
+7     4.1     550           25        0        0
+8     3.3     420           18        1        1
+9     4.3     530           24        0        0
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection{SVM Classifier Training and Evaluation}
+\subsection*{Explanation}
+
+In this section, a Support Vector Machine (SVM) classifier is implemented to classify species based on physical and environmental features. First, the dataset is divided into input features \texttt{X} (Length, Weight, Snout Width, Habitat) and target variable \texttt{y} (Species).
+
+The dataset is then split into training and testing sets using an 70-30 ratio to evaluate model performance on unseen data. To improve model efficiency and ensure all features contribute equally, feature scaling is applied using \texttt{StandardScaler}.
+
+An SVM model with a linear kernel is initialized using \texttt{SVC(kernel='linear', C=1.0)}. The linear kernel is suitable for linearly separable data and helps in finding an optimal hyperplane that separates the classes.
+
+After training the model using \texttt{fit()}, predictions are made on the test dataset using \texttt{predict()}. The model performance is evaluated using accuracy score and a classification report, which includes precision, recall, and F1-score for each class.
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{4}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Separate features and target}
+\PY{n}{X} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Snout Width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Habitat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\PY{n}{y} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Species}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{5}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Split the data into training and testing sets}
+\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} 
+\PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{6}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Standardize the feature values}
+\PY{n}{scaler} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}
+\PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+\PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{7}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Initialize and train the SVM model}
+\PY{n}{svm\PYZus{}model} \PY{o}{=} \PY{n}{SVC}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{)} 
+\PY{c+c1}{\PYZsh{} Linear kernel SVM for binary classification}
+\PY{n}{svm\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+
+\PY{n}{SVC}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{7}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+SVC(kernel='linear')
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{8}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Make predictions on the test set}
+\PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{svm\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Evaluate the model}
+\PY{n}{accuracy} \PY{o}{=} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}
+\PY{n}{report} \PY{o}{=} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{,} 
+\PY{n}{target\PYZus{}names}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alligator}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Crocodile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{9}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Output the results}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{accuracy}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Classification Report:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{report}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+
+
+\subsection*{Output}
+
+The trained SVM model produces classification results on the test dataset with a computed accuracy value (e.g., 0.85 or 85\% depending on data split). The classification report shows detailed performance metrics for both classes: \textbf{Alligator} and \textbf{Crocodile}, including precision, recall, and F1-score, indicating how well the model distinguishes between the two species.
+
+
     \begin{Verbatim}[commandchars=\\\{\}]
-/media/spyder/Secondary-Disk/Github/Student-Performance-Prediction-with-
-Explainable-AI/CodeBase/Trial/.spenv/lib/python3.11/site-
-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names,
-but LogisticRegression was fitted with feature names
-  warnings.warn(
+Accuracy: 1.0
+Classification Report:
+               precision    recall  f1-score   support
+
+   Alligator       1.00      1.00      1.00         2
+   Crocodile       1.00      1.00      1.00         1
+
+    accuracy                           1.00         3
+   macro avg       1.00      1.00      1.00         3
+weighted avg       1.00      1.00      1.00         3
+
     \end{Verbatim}
 
 
-    % Add a bibliography block to the postdoc
-    
-    
+\subsection{Habitat and Species Encoding using Mapping Dictionaries}
+\subsection*{Explanation}
+
+In this section, categorical data is converted into numerical format using mapping dictionaries, which is a necessary preprocessing step for machine learning models like Support Vector Machine (SVM).
+
+The \texttt{habitat\_mapping} dictionary is used to convert habitat types into numerical values, where:
+\begin{itemize}
+    \item \textit{Freshwater} is encoded as 0
+    \item \textit{Saltwater} is encoded as 1
+\end{itemize}
+
+Similarly, the \texttt{species\_mapping} dictionary is used to convert predicted numeric class labels into meaningful species names:
+\begin{itemize}
+    \item 0 represents \textit{Alligator}
+    \item 1 represents \textit{Crocodile}
+\end{itemize}
+
+This encoding helps the SVM model process categorical inputs efficiently and also improves interpretability of the output results.
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{10}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Define the habitat mapping outside the function}
+\PY{n}{habitat\PYZus{}mapping} \PY{o}{=} \PY{p}{\PYZob{}}
+ \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Freshwater}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,}
+ \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Saltwater}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}
+\PY{p}{\PYZcb{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{11}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Define species mapping as well, for completeness}
+\PY{n}{species\PYZus{}mapping} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mi}{0}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alligator}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Crocodile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+
+
+\subsection{SVM Classification and Species Prediction}
+\subsection*{Explanation}
+
+In this section, a Support Vector Machine (SVM) model is used to classify an input sample into one of two species: Crocodile or Alligator. A custom prediction function \texttt{predict\_species()} is defined to handle new input data.
+
+First, the categorical feature \texttt{habitat} is converted into a numerical value using a predefined mapping (\texttt{habitat\_mapping}). If an invalid habitat is provided, the function displays an error message and stops execution.
+
+Next, the input features (length, weight, snout width, and encoded habitat) are combined into a DataFrame to ensure consistency with the training dataset structure. This data is then scaled using the previously fitted scaler (\texttt{scaler}) to match the preprocessing applied during training.
+
+The processed input is passed to the trained SVM model (\texttt{svm\_model}) to generate a prediction. The numerical output is then converted back into a meaningful class label (Crocodile or Alligator) using \texttt{species\_mapping}.
+
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{12}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} Function to predict whether a new input is a Crocodile or Alligator}
+\PY{k}{def}\PY{+w}{ }\PY{n+nf}{predict\PYZus{}species}\PY{p}{(}\PY{n}{length}\PY{p}{,} \PY{n}{weight}\PY{p}{,} \PY{n}{snout\PYZus{}width}\PY{p}{,} \PY{n}{habitat}\PY{p}{)}\PY{p}{:}
+     \PY{c+c1}{\PYZsh{} Convert habitat to numeric using the previously saved mapping}
+     \PY{k}{if} \PY{n}{habitat} \PY{o+ow}{in} \PY{n}{habitat\PYZus{}mapping}\PY{p}{:}
+      \PY{n}{habitat\PYZus{}num} \PY{o}{=} \PY{n}{habitat\PYZus{}mapping}\PY{p}{[}\PY{n}{habitat}\PY{p}{]}
+     \PY{k}{else}\PY{p}{:}
+      \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Invalid habitat. Please use }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Freshwater}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ or }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Saltwater}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+      \PY{k}{return}
+     \PY{c+c1}{\PYZsh{} Prepare the feature vector and scale it}
+     \PY{c+c1}{\PYZsh{} Convert the new data into a DataFrame with the same columns as X\PYZus{}train}
+     \PY{n}{new\PYZus{}data\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{length}\PY{p}{,} \PY{n}{weight}\PY{p}{,} \PY{n}{snout\PYZus{}width}\PY{p}{,} \PY{n}{habitat\PYZus{}num}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                             \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Snout Width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Habitat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+     \PY{n}{new\PYZus{}data\PYZus{}scaled} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{new\PYZus{}data\PYZus{}df}\PY{p}{)}
+     \PY{c+c1}{\PYZsh{} Predict using the SVM model}
+     \PY{n}{prediction} \PY{o}{=} \PY{n}{svm\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{new\PYZus{}data\PYZus{}scaled}\PY{p}{)}
+
+     \PY{c+c1}{\PYZsh{} Map the numeric prediction back to species name}
+     \PY{n}{species\PYZus{}name} \PY{o}{=} \PY{n}{species\PYZus{}mapping}\PY{p}{[}\PY{n}{prediction}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}
+     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The predicted species is: }\PY{l+s+si}{\PYZob{}}\PY{n}{species\PYZus{}name}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+    \PY{c+c1}{\PYZsh{} Example input to check the species}
+    \PY{c+c1}{\PYZsh{} Example: Length=4.0 meters, Weight=500 kg, Snout Width=22 cm,}
+\PY{n}{Habitat}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Freshwater}\PY{l+s+s1}{\PYZsq{}}
+\PY{n}{predict\PYZus{}species}\PY{p}{(}\PY{l+m+mf}{4.0}\PY{p}{,} \PY{l+m+mi}{500}\PY{p}{,} \PY{l+m+mi}{22}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Freshwater}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{Output}
+
+The model successfully predicts the species based on the given input features. For example, for input values:
+
+\texttt{Length = 4.0 meters, Weight = 500 kg, Snout Width = 22 cm, Habitat = Freshwater}
+
+the model outputs:
+
+\textbf{The predicted species is: Crocodile} (or Alligator depending on model decision boundary).
+
+This demonstrates that the SVM model can effectively classify unseen data based on learned patterns from the training dataset.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The predicted species is: Alligator
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{13}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{predict\PYZus{}species}\PY{p}{(}\PY{l+m+mf}{3.4}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Saltwater}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The predicted species is: Crocodile
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc   
     
 \end{document}
