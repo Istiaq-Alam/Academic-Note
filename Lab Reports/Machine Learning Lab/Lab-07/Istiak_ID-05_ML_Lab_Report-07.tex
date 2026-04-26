@@ -505,7 +505,10 @@ The \texttt{house\_data.csv} dataset contains real estate information used for p
 
 \section{Decision Tree Classifier}\label{decision-tree-classifier}
 
-\subsection{Tennis as Classifier}\label{tennis-as-classifier}
+\subsection{Implementing on Tennis Dataset}
+
+\subsection*{Explanation}
+This code imports essential machine learning libraries such as pandas for data handling, scikit-learn modules for building and evaluating a Decision Tree classifier. The dataset is loaded from a CSV file named \texttt{DT.csv}, which likely contains tennis-related attributes used for classification. A Decision Tree model is typically used to learn decision rules from data features and predict categorical outcomes.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{1}{\boxspacing}
@@ -534,7 +537,10 @@ The \texttt{house\_data.csv} dataset contains real estate information used for p
 \end{Verbatim}
 \end{tcolorbox}
 
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+
+\subsection*{Output}
+The output of this step is the successful loading of the dataset into a pandas DataFrame. No model training or prediction occurs yet at this stage. If printed, it would display the first few rows or structure of the dataset, confirming that the data has been read correctly and is ready for preprocessing and model training.
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{3}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
     Day   Outlook  Temp Humidity    Wind PlayTennis  Unnamed: 6
@@ -555,7 +561,18 @@ The \texttt{house\_data.csv} dataset contains real estate information used for p
 14  D15     sunny   hot   normal    weak         No         NaN
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+
+\subsection{Data Preprocessing and Model Training}
+
+\subsection*{Explanation}
+This code performs preprocessing and model training for a Decision Tree classifier. First, categorical variables in the dataset are converted into numeric form using \texttt{LabelEncoder}, since machine learning models cannot directly process text data. Each column (except identifiers like \texttt{Day}) is encoded and stored.  
+
+Next, the dataset is split into feature variables \texttt{X} (Outlook, Temperature, Humidity, Wind) and target variable \texttt{y} (PlayTennis). The data is then divided into training and testing sets using an 80-20 split.  
+
+A \texttt{DecisionTreeClassifier} is trained using the training data, and predictions are made on the test set.
+
+      
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{4}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -617,6 +634,9 @@ array([1, 1, 0])
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output includes the trained model and predicted values (\texttt{y\_pred}) for the test dataset. The comparison between \texttt{y\_pred} and actual values (\texttt{y\_test}) shows how well the model performs. If printed, both arrays will display encoded class labels (e.g., 0 and 1), which can later be evaluated using accuracy or confusion matrix. 
+
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{9}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -626,7 +646,14 @@ array([1, 1, 0])
 Name: PlayTennis, dtype: int64
 \end{Verbatim}
 \end{tcolorbox}
-        
+ 
+ 
+\subsection{Decision Tree Model Accuracy Evaluation}
+
+\subsection*{Explanation}
+This code calculates the performance of the trained Decision Tree classifier by comparing the predicted labels (\texttt{y\_pred}) with the actual test labels (\texttt{y\_test}). The function \texttt{accuracy\_score} from scikit-learn is used to compute the proportion of correctly classified instances. The result is stored in the variable \texttt{accuracy} and then printed.
+
+      
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{10}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -636,9 +663,17 @@ Name: PlayTennis, dtype: int64
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output displays the model’s accuracy as a numeric value between 0 and 1 (or 0\% to 100\%). 
     \begin{Verbatim}[commandchars=\\\{\}]
 Model accuracy: 1.0
     \end{Verbatim}
+
+\subsection{Decision Tree - Confusion Matrix Evaluation}
+
+\subsection*{Explanation}
+This code evaluates the performance of the trained Decision Tree classifier using a confusion matrix. The function \texttt{confusion\_matrix(y\_test, y\_pred)} compares the actual labels (\texttt{y\_test}) with the predicted labels (\texttt{y\_pred}) and produces a matrix showing correct and incorrect classifications. Each row represents actual classes, while each column represents predicted classes. Additionally, \texttt{ConfusionMatrixDisplay.from\_predictions()} visualizes this matrix with proper class labels using the encoded target variable \texttt{PlayTennis}.
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{11}{\boxspacing}
@@ -651,12 +686,13 @@ Model accuracy: 1.0
 \end{Verbatim}
 \end{tcolorbox}
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-
+\subsection*{Output}
+The output includes a printed confusion matrix in numerical form, showing how many predictions were correct and where misclassifications occurred. 
+\begin{Verbatim}[commandchars=\\\{\}]
 Confusion Matrix:
 [[1 0]
  [0 2]]
-    \end{Verbatim}
+\end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{11}{\boxspacing}
@@ -669,9 +705,16 @@ Confusion Matrix:
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_2.png}
     \end{center}
-    { \hspace*{\fill} \\}
+ 
     
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\subsection{Decision Tree - Actual vs Predicted Comparison}
+
+\subsection*{Explanation}
+This code compares the actual target values with the predicted values generated by the Decision Tree classifier. It iterates through the test dataset using \texttt{y\_test} (true labels) and \texttt{y\_pred} (model predictions). Since the labels were originally encoded using \texttt{LabelEncoder}, the code converts them back to their original categorical form (e.g., Yes/No for PlayTennis) using \texttt{inverse\_transform} for better interpretability.
+
+
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{12}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Show actual vs predicted values for each test sample}
@@ -681,14 +724,25 @@ Confusion Matrix:
 \end{Verbatim}
 \end{tcolorbox}
 
-    \begin{Verbatim}[commandchars=\\\{\}]
+\subsection*{Output}
+The output prints a list of test samples showing side-by-side comparison of actual vs predicted values. Each line displays the true class (e.g., PlayTennis = Yes/No) and the model’s predicted class for that same instance. This helps evaluate how accurately the Decision Tree classifier is performing on unseen data.
 
+
+\begin{Verbatim}[commandchars=\\\{\}]
 Actual vs Predicted:
 Actual: Yes, Predicted: Yes
 Actual: Yes, Predicted: Yes
 Actual: No, Predicted: No
     \end{Verbatim}
 
+
+\subsection{Decision Tree Prediction on New Input}
+
+\subsection*{Explanation}
+This code prepares a new input sample for prediction using a trained Decision Tree model. Since machine learning models require numerical input, categorical values such as \texttt{Outlook}, \texttt{Temp}, \texttt{Humidity}, and \texttt{Wind} are first converted into encoded numeric form using previously fitted \texttt{LabelEncoder} objects. The input corresponds to a condition: rain, mild temperature, high humidity, and strong wind. After preprocessing, the model predicts whether tennis should be played based on learned patterns from the dataset. Finally, the predicted numeric output is converted back into a readable label using inverse transformation.
+
+\subsection*{Output}
+The model outputs a single classification result indicating whether playing tennis is suitable under the given weather conditions. For the input \{rain, mild, high, strong\}, the printed output will typically show either \textbf{Play Tennis = Yes} or \textbf{Play Tennis = No}, depending on the patterns learned during training. This confirms that the model can generalize and make decisions on unseen data.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{13}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -717,8 +771,17 @@ Actual: No, Predicted: No
 Prediction for input \{rain, mild, high, strong\}: Play Tennis = No
     \end{Verbatim}
 
-    \section{Decision tree from Dataset to predict as a
+\section{Decision tree from Dataset to predict as a
 Regressor}\label{decision-tree-from-dataset-to-predict-as-a-regressor}
+
+\subsection{Decision Tree Regressor - House Price Prediction}
+
+\subsection*{Explanation}
+This code implements a Decision Tree Regressor model to predict house prices using a dataset named \texttt{house\_data\_DT.csv}. First, necessary libraries are imported, including pandas for data handling, train\_test\_split for splitting the dataset, and DecisionTreeRegressor for regression modeling. The dataset is then loaded and cleaned by stripping whitespace from column names and validating the presence of the \texttt{Location} column.
+
+The \texttt{Location} feature is converted into numerical form using manual encoding (Suburb = 0, City = 1). Missing or invalid values are checked, and any incomplete rows are removed to ensure data consistency. After preprocessing, the dataset is split into features (Rooms, Area, Location) and target variable (Price). Finally, the data is divided into training and testing sets, and a Decision Tree Regressor is trained using the training data.
+
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{15}{\boxspacing}
@@ -781,7 +844,8 @@ Regressor}\label{decision-tree-from-dataset-to-predict-as-a-regressor}
 \PY{n}{regressor}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
-
+\subsection*{Output}
+The output of this stage includes a cleaned and preprocessed dataset with no missing or invalid values, followed by successful training of the Decision Tree Regressor model. No prediction is shown yet at this step, but the model is now ready to estimate house prices based on input features in later stages.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{19}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -789,7 +853,16 @@ DecisionTreeRegressor(random\_state=42)
 \end{Verbatim}
 \end{tcolorbox}
         
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+
+
+\subsection{Decision Tree Prediction and Evaluation}
+
+\subsection*{Explanation}
+This code uses a trained Decision Tree regressor model to make predictions on the test dataset (\texttt{X\_test}). The predicted values (\texttt{y\_pred}) are then compared with the actual target values (\texttt{y\_test}) to evaluate model performance. Two evaluation metrics are used: Mean Squared Error (MSE), which measures the average squared difference between actual and predicted values, and R² Score, which indicates how well the model explains the variance in the data.
+
+
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{20}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Make predictions on the test set}
@@ -803,10 +876,20 @@ DecisionTreeRegressor(random\_state=42)
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output displays two numerical evaluation results. The Mean Squared Error (MSE) shows how much error the model is making on average (lower is better). The R² Score indicates the goodness of fit, where a value closer to 1 means the model is performing well in predicting the target variable. These results help assess the accuracy and reliability of the Decision Tree model.
+
     \begin{Verbatim}[commandchars=\\\{\}]
 Mean Squared Error: 2500000000.0
 R\^{}2 Score: -10.11111111111111
     \end{Verbatim}
+
+
+\subsection{Decision Tree Price Prediction Function}
+
+\subsection*{Explanation}
+This code defines a function \texttt{predict\_price()} that takes user inputs such as number of rooms, area, and location to predict a house price using a trained regression model (referred to as \texttt{regressor}). The categorical variable \texttt{location} is manually encoded into numerical form (Suburb = 0, City = 1) to match the model’s training format. The inputs are then converted into a pandas DataFrame and passed into the model’s \texttt{predict()} function to generate the estimated price.
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{21}{\boxspacing}
@@ -833,14 +916,26 @@ R\^{}2 Score: -10.11111111111111
 \end{Verbatim}
 \end{tcolorbox}
 
-    \begin{Verbatim}[commandchars=\\\{\}]
+
+\subsection*{Output}
+The function prints the predicted house price for given input values. For example, when called with (Rooms=3, Area=75, Location='Suburb'), it outputs a lower estimated price compared to (Rooms=4, Area=95, Location='City'), as larger area and city location typically increase property value. The output is displayed in a formatted currency style showing the predicted price for each test case.
+
+\begin{Verbatim}[commandchars=\\\{\}]
 
 Predicted Price for input (Rooms: 3, Area: 75, Location: Suburb): \$320,000.00
 
 Predicted Price for input (Rooms: 4, Area: 95, Location: City): \$450,000.00
     \end{Verbatim}
 
-    \section{Confusion Matrix}\label{confusion-matrix}
+\newpage
+\section{Confusion Matrix}\label{confusion-matrix}
+\lhead{Lab-07: Confusion Matrix}
+
+\subsection{Confusion Matrix for Classification Evaluation}
+
+\subsection*{Explanation}
+This code demonstrates how to evaluate a classification model using a confusion matrix. It imports necessary libraries including pandas, matplotlib, seaborn, and scikit-learn metrics. A custom function \texttt{plot\_confusion\_matrix()} is defined to visualize the confusion matrix using a heatmap. The actual labels (\texttt{truth}) and predicted labels (\texttt{prediction}) are defined for a binary classification problem (Dog vs Not a dog). The confusion matrix is then computed using \texttt{confusion\_matrix()} from scikit-learn, which compares actual vs predicted values and summarizes correct and incorrect classifications.
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{22}{\boxspacing}
@@ -884,10 +979,28 @@ Predicted Price for input (Rooms: 4, Area: 95, Location: City): \$450,000.00
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output is a 2×2 confusion matrix heatmap showing the classification performance. The diagonal values represent correctly classified samples (true positives and true negatives), while the off-diagonal values represent misclassifications. The heatmap visually highlights how many "Dog" and "Not a dog" instances were correctly or incorrectly predicted by the model, making it easier to evaluate accuracy and error patterns.
+
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
     \end{center}
     { \hspace*{\fill} \\}
+
+
+\subsection{Confusion Matrix and Classification Report Evaluation}
+
+\subsection*{Explanation}
+This code evaluates a classification model using the \texttt{classification\_report} function, which provides precision, recall, and F1-score for each class by comparing the true labels (\texttt{truth}) with the predicted labels (\texttt{prediction}). 
+
+Additionally, the F1-score is manually computed for two classes: “Dog” and “not a Dog” using the harmonic mean formula:
+\[
+F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}
+\]
+For the “Dog” class, precision is 0.57 and recall is 0.67. For the “not a Dog” class, precision is 0.33 and recall is 0.25. These calculations help measure the balance between precision and recall for each class.
+
+\subsection*{Output}
+The output includes a full classification report showing precision, recall, F1-score, and support for each class. It indicates how well the model distinguishes between “Dog” and “not a Dog” instances. The manually computed F1-scores further confirm model performance: the “Dog” class achieves a moderate F1-score (~0.61), while the “not a Dog” class shows a low F1-score (~0.29), indicating weaker predictive performance for that class.
     
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{26}{\boxspacing}
