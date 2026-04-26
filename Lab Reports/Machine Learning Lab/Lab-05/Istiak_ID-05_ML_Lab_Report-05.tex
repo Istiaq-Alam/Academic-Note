@@ -449,7 +449,7 @@
 		\vspace{0.3cm}        
         \textbf{\Large Course Title: Machine Learning Lab} \\
         \vspace{0.3cm}
-        \textbf{\Large Lab Task Topic: Naive Bayes Theorem} \\        
+        \textbf{\Large Lab Task Topic: Naive Bayes Theorem \& Feature Selection} \\        
     \end{flushleft}
     
     \vspace{1em}
@@ -1140,6 +1140,16 @@ The output consists of a new dataframe containing encoded columns for the \textt
 [418 rows x 2 columns]
 \end{Verbatim}
 \end{tcolorbox}
+
+
+\subsection{Dropping Column and Using Dummy Variables}
+\subsection*{Explanation}
+In this code, the `Sex` column is removed from the dataset using the `drop()` function with `axis='columns'`. This is typically done to eliminate non-numeric or redundant features before applying machine learning models. After that, the dataset `inputs` is displayed to verify the changes.
+
+The `dummies` variable represents the encoded version of categorical data (e.g., gender), where values are converted into numerical format (0 and 1) instead of Boolean values (True/False). This process is known as one-hot encoding and is useful for model compatibility.
+
+
+
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{34}{\boxspacing}
@@ -1263,7 +1273,10 @@ The output consists of a new dataframe containing encoded columns for the \textt
 [418 rows x 5 columns]
 \end{Verbatim}
 \end{tcolorbox}
-        
+ 
+ \subsection*{Output}
+The updated dataset `inputs` will be displayed without the `Sex` column. The `dummies` output will show encoded values as 0 and 1, representing different categories instead of True and False.
+       
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{40}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1290,6 +1303,12 @@ The output consists of a new dataframe containing encoded columns for the \textt
 [418 rows x 3 columns]
 \end{Verbatim}
 \end{tcolorbox}
+
+
+\subsection{Merging DataFrames using pd.concat}
+\subsection*{Explanation}
+This code combines two DataFrames, \texttt{inputs} and \texttt{dummies}, column-wise using the \texttt{pd.concat()} function. The parameter \texttt{axis = 'columns'} ensures that the DataFrames are merged horizontally, meaning the columns from \texttt{dummies} are added alongside the columns of \texttt{inputs}. The result is stored in a new DataFrame called \texttt{merged}.
+
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{41}{\boxspacing}
@@ -1304,7 +1323,8 @@ The output consists of a new dataframe containing encoded columns for the \textt
 \PY{n}{merged}
 \end{Verbatim}
 \end{tcolorbox}
-
+\subsection*{Output}
+The output displays a new DataFrame where all original columns from \texttt{inputs} and the encoded (dummy) columns from \texttt{dummies} are combined side by side. Each row corresponds correctly based on the index, resulting in an expanded dataset ready for further analysis or modeling.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{42}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1324,6 +1344,12 @@ The output consists of a new dataframe containing encoded columns for the \textt
 [418 rows x 5 columns]
 \end{Verbatim}
 \end{tcolorbox}
+
+
+\subsection{Dropping a Column from Dataset}
+\subsection*{Explanation}
+This code removes the column named \texttt{male} from the merged dataset using the \texttt{drop()} function. The parameter \texttt{axis=1} specifies that a column (not a row) is being removed. The result is stored in a new DataFrame called \texttt{final}, leaving the original dataset unchanged.
+
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{43}{\boxspacing}
@@ -1339,6 +1365,9 @@ The output consists of a new dataframe containing encoded columns for the \textt
 \end{Verbatim}
 \end{tcolorbox}
 
+
+\subsection*{Output}
+The output displays the updated DataFrame \texttt{final}, where the \texttt{male} column is no longer present. All remaining columns and their corresponding data are shown.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{44}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1358,6 +1387,16 @@ The output consists of a new dataframe containing encoded columns for the \textt
 [418 rows x 4 columns]
 \end{Verbatim}
 \end{tcolorbox}
+
+
+\subsection{Handling Missing Values in 'Fare' Column}
+\subsection*{Explanation}
+The first line checks for columns in the dataset \texttt{final} that contain missing (NaN) values using \texttt{isna()} and returns only those column names. Here, it shows that the \texttt{'Fare'} column has missing values.
+
+Next, the code calculates the total number of null values in the \texttt{'Fare'} column of the dataframe \texttt{df} using \texttt{isnull().sum()}. Finally, it prints the count in a formatted string.
+
+
+
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{45}{\boxspacing}
@@ -1380,10 +1419,19 @@ Index(['Fare'], dtype='str')
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of null values in }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Fare}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ column: }\PY{l+s+si}{\PYZob{}}\PY{n}{null\PYZus{}count\PYZus{}city}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
+\subsection*{Output}
+The output first displays the column name that contains missing values:
+\begin{verbatim}
+Index(['Fare'], dtype='str')
+\end{verbatim}
 
+Then, it prints the total number of missing values in the \texttt{'Fare'} column, 
     \begin{Verbatim}[commandchars=\\\{\}]
 Number of null values in 'Fare' column: 1
     \end{Verbatim}
+(where 1 represents the actual count of missing values in the dataset)
+
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{47}{\boxspacing}
@@ -1449,6 +1497,13 @@ Name: Fare, dtype: float64
 \end{Verbatim}
 \end{tcolorbox}
         
+        
+        \subsection{Handling Missing Fare Values and Displaying Data}
+\subsection*{Explanation}
+The statement \texttt{final.Fare = final.Fare.fillna(final.Fare.mean())} replaces all missing (NaN) values in the \texttt{Fare} column with the mean (average) fare value of that column. This is a common data preprocessing technique to handle missing data without removing rows.
+
+The function \texttt{final.head()} is then used to display the first five rows of the dataset, allowing a quick check to confirm that missing values have been handled properly.
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{48}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1457,6 +1512,9 @@ Name: Fare, dtype: float64
 \end{Verbatim}
 \end{tcolorbox}
 
+
+\subsection*{Output}
+The output displays the first five rows of the updated dataset. The \texttt{Fare} column no longer contains missing values, as they have been replaced by the average fare. This helps verify that the data cleaning step was successful.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{48}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1468,6 +1526,15 @@ Name: Fare, dtype: float64
 4       3  22.0  12.2875       1
 \end{Verbatim}
 \end{tcolorbox}
+        
+        
+\subsection{Naive Bayes Model Training and Testing}
+\subsection*{Explanation}
+The \texttt{train\_test\_split} function from \texttt{sklearn.model\_selection} is used to divide the dataset into training and testing sets, where 70\% of the data is used for training and 30\% for testing. The \texttt{random\_state=1} ensures reproducibility of the split.
+
+Then, a \texttt{GaussianNB} model (Naive Bayes classifier) is created and trained using \texttt{model.fit(xtrain, ytrain)}. After training, the model's performance is evaluated on the test data using \texttt{model.score(xtest, ytest)}, which returns the accuracy.
+
+Finally, \texttt{xtest[:10]} is used to display the first 10 samples from the test dataset for inspection.
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{49}{\boxspacing}
@@ -1526,6 +1593,10 @@ GaussianNB()
 \end{Verbatim}
 \end{tcolorbox}
 
+
+\subsection*{Output}
+The output includes the accuracy score of the trained Naive Bayes model on the test dataset, indicating how well the model performs. Additionally, the first 10 rows of the test feature set (\texttt{xtest}) are displayed, showing sample input data used for prediction.
+
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{54}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1566,7 +1637,16 @@ GaussianNB()
 Name: Survived, dtype: int64
 \end{Verbatim}
 \end{tcolorbox}
-        
+ 
+ 
+ \subsection{Model Prediction and Probability Output}
+\subsection*{Explanation}
+The function \texttt{model.predict(xtest[0:10])} is used to predict the class labels (e.g., Survived or Not Survived) for the first 10 samples of the test dataset. The function \texttt{model.predict\_proba(xtest[:10])} returns the probability of each class for those same samples, showing how confident the model is in its predictions.
+
+A custom test input \texttt{test = [[1,23.000000,113.2750,0]]} is provided, representing features like passenger class, age, fare, and gender. The model predicts the outcome for this input using \texttt{model.predict(test)}. Based on the predicted value, a conditional statement prints whether the passenger "Survived" or "Not Survived".
+
+
+       
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{56}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1619,20 +1699,19 @@ array([[1., 0.],
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output of \texttt{model.predict(xtest[0:10])} is an array of predicted class labels (0 or 1) for the first 10 test samples. The \texttt{model.predict\_proba(xtest[:10])} outputs a 2D array where each row contains probabilities for both classes (e.g., [Not Survived, Survived]).
+
+For the custom test input, the model returns a single prediction (0 or 1). If the result is 0, the output displayed is "Not Survived"; otherwise, it prints "Survived".
+
     \begin{Verbatim}[commandchars=\\\{\}]
 Not Survived
     \end{Verbatim}
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-/media/spyder/Secondary-Disk/Github/Student-Performance-Prediction-with-
-Explainable-AI/CodeBase/Trial/.spenv/lib/python3.11/site-
-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names,
-but GaussianNB was fitted with feature names
-  warnings.warn(
-    \end{Verbatim}
 
-    \subsection{Calculate value with cross
-validation}\label{calculate-value-with-cross-validation}
+\subsection{Cross Validation using Gaussian Naive Bayes}
+\subsection*{Explanation}
+The function \texttt{cross\_val\_score()} from \texttt{sklearn.model\_selection} is used to evaluate the performance of the \texttt{GaussianNB()} model using cross-validation. Here, the dataset is split into 5 folds (cv = 5), where the model is trained on 4 folds and tested on the remaining fold. This process repeats 5 times, ensuring each fold is used once as test data. It helps in obtaining a more reliable estimate of model performance.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{59}{\boxspacing}
@@ -1648,6 +1727,9 @@ validation}\label{calculate-value-with-cross-validation}
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output is an array of 5 accuracy scores, where each value represents the model's performance on one fold. These scores indicate how well the model generalizes across different subsets of the training data.
+
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{60}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1655,11 +1737,12 @@ array([1., 1., 1., 1., 1.])
 \end{Verbatim}
 \end{tcolorbox}
         
-    \section{Feature-selection-stdm}\label{feature-selection-stdm}
+\section{Feature Selection Stdm}\label{feature-selection-stdm}
+\lhead{Lab-05: Feature Selection}
+\subsection{Loading Dataset for Univariate Feature Selection}
+\subsection*{Explanation}
+This code imports essential libraries such as \texttt{pandas}, \texttt{numpy}, and \texttt{seaborn} for data handling and visualization. Then, it loads the dataset \texttt{cardio\_train.csv} using \texttt{pd.read\_csv()} with a semicolon (\texttt{;}) as the separator. The dataset is stored in a DataFrame named \texttt{df}. Finally, \texttt{df} is displayed to preview the dataset structure before applying the SelectKBest feature selection method.
 
-    \subsection{Univariate Selecetion Method @Feature Selection, Algorithm:
-SelectKBest
-Algorithm}\label{univariate-selecetion-method-feature-selection-algorithm-selectkbest-algorithm}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{61}{\boxspacing}
@@ -1673,7 +1756,6 @@ Algorithm}\label{univariate-selecetion-method-feature-selection-algorithm-select
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{62}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{}df = pd.read\PYZus{}csv(\PYZdq{}bank.csv\PYZdq{},sep = \PYZsq{};\PYZsq{})}
 \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cardio\PYZus{}train.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{sep} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
@@ -1685,6 +1767,8 @@ Algorithm}\label{univariate-selecetion-method-feature-selection-algorithm-select
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output displays the full dataset (or a truncated table view) containing rows and columns from \texttt{cardio\_train.csv}. It shows features such as age, gender, height, weight, and other medical attributes, allowing initial inspection of data before feature selection.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{63}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1717,6 +1801,14 @@ Algorithm}\label{univariate-selecetion-method-feature-selection-algorithm-select
 [70000 rows x 13 columns]
 \end{Verbatim}
 \end{tcolorbox}
+
+
+\subsection{Dataset Shape and Class Distribution Analysis}
+\subsection*{Explanation}
+The expression \texttt{df.shape} is used to determine the dimensions of the dataset \texttt{df}. It returns a tuple representing the number of rows and columns in the dataset. In this case, the dataset contains 70,000 rows and 13 columns.
+
+The function \texttt{df["cardio"].value\_counts()} is used to count the occurrences of each unique value in the \texttt{cardio} column. This is typically used to analyze the distribution of target classes in classification problems, helping to identify whether the dataset is balanced or imbalanced.
+
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{64}{\boxspacing}
@@ -1739,7 +1831,13 @@ Algorithm}\label{univariate-selecetion-method-feature-selection-algorithm-select
 \end{Verbatim}
 \end{tcolorbox}
 
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\subsection*{Output}
+The output of \texttt{df.shape} is:
+\texttt{(70000, 13)}, meaning the dataset has 70,000 samples and 13 features.
+
+The output of \texttt{df["cardio"].value\_counts()} shows the frequency of each class in the \texttt{cardio} column, typically returning two values (0 and 1), which represent the number of non-disease and disease cases respectively. This helps in understanding class balance in the dataset.
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{65}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 cardio
@@ -1749,12 +1847,24 @@ Name: count, dtype: int64
 \end{Verbatim}
 \end{tcolorbox}
         
+        
+        
+\subsection{Cardiovascular Disease Count Visualization Using Countplot}
+\subsection*{Explanation}
+The function \texttt{sns.countplot(df["cardio"])} from Seaborn is used to visualize the frequency distribution of the \texttt{cardio} column in the dataset \texttt{df}. It counts the number of occurrences of each category (typically 0 and 1, representing absence or presence of cardiovascular disease) and displays them as bars in a plot.
+
+
+        
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{66}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cardio}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
+
+
+\subsection*{Output}
+The output is a bar chart showing two bars: one for individuals without cardiovascular disease (0) and one for individuals with cardiovascular disease (1). The height of each bar represents the number of samples in each category, helping to quickly understand class imbalance in the dataset.
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{66}{\boxspacing}
@@ -1766,7 +1876,6 @@ Name: count, dtype: int64
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_70_1.png}
     \end{center}
-    { \hspace*{\fill} \\}
     
     \begin{itemize}
 \tightlist
@@ -1784,17 +1893,9 @@ Name: count, dtype: int64
 \item
   Result: x will be a DataFrame containing all the columns of df except
   the last column
-\end{itemize}
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{67}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{x} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:} \PY{p}{,} \PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
-\end{Verbatim}
-\end{tcolorbox}
-
-    \begin{itemize}
-\tightlist
+  
+\item
+  x = df.iloc[: , :-1]
 \item
   y = df.iloc{[}:, 12{]}
 \item
@@ -1810,10 +1911,22 @@ Name: count, dtype: int64
   df.
 \end{itemize}
 
+
+\subsection{Feature Selection using SelectKBest (ANOVA F-test)}
+\subsection*{Explanation}
+This code performs feature selection on the dataset using \texttt{SelectKBest} with the \texttt{f\_classif} scoring function (ANOVA F-test). First, the dataset is split into features (\texttt{x}) and target (\texttt{y}) using \texttt{iloc}. Then, \texttt{SelectKBest} is initialized to evaluate the relationship between each feature and the target variable. The model is fitted using \texttt{fit(x, y)}, which computes statistical scores for each feature based on their importance. Finally, \texttt{FIT\_FEATURES.scores\_} is converted into a DataFrame to display feature importance scores in a structured format.
+
+
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{67}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{x} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:} \PY{p}{,} \PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{68}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} y = df.iloc[:, 12]}
 \PY{n}{y} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{iloc} \PY{p}{[}\PY{p}{:} \PY{p}{,}\PY{l+m+mi}{12}\PY{p}{]}
 \end{Verbatim}
 \end{tcolorbox}
@@ -1860,6 +1973,8 @@ SelectKBest()
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output is a pandas DataFrame containing numerical scores for each feature in the dataset. These scores represent how strongly each feature is related to the target variable according to the ANOVA F-test. Higher scores indicate more important features, while lower scores suggest weaker relevance for prediction.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{73}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1878,6 +1993,13 @@ SelectKBest()
 11    89.091494
 \end{Verbatim}
 \end{tcolorbox}
+
+
+\subsection{Creating DataFrame from Features}
+\subsection*{Explanation}
+The code \texttt{score\_COL = pd.DataFrame(FIT\_FEATURES.scores\_)} converts the feature importance scores stored in \texttt{FIT\_FEATURES.scores\_} into a Pandas DataFrame. This is typically done after applying a feature selection method (such as SelectKBest), where each feature is assigned a numerical score indicating its relevance to the target variable.
+
+
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{74}{\boxspacing}
@@ -1893,6 +2015,8 @@ SelectKBest()
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output is a DataFrame named \texttt{score\_COL} containing the computed feature scores in tabular form. Each row corresponds to a feature and its associated score, making it easier to analyze and compare feature importance visually or programmatically.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{75}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1911,7 +2035,9 @@ SelectKBest()
 11    89.091494
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+
+       
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{76}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1946,6 +2072,9 @@ SelectKBest()
 11    89.091494
 \end{Verbatim}
 \end{tcolorbox}
+     
+     
+     
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{78}{\boxspacing}
@@ -1979,7 +2108,12 @@ SelectKBest()
 11       active
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+
+\subsection{Combining Feature and Score DataFrames Using Concat}
+\subsection*{Explanation}
+The code \texttt{top\_features = pd.concat([NEW\_COL, score\_COL], axis=1)} merges two pandas DataFrames (\texttt{NEW\_COL} and \texttt{score\_COL}) column-wise using \texttt{axis=1}. This operation is commonly used in feature engineering to combine selected features with their corresponding scores or importance values into a single structured dataset.
+       
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{80}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1993,6 +2127,10 @@ SelectKBest()
 \PY{n}{top\PYZus{}features}
 \end{Verbatim}
 \end{tcolorbox}
+
+
+\subsection*{Output}
+The output is a new DataFrame named \texttt{top\_features}, where columns from both input DataFrames are joined side by side. Each row contains the aligned feature values from \texttt{NEW\_COL} along with their corresponding scores from \texttt{score\_COL}, making it easier to analyze feature importance together.
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{81}{\boxspacing}
@@ -2012,7 +2150,13 @@ SelectKBest()
 11       active    89.091494
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+
+\subsection{Selecting Top 8 Features Based on Score Value}
+\subsection*{Explanation}
+The expression \texttt{top\_features.nlargest(8, "scorevalue")} is used to retrieve the 8 rows with the highest values in the \texttt{scorevalue} column from the \texttt{top\_features} dataset. It helps in feature selection by identifying the most significant features according to their importance score.
+
+    
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{82}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2020,6 +2164,8 @@ SelectKBest()
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output displays a subset of the dataset containing the top 8 features ranked by their \texttt{scorevalue}. Each row includes the feature name and its corresponding score, showing which features contribute most strongly based on the given scoring metric.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{82}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2035,7 +2181,10 @@ SelectKBest()
 \end{Verbatim}
 \end{tcolorbox}
         
-    \section{Feature-selection-using-correlation}\label{feature-selection-using-correlation}
+    \section{Feature Selection Using Correlation}\label{feature-selection-using-correlation}
+\subsection{Loading Dataset for Feature Selection Using Correlation}
+\subsection*{Explanation}
+This code imports the \texttt{pandas} library and loads a dataset named \texttt{feature\_selection.csv} into a DataFrame called \texttt{df}. The dataset is intended for feature selection using correlation analysis. After loading, the DataFrame is displayed to inspect the structure, features, and initial values of the dataset.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{83}{\boxspacing}
@@ -2052,7 +2201,8 @@ SelectKBest()
 \PY{n}{df}
 \end{Verbatim}
 \end{tcolorbox}
-
+\subsection*{Output}
+The output displays the full contents of the dataset in tabular form. It shows multiple columns (features) and rows (records), allowing a quick overview of variables that will later be analyzed to determine their correlation and importance in feature selection.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{84}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2069,7 +2219,9 @@ SelectKBest()
 9         j     dhaka         4         2      v         ab-  11000
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+
+       
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{85}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2088,6 +2240,10 @@ blodd group      str
 price          int64
 dtype: object
     \end{Verbatim}
+
+\subsection{Detecting and Handling Non-Numeric Values in Dataset Columns}
+\subsection*{Explanation}
+This code iterates through all columns of the dataframe \texttt{df} and checks their data types. If a column is of type \texttt{object} (usually containing strings or mixed values), it prints all unique values to identify non-numeric entries. After inspection, the entire dataframe is converted into numeric format using \texttt{pd.to\_numeric()} with \texttt{errors='coerce'}, which replaces invalid or non-convertible values with \texttt{NaN}. This is commonly used during preprocessing to clean data for machine learning models.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{86}{\boxspacing}
@@ -2111,9 +2267,12 @@ dtype: object
 \prompt{In}{incolor}{88}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{df}
+
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output first displays the unique non-numeric values found in each object-type column, helping to detect inconsistent or invalid data entries. After conversion, the dataframe is updated where all columns are transformed into numeric types, and any previously non-numeric values are replaced with \texttt{NaN}, making the dataset suitable for further analysis or modeling.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{88}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2131,6 +2290,13 @@ dtype: object
 \end{Verbatim}
 \end{tcolorbox}
         
+        
+\subsection{Correlation Analysis and Data Type Inspection}
+\subsection*{Explanation}
+The code computes the correlation matrix of the dataset using \texttt{df.corr()}, which measures the statistical relationship between numerical features, including the target variable \texttt{price}. This helps identify how strongly each feature is related to the target.
+Additionally, \texttt{df.dtypes} is used to display the data types of all columns in the dataset, which is important for understanding whether variables are numerical or categorical before applying machine learning models.
+
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{89}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2146,6 +2312,11 @@ dtype: object
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output consists of two parts:
+First, a correlation matrix showing pairwise correlation values between numerical features (including how each feature relates to \texttt{price}). Higher positive or negative values indicate stronger relationships.
+Second, the data types of each column are printed, showing whether each feature is \texttt{int}, \texttt{float}, or \texttt{object}, helping verify dataset structure and preprocessing needs.
+
     \begin{Verbatim}[commandchars=\\\{\}]
 location       float64
 area           float64
@@ -2156,6 +2327,12 @@ blodd group    float64
 price            int64
 dtype: object
     \end{Verbatim}
+
+
+\subsection{Feature Correlation with Target Variable (Price)}
+\subsection*{Explanation}
+This code first converts all dataframe columns into numeric format using \texttt{pd.to\_numeric} with \texttt{errors='coerce'}, which replaces non-numeric values with NaN. Then, it computes the correlation matrix using \texttt{df.corr()}, measuring the linear relationship between variables. Finally, it extracts and sorts the correlation values of all features with respect to the target variable \texttt{price} in descending order to identify the most influential features.
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{91}{\boxspacing}
@@ -2182,6 +2359,9 @@ dtype: object
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output displays a list of features along with their correlation values with \texttt{price}. Positive values indicate a direct relationship, while negative values indicate an inverse relationship. Features at the top have the strongest influence on price, helping in feature selection and model understanding.
+
     \begin{Verbatim}[commandchars=\\\{\}]
 Correlation with Price:
  price          1.000000
@@ -2196,6 +2376,9 @@ Name: price, dtype: float64
 
     \subsection{Encoding / Handling another column =\textgreater{}
 location}\label{encoding-handling-another-column-location}
+
+\subsection*{Explanation}
+In this code, the dataset \texttt{feature\_selection.csv} is loaded into a pandas DataFrame using \texttt{pd.read\_csv()}. A categorical column named \texttt{location} is selected for preprocessing, which is typically required before applying machine learning models. The \texttt{OrdinalEncoder} from \texttt{sklearn.preprocessing} is imported to convert categorical text data into numerical form, although it is not yet applied in this snippet.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{94}{\boxspacing}
@@ -2220,6 +2403,8 @@ location}\label{encoding-handling-another-column-location}
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output displays the full DataFrame \texttt{df}, showing all rows and columns from the dataset. This helps verify that the data has been loaded correctly and confirms the presence of the \texttt{location} column, which will later be encoded into numerical values for model training.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{96}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2236,7 +2421,16 @@ location}\label{encoding-handling-another-column-location}
 9         j     dhaka         4         2      v         ab-  11000
 \end{Verbatim}
 \end{tcolorbox}
-        
+ 
+ 
+ 
+\subsection{Cleaning and Standardizing DataFrame Column Names}
+\subsection*{Explanation}
+This code is used to inspect and clean the column names of a pandas DataFrame \texttt{df}. First, \texttt{print(df.columns)} displays the original column names. Then, \texttt{df.columns.str.strip()} removes any leading or trailing whitespace from column names, ensuring consistency. After that, \texttt{df.columns.str.lower()} converts all column names to lowercase to maintain uniform naming and avoid case-sensitivity issues in further processing. Finally, the updated column names are printed again.
+
+\subsection*{Output}
+The output first shows the original column names, which may include extra spaces or mixed casing. After cleaning, the second output displays standardized column names where all leading/trailing spaces are removed and all letters are converted to lowercase, making the dataset easier to work with in subsequent analysis.
+       
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{97}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2265,6 +2459,8 @@ Index(['location', 'area', 'bedroom', 'bathroom', 'owner', 'blodd group',
       dtype='str')
     \end{Verbatim}
 
+
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{99}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2285,6 +2481,12 @@ Index(['location', 'area', 'bedroom', 'bathroom', 'owner', 'blodd group',
 Name: location, dtype: str
     \end{Verbatim}
 
+
+
+\subsection{Ordinal Encoding of Categorical Column}
+\subsection*{Explanation}
+This code applies \texttt{OrdinalEncoder} from Scikit-learn to convert categorical data into numerical form. First, an encoder object is created. Then, the specified categorical column in the dataframe \texttt{df} is transformed using \texttt{fit\_transform()}, which assigns each unique category a numeric value based on ordinal encoding. Finally, the updated dataframe is displayed with the encoded column replacing the original categorical values.
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{100}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2299,7 +2501,8 @@ Name: location, dtype: str
 \PY{n}{df}
 \end{Verbatim}
 \end{tcolorbox}
-
+\subsection*{Output}
+The output is the modified dataframe \texttt{df}, where the selected categorical column has been replaced with numerical values. Each unique category is represented by a distinct integer, making the dataset suitable for machine learning models that require numerical input.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{101}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2316,61 +2519,12 @@ Name: location, dtype: str
 9       9.0     dhaka        4         2     v         ab-  11000
 \end{Verbatim}
 \end{tcolorbox}
-        
-    \section{Feature Selection using Correlation
--U}\label{feature-selection-using-correlation--u}
 
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{102}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{pandas}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{pd}
-\PY{c+c1}{\PYZsh{} Load the dataset}
-\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{feature\PYZus{}selection.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-\end{Verbatim}
-\end{tcolorbox}
-
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{103}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{df}
-\end{Verbatim}
-\end{tcolorbox}
-
-            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{103}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-  location      area   bedroom   bathroom owner  blodd group  price
-0         a     dhaka         3         2      x          o+  10000
-1         b     dhaka         4         2      y         ab+  12000
-2         c    khulna         2         2      p         ab-  11000
-3         d  rajshahi         3         2      q          o+  15000
-4         e   cumilla         3         1      w         ab+  12000
-5         f     dhaka         2         1      l         ab-  11000
-6         g  barishal         2         1      r          o+  10000
-7         h    natore         2         3      s          o+  15000
-8         i    khulna         3         3      k         ab+  12000
-9         j     dhaka         4         2      v         ab-  11000
-\end{Verbatim}
-\end{tcolorbox}
-        
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{104}{\boxspacing}
-\begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{}  Check for non\PYZhy{}numeric data in the columns}
-\PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{dtypes}\PY{p}{)}
-\end{Verbatim}
-\end{tcolorbox}
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-location         str
-area             str
-bedroom        int64
-bathroom       int64
-owner            str
-blodd group      str
-price          int64
-dtype: object
-    \end{Verbatim}
+\newpage
+    
+\subsection{Identifying Non-Numeric Values in Dataset Columns}
+\subsection*{Explanation}
+This code iterates through all columns in the DataFrame \texttt{df}. For each column, it checks whether the data type is \texttt{object}, which typically indicates non-numeric (categorical or text) data. If the column is non-numeric, it prints the unique values present in that column using \texttt{unique()}. This helps in identifying categorical features and detecting inconsistent or unexpected values in the dataset.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{105}{\boxspacing}
@@ -2382,8 +2536,12 @@ dtype: object
 \end{Verbatim}
 \end{tcolorbox}
 
-    \subsection{Encoding / Handling another column =\textgreater{}
-location}\label{encoding-handling-another-column-location}
+
+\subsection{Encoding Location Column using OrdinalEncoder}
+\subsection*{Explanation}
+This code imports \texttt{OrdinalEncoder} from \texttt{sklearn.preprocessing} to prepare categorical data for machine learning. The variable \texttt{categorical\_column} is set to \texttt{'location'}, indicating that this column will be encoded. Ordinal encoding converts categorical text values into numeric form so that algorithms can process them effectively. However, in this snippet, the encoding step is not yet applied—only the setup is shown.
+
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{106}{\boxspacing}
@@ -2394,6 +2552,8 @@ location}\label{encoding-handling-another-column-location}
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output displays the DataFrame \texttt{df} in its current state. Since no transformation is applied yet, the \texttt{location} column remains unchanged and still contains its original categorical values.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{106}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2424,6 +2584,16 @@ Index(['location ', 'area ', 'bedroom ', 'bathroom', 'owner ', 'blodd group',
       dtype='str')
     \end{Verbatim}
 
+
+
+\subsection{Cleaning and Standardizing DataFrame Column Names}
+\subsection*{Explanation}
+This code performs basic preprocessing on a pandas DataFrame. First, df.columns.str.strip() removes any leading or trailing whitespace from column names to avoid mismatches caused by hidden spaces. Then, df.columns.str.lower() converts all column names to lowercase to ensure consistency and avoid case-sensitivity issues during data access. After standardization, the updated column names are printed.
+
+Next, a conditional check is performed to verify whether the column 'location' exists in the DataFrame. If it exists, the first few rows of that column are displayed using df['location'].head(). Otherwise, a message is printed indicating that the 'location' column is not present.
+
+
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{108}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2450,6 +2620,8 @@ Index(['location', 'area', 'bedroom', 'bathroom', 'owner', 'blodd group',
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output first displays the cleaned list of column names in lowercase with no extra spaces. Then, depending on the dataset, either the first few values of the location column are shown or a message appears stating that the 'location' column is not available in the DataFrame.
     \begin{Verbatim}[commandchars=\\\{\}]
 0    a
 1    b
@@ -2458,6 +2630,11 @@ Index(['location', 'area', 'bedroom', 'bathroom', 'owner', 'blodd group',
 4    e
 Name: location, dtype: str
     \end{Verbatim}
+
+\subsection{Ordinal Encoding of Categorical Column}
+\subsection*{Explanation}
+The code applies \texttt{OrdinalEncoder} from \texttt{sklearn} to convert categorical values in a selected column into numerical form. First, an encoder object is created using \texttt{OrdinalEncoder()}. Then, the categorical column in the dataframe \texttt{df} is transformed using \texttt{fit\_transform()}, which assigns each unique category a corresponding integer value. This process is commonly used to prepare categorical data for machine learning models that require numerical input.
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{110}{\boxspacing}
@@ -2473,7 +2650,8 @@ Name: location, dtype: str
 \PY{n}{df}
 \end{Verbatim}
 \end{tcolorbox}
-
+\subsection*{Output}
+The output is the updated dataframe \texttt{df}, where the specified categorical column is replaced with encoded numerical values. Each category is now represented by an integer, making the dataset suitable for further processing or model training.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{111}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2491,8 +2669,11 @@ Name: location, dtype: str
 \end{Verbatim}
 \end{tcolorbox}
         
-    \subsection{Encoding / Handling another column =\textgreater{}
-area}\label{encoding-handling-another-column-area}
+    
+\subsection{Encoding Categorical Column (Area) Using Ordinal Encoder}
+\subsection*{Explanation}
+This code performs label encoding on the categorical column \texttt{area} using \texttt{OrdinalEncoder}. The column is first selected, then transformed into numerical values where each unique category is assigned a distinct integer. This transformation is necessary because most machine learning algorithms cannot directly process categorical (text) data. After encoding, the updated values replace the original column in the dataframe \texttt{df}.
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{112}{\boxspacing}
@@ -2515,7 +2696,8 @@ area}\label{encoding-handling-another-column-area}
 \PY{n}{df}
 \end{Verbatim}
 \end{tcolorbox}
-
+\subsection*{Output}
+The output displays the updated dataframe \texttt{df}, where the \texttt{area} column is converted from categorical text values into numerical encoded values (e.g., 0, 1, 2, etc.). This makes the dataset suitable for further machine learning modeling and analysis.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{114}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2533,8 +2715,13 @@ area}\label{encoding-handling-another-column-area}
 \end{Verbatim}
 \end{tcolorbox}
         
-    \subsection{Encoding more than one column at a
-time}\label{encoding-more-than-one-column-at-a-time}
+\subsection{Encoding Multiple Categorical Columns with Validation}
+\subsection*{Explanation}
+This code is used to handle encoding preparation for multiple categorical columns in a dataset. A list named \texttt{categorical\_columns} contains the column names \texttt{'owner'} and \texttt{'blodd group'}. The program iterates through each column and checks whether it exists in the DataFrame \texttt{df}. If a column is missing, it prints an error message indicating that the column does not exist. Otherwise, it confirms that the column is ready for encoding by printing a message.
+
+This step is important in data preprocessing because encoding can only be applied to valid categorical columns. The check prevents runtime errors and ensures data integrity before transformation.
+
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{115}{\boxspacing}
@@ -2558,6 +2745,21 @@ time}\label{encoding-more-than-one-column-at-a-time}
 Encoding column: owner
 Encoding column: blodd group
     \end{Verbatim}
+    
+\subsection*{Output}
+The output will display messages for each column in the list:
+
+If a column exists in the DataFrame, it prints: \texttt{Encoding column: owner} or \texttt{Encoding column: blodd group}.
+If a column is missing, it prints: \texttt{Column 'owner' does not exist in the DataFrame} or similar message for the missing column.
+
+This helps verify which categorical variables are available for encoding before further preprocessing.
+
+
+\subsection{Encoding Multiple Categorical Columns Using OrdinalEncoder}
+\subsection*{Explanation}
+This code applies label encoding to multiple categorical columns in a dataset using \texttt{OrdinalEncoder}. First, it creates an encoder object. Then it filters only those columns from \texttt{categorical\_columns} that actually exist in the dataframe \texttt{df}. After that, it transforms all selected categorical columns into numerical values at once using \texttt{fit\_transform()}. This is useful for machine learning models that require numerical input instead of categorical text data.
+
+
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{117}{\boxspacing}
@@ -2575,6 +2777,8 @@ Encoding column: blodd group
 \end{Verbatim}
 \end{tcolorbox}
 
+\subsection*{Output}
+The output is the updated dataframe \texttt{df} where all selected categorical columns are converted into numerical encoded values. Each unique category in those columns is replaced with a corresponding integer, making the dataset fully numeric and ready for model training or analysis.
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{118}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2591,7 +2795,13 @@ Encoding column: blodd group
 9       9.0   2.0        4         2    6.0          1.0  11000
 \end{Verbatim}
 \end{tcolorbox}
-        
+
+\subsection{Feature Correlation with Target Variable}
+\subsection*{Explanation}
+This code computes the correlation matrix of the dataset using \texttt{df.corr()}, which measures the linear relationship between all numerical features. Then it extracts the correlation values of each feature with the target variable \texttt{price}. Finally, it sorts these correlations in descending order to identify which features have the strongest positive or negative relationship with price.
+
+
+
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{119}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -2608,6 +2818,9 @@ Encoding column: blodd group
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Correlation with Price:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{correlated\PYZus{}features}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
+
+\subsection*{Output}
+The output prints a sorted list of features along with their correlation values with \texttt{price}. Features with higher positive values indicate strong positive influence on price, while negative values indicate an inverse relationship. This helps in feature selection by identifying the most influential variables for predicting price.
 
     \begin{Verbatim}[commandchars=\\\{\}]
 Correlation with Price:
