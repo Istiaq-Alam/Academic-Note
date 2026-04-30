@@ -1,0 +1,7 @@
+Default :
+
+latex -interaction=nonstopmode %.tex|bibtex %.aux|latex -interaction=nonstopmode %.tex|latex -interaction=nonstopmode %.tex|xdvi %.dvi
+
+
+My One :
+xelatex -interaction=nonstopmode %.tex | qpdf --encrypt "" owner123 256 --print=full --modify=none --extract=n --annotate=n %.pdf protected_%.pdf
