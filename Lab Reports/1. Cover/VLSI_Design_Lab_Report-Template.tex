@@ -1,4 +1,6 @@
-\documentclass[12pt]{report}
+% VLSI LAB REPORT STRUCTURE TEMPLATE
+% CREATED BY ISTIAK ALAM (CSE-20)
+\documentclass[12pt,a4paper]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{fontspec}
@@ -17,12 +19,12 @@
 \geometry{a4paper, margin=1in}
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
 \renewcommand{\contentsname}{Table of Contents}
+\titleformat{\chapter}
+  {\centering\Huge\bfseries}  % centering Chapter Name
+  {Lab \thechapter}               
+  {1em}
+  {} 
 
-\pagestyle{fancy}
-\fancyhf{} 							% Header Middle
-\rhead{VLSI Design Lab}
-\lhead{Lab-04: FlipFlop Circuit}
-\rfoot{\thepage}
 
 \begin{document}
 
@@ -43,7 +45,7 @@
 		\vspace{0.3cm}        
         \textbf{\Large Course Title: VLSI Design Lab} \\
         \vspace{0.3cm}
-        \textbf{\Large Experiment Name: } \\        
+        \textbf{\Large Experiment Name: All the experiments} \\        
     \end{flushleft}
     
     \vspace{1em}
@@ -71,27 +73,44 @@
 \end{center}
 \end{titlepage}						% Cover End
 
+% Table of Contents
 \tableofcontents
 \thispagestyle{empty}
 \clearpage
 \pagenumbering{arabic}
 
-\section*{\center Abstract (All Lab)}
+% Header Sections 
+\pagestyle{fancy}
+\fancyhf{} 							% Header Middle
+\rhead{VLSI Design Lab}
+\rfoot{\thepage}
 
+\chapter*{\center Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+\thispagestyle{empty}
+
+<Write Abstract here>
+
+
+\chapter*{\center Software Information}
+\addcontentsline{toc}{chapter}{Software Information}
+<Write Software information here>
 
 \newpage
-\chapter{Lab-01 CMOS Logic Gate}
-\section{Introduction}
+\chapter{CMOS Logic Gate in DSCH2}
+\lhead{Lab-01: CMOS Logic Gate in DSCH2}
 
+\section{Introduction}
+<Introduction of Lab-01> 
 
 \section{Objective}
-
+<Objective of Lab-01>
 
 \section{Function}
+<Write fuction>
 
 
-
-\subsection*{Truth Table}
+\section{Truth Table}
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
@@ -102,19 +121,19 @@ No Edge & X & Q(previous) \\ \hline
 \end{tabular}
 \end{center}
 
-\subsection*{Schematic Image}
+\section{Schematic Image}
 \begin{figure}[!h]
 \centering
 %\includegraphics[width=1\textwidth]{FlipFlop.png}
-\caption{CMOS Schematic of D Flip-Flop in DSCH2}
+\caption{Add figure caption here}
 \end{figure}
 
 
-\subsection*{Timing Diagram}
+\section{Timing Diagram}
 \begin{figure}[!h]
 \centering
 %\includegraphics[width=1\textwidth]{Timing Diagram.png}
-\caption{Timing Diagram of D Flip-Flop}
+\caption{Add Timing Diagram here}
 \end{figure}
 
 The timing diagram shows that the output Q follows the input D only at the rising edge of the clock signal. Between clock edges, the output remains constant regardless of changes in the input. \\
@@ -122,22 +141,45 @@ From the simulation results, it was observed that the D Flip-Flop changes its ou
 
 % =====================================================
 \section{Conclusion}
+<Write Conclusition here>\\
+DEMO \\
 The CMOS-based D Flip-Flop was successfully designed and simulated using the DSCH2 tool. The truth table and timing diagram verified that the circuit operates correctly as a clocked storage element. This experiment reinforces the understanding of sequential logic design and the role of flip-flops in digital systems.
 
 
 
-\chapter{Lab-02 Sequential Circuit}
+
+\chapter{Implementing Sequential Circuit}
+\lhead{Lab-02: Implementing Sequential Circuit}
+<Lab 2 Start here>
 
 
 
-\chapter{Lab-03}
+
+\chapter{Adder Circuits}
+\lhead{Lab-03: Adder Circuits}
+<Lab 3 Start here>
 
 
-\chapter{Lab-04 }
 
-\chapter{Lab-05 }
 
-\chapter{Lab-06 }
+\chapter{Flip-Flop Circuits}
+\lhead{Lab-04: Flip-Flop Circuits}
+<Lab 4 Start here>
+
+
+
+
+\chapter{Stick Diagram in MICROWIND2}
+\lhead{Lab-05: Stick Diagram in MICROWIND2}
+<Lab 5 Start here>
+
+
+
+
+\chapter{Stick Diagram of XOR function}
+\lhead{Lab-06: Stick Diagram of XOR function}
+<Lab 6 Start here>
+
 
 
 
