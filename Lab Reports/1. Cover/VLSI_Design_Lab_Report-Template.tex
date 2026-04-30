@@ -1,0 +1,145 @@
+\documentclass[12pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\newfontfamily\hackfont{Hack}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\renewcommand{\contentsname}{Table of Contents}
+
+\pagestyle{fancy}
+\fancyhf{} 							% Header Middle
+\rhead{VLSI Design Lab}
+\lhead{Lab-04: FlipFlop Circuit}
+\rfoot{\thepage}
+
+\begin{document}
+
+\begin{titlepage}					% Cover Start
+\begin{center}
+    \includegraphics[width=0.35\textwidth]{logo.png} \\
+    \vspace{0.5cm}
+    \textbf{\Huge \textcolor{cyan}{NOTRE DAME} \textcolor{cyan}{UNIVERSITY}} \\
+    \vspace{0.5cm}
+    \textbf{\Huge \textcolor{orange}{BANGLADESH}} \\
+    
+    \vspace{0.9cm}
+    \textbf{\Huge \underline{VLSI Design Lab Report}} \\
+    
+    \vspace{1.5em}
+    \begin{flushleft}
+    	\textbf{\Large Course Code: CSE-4218} \\
+		\vspace{0.3cm}        
+        \textbf{\Large Course Title: VLSI Design Lab} \\
+        \vspace{0.3cm}
+        \textbf{\Large Experiment Name: } \\        
+    \end{flushleft}
+    
+    \vspace{1em}
+    \begin{flushleft}
+        \textbf{\Huge \textcolor{blue}{Submitted by:}} \\
+        \vspace{0.3cm}
+        \textbf{\Large Name: } \\
+        \vspace{0.3cm}
+        \textbf{\Large ID: } \\
+		\vspace{0.3cm}        
+        \textbf{\Large Batch: CSE-20} \\
+        \vspace{0.5cm}
+        \textbf{\Large Submission Date: }{\Large \textbf{\today}\par}
+    \end{flushleft}
+    \vfill
+    \begin{flushleft}
+        \textbf{\Huge \textcolor{blue}{Submitted to:}} \\
+        \vspace{0.3cm}
+        \textbf{\Large Nafisa Tabassum,} \\
+        \vspace{0.3cm}
+        \textbf{\Large Lecturer, Dept. of CSE} \\
+        \vspace{0.3cm}
+        \textbf{\Large Notre Dame University Bangladesh}
+    \end{flushleft}
+\end{center}
+\end{titlepage}						% Cover End
+
+\tableofcontents
+\thispagestyle{empty}
+\clearpage
+\pagenumbering{arabic}
+
+\section*{\center Abstract (All Lab)}
+
+
+\newpage
+\chapter{Lab-01 CMOS Logic Gate}
+\section{Introduction}
+
+
+\section{Objective}
+
+
+\section{Function}
+
+
+
+\subsection*{Truth Table}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Clock & D & Q(next) \\ \hline
+$\uparrow$ & 0 & 0 \\
+$\uparrow$ & 1 & 1 \\
+No Edge & X & Q(previous) \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection*{Schematic Image}
+\begin{figure}[!h]
+\centering
+%\includegraphics[width=1\textwidth]{FlipFlop.png}
+\caption{CMOS Schematic of D Flip-Flop in DSCH2}
+\end{figure}
+
+
+\subsection*{Timing Diagram}
+\begin{figure}[!h]
+\centering
+%\includegraphics[width=1\textwidth]{Timing Diagram.png}
+\caption{Timing Diagram of D Flip-Flop}
+\end{figure}
+
+The timing diagram shows that the output Q follows the input D only at the rising edge of the clock signal. Between clock edges, the output remains constant regardless of changes in the input. \\
+From the simulation results, it was observed that the D Flip-Flop changes its output state only at the rising edge of the clock signal. When the clock transitions from LOW to HIGH, the output Q takes the value of the input D. At all other times, the output remains unchanged, preserving the previously stored value. This behavior confirms the correct operation of the edge-triggered D Flip-Flop implemented using CMOS logic.
+
+% =====================================================
+\section{Conclusion}
+The CMOS-based D Flip-Flop was successfully designed and simulated using the DSCH2 tool. The truth table and timing diagram verified that the circuit operates correctly as a clocked storage element. This experiment reinforces the understanding of sequential logic design and the role of flip-flops in digital systems.
+
+
+
+\chapter{Lab-02 Sequential Circuit}
+
+
+
+\chapter{Lab-03}
+
+
+\chapter{Lab-04 }
+
+\chapter{Lab-05 }
+
+\chapter{Lab-06 }
+
+
+
+
+\end{document}
