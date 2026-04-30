@@ -21,7 +21,7 @@
 \pagestyle{fancy}
 \fancyhf{} 							% Header Middle
 \rhead{VLSI Design Lab}
-\lhead{Lab-05: Stick Diagram}
+\lhead{Lab-06: Stick Diagram of XOR Gate}
 \rfoot{\thepage}
 
 \begin{document}
@@ -35,7 +35,7 @@
     \textbf{\Huge \textcolor{orange}{BANGLADESH}} \\
     
     \vspace{0.9cm}
-    \textbf{\Huge \underline{VLSI Design Lab Report-05}} \\
+    \textbf{\Huge \underline{VLSI Design Lab Report-06}} \\
     
     \vspace{1.5em}
     \begin{flushleft}
@@ -43,7 +43,7 @@
 		\vspace{0.3cm}        
         \textbf{\Large Course Title: VLSI Design Lab} \\
         \vspace{0.3cm}
-        \textbf{\Large Experiment Name: Stick Diagram in MICROWIND2} \\        
+        \textbf{\Large Experiment Name: Stick Diagram of XOR Gate} \\        
     \end{flushleft}
     
     \vspace{1em}
@@ -77,14 +77,16 @@
 \pagenumbering{arabic}
 
 \section*{\center Abstract}
-This laboratory experiment focuses on the implementation of CMOS stick diagrams using the Microwind2 layout design tool. Stick diagrams for fundamental logic gates, including the 2-input NAND gate, 2-input NOR gate, and 1-input inverter, were developed following standard VLSI layout conventions. The diagrams represent simplified layout structures using color-coded layers such as polysilicon, diffusion, and metal interconnections. The primary objective of this experiment is to understand the physical representation of CMOS circuits and the relationship between schematic design and layout realization. The resulting stick diagrams provide a compact and technology-independent view of circuit structures, which is essential for efficient VLSI design.
+This laboratory experiment presents the implementation of the stick diagram of an XOR gate using the Microwind2 layout design tool. The XOR gate was realized based on its Boolean expression and CMOS logic principles. A simplified stick diagram was developed using standard layer representations such as polysilicon, diffusion, and metal interconnections. The functionality of the design was verified through simulation, and the output waveform was analyzed to confirm correct logical behavior. The experiment provides a clear understanding of the relationship between Boolean functions, CMOS circuit design, and their physical layout representation in VLSI systems.
+
 
 
 
 \section{Introduction}
-In VLSI design, the transition from schematic-level representation to physical layout is a critical step in the design process. Stick diagrams serve as an intermediate abstraction that simplifies the visualization of circuit layouts without considering exact dimensions. These diagrams use standardized color codes to represent different layers such as polysilicon, diffusion regions, and metal interconnections.
+In VLSI design, the transformation of logical circuits into physical layouts is an essential step in the design process. Stick diagrams serve as a simplified and technology-independent method for representing circuit layouts, allowing designers to visualize transistor placement and interconnections without focusing on exact dimensions.
 
-Microwind2 is a layout design tool that allows designers to implement and simulate CMOS circuits at the physical level. In this experiment, stick diagrams of basic logic gates were implemented to understand layout organization, transistor placement, and interconnection strategies. The study of stick diagrams helps in developing an understanding of design rules, layout optimization, and area-efficient circuit implementation in VLSI systems.
+The XOR gate is an important combinational logic circuit widely used in arithmetic and digital systems. Its implementation in CMOS requires careful arrangement of pull-up and pull-down networks. In this experiment, the XOR gate is designed using its Boolean expression and represented using a stick diagram in Microwind2. The study of this design helps in understanding layout organization, layer interaction, and efficient circuit realization in VLSI systems.
+
 
 
 \section{Objective}
@@ -99,77 +101,54 @@ The objectives of this laboratory experiment are as follows:
 
 
 \newpage
-\section{1 Input Inverter (NOT Gate)}
-The inverter, also known as a NOT gate, is the most fundamental logic gate in digital design. It produces the logical complement of the input signal. In CMOS technology, the inverter is implemented using one PMOS transistor in the pull-up network and one NMOS transistor in the pull-down network. The stick diagram represents this structure using polysilicon for gate control, diffusion regions for source and drain, and metal layers for interconnections. The inverter serves as the basic building block for more complex CMOS circuits.
+\section{XOR Gate}
 
-\subsection*{Schematic Image}
+An XOR (Exclusive-OR) gate is a combinational logic gate that produces a logic HIGH output when the inputs are different and a logic LOW output when the inputs are the same. It is commonly used in digital circuits for comparison, parity checking, and arithmetic operations. 
+
+\subsection*{Boolean Function}
+\[
+Y = (AB+A'B')'
+\]
+
+\subsection*{Truth Table}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+A & B & Y \\ \hline
+0 & 0 & 0 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 0 \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection*{Stick Diagram}
 \begin{figure}[!h]
 \centering
-\includegraphics[width=1\textwidth]{Inverter.png}
-\caption{Stick Diagram of Inverter (NOT Gate) in MICROWIND2}
+\includegraphics[width=0.7\textwidth]{XOR-Function-Stick-Diagram.png}
+\caption{Stick Diagram of XOR Gate}
 \end{figure}
 \newpage
-\subsection*{Output Diagram}
+\subsection*{Output}
 \begin{figure}[!h]
 \centering
-\includegraphics[width=1\textwidth]{Inverter-Out.png}
-\caption{Output of Inverter (NOT Gate)}
+\includegraphics[width=1\textwidth]{XOR-Function-Output.png}
+\caption{Output in Analog Simulation of XOR Gate}
 \end{figure}
 
-From the output waveform, it is observed that the inverter produces the exact complement of the input signal. When the input is at logic HIGH, the NMOS transistor conducts and pulls the output to logic LOW. Conversely, when the input is at logic LOW, the PMOS transistor conducts and pulls the output to logic HIGH. The transition between output states occurs immediately following the input change, demonstrating correct switching behavior. The observed output confirms the proper operation of the CMOS inverter as expected from its theoretical truth table.
+\subsection*{Observation}
+From the implementation and simulation of the XOR gate stick diagram using Microwind2, it was observed that the circuit produces a logic HIGH output when the inputs are different and a logic LOW output when both inputs are the same. The output waveform obtained from the simulation matches the theoretical truth table of the XOR function.
+
+The stick diagram correctly represents the CMOS structure using appropriate placement of polysilicon, diffusion, and metal layers. Proper alignment and interconnection of these layers ensured correct signal flow and circuit operation. The simulation results confirm that the designed layout accurately implements the XOR logic function.
 
 
-
-
-
-\newpage
-\section{2 Input NAND Gate}
-A 2-input NAND gate is a fundamental universal logic gate that produces a logic LOW output only when both inputs are logic HIGH. In CMOS layout design, the NAND gate is implemented using two NMOS transistors connected in series in the pull-down network and two PMOS transistors connected in parallel in the pull-up network. The stick diagram represents this structure using simplified layer representations such as polysilicon for gates, diffusion for active regions, and metal for interconnections.
-
-\subsection*{Schematic Image}
-\begin{figure}[!h]
-\centering
-\includegraphics[width=1\textwidth]{2in-NAND.png}
-\caption{Stick Diagram of 2in-NAND Gate in MICROWIND2}
-\end{figure}
-\newpage
-\subsection*{Output Diagram}
-\begin{figure}[!h]
-\centering
-\includegraphics[width=1\textwidth]{2in-NAND-Out.png}
-\caption{Output of 2in-NAND Gate}
-\end{figure}
-
-From the simulation results obtained in Microwind2, it is observed that the output remains at logic HIGH for all input combinations except when both inputs are HIGH. When inputs A and B are simultaneously at logic HIGH, the series NMOS transistors in the pull-down network conduct, creating a path to ground and forcing the output to logic LOW. For all other input conditions, at least one PMOS transistor in the pull-up network remains active, maintaining the output at logic HIGH. The observed output waveform matches the expected truth table of a 2-input NAND gate, confirming the correctness of the stick diagram implementation.
-
-
-
-
-
-\newpage
-\section{2 Input NOR Gate}
-The 2-input NOR gate is a fundamental digital logic gate that produces a logic HIGH output only when both inputs are at logic LOW. In CMOS implementation, the NOR gate is realized using parallel NMOS transistors in the pull-down network and series PMOS transistors in the pull-up network. In the stick diagram representation using Microwind2, different layers such as polysilicon, diffusion, and metal are arranged according to standard layout conventions to form the required transistor connections. The stick diagram provides a simplified visualization of the physical layout without considering exact dimensions.
-\subsection*{Schematic Image}
-\begin{figure}[!h]
-\centering
-\includegraphics[width=1\textwidth]{2in-NOR.png}
-\caption{Stick Diagram of 2in-NOR Gate in MICROWIND2}
-\end{figure}
-\newpage
-\subsection*{Output Diagram}
-\begin{figure}[!h]
-\centering
-\includegraphics[width=1\textwidth]{2in-NOR-Out.png}
-\caption{Output of 2in-NOR Gate}
-\end{figure}
-
-From the simulation results, it is observed that the output of the 2-input NOR gate remains logic HIGH only when both inputs are LOW (0,0). For all other input combinations, i.e., when any one or both inputs are HIGH, the output becomes logic LOW. The output waveform clearly reflects this behavior, showing a HIGH level only in the absence of input signals. This verifies the correct implementation of the NOR logic function in the stick diagram using Microwind2.
 
 % =====================================================
 \section{Conclusion}
-From the implementation and simulation of stick diagrams using Microwind2, it was observed that the layout structures of the 2-input NAND gate, 2-input NOR gate, and inverter correctly represent their respective CMOS configurations. The arrangement of polysilicon, diffusion, and metal layers follows standard VLSI design conventions, ensuring proper formation of transistor networks.\\
-The simulation outputs verified that each gate produces the expected logical behavior according to its truth table. The stick diagrams provided a simplified yet effective representation of the physical layout, helping to visualize transistor placement and interconnections without considering exact geometrical dimensions. It was also observed that proper alignment of layers is essential to ensure correct circuit functionality.\\
-In this laboratory experiment, stick diagrams of basic CMOS logic gates were successfully designed and implemented using Microwind2. The study demonstrated how schematic-level logic can be translated into physical layout representations using simplified diagrammatic techniques.
+In this laboratory experiment, the stick diagram of an XOR gate was successfully designed and implemented using Microwind2. The experiment demonstrated how a Boolean expression can be translated into a CMOS-based layout representation using simplified stick diagram techniques.
+
+The simulation results verified that the implemented design functions correctly according to the XOR truth table. This experiment enhanced the understanding of CMOS layout design, layer organization, and the relationship between logical design and physical implementation. The knowledge gained from this lab is essential for advanced VLSI design and layout optimization.
+
 
 
 

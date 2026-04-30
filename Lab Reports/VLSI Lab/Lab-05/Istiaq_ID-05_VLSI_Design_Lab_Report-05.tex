@@ -102,18 +102,18 @@ The objectives of this laboratory experiment are as follows:
 \section{1 Input Inverter (NOT Gate)}
 The inverter, also known as a NOT gate, is the most fundamental logic gate in digital design. It produces the logical complement of the input signal. In CMOS technology, the inverter is implemented using one PMOS transistor in the pull-up network and one NMOS transistor in the pull-down network. The stick diagram represents this structure using polysilicon for gate control, diffusion regions for source and drain, and metal layers for interconnections. The inverter serves as the basic building block for more complex CMOS circuits.
 
-\subsection*{Schematic Image}
+\subsection*{Stick Diagram}
 \begin{figure}[!h]
 \centering
 \includegraphics[width=1\textwidth]{Inverter.png}
 \caption{Stick Diagram of Inverter (NOT Gate) in MICROWIND2}
 \end{figure}
 \newpage
-\subsection*{Output Diagram}
+\subsection*{Output}
 \begin{figure}[!h]
 \centering
 \includegraphics[width=1\textwidth]{Inverter-Out.png}
-\caption{Output of Inverter (NOT Gate)}
+\caption{Analog Simulation of Inverter (NOT Gate)}
 \end{figure}
 
 From the output waveform, it is observed that the inverter produces the exact complement of the input signal. When the input is at logic HIGH, the NMOS transistor conducts and pulls the output to logic LOW. Conversely, when the input is at logic LOW, the PMOS transistor conducts and pulls the output to logic HIGH. The transition between output states occurs immediately following the input change, demonstrating correct switching behavior. The observed output confirms the proper operation of the CMOS inverter as expected from its theoretical truth table.
@@ -126,20 +126,21 @@ From the output waveform, it is observed that the inverter produces the exact co
 \section{2 Input NAND Gate}
 A 2-input NAND gate is a fundamental universal logic gate that produces a logic LOW output only when both inputs are logic HIGH. In CMOS layout design, the NAND gate is implemented using two NMOS transistors connected in series in the pull-down network and two PMOS transistors connected in parallel in the pull-up network. The stick diagram represents this structure using simplified layer representations such as polysilicon for gates, diffusion for active regions, and metal for interconnections.
 
-\subsection*{Schematic Image}
+\subsection*{Stick Diagram}
 \begin{figure}[!h]
 \centering
 \includegraphics[width=1\textwidth]{2in-NAND.png}
 \caption{Stick Diagram of 2in-NAND Gate in MICROWIND2}
 \end{figure}
 \newpage
-\subsection*{Output Diagram}
+\subsection*{Output}
 \begin{figure}[!h]
 \centering
 \includegraphics[width=1\textwidth]{2in-NAND-Out.png}
-\caption{Output of 2in-NAND Gate}
+\caption{Analog Simulation of 2in-NAND Gate}
 \end{figure}
 
+\subsection*{Observation}
 From the simulation results obtained in Microwind2, it is observed that the output remains at logic HIGH for all input combinations except when both inputs are HIGH. When inputs A and B are simultaneously at logic HIGH, the series NMOS transistors in the pull-down network conduct, creating a path to ground and forcing the output to logic LOW. For all other input conditions, at least one PMOS transistor in the pull-up network remains active, maintaining the output at logic HIGH. The observed output waveform matches the expected truth table of a 2-input NAND gate, confirming the correctness of the stick diagram implementation.
 
 
@@ -149,25 +150,25 @@ From the simulation results obtained in Microwind2, it is observed that the outp
 \newpage
 \section{2 Input NOR Gate}
 The 2-input NOR gate is a fundamental digital logic gate that produces a logic HIGH output only when both inputs are at logic LOW. In CMOS implementation, the NOR gate is realized using parallel NMOS transistors in the pull-down network and series PMOS transistors in the pull-up network. In the stick diagram representation using Microwind2, different layers such as polysilicon, diffusion, and metal are arranged according to standard layout conventions to form the required transistor connections. The stick diagram provides a simplified visualization of the physical layout without considering exact dimensions.
-\subsection*{Schematic Image}
+\subsection*{Stick Diagram}
 \begin{figure}[!h]
 \centering
 \includegraphics[width=1\textwidth]{2in-NOR.png}
 \caption{Stick Diagram of 2in-NOR Gate in MICROWIND2}
 \end{figure}
 \newpage
-\subsection*{Output Diagram}
+\subsection*{Output}
 \begin{figure}[!h]
 \centering
 \includegraphics[width=1\textwidth]{2in-NOR-Out.png}
-\caption{Output of 2in-NOR Gate}
+\caption{Analog Simulation of 2in-NOR Gate}
 \end{figure}
 
+\subsection*{Observation}
 From the simulation results, it is observed that the output of the 2-input NOR gate remains logic HIGH only when both inputs are LOW (0,0). For all other input combinations, i.e., when any one or both inputs are HIGH, the output becomes logic LOW. The output waveform clearly reflects this behavior, showing a HIGH level only in the absence of input signals. This verifies the correct implementation of the NOR logic function in the stick diagram using Microwind2.
 
 % =====================================================
 \section{Conclusion}
-From the implementation and simulation of stick diagrams using Microwind2, it was observed that the layout structures of the 2-input NAND gate, 2-input NOR gate, and inverter correctly represent their respective CMOS configurations. The arrangement of polysilicon, diffusion, and metal layers follows standard VLSI design conventions, ensuring proper formation of transistor networks.\\
 The simulation outputs verified that each gate produces the expected logical behavior according to its truth table. The stick diagrams provided a simplified yet effective representation of the physical layout, helping to visualize transistor placement and interconnections without considering exact geometrical dimensions. It was also observed that proper alignment of layers is essential to ensure correct circuit functionality.\\
 In this laboratory experiment, stick diagrams of basic CMOS logic gates were successfully designed and implemented using Microwind2. The study demonstrated how schematic-level logic can be translated into physical layout representations using simplified diagrammatic techniques.
 

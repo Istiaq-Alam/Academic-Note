@@ -709,20 +709,19 @@ The objectives of this laboratory experiment are as follows:
 \section{1 Input Inverter (NOT Gate)}
 The inverter, also known as a NOT gate, is the most fundamental logic gate in digital design. It produces the logical complement of the input signal. In CMOS technology, the inverter is implemented using one PMOS transistor in the pull-up network and one NMOS transistor in the pull-down network. The stick diagram represents this structure using polysilicon for gate control, diffusion regions for source and drain, and metal layers for interconnections. The inverter serves as the basic building block for more complex CMOS circuits.
 
-\subsection*{Schematic Image}
+\subsection*{Stick Diagram}
 \begin{figure}[!h]
 \centering
 \includegraphics[width=1\textwidth]{Lab-05/Inverter.png}
 \caption{Stick Diagram of Inverter (NOT Gate) in MICROWIND2}
 \end{figure}
 \newpage
-\subsection*{Output Diagram}
+\subsection*{Output}
 \begin{figure}[!h]
 \centering
 \includegraphics[width=1\textwidth]{Lab-05/Inverter-Out.png}
-\caption{Output of Inverter (NOT Gate)}
+\caption{Analog Simulation of Inverter (NOT Gate)}
 \end{figure}
-
 \subsection*{Observation}
 From the output waveform, it is observed that the inverter produces the exact complement of the input signal. When the input is at logic HIGH, the NMOS transistor conducts and pulls the output to logic LOW. Conversely, when the input is at logic LOW, the PMOS transistor conducts and pulls the output to logic HIGH. The transition between output states occurs immediately following the input change, demonstrating correct switching behavior. The observed output confirms the proper operation of the CMOS inverter as expected from its theoretical truth table.
 
@@ -734,18 +733,18 @@ From the output waveform, it is observed that the inverter produces the exact co
 \section{2 Input NAND Gate}
 A 2-input NAND gate is a fundamental universal logic gate that produces a logic LOW output only when both inputs are logic HIGH. In CMOS layout design, the NAND gate is implemented using two NMOS transistors connected in series in the pull-down network and two PMOS transistors connected in parallel in the pull-up network. The stick diagram represents this structure using simplified layer representations such as polysilicon for gates, diffusion for active regions, and metal for interconnections.
 
-\subsection*{Schematic Image}
+\subsection*{Stick Diagram}
 \begin{figure}[!h]
 \centering
 \includegraphics[width=1\textwidth]{Lab-05/2in-NAND.png}
 \caption{Stick Diagram of 2in-NAND Gate in MICROWIND2}
 \end{figure}
 \newpage
-\subsection*{Output Diagram}
+\subsection*{Output}
 \begin{figure}[!h]
 \centering
 \includegraphics[width=1\textwidth]{Lab-05/2in-NAND-Out.png}
-\caption{Output of 2in-NAND Gate}
+\caption{Analog Simulation of 2in-NAND Gate}
 \end{figure}
 
 \subsection*{Observation}
@@ -758,18 +757,18 @@ From the simulation results obtained in Microwind2, it is observed that the outp
 \newpage
 \section{2 Input NOR Gate}
 The 2-input NOR gate is a fundamental digital logic gate that produces a logic HIGH output only when both inputs are at logic LOW. In CMOS implementation, the NOR gate is realized using parallel NMOS transistors in the pull-down network and series PMOS transistors in the pull-up network. In the stick diagram representation using Microwind2, different layers such as polysilicon, diffusion, and metal are arranged according to standard layout conventions to form the required transistor connections. The stick diagram provides a simplified visualization of the physical layout without considering exact dimensions.
-\subsection*{Schematic Image}
+\subsection*{Stick Diagram}
 \begin{figure}[!h]
 \centering
 \includegraphics[width=1\textwidth]{Lab-05/2in-NOR.png}
 \caption{Stick Diagram of 2in-NOR Gate in MICROWIND2}
 \end{figure}
 \newpage
-\subsection*{Output Diagram}
+\subsection*{Output}
 \begin{figure}[!h]
 \centering
 \includegraphics[width=1\textwidth]{Lab-05/2in-NOR-Out.png}
-\caption{Output of 2in-NOR Gate}
+\caption{Analog Simulation of 2in-NOR Gate}
 \end{figure}
 
 \subsection*{Observation}
@@ -778,12 +777,53 @@ From the simulation results, it is observed that the output of the 2-input NOR g
 
 
 
+
+
 \chapter{Stick Diagram of XOR function}
 \lhead{Lab-06: Stick Diagram of XOR function}
-<Lab 6 Start here>
+
+\section*{Introduction}
+In VLSI design, the transformation of logical circuits into physical layouts is an essential step in the design process. Stick diagrams serve as a simplified and technology-independent method for representing circuit layouts, allowing designers to visualize transistor placement and interconnections without focusing on exact dimensions.
+
+The XOR gate is an important combinational logic circuit widely used in arithmetic and digital systems. Its implementation in CMOS requires careful arrangement of pull-up and pull-down networks. In this experiment, the XOR gate is designed using its Boolean expression and represented using a stick diagram in Microwind2. The study of this design helps in understanding layout organization, layer interaction, and efficient circuit realization in VLSI systems.
 
 
 
+\section*{Objective}
+The objectives of this laboratory experiment are as follows:
+\begin{itemize}
+    \item To understand the concept and importance of stick diagrams in VLSI layout design.
+    \item To implement stick diagrams of basic CMOS logic gates using Microwind2.
+    \item To represent transistor-level circuits using simplified, technology-independent layouts.
+    \item To analyze the arrangement of polysilicon, diffusion, and metal layers in CMOS design.
+    \item To develop a clear understanding of the relationship between schematic design and physical layout.
+\end{itemize}
 
+
+\newpage
+An XOR (Exclusive-OR) gate is a combinational logic gate that produces a logic HIGH output when the inputs are different and a logic LOW output when the inputs are the same. It is commonly used in digital circuits for comparison, parity checking, and arithmetic operations. 
+
+\subsection*{Boolean Function of XOR Gate}
+\[
+Y = (AB+A'B')'
+\]
+
+\subsection*{Truth Table}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+A & B & Y \\ \hline
+0 & 0 & 0 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 0 \\ \hline
+\end{tabular}
+\end{center}
+
+
+
+\chapter*{\center Conclusion}
+\addcontentsline{toc}{chapter}{Conclusion}
+<Write Conclusion here>
 
 \end{document}
