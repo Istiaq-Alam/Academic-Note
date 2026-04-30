@@ -567,21 +567,213 @@ Simulation results confirm correct inverted AND–OR CMOS implementation.
 
 \chapter{Adder Circuits}
 \lhead{Lab-03: Adder Circuits}
-<Lab 3 Start here>
+
+\section*{Introduction}
+A combinational logic circuit which is designed to add two binary digits is called as a half adder. The half adder provides the output along with a carry value (if any). The half adder circuit is designed by connecting an EX-OR gate and one AND gate. It has two input terminals and two output terminals for sum and carry.
+
+
+\section*{Objective}
+The objectives of this VLSI-Lab experiment are as follows:
+\begin{itemize}
+    \item To implement Adder Circuit using CMOS logic design methodology.
+    \item To design schematic-level Adder circuits using the DSCH2 tool.
+    \item To verify the logical correctness of the implemented circuits using truth tables.
+    \item To analyze timing diagrams to observe signal transitions and propagation behavior.
+    \item To develop a clear understanding of Adder Circuit.
+\end{itemize}
+
+\section{Half Adder Function}
+
+\subsection*{Boolean Function}
+\[
+Sum = AB' + A'B
+\]
+\[
+Carry= A⋅B
+\]
+
+\subsection*{Truth Table}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+A & B & Sum & Carry \\ \hline
+0 & 0 & 0 & 0  \\
+0 & 1 & 1 & 0  \\
+1 & 0 & 1 & 0  \\
+1 & 1 & 0 & 1  \\ \hline
+\end{tabular}
+\end{center}
+\newpage
+\subsection*{Schematic Image}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.7\textwidth]{Lab-03/Half-Adder.png}
+\caption{CMOS Schematic of Half-Adder}
+\end{figure}
+
+\subsection*{Timing Diagram}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.5\textwidth]{Lab-03/Half-Adder-TD.png}
+\caption{Timing Diagram of Half-Adder}
+\end{figure}
+  
+
+
+\subsection*{Observation}
+The timing diagram of a half adder illustrates the sequence of operations that occur when two binary inputs are added. The diagram typically shows the timing of the XOR operation for the sum and the timing of the AND operation for the carry. The timing diagram can help in understanding the propagation delay and the timing constraints of the circuit. It is important to note that the timing diagram should be adjusted to account for the specific timing requirements of the circuit design, such as rise/fall time and maximum input frequency. 
 
 
 
 
 \chapter{Flip-Flop Circuits}
 \lhead{Lab-04: Flip-Flop Circuits}
-<Lab 4 Start here>
+\section*{Introduction}
+This laboratory experiment focuses on the design and implementation of a flip-flop circuit using CMOS logic in the DSCH2 environment. Flip-flops are fundamental sequential elements used for data storage and synchronization in digital systems. In this experiment, a D Flip-Flop was designed using CMOS-based logic gates, and its functionality was verified through truth table analysis and timing simulation. The behavior of the circuit was observed with respect to clock-triggered input transitions.
+
+\section*{Objective}
+The objectives of this laboratory experiment are as follows:
+\begin{itemize}
+    \item To design and implement a flip-flop circuit using CMOS logic.
+    \item To develop schematic-level circuits using the DSCH2 tool.
+    \item To derive and verify the truth table of the flip-flop from simulation.
+    \item To analyze timing diagrams to observe clock-triggered behavior.
+    \item To understand the operation of sequential circuits and data storage elements.
+\end{itemize}
+
+\section{Function of FlipFlop Circuit}
+The D Flip-Flop is a clock-controlled bistable device that transfers the input data (D) to the output (Q) on the active edge of the clock signal.
+
+\[
+Q_{next} = D
+\]
+
+The output changes only at the triggering edge of the clock, ensuring synchronized data storage.
+
+
+\subsection*{Truth Table}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Clock & D & Q(next) \\ \hline
+$\uparrow$ & 0 & 0 \\
+$\uparrow$ & 1 & 1 \\
+No Edge & X & Q(previous) \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection*{Schematic Image}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\textwidth]{Lab-04/FlipFlop.png}
+\caption{CMOS Schematic of D Flip-Flop in DSCH2}
+\end{figure}
+
+
+\subsection*{Timing Diagram}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.7\textwidth]{Lab-04/Timing Diagram.png}
+\caption{Timing Diagram of D Flip-Flop}
+\end{figure}
+
+\subsection*{Observation}
+The timing diagram shows that the output Q follows the input D only at the rising edge of the clock signal. Between clock edges, the output remains constant regardless of changes in the input. \\
+From the simulation results, it was observed that the D Flip-Flop changes its output state only at the rising edge of the clock signal. When the clock transitions from LOW to HIGH, the output Q takes the value of the input D. At all other times, the output remains unchanged, preserving the previously stored value. This behavior confirms the correct operation of the edge-triggered D Flip-Flop implemented using CMOS logic.
 
 
 
 
 \chapter{Stick Diagram in MICROWIND2}
 \lhead{Lab-05: Stick Diagram in MICROWIND2}
-<Lab 5 Start here>
+
+\section*{Introduction}
+In VLSI design, the transition from schematic-level representation to physical layout is a critical step in the design process. Stick diagrams serve as an intermediate abstraction that simplifies the visualization of circuit layouts without considering exact dimensions. These diagrams use standardized color codes to represent different layers such as polysilicon, diffusion regions, and metal interconnections.
+
+Microwind2 is a layout design tool that allows designers to implement and simulate CMOS circuits at the physical level. In this experiment, stick diagrams of basic logic gates were implemented to understand layout organization, transistor placement, and interconnection strategies. The study of stick diagrams helps in developing an understanding of design rules, layout optimization, and area-efficient circuit implementation in VLSI systems.
+
+
+\section*{Objective}
+The objectives of this laboratory experiment are as follows:
+\begin{itemize}
+    \item To understand the concept and importance of stick diagrams in VLSI layout design.
+    \item To implement stick diagrams of basic CMOS logic gates using Microwind2.
+    \item To represent transistor-level circuits using simplified, technology-independent layouts.
+    \item To analyze the arrangement of polysilicon, diffusion, and metal layers in CMOS design.
+    \item To develop a clear understanding of the relationship between schematic design and physical layout.
+\end{itemize}
+
+
+\newpage
+\section{1 Input Inverter (NOT Gate)}
+The inverter, also known as a NOT gate, is the most fundamental logic gate in digital design. It produces the logical complement of the input signal. In CMOS technology, the inverter is implemented using one PMOS transistor in the pull-up network and one NMOS transistor in the pull-down network. The stick diagram represents this structure using polysilicon for gate control, diffusion regions for source and drain, and metal layers for interconnections. The inverter serves as the basic building block for more complex CMOS circuits.
+
+\subsection*{Schematic Image}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\textwidth]{Lab-05/Inverter.png}
+\caption{Stick Diagram of Inverter (NOT Gate) in MICROWIND2}
+\end{figure}
+\newpage
+\subsection*{Output Diagram}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\textwidth]{Lab-05/Inverter-Out.png}
+\caption{Output of Inverter (NOT Gate)}
+\end{figure}
+
+\subsection*{Observation}
+From the output waveform, it is observed that the inverter produces the exact complement of the input signal. When the input is at logic HIGH, the NMOS transistor conducts and pulls the output to logic LOW. Conversely, when the input is at logic LOW, the PMOS transistor conducts and pulls the output to logic HIGH. The transition between output states occurs immediately following the input change, demonstrating correct switching behavior. The observed output confirms the proper operation of the CMOS inverter as expected from its theoretical truth table.
+
+
+
+
+
+\newpage
+\section{2 Input NAND Gate}
+A 2-input NAND gate is a fundamental universal logic gate that produces a logic LOW output only when both inputs are logic HIGH. In CMOS layout design, the NAND gate is implemented using two NMOS transistors connected in series in the pull-down network and two PMOS transistors connected in parallel in the pull-up network. The stick diagram represents this structure using simplified layer representations such as polysilicon for gates, diffusion for active regions, and metal for interconnections.
+
+\subsection*{Schematic Image}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\textwidth]{Lab-05/2in-NAND.png}
+\caption{Stick Diagram of 2in-NAND Gate in MICROWIND2}
+\end{figure}
+\newpage
+\subsection*{Output Diagram}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\textwidth]{Lab-05/2in-NAND-Out.png}
+\caption{Output of 2in-NAND Gate}
+\end{figure}
+
+\subsection*{Observation}
+From the simulation results obtained in Microwind2, it is observed that the output remains at logic HIGH for all input combinations except when both inputs are HIGH. When inputs A and B are simultaneously at logic HIGH, the series NMOS transistors in the pull-down network conduct, creating a path to ground and forcing the output to logic LOW. For all other input conditions, at least one PMOS transistor in the pull-up network remains active, maintaining the output at logic HIGH. The observed output waveform matches the expected truth table of a 2-input NAND gate, confirming the correctness of the stick diagram implementation.
+
+
+
+
+
+\newpage
+\section{2 Input NOR Gate}
+The 2-input NOR gate is a fundamental digital logic gate that produces a logic HIGH output only when both inputs are at logic LOW. In CMOS implementation, the NOR gate is realized using parallel NMOS transistors in the pull-down network and series PMOS transistors in the pull-up network. In the stick diagram representation using Microwind2, different layers such as polysilicon, diffusion, and metal are arranged according to standard layout conventions to form the required transistor connections. The stick diagram provides a simplified visualization of the physical layout without considering exact dimensions.
+\subsection*{Schematic Image}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\textwidth]{Lab-05/2in-NOR.png}
+\caption{Stick Diagram of 2in-NOR Gate in MICROWIND2}
+\end{figure}
+\newpage
+\subsection*{Output Diagram}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\textwidth]{Lab-05/2in-NOR-Out.png}
+\caption{Output of 2in-NOR Gate}
+\end{figure}
+
+\subsection*{Observation}
+From the simulation results, it is observed that the output of the 2-input NOR gate remains logic HIGH only when both inputs are LOW (0,0). For all other input combinations, i.e., when any one or both inputs are HIGH, the output becomes logic LOW. The output waveform clearly reflects this behavior, showing a HIGH level only in the absence of input signals. This verifies the correct implementation of the NOR logic function in the stick diagram using Microwind2.
 
 
 
