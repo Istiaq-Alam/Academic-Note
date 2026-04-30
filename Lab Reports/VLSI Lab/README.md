@@ -1,4 +1,4 @@
-# Instruction:
+# LaTex Report Instruction:
 ## Download the Zip file or the tex file with logo
 
 ## For TexMaker : 
