@@ -92,7 +92,7 @@
 This report presents a comprehensive study of CMOS logic design, sequential circuits, adder circuits, flip-flop implementation, and stick diagram design using DSCH2 and MICROWIND2 tools in the VLSI Design Laboratory. The experiments were conducted to understand the principles of CMOS logic implementation, schematic-level circuit design, timing analysis, and physical layout representation in VLSI systems.\\ \\
 In the initial experiments, basic CMOS logic gates such as NOT, NAND, NOR, AND, OR, and XOR were designed and verified using DSCH2 through truth tables and simulation outputs. Various Boolean expressions were then implemented using CMOS pull-up and pull-down network structures to analyze logic functionality and timing behavior. Sequential circuits including D Flip-Flops and combinational circuits such as Half Adders were also implemented to observe clock-triggered operation, data storage behavior, and binary addition functionality.\\ \\
 Furthermore, stick diagrams of CMOS circuits were implemented in MICROWIND2 to develop an understanding of physical layout representation using polysilicon, diffusion, and metal layers. Stick diagram implementations of Inverter, NAND, NOR, and XOR gates were analyzed through analog simulation outputs to verify correct CMOS operation.\\ \\
-The experiments successfully demonstrated the relationship between Boolean logic, transistor-level CMOS implementation, schematic design, timing analysis, and physical layout representation. The knowledge gained from these experiments provides a fundamental understanding of VLSI circuit design methodologies and layout optimization techniques.\\ \\
+The experiments successfully demonstrated the relationship between Boolean logic, transistor level CMOS implementation, schematic design, timing analysis, and physical layout representation. The knowledge gained from these experiments provides a fundamental understanding of VLSI circuit design methodologies and layout optimization techniques.\\ \\
 
 
 \chapter*{\center Software Information}
@@ -852,7 +852,7 @@ A & B & Y \\ \hline
 \subsection*{Stick Diagram}
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.7\textwidth]{Lab-06/XOR-Function-Stick-Diagram.png}
+\includegraphics[width=0.9\textwidth]{Lab-06/XOR-Function-Stick-Diagram.png}
 \caption{Stick Diagram of XOR Gate}
 \end{figure}
 \newpage
@@ -864,14 +864,17 @@ A & B & Y \\ \hline
 \end{figure}
 
 \subsection*{Observation}
-From the implementation and simulation of the XOR gate stick diagram using Microwind2, it was observed that the circuit produces a logic HIGH output when the inputs are different and a logic LOW output when both inputs are the same. The output waveform obtained from the simulation matches the theoretical truth table of the XOR function.
-
+From the implementation and simulation of the XOR gate stick diagram using Microwind2, it was observed that the circuit produces a logic HIGH output when the inputs are different and a logic LOW output when both inputs are the same. The output waveform obtained from the simulation matches the theoretical truth table of the XOR function.\\ \\
 The stick diagram correctly represents the CMOS structure using appropriate placement of polysilicon, diffusion, and metal layers. Proper alignment and interconnection of these layers ensured correct signal flow and circuit operation. The simulation results confirm that the designed layout accurately implements the XOR logic function.
 
 
 
 \chapter*{\center Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
-<Write Conclusion here>
+In this VLSI Design Lab course, various CMOS-based digital circuits were successfully designed, implemented, simulated, and analyzed using DSCH2 and MICROWIND2 software tools. The experiments provided practical knowledge of combinational logic circuits, sequential circuits, timing analysis, CMOS implementation techniques, and physical layout representation in VLSI systems.\\ 
+The implementation of basic logic gates such as NOT, NAND, NOR, AND, OR, and XOR using DSCH2 helped in understanding the operation of CMOS pull-up and pull-down networks. Verification through truth tables and timing simulations confirmed the correct logical behavior of each circuit. The implementation of Boolean expressions further strengthened the understanding of CMOS logic design methodology and transistor level circuit realization.\\ \\
+The design and analysis of Half Adder and D Flip-Flop circuits introduced important concepts of arithmetic operations, sequential logic, data storage, and clock-triggered behavior. Timing diagrams demonstrated signal transitions and propagation characteristics of digital circuits.\\
+The implementation of stick diagrams using MICROWIND2 provided practical experience in translating schematic-level circuits into simplified physical layouts. The arrangement of polysilicon, diffusion, and metal layers helped in understanding transistor placement, routing techniques, and layout organization in CMOS design. Analog simulation outputs verified the correctness of the implemented layouts.\\ \\
+Overall, this laboratory course successfully developed fundamental knowledge and practical skills related to VLSI circuit design, CMOS implementation, timing analysis, and physical layout representation. The experiments provided a strong foundation for advanced study and research in VLSI system design and semiconductor technology.\\ \\
 
 \end{document}
