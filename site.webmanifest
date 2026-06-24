@@ -1,0 +1,84 @@
+{
+  "name": "NDUB CSE-20 Academic Notes",
+  "short_name": "CSE-20 Notes",
+  "description": "Free lecture PDFs, lab reports, books, and class routine for CSE-20 students at Notre Dame University Bangladesh — Computer Graphics, Machine Learning, VLSI Design, and more.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#1e1e2e",
+  "theme_color": "#1e1e2e",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Class Routine and Lecture Notes"
+    },
+    {
+      "src": "/screenshots/mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile view of Academic Notes"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Class Routine",
+      "short_name": "Routine",
+      "description": "Jump to the Spring '26 class schedule",
+      "url": "/#class-routine",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Lectures",
+      "short_name": "Lectures",
+      "description": "Browse lecture PDF notes",
+      "url": "/#class-lectures",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Lab Reports",
+      "short_name": "Labs",
+      "description": "Browse lab reports",
+      "url": "/#lab-reports",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Books",
+      "short_name": "Books",
+      "description": "Browse recommended books",
+      "url": "/#books",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}
