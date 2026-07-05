@@ -13,7 +13,7 @@
                 <div class="table-container">
                     <table align="center">
                         <tr>
-                            <th class="time">Time</th>     
+                            <th class="time">Time</th>           
                             <th>Saturday</th>
                             <th>Sunday</th>
                             <th>Monday</th>
