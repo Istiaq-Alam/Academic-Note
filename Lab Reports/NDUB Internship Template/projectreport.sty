@@ -1,0 +1,188 @@
+% ------------------------------------------------------------------------------
+% Mathematics Project Report Template style file
+% by Jon Shiach 2019
+% Manchester Metropolitan University
+% ------------------------------------------------------------------------------
+
+\ProvidesPackage{projectreport}
+\NeedsTeXFormat{LaTeX2e}
+
+% ------------------------------------------------------------------------------
+% Packages
+% ------------------------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{blindtext}
+
+% ------------------------------------------------------------------------------
+% Page setup
+% ------------------------------------------------------------------------------
+\usepackage{geometry} 
+\geometry{a4paper, margin=1in, twoside}
+\usepackage{setspace}
+\doublespacing
+
+% ------------------------------------------------------------------------------
+% Referencing
+% ------------------------------------------------------------------------------
+%\usepackage[
+%	backend=biber,
+%	citestyle=authoryear,
+%	bibstyle=authoryear,
+%	maxcitenames=2,
+%	maxbibnames=99]{biblatex}
+%\addbibresource{references.bib}
+%\DeclareNameAlias{sortname}{family-given}
+%\setlength\bibitemsep{1em}
+
+% ------------------------------------------------------------------------------
+% Code listings
+% ------------------------------------------------------------------------------
+\usepackage{listings}
+\usepackage{xcolor}
+\lstdefinestyle{matlabcode}{
+	backgroundcolor=\color{gray!10},   
+	commentstyle=\color{green!50!black},
+	keywordstyle=\color{blue},
+	stringstyle=\color{magenta},
+	basicstyle=\linespread{1}\footnotesize\ttfamily,
+	numberstyle=\tiny,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=t,   
+	frame=single,
+	keepspaces=true,         
+	language=matlab,        
+	numbers=none,             
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	aboveskip=1em,
+	belowskip=1em,
+	belowcaptionskip=12pt
+}
+
+% ------------------------------------------------------------------------------
+% Headers and footers
+% ------------------------------------------------------------------------------	
+\usepackage{fancyhdr}
+\pagestyle{fancy}   
+\setlength{\headheight}{14.5pt}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}   
+\fancyhead[LE,LO]{\rightmark}
+\fancyhead[RO,RE]{\leftmark}
+
+
+%definition of macros
+\def\cse{Department of Computer Science and Engineering}
+\def\ndub{Notre Dame University Bangladesh}
+
+% Read and store student names in DB
+\RequirePackage{datatool}
+\DTLloaddb[noheader]{Students}{Parameters/students.txt}
+\DTLloaddb[noheader]{Supervisor}{Parameters/supervisor.txt}
+% ------------------------------------------------------------------------------
+% my title page
+
+% Report parameters
+\def\reporttitle{\input{Parameters/ReportTitle.txt}\unskip}
+\def\reportdate{\input{Parameters/ReportDate.txt}\unskip}
+\def\companyname{\input{Parameters/CompanyName.txt}\unskip}
+\def\duration{\input{Parameters/InternshipDuration.txt}\unskip}
+
+% Report title page 
+\pagenumbering{Alpha}
+\renewcommand{\maketitle}{
+  \thispagestyle{empty}
+  \begin{center}
+   \Large{ B.Sc.\ in Computer Science and Engineering}\\
+    \vspace*{\stretch{2}}
+    \textbf{{\Large\reporttitle}}
+
+    \vspace*{\stretch{5}}
+    {\Large Submitted by}\\
+    \DTLforeach{Students}{\StudentName=Column1,\StudentID=Column2}{\vspace*{\stretch{1}}\StudentName\\\StudentID\\}
+    \vspace*{\stretch{3}}
+    {\Large Supervised by}\\
+    \vspace*{\stretch{1}}
+    \DTLforeach{Supervisor}{\SupervisorName=Column1,\SupervisorDesignation=Column2}{\SupervisorName}\\
+    \vspace*{\stretch{4}}{\tiny.}\vspace*{\stretch{2}}
+    \includegraphics[width=30mm]{Images/ndublogo}\\
+    \textbf{\cse}\\
+    \textbf{\Large\ndub}\\
+    \medskip
+    Dhaka, Bangladesh\\
+    \bigskip
+    \vspace*{\stretch{1}}
+    \reportdate
+  \end{center}}
+
+%end of my title
+
+% Internship Report candidates' declaration
+\def\candidatesdeclaration{
+  \begingroup
+  %\begin{center}
+   % \textbf{{\Large Candidate's Declaration}}
+  %\end{center}
+  \addcontentsline{toc}{chapter}{\textbf{\normalsize{\emph{Candidate's Declaration}}}}
+  %\vspace*{\stretch{1}}
+  This is to certify that the presented report of internship titled ``\reporttitle" of ``\companyname" is uniquely prepared by me after the completion of \duration\ work.
+  
+  \bigskip
+  
+  I also confirm that the report is only prepared for my academic requirement, not for any other purpose. It might not be used with the interest of the opposite party of the corporation.
+    
+  %This is to certify that the work presented in this thesis, titled,
+ % ``\thesistitle'', is the outcome of the investigation and research
+ % carried out by us under the supervision of
+ % \DTLforeach{Supervisor}{\SupervisorName=Column1,\SupervisorDesignation=Column2}{\SupervisorName}.
+
+ % \bigskip
+
+ % It is also declared that neither this thesis nor any part thereof
+ % has been submitted anywhere else for the award of any degree,
+ % diploma or other qualifications.
+
+
+  \DTLforeach{Students}{\StudentName=Column1,\StudentID=Column2}{
+    \vspace*{25.0mm}
+    \begin{minipage}[t]{0.4\textwidth}
+      \hrule\medskip
+      \StudentName\par
+      \StudentID
+    \end{minipage}\par}
+  
+  \vspace*{\stretch{2}}
+  \endgroup}
+  
+  %end of candidate's declaration macro
+  
+
+% ------------------------------------------------------------------------------
+% Theorem enivornments
+% ------------------------------------------------------------------------------
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newtheoremstyle{break}%
+    {}{}%
+    {}{}%
+    {\bfseries}{}% % Note that final punctuation is omitted.
+    {\newline}{}
+\theoremstyle{break}
+\newtheorem{example}{Example}[chapter]

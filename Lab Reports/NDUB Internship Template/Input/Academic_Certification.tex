@@ -1,0 +1,29 @@
+\bigskip\bigskip
+  
+
+  This internship report titled, \textbf{\lq\lq\input{Parameters/ReportTitle.txt}\unskip\rq\rq}, submitted by
+  the student as mentioned below has been accepted as satisfactory in
+  partial fulfillment of the requirements for the degree B.Sc.\ in
+  Computer Science and Engineering in \reportdate.
+
+  \vspace{\stretch{1}}  
+
+  \subsubsection*{Student Name:}
+  
+  \begin{enumerate}
+    \DTLforeach{Students}{\StudentName=Column1}{\item[]\textbf{\StudentName}}
+  \end{enumerate}
+  
+  \vspace{\stretch{1}}
+  
+  \subsubsection*{Supervisor:}
+  \vspace*{15.0mm}
+
+  \hspace*{15.0mm}\begin{minipage}[t]{0.6\textwidth}
+    \hrule\medskip
+    \DTLforeach{Supervisor}{\SupervisorName=Column1,\SupervisorDesignation=Column2}{\SupervisorName\par\SupervisorDesignation}\par
+    \cse\par
+    \ndub
+  \end{minipage}
+
+  \vspace{\stretch{2}}

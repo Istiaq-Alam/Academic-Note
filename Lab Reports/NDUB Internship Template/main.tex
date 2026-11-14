@@ -1,0 +1,79 @@
+
+\documentclass[11pt]{report} 
+
+\usepackage{projectreport}
+
+% Document
+% ------------------------------------------------------------------------------
+\begin{document}
+
+\maketitle
+
+\pagenumbering{roman}
+\setcounter{page}{0}
+
+%Candidate's Declaration
+\chapter*{\centering Candidate's Declaration}
+\candidatesdeclaration
+
+%Internship certificate 
+\chapter*{\centering Commercial Certification}
+\addcontentsline{toc}{chapter}{\textbf{\normalsize{\emph{Commercial Certification}}}}
+%Include scanned copy of your internship certificate
+
+%Internship Supervisor declaration 
+\chapter*{\centering Academic Certification}
+\addcontentsline{toc}{chapter}{\textbf{\normalsize{\emph{Academic Certification}}}}
+\input{Input/Academic_Certification.tex}
+
+
+
+%Acknowledgement
+
+\chapter*{\centering Acknowledgement}
+\addcontentsline{toc}{chapter}{\textbf{\normalsize{\emph{Acknowledgements}}}}
+\input {Input/Acknowledgement.tex}
+
+%Executive Summery
+
+\chapter*{\centering Executive Summary}
+\addcontentsline{toc}{chapter}{\textbf{\normalsize{\emph{Executive Summery}}}}
+\input{Input/ExecutiveSummery.tex}
+
+
+\tableofcontents
+\listoffigures
+\addcontentsline{toc}{chapter}{\textbf{\normalsize{\emph{List of Figures}}}}
+\listoftables
+\addcontentsline{toc}{chapter}{\textbf{\normalsize{\emph{List of Tables}}}}
+\lstlistoflistings		% comment out if not needed
+
+% ------------------------------------------------------------------------------
+% Main matter
+% Chapters are added to the document using the \include{chapterx} command
+% ------------------------------------------------------------------------------
+\newpage
+\setcounter{page}{0}
+\pagenumbering{arabic}
+\include{chapter1}
+\include{chapter2} 
+
+% ------------------------------------------------------------------------------
+% Reference list
+% -----------------------------------------------------------
+
+\renewcommand\bibname{References}
+\addcontentsline{toc}{chapter}{References}
+
+% Comment/uncomment as suits you
+\bibliographystyle{unsrt} %% IEEE transaction style
+% \bibliographystyle{acm} %% ACM style
+% \bibliographystyle{alpha}
+\bibliography{references}
+
+% ------------------------------------------------------------------------------
+% Appendices
+% ------------------------------------------------------------------------------
+\include{appendix} %Comment out if not necessary
+
+\end{document}
