@@ -793,6 +793,55 @@
                         line-height: 1.4;
                 }
 
+                .folder-dialog__actions {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        flex-shrink: 0;
+                }
+
+                .folder-dialog__views {
+                        display: flex;
+                        gap: 2px;
+                        padding: 3px;
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        border-radius: 10px;
+                        background: rgba(255, 255, 255, 0.04);
+                }
+
+                .folder-view {
+                        display: grid;
+                        place-items: center;
+                        width: 34px;
+                        height: 34px;
+                        border: 0;
+                        border-radius: 7px;
+                        background: transparent;
+                        color: rgba(255, 255, 255, 0.5);
+                        cursor: pointer;
+                        transition: background 0.2s var(--ease-out), color 0.2s var(--ease-out);
+                }
+
+                .folder-view:hover {
+                        background: rgba(124, 196, 242, 0.1);
+                        color: var(--text-light);
+                }
+
+                .folder-view[aria-pressed="true"] {
+                        background: rgba(124, 196, 242, 0.16);
+                        color: var(--folder);
+                }
+
+                .folder-view:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 2px;
+                }
+
+                .folder-view svg {
+                        width: 16px;
+                        height: 16px;
+                }
+
                 .folder-dialog__close {
                         display: inline-flex;
                         align-items: center;
@@ -1317,6 +1366,109 @@
 
                 .file-card:hover .file-name {
                         color: #0f4f7a;
+                }
+
+                .text-preview__badge {
+                        position: absolute;
+                        top: 6px;
+                        right: 6px;
+                        z-index: 1;
+                        display: grid;
+                        place-items: center;
+                        width: 18px;
+                        height: 18px;
+                        border-radius: 4px;
+                        background: var(--file-tint);
+                        color: var(--file-color);
+                        font-size: 9px;
+                        line-height: 1;
+                        box-shadow: 0 1px 3px rgba(22, 32, 46, 0.08);
+                }
+
+                .text-preview__badge i {
+                        display: block;
+                }
+
+                .file-card[data-type="markdown"] .text-preview__code {
+                        padding-top: 26px;
+                }
+
+                .folder-dialog[data-view="list"] .folder-dialog__grid {
+                        grid-template-columns: 1fr;
+                        gap: 8px;
+                        padding: 16px 24px 20px;
+                }
+
+                .folder-dialog[data-view="list"] .file-card {
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 12px;
+                        min-height: 58px;
+                        padding: 7px 12px;
+                        border: 1px solid #d8e6f4;
+                        border-left: 3px solid var(--file-color);
+                        border-radius: 8px;
+                }
+
+                .folder-dialog[data-view="list"] .file-card:hover {
+                        transform: translateX(2px);
+                }
+
+                .folder-dialog[data-view="list"] .file-thumb {
+                        width: 42px;
+                        height: 42px;
+                        flex-shrink: 0;
+                        aspect-ratio: auto;
+                        border: 0;
+                        border-radius: 7px;
+                }
+
+                .folder-dialog[data-view="list"] .file-thumb > :not(.file-thumb__fallback) {
+                        display: none;
+                }
+
+                .folder-dialog[data-view="list"] .file-thumb__fallback {
+                        opacity: 1;
+                }
+
+                .folder-dialog[data-view="list"] .file-sheet {
+                        width: 100%;
+                        height: 100%;
+                        border: 0;
+                        background: transparent;
+                        box-shadow: none;
+                }
+
+                .folder-dialog[data-view="list"] .file-sheet::before {
+                        display: none;
+                }
+
+                .folder-dialog[data-view="list"] .file-sheet__icon {
+                        font-size: 18px;
+                }
+
+                .folder-dialog[data-view="list"] .file-sheet__ext {
+                        display: none;
+                }
+
+                .folder-dialog[data-view="list"] .file-info {
+                        flex: 1;
+                        min-width: 0;
+                        gap: 3px;
+                        padding: 0;
+                }
+
+                .folder-dialog[data-view="list"] .file-name {
+                        display: block;
+                        overflow: hidden;
+                        font-size: 0.84rem;
+                        line-height: 1.3;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                }
+
+                .folder-dialog[data-view="list"] .file-meta {
+                        gap: 8px;
                 }
 
                 @keyframes folderUnfold {
@@ -4425,9 +4577,19 @@
                                                         <h2 class="folder-dialog__title" id="folder-dialog-title">Folder</h2>
                                                         <p class="folder-dialog__meta" id="folder-dialog-meta"></p>
                                                 </div>
-                                                <button type="button" class="folder-dialog__close" aria-label="Close folder">
-                                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
-                                                </button>
+                                                <div class="folder-dialog__actions">
+                                                        <div class="folder-dialog__views" role="group" aria-label="Folder view">
+                                                                <button type="button" class="folder-view" data-view="grid" aria-label="Grid view" aria-pressed="true" title="Grid view">
+                                                                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="5.5" height="5.5" rx="1"/><rect x="11.5" y="3" width="5.5" height="5.5" rx="1"/><rect x="3" y="11.5" width="5.5" height="5.5" rx="1"/><rect x="11.5" y="11.5" width="5.5" height="5.5" rx="1"/></svg>
+                                                                </button>
+                                                                <button type="button" class="folder-view" data-view="list" aria-label="List view" aria-pressed="false" title="List view">
+                                                                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 5h1M8 5h8M4 10h1M8 10h8M4 15h1M8 15h8"/></svg>
+                                                                </button>
+                                                        </div>
+                                                        <button type="button" class="folder-dialog__close" aria-label="Close folder">
+                                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+                                                        </button>
+                                                </div>
                                         </div>
                                         <div class="folder-dialog__grid" id="folder-dialog-grid"></div>
                                 </div>
@@ -4582,7 +4744,15 @@
                 const dialogKicker = document.getElementById('folder-dialog-kicker');
                 const dialogMeta = document.getElementById('folder-dialog-meta');
                 const closeButton = dialog.querySelector('.folder-dialog__close');
+                const viewButtons = Array.from(dialog.querySelectorAll('.folder-view'));
                 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+                let viewMode = 'grid';
+                try {
+                        if (window.localStorage.getItem('folder-modal-view') === 'list') viewMode = 'list';
+                } catch (error) {
+                        /* storage can be unavailable; grid remains the default */
+                }
 
                 let lastTrigger = null;
                 let closeTimer = null;
@@ -4993,6 +5163,14 @@
                                 preview.className = 'text-preview';
                                 preview.setAttribute('aria-hidden', 'true');
 
+                                if (file.typeKey === 'markdown') {
+                                        const badge = document.createElement('span');
+                                        badge.className = 'text-preview__badge';
+                                        badge.setAttribute('aria-hidden', 'true');
+                                        badge.innerHTML = icons.markdown;
+                                        preview.append(badge);
+                                }
+
                                 const code = document.createElement('pre');
                                 code.className = 'text-preview__code';
 
@@ -5069,9 +5247,25 @@
 
                         requestAnimationFrame(() => {
                                 closeButton.focus();
-                                observeThumbnails(session);
-                                loadTextPreviews(session);
+                                if (viewMode === 'grid') {
+                                        observeThumbnails(session);
+                                        loadTextPreviews(session);
+                                }
                         });
+                }
+
+                function setFolderView(mode, persist = true) {
+                        viewMode = mode === 'list' ? 'list' : 'grid';
+                        dialog.dataset.view = viewMode;
+                        viewButtons.forEach((button) => {
+                                button.setAttribute('aria-pressed', button.dataset.view === viewMode ? 'true' : 'false');
+                        });
+                        if (!persist) return;
+                        try {
+                                window.localStorage.setItem('folder-modal-view', viewMode);
+                        } catch (error) {
+                                /* the toggle still works without storage */
+                        }
                 }
 
                 function requestClose() {
@@ -5099,7 +5293,7 @@
 
                 function observeThumbnails(token) {
                         if (observer) observer.disconnect();
-                        const thumbs = Array.from(dialogGrid.querySelectorAll('.file-thumb[data-pdf]'));
+                        const thumbs = Array.from(dialogGrid.querySelectorAll('.file-thumb[data-pdf]:not(.is-ready):not(.is-error)'));
                         if (thumbs.length === 0) return;
 
                         if (!('IntersectionObserver' in window)) {
@@ -5122,6 +5316,8 @@
                         if (token !== session) return;
                         const canvas = thumb.querySelector('.file-thumb__canvas');
                         if (!canvas) return;
+                        if (thumb.dataset.pdfQueued === '1' || thumb.dataset.pdfActive === '1') return;
+                        thumb.dataset.pdfQueued = '1';
                         pdfQueue.push({ thumb, canvas, url: thumb.dataset.pdf, token });
                         pumpPdfQueue();
                 }
@@ -5130,11 +5326,14 @@
                         const maxWorkers = 3;
                         while (pdfActive < maxWorkers && pdfQueue.length > 0) {
                                 const job = pdfQueue.shift();
+                                delete job.thumb.dataset.pdfQueued;
+                                job.thumb.dataset.pdfActive = '1';
                                 pdfActive += 1;
                                 renderPdf(job)
                                         .catch(() => markThumbError(job.thumb, job.token))
                                         .finally(() => {
                                                 pdfActive -= 1;
+                                                delete job.thumb.dataset.pdfActive;
                                                 pumpPdfQueue();
                                         });
                         }
@@ -5203,10 +5402,11 @@
                 }
 
                 function loadTextPreviews(token) {
-                        dialogGrid.querySelectorAll('.file-thumb[data-text]').forEach((thumb) => {
+                        dialogGrid.querySelectorAll('.file-thumb[data-text]:not(.is-ready):not(.is-error)').forEach((thumb) => {
                                 const source = thumb.dataset.text;
                                 const code = thumb.querySelector('.text-preview__code');
-                                if (!source || !code) return;
+                                if (!source || !code || thumb.dataset.textLoading === '1') return;
+                                thumb.dataset.textLoading = '1';
 
                                 fetch(source, { mode: 'cors', credentials: 'omit' })
                                         .then((response) => {
@@ -5235,7 +5435,10 @@
                                                 code.textContent = content.slice(0, 900);
                                                 thumb.classList.add('is-ready');
                                         })
-                                        .catch(() => markThumbError(thumb, token));
+                                        .catch(() => markThumbError(thumb, token))
+                                        .finally(() => {
+                                                delete thumb.dataset.textLoading;
+                                        });
                         });
                 }
 
@@ -5245,6 +5448,35 @@
                         thumb.removeAttribute('data-pdf');
                         thumb.removeAttribute('data-text');
                 }
+
+                viewButtons.forEach((button) => {
+                        button.addEventListener('click', () => {
+                                const next = button.dataset.view === 'list' ? 'list' : 'grid';
+                                if (next === viewMode) return;
+
+                                const scrollTop = dialogBody.scrollTop;
+                                setFolderView(next);
+
+                                if (next === 'list') {
+                                        if (observer) {
+                                                observer.disconnect();
+                                                observer = null;
+                                        }
+                                        pdfQueue.forEach((job) => {
+                                                delete job.thumb.dataset.pdfQueued;
+                                        });
+                                        pdfQueue = [];
+                                }
+
+                                requestAnimationFrame(() => {
+                                        dialogBody.scrollTop = scrollTop;
+                                        if (next === 'grid') {
+                                                observeThumbnails(session);
+                                                loadTextPreviews(session);
+                                        }
+                                });
+                        });
+                });
 
                 closeButton.addEventListener('click', requestClose);
                 dialog.addEventListener('cancel', (event) => {
@@ -5256,6 +5488,7 @@
                 });
                 dialog.addEventListener('close', cleanupDialog);
 
+                setFolderView(viewMode, false);
                 buildFolders();
         })();
         </script>
