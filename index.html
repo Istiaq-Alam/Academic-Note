@@ -30,6 +30,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <meta name="theme-color" content="#1e1e2e" />
 
   <!-- Structured Data -->
@@ -843,10 +845,13 @@
 
                 /* ─── FILE CARDS ─── */
                 .file-card {
+                        --file-color: #52677a;
+                        --file-tint: #eef4f9;
                         display: flex;
                         flex-direction: column;
                         min-width: 0;
                         border: 1px solid #d8e6f4;
+                        border-top: 2px solid var(--file-color);
                         border-radius: 10px;
                         background: #f7fbff;
                         color: var(--folder-ink);
@@ -855,9 +860,49 @@
                         transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
                 }
 
+                .file-card[data-type="pdf"] {
+                        --file-color: #c0392b;
+                        --file-tint: #fdeeee;
+                }
+
+                .file-card[data-type="image"] {
+                        --file-color: #7c3aed;
+                        --file-tint: #f3ecff;
+                }
+
+                .file-card[data-type="markdown"] {
+                        --file-color: #1d4ed8;
+                        --file-tint: #e9efff;
+                }
+
+                .file-card[data-type="archive"] {
+                        --file-color: #9a5b00;
+                        --file-tint: #fff3e0;
+                }
+
+                .file-card[data-type="word"] {
+                        --file-color: #2b579a;
+                        --file-tint: #e8f0fb;
+                }
+
+                .file-card[data-type="link"] {
+                        --file-color: #0b7285;
+                        --file-tint: #e6f6f9;
+                }
+
+                .file-card[data-type="youtube"] {
+                        --file-color: #c1121f;
+                        --file-tint: #ffecee;
+                }
+
+                .file-card[data-type="code"] {
+                        --file-color: #157347;
+                        --file-tint: #e9f7ef;
+                }
+
                 .file-card:hover {
                         transform: translateY(-3px);
-                        border-color: #a9cdec;
+                        border-color: var(--file-color);
                         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.26);
                         text-decoration: none;
                 }
@@ -877,7 +922,7 @@
                         place-items: center;
                         aspect-ratio: 4 / 3;
                         overflow: hidden;
-                        background: #e7eff7;
+                        background: var(--file-tint);
                         border-bottom: 1px solid #dbe7f2;
                 }
 
@@ -891,7 +936,7 @@
                 .file-thumb__img {
                         object-fit: cover;
                         object-position: top center;
-                        background: #eef5fb;
+                        background: var(--file-tint);
                         transition: transform 0.5s var(--ease-out);
                 }
 
@@ -900,7 +945,7 @@
                         inset: 0;
                         width: 100%;
                         height: 100%;
-                        background: #eef5fb;
+                        background: var(--file-tint);
                         object-fit: cover;
                         object-position: top center;
                         opacity: 0;
@@ -920,8 +965,8 @@
                         inset: 0;
                         display: grid;
                         place-items: center;
-                        color: #7d96ad;
-                        background: #e7eff7;
+                        color: var(--file-color);
+                        background: var(--file-tint);
                         opacity: 1;
                         transition: opacity 0.24s var(--ease-out);
                 }
@@ -968,31 +1013,22 @@
                 .file-sheet__icon {
                         display: grid;
                         place-items: center;
-                        color: #64809a;
+                        color: var(--file-color);
+                        font-size: 30px;
+                        line-height: 1;
                 }
 
-                .file-sheet__icon svg {
-                        width: 30px;
-                        height: 30px;
+                .file-sheet__icon i {
+                        display: block;
                 }
 
                 .file-sheet__ext {
-                        color: #6f869a;
+                        color: var(--file-color);
                         font-family: var(--font-ui);
                         font-size: 0.56rem;
                         font-weight: 700;
                         letter-spacing: 0.7px;
                         line-height: 1;
-                }
-
-                .file-thumb[data-kind="archive"] .file-sheet__icon,
-                .file-thumb[data-kind="archive"] .file-sheet__ext {
-                        color: #a06a2b;
-                }
-
-                .file-thumb[data-kind="doc"] .file-sheet__icon,
-                .file-thumb[data-kind="doc"] .file-sheet__ext {
-                        color: #416f9a;
                 }
 
                 .youtube-preview {
@@ -1041,6 +1077,7 @@
                         inset: 8px;
                         overflow: hidden;
                         border: 1px solid #d5e3f0;
+                        border-top: 3px solid var(--file-color);
                         border-radius: 5px;
                         background: #ffffff;
                         box-shadow: 0 4px 12px rgba(22, 32, 46, 0.12);
@@ -1072,6 +1109,7 @@
                         flex-direction: column;
                         overflow: hidden;
                         border: 1px solid #d3e0ec;
+                        border-top: 3px solid var(--file-color);
                         border-radius: 7px;
                         background: #ffffff;
                         box-shadow: 0 4px 12px rgba(22, 32, 46, 0.12);
@@ -1085,7 +1123,7 @@
                         height: 16px;
                         padding: 0 7px;
                         border-bottom: 1px solid #e1eaf2;
-                        background: #eff4f9;
+                        background: var(--file-tint);
                 }
 
                 .link-preview__dot {
@@ -1119,13 +1157,14 @@
                         height: 17px;
                         flex-shrink: 0;
                         border-radius: 4px;
-                        background: #e8f1f9;
-                        color: #54738d;
+                        background: var(--file-tint);
+                        color: var(--file-color);
+                        font-size: 11px;
+                        line-height: 1;
                 }
 
-                .link-preview__glyph svg {
-                        width: 11px;
-                        height: 11px;
+                .link-preview__glyph i {
+                        display: block;
                 }
 
                 .link-preview__favicon {
@@ -1137,7 +1176,7 @@
 
                 .link-preview__host {
                         overflow: hidden;
-                        color: #335a78;
+                        color: var(--file-color);
                         font-family: var(--font-ui);
                         font-size: 0.52rem;
                         font-weight: 700;
@@ -1162,11 +1201,12 @@
                 .file-type {
                         display: inline-flex;
                         align-items: center;
+                        gap: 4px;
                         flex-shrink: 0;
                         height: 18px;
                         padding: 0 6px;
                         border-radius: 4px;
-                        background: #16202e;
+                        background: var(--file-color);
                         color: #fff;
                         font-family: var(--font-ui);
                         font-size: 0.58rem;
@@ -1176,12 +1216,23 @@
                         text-transform: uppercase;
                 }
 
+                .file-type__icon {
+                        display: grid;
+                        place-items: center;
+                        font-size: 9px;
+                        line-height: 1;
+                }
+
+                .file-type__icon i {
+                        display: block;
+                }
+
                 .thumb-skel {
                         position: absolute;
                         inset: 0;
                         display: none;
                         place-items: center;
-                        background: #e7eff7;
+                        background: var(--file-tint);
                 }
 
                 .file-thumb[data-preview="pdf"] .thumb-skel,
@@ -4553,14 +4604,16 @@
                         </span>`;
 
                 const icons = {
-                        pdf: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 4h17l9 9v31H12z"/><path d="M29 4v9h9"/><text x="16" y="36" fill="currentColor" stroke="none" font-family="sans-serif" font-size="8" font-weight="700">PDF</text></svg>',
-                        image: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="9" width="34" height="30" rx="2"/><circle cx="17" cy="19" r="3"/><path d="m9 34 10-9 7 6 6-5 7 7"/></svg>',
-                        archive: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M9 14h30v27H9z"/><path d="M7 7h34v7H7zM21 21h6v5h-6zM21 30h6v5h-6z"/></svg>',
-                        video: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="11" width="36" height="26" rx="3"/><path d="m21 18 9 6-9 6z"/></svg>',
-                        code: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 4h17l9 9v31H12z"/><path d="M29 4v9h9M21 23l-5 5 5 5M29 23l5 5-5 5"/></svg>',
-                        doc: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 4h17l9 9v31H12z"/><path d="M29 4v9h9M18 23h14M18 29h14M18 35h9"/></svg>',
-                        link: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="24" cy="24" r="17"/><path d="M7 24h34M24 7c5 5 7.5 10.5 7.5 17S29 36 24 41c-5-5-7.5-10.5-7.5-17S19 12 24 7Z"/></svg>',
-                        file: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 4h17l9 9v31H12z"/><path d="M29 4v9h9M18 23h14M18 29h14M18 35h9"/></svg>'
+                        pdf: '<i class="fa-solid fa-file-pdf" aria-hidden="true"></i>',
+                        image: '<i class="fa-solid fa-file-image" aria-hidden="true"></i>',
+                        archive: '<i class="fa-solid fa-file-zipper" aria-hidden="true"></i>',
+                        video: '<i class="fa-brands fa-youtube" aria-hidden="true"></i>',
+                        code: '<i class="fa-solid fa-file-code" aria-hidden="true"></i>',
+                        doc: '<i class="fa-solid fa-file-lines" aria-hidden="true"></i>',
+                        link: '<i class="fa-solid fa-link" aria-hidden="true"></i>',
+                        markdown: '<i class="fa-brands fa-markdown" aria-hidden="true"></i>',
+                        word: '<i class="fa-solid fa-file-word" aria-hidden="true"></i>',
+                        file: '<i class="fa-solid fa-file" aria-hidden="true"></i>'
                 };
 
                 function iconFor(kind) {
@@ -4615,6 +4668,18 @@
                         if (ext === 'video' || host.includes('youtu')) return 'video';
                         if (host === 'github.com' || host === 'raw.githubusercontent.com') return 'link';
                         return 'link';
+                }
+
+                function fileTypeKey(ext, videoId) {
+                        if (ext === 'pdf') return 'pdf';
+                        if (IMAGE_EXTENSIONS.has(ext)) return 'image';
+                        if (ext === 'md' || ext === 'markdown') return 'markdown';
+                        if (ARCHIVE_EXTENSIONS.has(ext)) return 'archive';
+                        if (['doc', 'docx', 'odt', 'rtf'].includes(ext)) return 'word';
+                        if (CODE_EXTENSIONS.has(ext)) return 'code';
+                        if (videoId) return 'youtube';
+                        if (!ext || ext === 'link' || ext === 'video') return 'link';
+                        return 'file';
                 }
 
                 function describeFile(file) {
@@ -4719,6 +4784,7 @@
                                 ext,
                                 typeLabel: ext ? ext.toUpperCase() : 'LINK',
                                 kind,
+                                typeKey: fileTypeKey(ext, videoId),
                                 host,
                                 isExternal: !sameOrigin,
                                 preview,
@@ -4813,7 +4879,7 @@
                 function makeFileSheet(file) {
                         const sheet = document.createElement('span');
                         sheet.className = 'file-sheet';
-                        sheet.innerHTML = `<span class="file-sheet__icon">${iconFor(file.kind)}</span><span class="file-sheet__ext">${file.typeLabel}</span>`;
+                        sheet.innerHTML = `<span class="file-sheet__icon">${iconFor(file.typeKey)}</span><span class="file-sheet__ext">${file.typeLabel}</span>`;
                         return sheet;
                 }
 
@@ -4872,6 +4938,7 @@
                         card.setAttribute('aria-label', `${file.label} (${file.typeLabel}), opens in a new tab`);
 
                         const thumb = document.createElement('div');
+                        card.dataset.type = file.typeKey;
                         thumb.className = 'file-thumb';
                         thumb.dataset.preview = file.preview;
                         thumb.dataset.kind = file.kind;
@@ -4946,7 +5013,12 @@
 
                         const type = document.createElement('span');
                         type.className = 'file-type';
-                        type.textContent = file.typeLabel;
+
+                        const typeIcon = document.createElement('span');
+                        typeIcon.className = 'file-type__icon';
+                        typeIcon.innerHTML = iconFor(file.typeKey);
+
+                        type.append(typeIcon, document.createTextNode(file.typeLabel));
 
                         thumb.append(fallback);
 
