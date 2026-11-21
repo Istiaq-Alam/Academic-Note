@@ -61,6 +61,12 @@
                         --text-muted: #aaa;
                         --border: rgba(255, 255, 255, 0.07);
                         --radius: 10px;
+                        --folder: #7cc4f2;
+                        --folder-deep: #4f9bd6;
+                        --folder-pale: #d7ecff;
+                        --folder-ink: #16202e;
+                        --font-ui: "Segoe UI", "Manrope", system-ui, -apple-system, sans-serif;
+                        --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
                 }
 
                 html {
@@ -539,6 +545,779 @@
                 details details summary {
                         font-size: 0.88rem;
                         padding: 8px 12px;
+                }
+
+                /* ─── FILE MANAGER: FOLDER GRID ─── */
+                .folder-grid,
+                .folder-grid *,
+                .folder-dialog,
+                .folder-dialog * {
+                        box-sizing: border-box;
+                }
+
+                .folder-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fill, minmax(122px, 1fr));
+                        gap: 8px 4px;
+                        margin-top: 14px;
+                }
+
+                .folder-tile {
+                        appearance: none;
+                        border: 1px solid transparent;
+                        border-radius: 12px;
+                        background: transparent;
+                        color: var(--text-light);
+                        font-family: var(--font-ui);
+                        min-height: 44px;
+                        padding: 8px 6px 10px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 4px;
+                        text-align: center;
+                        cursor: pointer;
+                        transition: background 0.24s var(--ease-out), border-color 0.24s var(--ease-out), transform 0.24s var(--ease-out);
+                }
+
+                .folder-tile:hover {
+                        background: rgba(124, 196, 242, 0.08);
+                        border-color: rgba(124, 196, 242, 0.2);
+                        transform: translateY(-2px);
+                }
+
+                .folder-tile:active {
+                        transform: translateY(0) scale(0.985);
+                }
+
+                .folder-tile:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 2px;
+                }
+
+                .folder-art {
+                        display: block;
+                        width: min(100%, 106px);
+                        pointer-events: none;
+                }
+
+                .folder-svg {
+                        display: block;
+                        width: 100%;
+                        height: auto;
+                        overflow: visible;
+                }
+
+                .folder-shadow {
+                        transition: opacity 0.28s var(--ease-out), transform 0.28s var(--ease-out);
+                        transform-box: fill-box;
+                        transform-origin: center;
+                }
+
+                .folder-paper {
+                        opacity: 0;
+                        transform: translateY(12px);
+                        transition: opacity 0.28s var(--ease-out), transform 0.32s var(--ease-out);
+                        transform-box: fill-box;
+                }
+
+                .folder-front {
+                        transition: transform 0.32s var(--ease-out);
+                        transform-box: fill-box;
+                        transform-origin: center bottom;
+                }
+
+                .folder-tile:hover .folder-art,
+                .folder-tile:focus-visible .folder-art {
+                        transform: translateY(-2px);
+                }
+
+                .folder-tile:hover .folder-paper,
+                .folder-tile:focus-visible .folder-paper {
+                        opacity: 1;
+                        transform: translateY(0);
+                }
+
+                .folder-tile:hover .folder-front,
+                .folder-tile:focus-visible .folder-front {
+                        transform: scaleY(0.9);
+                }
+
+                .folder-tile:hover .folder-shadow,
+                .folder-tile:focus-visible .folder-shadow {
+                        opacity: 0.16;
+                        transform: scaleX(0.9);
+                }
+
+                .folder-name {
+                        display: block;
+                        color: var(--text-light);
+                        font-size: 0.82rem;
+                        font-weight: 600;
+                        line-height: 1.3;
+                        text-wrap: balance;
+                        overflow-wrap: anywhere;
+                }
+
+                .folder-meta {
+                        display: block;
+                        color: var(--text-muted);
+                        font-size: 0.68rem;
+                        font-weight: 500;
+                        line-height: 1.4;
+                        letter-spacing: 0.2px;
+                }
+
+                /* ─── FILE MANAGER: FOLDER DIALOG ─── */
+                body.has-folder-dialog {
+                        overflow: hidden;
+                }
+
+                .folder-dialog {
+                        width: min(1040px, calc(100vw - 32px));
+                        max-width: none;
+                        max-height: calc(100dvh - 32px);
+                        padding: 0;
+                        border: 0;
+                        background: transparent;
+                        color: var(--text-light);
+                        overflow-x: clip;
+                        overflow-y: visible;
+                }
+
+                .folder-dialog::backdrop {
+                        background: rgba(8, 10, 18, 0.76);
+                        backdrop-filter: blur(6px);
+                }
+
+                .folder-dialog[open]::backdrop {
+                        animation: backdropIn 0.24s var(--ease-out);
+                }
+
+                .folder-dialog__panel {
+                        position: relative;
+                        margin-top: 28px;
+                        background: #23233a;
+                        border: 1px solid rgba(124, 196, 242, 0.28);
+                        border-radius: 0 18px 18px 18px;
+                        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.62);
+                        overflow: visible;
+                        animation: folderUnfold 0.34s var(--ease-out);
+                }
+
+                .folder-dialog.is-closing .folder-dialog__panel {
+                        animation: folderFold 0.16s var(--ease-out) forwards;
+                }
+
+                .folder-dialog__tab {
+                        position: absolute;
+                        top: -29px;
+                        left: -1px;
+                        height: 30px;
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 8px;
+                        padding: 0 16px;
+                        border: 1px solid rgba(124, 196, 242, 0.28);
+                        border-bottom: 0;
+                        border-radius: 14px 14px 0 0;
+                        background: #23233a;
+                        color: var(--folder);
+                        font-family: var(--font-ui);
+                        font-size: 0.7rem;
+                        font-weight: 700;
+                        letter-spacing: 1.1px;
+                        text-transform: uppercase;
+                }
+
+                .folder-dialog__tab svg {
+                        width: 16px;
+                        height: 16px;
+                        flex-shrink: 0;
+                }
+
+                .folder-dialog__body {
+                        max-height: calc(100dvh - 92px);
+                        border-radius: 0 18px 18px 18px;
+                        background: #23233a;
+                        overflow-x: hidden;
+                        overflow-y: auto;
+                        overscroll-behavior: contain;
+                        scrollbar-color: rgba(124, 196, 242, 0.45) transparent;
+                }
+
+                .folder-dialog__heading {
+                        min-width: 0;
+                }
+
+                .folder-dialog__head {
+                        position: sticky;
+                        top: 0;
+                        z-index: 2;
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: space-between;
+                        gap: 20px;
+                        padding: 22px 24px 18px;
+                        background: #23233a;
+                        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                }
+
+                .folder-dialog__eyebrow {
+                        margin: 0 0 4px;
+                        color: var(--folder);
+                        font-family: var(--font-ui);
+                        font-size: 0.7rem;
+                        font-weight: 700;
+                        letter-spacing: 1.2px;
+                        text-transform: uppercase;
+                }
+
+                .folder-dialog__title {
+                        margin: 0;
+                        color: var(--text-light);
+                        font-family: var(--font-ui);
+                        font-size: 1.65rem;
+                        font-weight: 700;
+                        line-height: 1.2;
+                        text-wrap: balance;
+                }
+
+                .folder-dialog__meta {
+                        margin: 6px 0 0;
+                        color: var(--text-muted);
+                        font-family: var(--font-ui);
+                        font-size: 0.8rem;
+                        line-height: 1.4;
+                }
+
+                .folder-dialog__close {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 44px;
+                        height: 44px;
+                        flex-shrink: 0;
+                        border: 1px solid rgba(255, 255, 255, 0.12);
+                        border-radius: 10px;
+                        background: rgba(255, 255, 255, 0.05);
+                        color: var(--text-light);
+                        cursor: pointer;
+                        transition: background 0.2s var(--ease-out), border-color 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+                }
+
+                .folder-dialog__close:hover {
+                        background: rgba(124, 196, 242, 0.14);
+                        border-color: rgba(124, 196, 242, 0.4);
+                }
+
+                .folder-dialog__close:active {
+                        transform: scale(0.96);
+                }
+
+                .folder-dialog__close:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 2px;
+                }
+
+                .folder-dialog__close svg {
+                        width: 18px;
+                        height: 18px;
+                }
+
+                .folder-dialog__grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+                        gap: 16px;
+                        padding: 22px 24px 26px;
+                }
+
+                .folder-dialog__empty {
+                        grid-column: 1 / -1;
+                        padding: 40px 8px;
+                        color: var(--text-muted);
+                        font-family: var(--font-ui);
+                        font-size: 0.95rem;
+                        text-align: center;
+                }
+
+                /* ─── FILE CARDS ─── */
+                .file-card {
+                        display: flex;
+                        flex-direction: column;
+                        min-width: 0;
+                        border: 1px solid #d8e6f4;
+                        border-radius: 10px;
+                        background: #f7fbff;
+                        color: var(--folder-ink);
+                        text-decoration: none;
+                        overflow: hidden;
+                        transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+                }
+
+                .file-card:hover {
+                        transform: translateY(-3px);
+                        border-color: #a9cdec;
+                        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.26);
+                        text-decoration: none;
+                }
+
+                .file-card:active {
+                        transform: translateY(-1px) scale(0.99);
+                }
+
+                .file-card:focus-visible {
+                        outline: 3px solid var(--accent);
+                        outline-offset: 2px;
+                }
+
+                .file-thumb {
+                        position: relative;
+                        display: grid;
+                        place-items: center;
+                        aspect-ratio: 4 / 3;
+                        overflow: hidden;
+                        background: #e7eff7;
+                        border-bottom: 1px solid #dbe7f2;
+                }
+
+                .file-thumb__canvas,
+                .file-thumb__img {
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                }
+
+                .file-thumb__img {
+                        object-fit: cover;
+                        object-position: top center;
+                        background: #eef5fb;
+                        transition: transform 0.5s var(--ease-out);
+                }
+
+                .file-thumb__canvas {
+                        position: absolute;
+                        inset: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: #eef5fb;
+                        object-fit: cover;
+                        object-position: top center;
+                        opacity: 0;
+                        transition: opacity 0.3s var(--ease-out);
+                }
+
+                .file-thumb.is-ready .file-thumb__canvas {
+                        opacity: 1;
+                }
+
+                .file-card:hover .file-thumb__img {
+                        transform: scale(1.025);
+                }
+
+                .file-thumb__fallback {
+                        position: absolute;
+                        inset: 0;
+                        display: grid;
+                        place-items: center;
+                        color: #7d96ad;
+                        background: #e7eff7;
+                        opacity: 1;
+                        transition: opacity 0.24s var(--ease-out);
+                }
+
+                .file-thumb[data-preview="pdf"] .file-thumb__fallback,
+                .file-thumb[data-preview="image"] .file-thumb__fallback,
+                .file-thumb[data-preview="youtube"] .file-thumb__fallback,
+                .file-thumb[data-preview="text"] .file-thumb__fallback,
+                .file-thumb[data-preview="link"] .file-thumb__fallback {
+                        opacity: 0;
+                }
+
+                .file-thumb.is-error .file-thumb__fallback {
+                        opacity: 1;
+                }
+
+                .file-sheet {
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 6px;
+                        width: 72%;
+                        height: 84%;
+                        border: 1px solid #d5e3f0;
+                        border-radius: 5px;
+                        background: #ffffff;
+                        box-shadow: 0 4px 12px rgba(22, 32, 46, 0.12);
+                }
+
+                .file-sheet::before {
+                        content: "";
+                        position: absolute;
+                        top: -1px;
+                        right: -1px;
+                        width: 18px;
+                        height: 18px;
+                        border-radius: 0 5px 0 4px;
+                        background: #e3eef7;
+                        clip-path: polygon(0 0, 100% 100%, 0 100%);
+                }
+
+                .file-sheet__icon {
+                        display: grid;
+                        place-items: center;
+                        color: #64809a;
+                }
+
+                .file-sheet__icon svg {
+                        width: 30px;
+                        height: 30px;
+                }
+
+                .file-sheet__ext {
+                        color: #6f869a;
+                        font-family: var(--font-ui);
+                        font-size: 0.56rem;
+                        font-weight: 700;
+                        letter-spacing: 0.7px;
+                        line-height: 1;
+                }
+
+                .file-thumb[data-kind="archive"] .file-sheet__icon,
+                .file-thumb[data-kind="archive"] .file-sheet__ext {
+                        color: #a06a2b;
+                }
+
+                .file-thumb[data-kind="doc"] .file-sheet__icon,
+                .file-thumb[data-kind="doc"] .file-sheet__ext {
+                        color: #416f9a;
+                }
+
+                .youtube-preview {
+                        position: absolute;
+                        inset: 0;
+                        overflow: hidden;
+                        background: #10151c;
+                }
+
+                .youtube-preview img {
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                        object-fit: cover;
+                        transition: transform 0.5s var(--ease-out);
+                }
+
+                .file-card:hover .youtube-preview img {
+                        transform: scale(1.025);
+                }
+
+                .youtube-play {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        display: grid;
+                        place-items: center;
+                        width: 34px;
+                        height: 34px;
+                        border-radius: 50%;
+                        background: rgba(12, 18, 26, 0.78);
+                        color: #ffffff;
+                        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+                        transform: translate(-50%, -50%);
+                        pointer-events: none;
+                }
+
+                .youtube-play svg {
+                        width: 13px;
+                        height: 13px;
+                        margin-left: 1px;
+                }
+
+                .text-preview {
+                        position: absolute;
+                        inset: 8px;
+                        overflow: hidden;
+                        border: 1px solid #d5e3f0;
+                        border-radius: 5px;
+                        background: #ffffff;
+                        box-shadow: 0 4px 12px rgba(22, 32, 46, 0.12);
+                        opacity: 0;
+                        transition: opacity 0.3s var(--ease-out);
+                }
+
+                .file-thumb.is-ready .text-preview {
+                        opacity: 1;
+                }
+
+                .text-preview__code {
+                        height: 100%;
+                        margin: 0;
+                        padding: 9px 10px;
+                        overflow: hidden;
+                        color: #4d6376;
+                        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+                        font-size: 6.5px;
+                        line-height: 1.55;
+                        overflow-wrap: anywhere;
+                        white-space: pre-wrap;
+                }
+
+                .link-preview {
+                        position: absolute;
+                        inset: 9px;
+                        display: flex;
+                        flex-direction: column;
+                        overflow: hidden;
+                        border: 1px solid #d3e0ec;
+                        border-radius: 7px;
+                        background: #ffffff;
+                        box-shadow: 0 4px 12px rgba(22, 32, 46, 0.12);
+                }
+
+                .link-preview__bar {
+                        display: flex;
+                        align-items: center;
+                        gap: 3px;
+                        flex-shrink: 0;
+                        height: 16px;
+                        padding: 0 7px;
+                        border-bottom: 1px solid #e1eaf2;
+                        background: #eff4f9;
+                }
+
+                .link-preview__dot {
+                        width: 3px;
+                        height: 3px;
+                        border-radius: 50%;
+                        background: #c3d2df;
+                }
+
+                .link-preview__body {
+                        display: flex;
+                        flex: 1;
+                        flex-direction: column;
+                        justify-content: center;
+                        gap: 4px;
+                        min-height: 0;
+                        padding: 8px 10px;
+                }
+
+                .link-preview__brand {
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        min-width: 0;
+                }
+
+                .link-preview__glyph {
+                        display: grid;
+                        place-items: center;
+                        width: 17px;
+                        height: 17px;
+                        flex-shrink: 0;
+                        border-radius: 4px;
+                        background: #e8f1f9;
+                        color: #54738d;
+                }
+
+                .link-preview__glyph svg {
+                        width: 11px;
+                        height: 11px;
+                }
+
+                .link-preview__favicon {
+                        width: 16px;
+                        height: 16px;
+                        flex-shrink: 0;
+                        object-fit: contain;
+                }
+
+                .link-preview__host {
+                        overflow: hidden;
+                        color: #335a78;
+                        font-family: var(--font-ui);
+                        font-size: 0.52rem;
+                        font-weight: 700;
+                        letter-spacing: 0.2px;
+                        line-height: 1.2;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                }
+
+                .link-preview__path {
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                        overflow: hidden;
+                        color: #6b7f90;
+                        font-family: var(--font-ui);
+                        font-size: 0.48rem;
+                        line-height: 1.35;
+                        overflow-wrap: anywhere;
+                }
+
+                .file-type {
+                        display: inline-flex;
+                        align-items: center;
+                        flex-shrink: 0;
+                        height: 18px;
+                        padding: 0 6px;
+                        border-radius: 4px;
+                        background: #16202e;
+                        color: #fff;
+                        font-family: var(--font-ui);
+                        font-size: 0.58rem;
+                        font-weight: 700;
+                        line-height: 1;
+                        letter-spacing: 0.7px;
+                        text-transform: uppercase;
+                }
+
+                .thumb-skel {
+                        position: absolute;
+                        inset: 0;
+                        display: none;
+                        place-items: center;
+                        background: #e7eff7;
+                }
+
+                .file-thumb[data-preview="pdf"] .thumb-skel,
+                .file-thumb[data-preview="text"] .thumb-skel {
+                        display: grid;
+                }
+
+                .file-thumb.is-ready .thumb-skel,
+                .file-thumb.is-error .thumb-skel {
+                        display: none;
+                }
+
+                .thumb-skel__page {
+                        position: relative;
+                        width: 58%;
+                        height: 76%;
+                        border-radius: 3px;
+                        background: #ffffff;
+                        box-shadow: 0 2px 8px rgba(22, 32, 46, 0.1);
+                        animation: skeletonPulse 1.6s var(--ease-out) infinite;
+                }
+
+                .thumb-skel__page::before,
+                .thumb-skel__page::after {
+                        content: "";
+                        position: absolute;
+                        left: 18%;
+                        height: 4px;
+                        border-radius: 2px;
+                        background: #dbe7f2;
+                }
+
+                .thumb-skel__page::before {
+                        top: 26%;
+                        width: 64%;
+                        box-shadow: 0 10px 0 #e4edf5, 0 20px 0 #e4edf5;
+                }
+
+                .thumb-skel__page::after {
+                        bottom: 18%;
+                        width: 46%;
+                }
+
+                .file-info {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 5px;
+                        padding: 10px 12px 12px;
+                }
+
+                .file-meta {
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+                        min-width: 0;
+                }
+
+                .file-name {
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                        overflow: hidden;
+                        color: var(--folder-ink);
+                        font-family: var(--font-ui);
+                        font-size: 0.8rem;
+                        font-weight: 600;
+                        line-height: 1.35;
+                        overflow-wrap: anywhere;
+                }
+
+                .file-sub {
+                        min-width: 0;
+                        overflow: hidden;
+                        color: #64788b;
+                        font-family: var(--font-ui);
+                        font-size: 0.66rem;
+                        font-weight: 500;
+                        line-height: 1.4;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                }
+
+                .file-card:hover .file-name {
+                        color: #0f4f7a;
+                }
+
+                @keyframes folderUnfold {
+                        from {
+                                opacity: 0;
+                                transform: translateY(18px) scale(0.975);
+                        }
+
+                        to {
+                                opacity: 1;
+                                transform: translateY(0) scale(1);
+                        }
+                }
+
+                @keyframes folderFold {
+                        to {
+                                opacity: 0;
+                                transform: translateY(10px) scale(0.985);
+                        }
+                }
+
+                @keyframes backdropIn {
+                        from {
+                                opacity: 0;
+                        }
+
+                        to {
+                                opacity: 1;
+                        }
+                }
+
+                @keyframes skeletonPulse {
+                        0%,
+                        100% {
+                                opacity: 1;
+                        }
+
+                        50% {
+                                opacity: 0.55;
+                        }
+                }
+
+                @media (prefers-reduced-motion: reduce) {
+                        .folder-dialog__panel,
+                        .folder-dialog[open]::backdrop,
+                        .thumb-skel__page {
+                                animation: none;
+                        }
+
+                        .folder-dialog.is-closing .folder-dialog__panel {
+                                animation: none;
+                        }
                 }
 
                 /* ── FOOTER ── UNCHANGED */
@@ -1584,7 +2363,7 @@
                                                                         Class
                                                                         Notes.pdf</a></li>
                                                         <li><a
-                                                                        href="Resource/Notes/JS12 Class Notes.pdf"
+                                                                        href="Resource/Notes/JS12 ClassNotes.pdf"
                                                                         target="_blank">JS12
                                                                         Class
                                                                         Notes.pdf</a></li>
@@ -1607,7 +2386,7 @@
                                                                         Architecture</summary>
                                                                 <ol>
                                                                         <li><a
-                                                                                        href="CSE Class Notes/VLSI Design/ALGORITHMS FOR VLSI-PHYSICAL DESIGN AUTOMATION by Naveed Sherwani.pdf"
+                                                                                        href="CSE Class Notes/VLSI Design/Algorithms For VLSI-Physical Design Automation by Naveed Sherwani.pdf"
                                                                                         target="_blank">Algorithms
                                                                                         For
                                                                                         VLSI-Physical
@@ -2562,7 +3341,7 @@
                                                                         2- ER
                                                                         diagram.pdf</a></li>
                                                         <li><a
-                                                                        href="CSE Class Notes/DataBase Management System/Chapter 3 - Relational Model.pdf"
+                                                                        href="CSE Class Notes/DataBase Management System/Chapter 3- Relational Model from ERD [Extended].pdf"
                                                                         target="_blank">Chapter
                                                                         3 -
                                                                         Relational
@@ -3580,6 +4359,30 @@
                                 </section>
                         </div>
                 </div>
+
+                <!-- File manager: folder contents -->
+                <dialog id="folder-dialog" class="folder-dialog" aria-labelledby="folder-dialog-title" aria-describedby="folder-dialog-meta">
+                        <div class="folder-dialog__panel">
+                                <div class="folder-dialog__tab">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" fill="currentColor"/></svg>
+                                        <span>Folder</span>
+                                </div>
+                                <div class="folder-dialog__body">
+                                        <div class="folder-dialog__head">
+                                                <div class="folder-dialog__heading">
+                                                        <p class="folder-dialog__eyebrow" id="folder-dialog-kicker">Library</p>
+                                                        <h2 class="folder-dialog__title" id="folder-dialog-title">Folder</h2>
+                                                        <p class="folder-dialog__meta" id="folder-dialog-meta"></p>
+                                                </div>
+                                                <button type="button" class="folder-dialog__close" aria-label="Close folder">
+                                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+                                                </button>
+                                        </div>
+                                        <div class="folder-dialog__grid" id="folder-dialog-grid"></div>
+                                </div>
+                        </div>
+                </dialog>
+
                 <footer>
                         <div class="footer-container">
                                 <p>&copy; 2026 NDUB CSE-20 Academic Notes | Made
@@ -3699,6 +4502,690 @@
                 updateClassStatus();
                 setInterval(updateClassStatus, 1000);
 
+        </script>
+
+        <script>
+        /* ===============================
+           FILE MANAGER
+           Existing details lists stay in the page as the source of truth.
+           This layer turns each subsection into a folder tile and shows its
+           files in a folder dialog. Without JavaScript, the lists still work.
+        ================================ */
+        (() => {
+                'use strict';
+
+                const PDFJS_VERSION = '3.11.174';
+                const PDFJS_BASE = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${PDFJS_VERSION}/`;
+                const IMAGE_EXTENSIONS = new Set(['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'avif', 'bmp']);
+                const DOC_EXTENSIONS = new Set(['doc', 'docx', 'odt', 'rtf', 'txt', 'tex', 'md', 'ppt', 'pptx', 'xls', 'xlsx']);
+                const ARCHIVE_EXTENSIONS = new Set(['zip', 'rar', '7z', 'tar', 'gz']);
+                const CODE_EXTENSIONS = new Set(['html', 'htm', 'css', 'js', 'json', 'py', 'c', 'cpp', 'java', 'cs', 'sql', 'sh']);
+                const TEXT_EXTENSIONS = new Set(['md', 'markdown', 'txt', 'tex', 'html', 'htm', 'js', 'json', 'css', 'py', 'c', 'cpp', 'java', 'cs', 'sql', 'sh', 'xml']);
+
+                const dialog = document.getElementById('folder-dialog');
+                if (!dialog) return;
+
+                const dialogBody = dialog.querySelector('.folder-dialog__body');
+                const dialogGrid = document.getElementById('folder-dialog-grid');
+                const dialogTitle = document.getElementById('folder-dialog-title');
+                const dialogKicker = document.getElementById('folder-dialog-kicker');
+                const dialogMeta = document.getElementById('folder-dialog-meta');
+                const closeButton = dialog.querySelector('.folder-dialog__close');
+                const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+                let lastTrigger = null;
+                let closeTimer = null;
+                let session = 0;
+                let observer = null;
+                let pdfQueue = [];
+                let pdfActive = 0;
+                let pdfjsPromise = null;
+
+                const folderArt = `
+                        <span class="folder-art" aria-hidden="true">
+                                <svg class="folder-svg" viewBox="0 0 120 92" focusable="false">
+                                        <ellipse class="folder-shadow" cx="60" cy="85" rx="43" ry="4.5" fill="#080c14" opacity="0.28"/>
+                                        <path fill="#4f9bd6" d="M10 22a6 6 0 0 1 6-6h31l8 8h49a6 6 0 0 1 6 6v48a6 6 0 0 1-6 6H16a6 6 0 0 1-6-6V22Z"/>
+                                        <path class="folder-paper" fill="#d7ecff" d="M23 42h74v38H23z"/>
+                                        <path class="folder-front" fill="#7cc4f2" d="M10 40h100v36a6 6 0 0 1-6 6H16a6 6 0 0 1-6-6V40Z"/>
+                                        <path fill="#a9dcfb" opacity="0.75" d="M10 40h100v2.4H10z"/>
+                                </svg>
+                        </span>`;
+
+                const icons = {
+                        pdf: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 4h17l9 9v31H12z"/><path d="M29 4v9h9"/><text x="16" y="36" fill="currentColor" stroke="none" font-family="sans-serif" font-size="8" font-weight="700">PDF</text></svg>',
+                        image: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="9" width="34" height="30" rx="2"/><circle cx="17" cy="19" r="3"/><path d="m9 34 10-9 7 6 6-5 7 7"/></svg>',
+                        archive: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M9 14h30v27H9z"/><path d="M7 7h34v7H7zM21 21h6v5h-6zM21 30h6v5h-6z"/></svg>',
+                        video: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="11" width="36" height="26" rx="3"/><path d="m21 18 9 6-9 6z"/></svg>',
+                        code: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 4h17l9 9v31H12z"/><path d="M29 4v9h9M21 23l-5 5 5 5M29 23l5 5-5 5"/></svg>',
+                        doc: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 4h17l9 9v31H12z"/><path d="M29 4v9h9M18 23h14M18 29h14M18 35h9"/></svg>',
+                        link: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="24" cy="24" r="17"/><path d="M7 24h34M24 7c5 5 7.5 10.5 7.5 17S29 36 24 41c-5-5-7.5-10.5-7.5-17S19 12 24 7Z"/></svg>',
+                        file: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 4h17l9 9v31H12z"/><path d="M29 4v9h9M18 23h14M18 29h14M18 35h9"/></svg>'
+                };
+
+                function iconFor(kind) {
+                        return icons[kind] || icons.file;
+                }
+
+                function cleanText(value) {
+                        return (value || '').replace(/\s+/g, ' ').trim();
+                }
+
+                function plural(count, word) {
+                        return `${count} ${word}${count === 1 ? '' : 's'}`;
+                }
+
+                function parseFolderName(summaryText) {
+                        let text = cleanText(summaryText)
+                                .replace(/^[\p{Extended_Pictographic}\uFE0F\u200D\s]+/u, '')
+                                .replace(/\s+Drawer$/i, '')
+                                .trim();
+                        let code = '';
+                        const match = text.match(/^([A-Z]{2,5}\s?\d{3,4})\s*[:\u2013-]\s*(.+)$/i);
+                        if (match) {
+                                code = match[1].replace(/\s+/g, '').toUpperCase();
+                                text = match[2].trim();
+                        }
+                        return { code, title: text || 'Untitled folder' };
+                }
+
+                function collectDirectLinks(root) {
+                        const links = [];
+                        const visit = (node) => {
+                                Array.from(node.children).forEach((child) => {
+                                        const tag = child.tagName;
+                                        if (tag === 'DETAILS' || tag === 'SUMMARY' || tag === 'SCRIPT' || tag === 'STYLE') return;
+                                        if (tag === 'A') {
+                                                links.push(child);
+                                                return;
+                                        }
+                                        visit(child);
+                                });
+                        };
+                        visit(root);
+                        return links;
+                }
+
+                function classify(ext, host, url) {
+                        if (ext === 'pdf') return 'pdf';
+                        if (IMAGE_EXTENSIONS.has(ext)) return 'image';
+                        if (ARCHIVE_EXTENSIONS.has(ext)) return 'archive';
+                        if (DOC_EXTENSIONS.has(ext)) return 'doc';
+                        if (CODE_EXTENSIONS.has(ext)) return 'code';
+                        if (ext === 'video' || host.includes('youtu')) return 'video';
+                        if (host === 'github.com' || host === 'raw.githubusercontent.com') return 'link';
+                        return 'link';
+                }
+
+                function describeFile(file) {
+                        return file.isExternal ? 'External link' : 'Local file';
+                }
+
+                function githubRawUrl(url) {
+                        const host = url.hostname.replace(/^www\./, '');
+                        if (host !== 'github.com') return '';
+                        const parts = url.pathname.split('/').filter(Boolean);
+                        if (parts.length < 5) return '';
+                        if (parts[2] !== 'blob' && parts[2] !== 'raw') return '';
+                        return `https://raw.githubusercontent.com/${parts[0]}/${parts[1]}/${parts.slice(3).join('/')}`;
+                }
+
+                function youtubeId(url) {
+                        const host = url.hostname.replace(/^www\./, '');
+                        if (host === 'youtu.be') return url.pathname.split('/').filter(Boolean)[0] || '';
+                        if (!host.endsWith('youtube.com')) return '';
+                        if (url.searchParams.get('v')) return url.searchParams.get('v');
+                        const parts = url.pathname.split('/').filter(Boolean);
+                        if (parts[0] === 'shorts' || parts[0] === 'embed' || parts[0] === 'live') return parts[1] || '';
+                        return '';
+                }
+
+                function siteLabel(host) {
+                        if (host === 'github.com' || host === 'raw.githubusercontent.com') return 'GitHub';
+                        if (host.endsWith('youtube.com') || host === 'youtu.be') return 'YouTube';
+                        return host.replace(/^www\./, '');
+                }
+
+                function pathLabel(url, host) {
+                        let parts = url.pathname.split('/').filter(Boolean);
+                        try {
+                                parts = parts.map((part) => decodeURIComponent(part));
+                        } catch (error) {
+                                /* keep the encoded path if it cannot be decoded */
+                        }
+                        if (host === 'github.com' && parts.length > 4 && ['tree', 'blob', 'raw'].includes(parts[2])) {
+                                return [parts[0], parts[1], parts[parts.length - 1]].join(' / ');
+                        }
+                        return parts.slice(-3).join(' / ') || siteLabel(host);
+                }
+
+                function fileMeta(anchor) {
+                        const rawHref = anchor.getAttribute('href');
+                        if (!rawHref || rawHref === '#') return null;
+
+                        let url;
+                        try {
+                                url = new URL(rawHref, window.location.href);
+                        } catch (error) {
+                                return null;
+                        }
+
+                        let pathname = url.pathname;
+                        try {
+                                pathname = decodeURIComponent(pathname);
+                        } catch (error) {
+                                /* a malformed escape should not hide the file */
+                        }
+
+                        const basename = pathname.split('/').filter(Boolean).pop() || '';
+                        const extMatch = basename.match(/\.([a-z0-9]{1,8})$/i);
+                        let ext = extMatch ? extMatch[1].toLowerCase() : '';
+                        const host = url.hostname.replace(/^www\./, '');
+                        if (!ext) {
+                                if (host.endsWith('youtube.com') || host === 'youtu.be') ext = 'video';
+                                else if (host === 'github.com' || host === 'raw.githubusercontent.com') ext = 'link';
+                        }
+
+                        const label = cleanText(anchor.textContent) || basename || 'Untitled file';
+                        const kind = classify(ext, host, url);
+                        const sameOrigin = url.origin === window.location.origin;
+                        const rawGithub = githubRawUrl(url);
+                        const directRaw = host === 'raw.githubusercontent.com';
+                        const canFetchPdf = ext === 'pdf' && (sameOrigin || directRaw || Boolean(rawGithub));
+                        const canFetchText = TEXT_EXTENSIONS.has(ext) && (sameOrigin || directRaw || Boolean(rawGithub));
+                        const videoId = youtubeId(url);
+
+                        let preview = 'file';
+                        let previewUrl = '';
+                        if (canFetchPdf) {
+                                preview = 'pdf';
+                                previewUrl = sameOrigin ? url.href : (directRaw ? url.href : rawGithub);
+                        } else if (IMAGE_EXTENSIONS.has(ext)) {
+                                preview = 'image';
+                                previewUrl = url.href;
+                        } else if (videoId) {
+                                preview = 'youtube';
+                        } else if (canFetchText) {
+                                preview = 'text';
+                                previewUrl = sameOrigin ? url.href : (directRaw ? url.href : rawGithub);
+                        } else if (!sameOrigin && (!ext || ext === 'link' || ext === 'video')) {
+                                preview = 'link';
+                        }
+
+                        return {
+                                href: rawHref,
+                                absoluteUrl: anchor.href,
+                                label,
+                                ext,
+                                typeLabel: ext ? ext.toUpperCase() : 'LINK',
+                                kind,
+                                host,
+                                isExternal: !sameOrigin,
+                                preview,
+                                previewUrl,
+                                videoId,
+                                site: siteLabel(host),
+                                path: pathLabel(url, host)
+                        };
+                }
+
+                function buildFolders() {
+                        document.querySelectorAll('section.info-card').forEach((section) => {
+                                const folders = [];
+                                const heading = section.querySelector(':scope > h2');
+                                const context = cleanText(heading ? heading.textContent : '')
+                                        .replace(/^[\p{Extended_Pictographic}\uFE0F\u200D\s]+/u, '')
+                                        .trim();
+
+                                section.querySelectorAll('details').forEach((details) => {
+                                        const anchorLinks = collectDirectLinks(details);
+                                        if (anchorLinks.length === 0) return;
+
+                                        const seen = new Set();
+                                        const files = [];
+                                        anchorLinks.forEach((anchor) => {
+                                                const href = anchor.getAttribute('href');
+                                                if (!href || seen.has(href)) return;
+                                                seen.add(href);
+                                                const file = fileMeta(anchor);
+                                                if (file) files.push(file);
+                                        });
+
+                                        if (files.length === 0) return;
+
+                                        const summary = details.querySelector(':scope > summary');
+                                        const parsed = parseFolderName(summary ? summary.textContent : '');
+                                        folders.push({ ...parsed, files, context });
+                                });
+
+                                if (folders.length === 0) return;
+
+                                if (section.id === 'class-lectures') {
+                                        folders.sort((a, b) => a.code.localeCompare(b.code));
+                                }
+
+                                const grid = document.createElement('div');
+                                grid.className = 'folder-grid';
+                                grid.setAttribute('role', 'group');
+                                grid.setAttribute('aria-label', 'Folders');
+
+                                folders.forEach((folder) => {
+                                        const button = document.createElement('button');
+                                        button.type = 'button';
+                                        button.className = 'folder-tile';
+                                        button.setAttribute('aria-haspopup', 'dialog');
+                                        button.setAttribute('aria-label', `${folder.title}, ${plural(folder.files.length, 'file')}`);
+                                        button.innerHTML = folderArt;
+
+                                        const name = document.createElement('span');
+                                        name.className = 'folder-name';
+                                        name.textContent = folder.title;
+
+                                        const meta = document.createElement('span');
+                                        meta.className = 'folder-meta';
+                                        meta.textContent = folder.code
+                                                ? `${folder.code} \u00B7 ${plural(folder.files.length, 'file')}`
+                                                : plural(folder.files.length, 'file');
+
+                                        button.append(name, meta);
+                                        button.addEventListener('click', () => openFolder(folder, button));
+                                        grid.append(button);
+                                });
+
+                                section.querySelectorAll(':scope > details, :scope > ul').forEach((element) => {
+                                        element.hidden = true;
+                                });
+
+                                const after = section.querySelector(':scope > p') || section.querySelector(':scope > h2');
+                                if (after) after.insertAdjacentElement('afterend', grid);
+                                else section.append(grid);
+                        });
+                }
+
+                function makeSkeleton() {
+                        const skeleton = document.createElement('div');
+                        skeleton.className = 'thumb-skel';
+                        skeleton.setAttribute('aria-hidden', 'true');
+                        skeleton.innerHTML = '<span class="thumb-skel__page"></span>';
+                        return skeleton;
+                }
+
+                function makeFileSheet(file) {
+                        const sheet = document.createElement('span');
+                        sheet.className = 'file-sheet';
+                        sheet.innerHTML = `<span class="file-sheet__icon">${iconFor(file.kind)}</span><span class="file-sheet__ext">${file.typeLabel}</span>`;
+                        return sheet;
+                }
+
+                function makeLinkPreview(file) {
+                        const preview = document.createElement('span');
+                        preview.className = 'link-preview';
+                        preview.setAttribute('aria-hidden', 'true');
+
+                        const bar = document.createElement('span');
+                        bar.className = 'link-preview__bar';
+                        for (let index = 0; index < 3; index += 1) {
+                                const dot = document.createElement('span');
+                                dot.className = 'link-preview__dot';
+                                bar.append(dot);
+                        }
+
+                        const body = document.createElement('span');
+                        body.className = 'link-preview__body';
+
+                        const brand = document.createElement('span');
+                        brand.className = 'link-preview__brand';
+
+                        const glyph = document.createElement('span');
+                        glyph.className = 'link-preview__glyph';
+                        glyph.innerHTML = icons.link;
+
+                        const favicon = document.createElement('img');
+                        favicon.className = 'link-preview__favicon';
+                        favicon.alt = '';
+                        favicon.loading = 'lazy';
+                        favicon.decoding = 'async';
+                        favicon.src = `https://icons.duckduckgo.com/ip3/${encodeURIComponent(file.host)}.ico`;
+                        favicon.addEventListener('load', () => glyph.remove());
+                        favicon.addEventListener('error', () => favicon.remove());
+
+                        const host = document.createElement('span');
+                        host.className = 'link-preview__host';
+                        host.textContent = file.site;
+
+                        const path = document.createElement('span');
+                        path.className = 'link-preview__path';
+                        path.textContent = file.path;
+
+                        brand.append(glyph, favicon, host);
+                        body.append(brand, path);
+                        preview.append(bar, body);
+                        return preview;
+                }
+
+                function createFileCard(file) {
+                        const card = document.createElement('a');
+                        card.className = 'file-card';
+                        card.href = file.href;
+                        card.target = '_blank';
+                        card.rel = 'noopener noreferrer';
+                        card.setAttribute('aria-label', `${file.label} (${file.typeLabel}), opens in a new tab`);
+
+                        const thumb = document.createElement('div');
+                        thumb.className = 'file-thumb';
+                        thumb.dataset.preview = file.preview;
+                        thumb.dataset.kind = file.kind;
+
+                        if (file.preview === 'pdf') {
+                                const canvas = document.createElement('canvas');
+                                canvas.className = 'file-thumb__canvas';
+                                canvas.setAttribute('aria-hidden', 'true');
+                                thumb.dataset.pdf = file.previewUrl;
+                                thumb.append(makeSkeleton(), canvas);
+                        }
+
+                        if (file.preview === 'image') {
+                                const image = document.createElement('img');
+                                image.className = 'file-thumb__img';
+                                image.src = file.href;
+                                image.alt = '';
+                                image.loading = 'lazy';
+                                image.decoding = 'async';
+                                image.addEventListener('error', () => {
+                                        thumb.classList.add('is-error');
+                                        image.remove();
+                                });
+                                thumb.append(image);
+                        }
+
+                        if (file.preview === 'youtube') {
+                                const wrapper = document.createElement('span');
+                                wrapper.className = 'youtube-preview';
+                                wrapper.setAttribute('aria-hidden', 'true');
+
+                                const cover = document.createElement('img');
+                                cover.alt = '';
+                                cover.loading = 'lazy';
+                                cover.decoding = 'async';
+                                cover.src = `https://i.ytimg.com/vi/${file.videoId}/mqdefault.jpg`;
+                                cover.addEventListener('error', () => {
+                                        thumb.classList.add('is-error');
+                                        wrapper.remove();
+                                });
+
+                                const play = document.createElement('span');
+                                play.className = 'youtube-play';
+                                play.innerHTML = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3 1.5 14 8 3 14.5z"/></svg>';
+
+                                wrapper.append(cover, play);
+                                thumb.append(wrapper);
+                        }
+
+                        if (file.preview === 'text') {
+                                const preview = document.createElement('span');
+                                preview.className = 'text-preview';
+                                preview.setAttribute('aria-hidden', 'true');
+
+                                const code = document.createElement('pre');
+                                code.className = 'text-preview__code';
+
+                                preview.append(code);
+                                thumb.dataset.text = file.previewUrl;
+                                thumb.dataset.textExt = file.ext;
+                                thumb.append(makeSkeleton(), preview);
+                        }
+
+                        if (file.preview === 'link') {
+                                thumb.append(makeLinkPreview(file));
+                        }
+
+                        const fallback = document.createElement('span');
+                        fallback.className = 'file-thumb__fallback';
+                        fallback.setAttribute('aria-hidden', 'true');
+                        fallback.append(makeFileSheet(file));
+
+                        const type = document.createElement('span');
+                        type.className = 'file-type';
+                        type.textContent = file.typeLabel;
+
+                        thumb.append(fallback);
+
+                        const info = document.createElement('span');
+                        info.className = 'file-info';
+
+                        const name = document.createElement('span');
+                        name.className = 'file-name';
+                        name.textContent = file.label;
+
+                        const meta = document.createElement('span');
+                        meta.className = 'file-meta';
+
+                        const sub = document.createElement('span');
+                        sub.className = 'file-sub';
+                        sub.textContent = describeFile(file);
+
+                        meta.append(type, sub);
+                        info.append(name, meta);
+                        card.append(thumb, info);
+                        return card;
+                }
+
+                function openFolder(folder, trigger) {
+                        clearTimeout(closeTimer);
+                        closeTimer = null;
+                        dialog.classList.remove('is-closing');
+                        session += 1;
+                        lastTrigger = trigger;
+
+                        dialogTitle.textContent = folder.title;
+                        dialogKicker.textContent = folder.code || folder.context || 'Library';
+                        dialogMeta.textContent = plural(folder.files.length, 'file');
+                        dialogGrid.replaceChildren();
+
+                        if (folder.files.length === 0) {
+                                const empty = document.createElement('p');
+                                empty.className = 'folder-dialog__empty';
+                                empty.textContent = 'This folder is empty.';
+                                dialogGrid.append(empty);
+                        } else {
+                                folder.files.forEach((file) => dialogGrid.append(createFileCard(file)));
+                        }
+
+                        document.body.classList.add('has-folder-dialog');
+                        if (!dialog.open) dialog.showModal();
+                        dialogBody.scrollTop = 0;
+
+                        requestAnimationFrame(() => {
+                                closeButton.focus();
+                                observeThumbnails(session);
+                                loadTextPreviews(session);
+                        });
+                }
+
+                function requestClose() {
+                        if (!dialog.open || dialog.classList.contains('is-closing')) return;
+                        dialog.classList.add('is-closing');
+                        const delay = reduceMotion.matches ? 0 : 150;
+                        closeTimer = window.setTimeout(() => dialog.close(), delay);
+                }
+
+                function cleanupDialog() {
+                        session += 1;
+                        dialog.classList.remove('is-closing');
+                        document.body.classList.remove('has-folder-dialog');
+                        if (observer) {
+                                observer.disconnect();
+                                observer = null;
+                        }
+                        pdfQueue = [];
+                        dialogGrid.replaceChildren();
+                        if (lastTrigger && document.documentElement.contains(lastTrigger)) {
+                                lastTrigger.focus({ preventScroll: true });
+                        }
+                        lastTrigger = null;
+                }
+
+                function observeThumbnails(token) {
+                        if (observer) observer.disconnect();
+                        const thumbs = Array.from(dialogGrid.querySelectorAll('.file-thumb[data-pdf]'));
+                        if (thumbs.length === 0) return;
+
+                        if (!('IntersectionObserver' in window)) {
+                                thumbs.forEach((thumb) => enqueuePdf(thumb, token));
+                                return;
+                        }
+
+                        observer = new IntersectionObserver((entries) => {
+                                entries.forEach((entry) => {
+                                        if (!entry.isIntersecting) return;
+                                        observer.unobserve(entry.target);
+                                        enqueuePdf(entry.target, token);
+                                });
+                        }, { root: dialogBody, rootMargin: '240px 0px' });
+
+                        thumbs.forEach((thumb) => observer.observe(thumb));
+                }
+
+                function enqueuePdf(thumb, token) {
+                        if (token !== session) return;
+                        const canvas = thumb.querySelector('.file-thumb__canvas');
+                        if (!canvas) return;
+                        pdfQueue.push({ thumb, canvas, url: thumb.dataset.pdf, token });
+                        pumpPdfQueue();
+                }
+
+                function pumpPdfQueue() {
+                        const maxWorkers = 3;
+                        while (pdfActive < maxWorkers && pdfQueue.length > 0) {
+                                const job = pdfQueue.shift();
+                                pdfActive += 1;
+                                renderPdf(job)
+                                        .catch(() => markThumbError(job.thumb, job.token))
+                                        .finally(() => {
+                                                pdfActive -= 1;
+                                                pumpPdfQueue();
+                                        });
+                        }
+                }
+
+                function getPdfJs() {
+                        if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+                        if (pdfjsPromise) return pdfjsPromise;
+
+                        pdfjsPromise = new Promise((resolve, reject) => {
+                                const script = document.createElement('script');
+                                script.src = `${PDFJS_BASE}pdf.min.js`;
+                                script.onload = () => {
+                                        if (!window.pdfjsLib) {
+                                                reject(new Error('PDF library unavailable'));
+                                                return;
+                                        }
+                                        window.pdfjsLib.GlobalWorkerOptions.workerSrc = `${PDFJS_BASE}pdf.worker.min.js`;
+                                        resolve(window.pdfjsLib);
+                                };
+                                script.onerror = () => reject(new Error('PDF library failed to load'));
+                                document.head.append(script);
+                        });
+
+                        return pdfjsPromise;
+                }
+
+                async function renderPdf(job) {
+                        if (job.token !== session) return;
+                        const pdfjs = await getPdfJs();
+                        if (job.token !== session) return;
+
+                        const loadingTask = pdfjs.getDocument({
+                                url: job.url,
+                                disableAutoFetch: true,
+                                disableStream: true
+                        });
+                        const pdf = await loadingTask.promise;
+
+                        try {
+                                if (job.token !== session) return;
+                                const page = await pdf.getPage(1);
+                                if (job.token !== session) return;
+
+                                const unscaled = page.getViewport({ scale: 1 });
+                                const density = Math.min(window.devicePixelRatio || 1, 2);
+                                const fit = (380 * density) / unscaled.width;
+                                const viewport = page.getViewport({ scale: fit });
+
+                                job.canvas.width = Math.max(1, Math.round(viewport.width));
+                                job.canvas.height = Math.max(1, Math.round(viewport.height));
+                                const context = job.canvas.getContext('2d', { alpha: false });
+
+                                context.fillStyle = '#ffffff';
+                                context.fillRect(0, 0, job.canvas.width, job.canvas.height);
+
+                                await page.render({
+                                        canvasContext: context,
+                                        viewport
+                                }).promise;
+                                if (job.token !== session) return;
+                                job.thumb.classList.add('is-ready');
+                        } finally {
+                                pdf.destroy();
+                        }
+                }
+
+                function loadTextPreviews(token) {
+                        dialogGrid.querySelectorAll('.file-thumb[data-text]').forEach((thumb) => {
+                                const source = thumb.dataset.text;
+                                const code = thumb.querySelector('.text-preview__code');
+                                if (!source || !code) return;
+
+                                fetch(source, { mode: 'cors', credentials: 'omit' })
+                                        .then((response) => {
+                                                if (!response.ok) throw new Error('Preview unavailable');
+                                                return response.text();
+                                        })
+                                        .then((text) => {
+                                                if (token !== session || !thumb.isConnected) return;
+                                                let content = text.replace(/\r/g, '').trim();
+                                                if (thumb.dataset.textExt === 'html' || thumb.dataset.textExt === 'htm') {
+                                                        const parsed = new DOMParser().parseFromString(text, 'text/html');
+                                                        parsed.querySelectorAll('script, style, noscript').forEach((node) => node.remove());
+                                                        content = parsed.body ? parsed.body.textContent : text;
+                                                }
+                                                content = content
+                                                        .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+                                                        .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+                                                        .replace(/<[^>]*>/g, ' ')
+                                                        .replace(/^#{1,6}\s*/gm, '')
+                                                        .replace(/[*_`]{1,3}/g, '')
+                                                        .replace(/^\s*[-*+]\s+/gm, '\u2022 ')
+                                                        .replace(/[ \t]+/g, ' ')
+                                                        .replace(/\n{3,}/g, '\n\n')
+                                                        .trim();
+                                                if (!content) throw new Error('Empty preview');
+                                                code.textContent = content.slice(0, 900);
+                                                thumb.classList.add('is-ready');
+                                        })
+                                        .catch(() => markThumbError(thumb, token));
+                        });
+                }
+
+                function markThumbError(thumb, token) {
+                        if (token !== session || !thumb.isConnected) return;
+                        thumb.classList.add('is-error');
+                        thumb.removeAttribute('data-pdf');
+                        thumb.removeAttribute('data-text');
+                }
+
+                closeButton.addEventListener('click', requestClose);
+                dialog.addEventListener('cancel', (event) => {
+                        event.preventDefault();
+                        requestClose();
+                });
+                dialog.addEventListener('click', (event) => {
+                        if (event.target === dialog) requestClose();
+                });
+                dialog.addEventListener('close', cleanupDialog);
+
+                buildFolders();
+        })();
         </script>
         </body>
 
