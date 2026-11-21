@@ -16,3 +16,12 @@ venv/
 .DS_Store
 Thumbs.db
 .freebuff
+.claude
+.agents
+Setup-skills.sh
+AGENTS.md
+CLAUDE.md
+DESIGN-SKILLS-GUIDE.md
+skill-instructions.md
+skills-lock.json
+.mcp.json
